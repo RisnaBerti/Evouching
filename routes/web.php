@@ -21,18 +21,25 @@ use App\Http\Controllers\Admin\PengajuanAdmin;
 |
 */
 
-//ROUTE FOR AUTHENTICATION
-Route::controller(AuthController::class)->group(function () {
-    Route::get('/', 'index');
-    Route::post('/login', 'login');
-    Route::post('/login_action', 'login_action');
-    Route::get('/forgot_password', 'forgot_password', ["title" => "Forgot Password"]);
-    Route::get('/reset-password', 'reset_password', ["title" => "Reset Password"]);
-    Route::get('/change-password', 'change_password', ["title" => "Change Password"]);
-    Route::get('/profile', 'profile', ["title" => "Profile"]);
-    Route::get('/edit-profile', 'edit_profile', ["title" => "Edit Profile"]);
-    Route::get('/logout', 'logout');
+Route::get('/', function () {
+    return redirect()->route('login');
 });
+
+//ROUTE FOR LOGIN
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
+
+
+// Route::controller(AuthController::class)->group(function () {
+//     Route::get('/login', 'login');
+//     Route::post('/ login', 'authenticating');
+//     Route::get('/forgot_password', 'forgot_password', ["title" => "Forgot Password"]);
+//     Route::get('/reset-password', 'reset_password', ["title" => "Reset Password"]);
+//     Route::get('/change-password', 'change_password', ["title" => "Change Password"]);
+//     Route::get('/profile', 'profile', ["title" => "Profile"]);
+//     Route::get('/edit-profile', 'edit_profile', ["title" => "Edit Profile"]);
+//     Route::get('/logout', 'logout');
+// });
 
 //ROUTE FOR ADMIN
 Route::prefix('admin')->group(function () {
@@ -40,9 +47,6 @@ Route::prefix('admin')->group(function () {
     // Route::get('/pengajuan', [PengajuanAdmin::class, 'pengajuan'])->name('admin.pengajuan-admin');
 });
 
-// Route::controller(PengajuanAdmin::class)->group(function () {
-//     Route::get('/pengajuan', 'index');
-// });
 
 
 Route::get('/admin', function () {
