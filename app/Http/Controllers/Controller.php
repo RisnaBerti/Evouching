@@ -10,4 +10,14 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function index()
+    {
+        return view('auth/login');
+    }
+
+    public function forgot_password()
+    {
+        return view('auth/forgot-password');
+    }
 }
