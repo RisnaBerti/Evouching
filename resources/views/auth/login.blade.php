@@ -18,30 +18,31 @@
 
                     <!--begin::Signin-->
                     <div class="login-form">
-                        @if (session('status'))
-                            <div class="alert alert-danger">
-                                {{ session('message') }}
-                            </div>
-                        @endif
                         <!--begin::Form-->
                         <form action="/login" method="post" class="form" id="kt_login_singin_form">
                         @csrf
                             <!--begin::Title-->
-                            <div class="pb-5 pb-lg-15">
+                            <div class="pb-5">
                                 <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Sign In</h3>
                             </div>
                             <!--begin::Title-->
+                            @if (session('status'))
+                                <div class="alert alert-danger">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
 
                             <!--begin::Form group-->
                             <div class="form-group">
                                 <label class="font-size-h6 font-weight-bolder text-dark" for="email">Your Email</label>
-                                <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0" type="text" name="email" id="email" class="form-control @error('email') is-invalid @enderror" autocomplete="email" required autofocus/>
+                                <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0 @error('email') is-invalid @enderror" type="email" name="email" id="email"  autocomplete="email" value="" autofocus/>
                             </div>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                {{-- <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span> --}}
+                            @enderror
                             <!--end::Form group-->
 
                             <!--begin::Form group-->
@@ -52,8 +53,11 @@
                                         Forgot Password ?
                                     </a>
                                 </div>
-                                <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0" type="password" name="password" id="password" autocomplete="off" required/>
+                                <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0 @error('password') is-invalid @enderror" type="password" name="password" id="password" autocomplete="off"/>
                             </div>
+                            @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             <!--end::Form group-->
 
                             <!--begin::Action-->

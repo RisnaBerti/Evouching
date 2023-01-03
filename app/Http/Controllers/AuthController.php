@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -12,7 +13,7 @@ class AuthController extends Controller
     {
         return view('auth.login', [
             'title' => 'Sign In',
-            'active' => 'login'
+            'active' => 'Sign In'
         ]);
     }
 
@@ -23,33 +24,40 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
-        $user = Auth::user();
-            //cek apakah user active atau tidak
+            //cek user active atau tidak
+            $user = Auth::user();
             if ($user->is_active == 1) {
-                return redirect()->intended('dashboard');
+
+                // cek role
+                if ($user->role_id == 1) {
+                    return redirect()->intended('admin');
+                } else if ($user->role_id == 2) {
+                    return redirect()->intended('manajer');
+                } else if ($user->role_id == 3) {
+                    return redirect()->intended('pemeriksa');
+                } else {
+                    return redirect()->intended('pengaju');
+                }
+
             } else {
-                Auth::logout();
-                return back()->withErrors([
-                    'email' => 'Maaf akun Anda belum aktif'
-                ])->onlyInput('email');
+                return redirect()->route('auth-login')->with('status', 'Your account is not active, please contact admin!');
             }
+
         }
 
-        return back()->withErrors([
-        'email' => 'Maaf email atau password Anda salah'
-        ])->onlyInput('email');
-
-        
-
-
+        return redirect()->route('auth-login')->with('status', 'Your email or password is incorrect!');
         
     }
 
-    
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('auth-login');
+    }
 
 
     public function forgot_password()

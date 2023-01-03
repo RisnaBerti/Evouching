@@ -22,6 +22,7 @@ class User extends Authenticatable
         'divisi',
         'jabatan',
         'alamat',
+        'is_active',
     ];
 
    
