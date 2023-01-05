@@ -1,73 +1,87 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="modal" id="modal_user" tabindex="-1">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Kelola User</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<form id="form_user">
-				<div class="modal-body">
-					<input class="d-none" type="text" id="id_user" name="id_user" autocomplete="off" />
-					<div class="form-group row">
-						<label class="col-form-label col-4" for="nama_user ">Nama </label>
-						<div class="col-8">
-							<input class="form-control " type="text" placeholder="masukan nama user" id="nama_user" name="nama_user" autocomplete="off" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-form-label col-4" for="harga_user ">Divisi</label>
-						<div class="col-8">
-							<input class="form-control " type="text" placeholder="masukan divisi" id="nama_user" name="nama_user" autocomplete="off" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-form-label col-4" for="jml_komisi ">Jabatan</label>
-						<div class="col-8">
-							<input class="form-control " type="text" placeholder="masukan jabatan" id="nama_user" name="nama_user" autocomplete="off" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-form-label col-4" for="deskripsi_user">Email</label>
-						<div class="col-8">
-							<input class="form-control " type="text" placeholder="masukan email" id="deskripsi_user" name="deskripsi_user" autocomplete="off" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-form-label col-4" for="link_user">No Telepon</label>
-						<div class="col-8">
-							<input class="form-control " type="text" placeholder="masukan no telepon" id="link_user" name="link_user" autocomplete="off" />
-						</div>
-					</div>
-				</div>
-			</form>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-light-primary" onclick="save($(this))">Simpan</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-			</div>
-		</div>
-	</div>
-</div>
+    <div class="modal" id="modal_user" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kelola User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="form_user">
+                    <div class="modal-body">
+                        <input class="d-none" type="text" id="id_user" name="id_user" autocomplete="off" />
+                        <div class="form-group row">
+                            <label class="col-form-label col-4" for="nama_user ">Nama </label>
+                            <div class="col-8">
+                                <input class="form-control " type="text" placeholder="masukan nama user" id="nama_user"
+                                    name="nama_user" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-4" for="harga_user ">Divisi</label>
+                            <div class="col-8">
+                                <input class="form-control " type="text" placeholder="masukan divisi" id="nama_user"
+                                    name="nama_user" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-4" for="jml_komisi ">Jabatan</label>
+                            <div class="col-8">
+                                <input class="form-control " type="text" placeholder="masukan jabatan" id="nama_user"
+                                    name="nama_user" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-4" for="deskripsi_user">Email</label>
+                            <div class="col-8">
+                                <input class="form-control " type="text" placeholder="masukan email" id="deskripsi_user"
+                                    name="deskripsi_user" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-4" for="link_user">No Telepon</label>
+                            <div class="col-8">
+                                <input class="form-control " type="text" placeholder="masukan no telepon" id="link_user"
+                                    name="link_user" autocomplete="off" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-primary" onclick="save($(this))">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-{{-- //////////// --}}
+    {{-- //////////// --}}
 
     <div class="card card-custom gutter-b">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
                 <span class="symbol symbol-40 symbol-light-primary mr-2">
-                  <span class="symbol-label">
-                    <span class="svg-icon svg-icon-xl svg-icon-primary"><!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
-                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                          <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                          <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                          <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
-                      </g>
-                    </svg><!--end::Svg Icon--></span>  
-                  </span>
+                    <span class="symbol-label">
+                        <span class="svg-icon svg-icon-xl svg-icon-primary">
+                            <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg--><svg
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px"
+                                height="18px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                    <path
+                                        d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z"
+                                        fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                    <path
+                                        d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z"
+                                        fill="#000000" fill-rule="nonzero"></path>
+                                </g>
+                            </svg>
+                            <!--end::Svg Icon-->
+                        </span>
+                    </span>
                 </span>
                 <h3 class="card-label">
                     Kelola Users
@@ -77,8 +91,9 @@
 
                 <!--begin::Dropdown-->
                 <div class="dropdown dropdown-inline mr-2">
-                    <button onclick="tambahuser()" type="button" class="btn btn-light-primary font-weight-bolder" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         Tambah Data
+                    <button onclick="tambahuser()" type="button" class="btn btn-light-primary font-weight-bolder"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tambah Data
                     </button>
                 </div>
                 <!--end::Dropdown-->
@@ -119,24 +134,63 @@
                                     style="width: 1159px;">
                                     <thead>
                                         <tr role="row" style="height: 0px;">
-                                            <th><center>ID</center></th>
-                                            <th><center>NAMA</center></th>
-                                            <th><center>DIVISI</center></th>
-                                            <th><center>JABATAN</center></th>
-                                            <th><center>EMAIL</center></th>
-                                            <th><center>NO TELEPON</center></th>
-                                            <th><center>SETTING</center></th>
+                                            <th>
+                                                <center>ID</center>
+                                            </th>
+                                            <th>
+                                                <center>NAMA</center>
+                                            </th>
+                                            <th>
+                                                <center>DIVISI</center>
+                                            </th>
+                                            <th>
+                                                <center>JABATAN</center>
+                                            </th>
+                                            <th>
+                                                <center>EMAIL</center>
+                                            </th>
+                                            <th>
+                                                <center>NO TELEPON</center>
+                                            </th>
+                                            <th>
+                                                <center>SETTING</center>
+                                            </th>
                                     </thead>
                                     <tbody>
-                                        <tr role="row" class="odd">
-                                            <td class="sorting_1">1</td>
-                                            <td>64616-103</td>
-                                            <td>Brazil</td>
-                                            <td>São Félix do Xingu</td>
-                                            <td>698 Oriole Pass</td>
-                                            <td>Hayes Boule</td>
-                                            <td>Casper-Kerluke</td>
-                                        </tr>
+                                        @foreach ($users as $user)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                {{-- <td><center>{{ $user->id }}</center></td> --}}
+                                                <td>
+                                                    <center>{{ $user->name }}</center>
+                                                </td>
+                                                <td>
+                                                    <center>{{ $user->divisi }}</center>
+                                                </td>
+                                                <td>
+                                                    <center>{{ $user->jabatan }}</center>
+                                                </td>
+                                                <td>
+                                                    <center>{{ $user->email }}</center>
+                                                </td>
+                                                <td>
+                                                    <center>{{ $user->no_hp }}</center>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        @if ($user->is_active == 0)
+                                                            <button type="button" class="btn btn-primary btn-sm"
+                                                                onclick="edituser({{ $user->id }})">Active</button>
+                                                        @else
+                                                            <button type="button" class="btn btn-warning btn-sm"
+                                                                onclick="edituser({{ $user->id }})">Non Active</button>
+                                                        @endif
+                                                        <button type="button" class="btn btn-danger btn-sm"
+                                                            onclick="hapususer({{ $user->id }})">Hapus</button>
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
 
@@ -181,9 +235,8 @@
 
     <script>
         const tambahuser = async () => {
-          $('#form_user')[0].reset()
-          $('#modal_user').modal('show')
+            $('#form_user')[0].reset()
+            $('#modal_user').modal('show')
         }
     </script>
-    
 @endsection

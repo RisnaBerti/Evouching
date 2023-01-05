@@ -13,7 +13,7 @@ class UserController extends Controller
     //fungsi profile
     public function profile()
     {
-        return view('user.profile', [
+        return view('auth.profile', [
             'title' => 'Profile',
             'active' => 'Profile'
         ]);

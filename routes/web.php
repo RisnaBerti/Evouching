@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\PengajuanAdmin;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\DataUserController;
 
 // use Illuminate\Support\Facades\Auth;
 // use App\Http\Controllers\UserController;
@@ -19,46 +21,66 @@ use App\Http\Controllers\Admin\PengajuanAdmin;
 | contains the "web" middleware group. Now create something great!
 |
 */
+$controller_path = 'App\Http\Controllers';
 
-//Main Route
+//main route
 Route::get('/', function () {
-    return redirect()->route('auth-login');
+    return view('auth/login', ["title" => "Sign In"]);
 });
 
 // authentification
-Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'login')->name('auth-login');
-    Route::post('/login', 'authenticate')->name('auth-authenticate');
-    Route::get('/logout', 'logout')->name('auth-logout');
-    Route::get('/forgot_password', 'forgot_password', ["title" => "Forgot Password"]);
-    Route::get('/reset-password', 'reset_password', ["title" => "Reset Password"]);
+Route::middleware('guest')->group(function () {
+    Route::controller(AuthController::class)->group(function () {
+        Route::get('/login', 'login')->name('auth-login');
+        Route::post('/login', 'authenticate')->name('auth-authenticate');
+        Route::get('/forgot_password', 'forgot_password', ["title" => "Forgot Password"]);
+        Route::get('/reset-password', 'reset_password', ["title" => "Reset Password"]);
+    });
 });
 
-//Route for User
-Route::controller(UserController::class)->group(function () {
-    Route::get('/profile', 'profile');
-    Route::post('/profile', 'update_profile');
-    Route::get('/change_password', 'change_password');
-    Route::post('/change_password', 'change_password');
-});
 
-Route::group(['middleware' => ['auth']], function () {
+// Route::middleware('auth')->group(function () {
 
-    //Route for Admin
-    Route::group(['middleware' => ['role:bendahara']], function () {
-        // Route::resource('/admin', AdminController::class)->only(['index', 'show']);
-        // Route::resource('/pengajuan/admin', PengajuanAdmin::class)->only(['index', 'show']);
+    Route::get('/logout', [AuthController::class, 'logout']);
+
+    //all user
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/profile', 'profile')->name('profile');
+        Route::post('/profile', 'update_profile');
+        Route::get('/change_password', 'change_password');
+        Route::post('/change_password', 'change_password');
     });
 
-});
+    //admin
+    Route::get('/datauser', [DataUserController::class, 'index']);
+    Route::get('/pengajuan', [PengajuanAdmin::class, 'index']);
+
+    
+// });
+
+
+
+
+
+// ----------------------------------------------------------------------------------------
+// Route::group(['middleware' => ['auth']], function () {
+
+//     //Route for Admin
+//     Route::group(['middleware' => ['role:bendahara']], function () {
+//         // Route::resource('/admin', AdminController::class)->only(['index', 'show']);
+//         // Route::resource('/pengajuan/admin', PengajuanAdmin::class)->only(['index', 'show']);
+//     });
+
+//     //route for admin
+// });
 
 
 
 
 // //ROUTE FOR ADMIN
-// Route::get('/admin', function () {
-//     return view('admin/dashboard-admin', ["title" => "Dashboard"]);
-// })->middleware('auth');
+Route::get('/admin', function () {
+    return view('admin/dashboard-admin', ["title" => "Dashboard"]);
+})->middleware('auth');
 
 // Route::get('/pengajuan', function () {
 //     return view('admin/pengajuan-admin', ["title" => "Pengajuan Dana"]);
