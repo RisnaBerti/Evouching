@@ -63,6 +63,7 @@ class AuthController extends Controller
 
     public function forgot_password()
     {
-        return view('auth/forgot-password', ['title' => 'Forgot Password']);
+        return view('auth/forgot-password', 
+        ['title' => 'Forgot Password']);
     }
 }

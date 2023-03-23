@@ -23,6 +23,7 @@ class User extends Authenticatable
         'jabatan',
         'alamat',
         'is_active',
+        'role_id',
     ];
 
    
@@ -35,4 +36,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'id_role');
+    }
+
+    public function pengajuan()
+    {
+        return $this->hasMany(Pengajuan::class, 'id_user', 'id_user');
+    }
+
+    
 }

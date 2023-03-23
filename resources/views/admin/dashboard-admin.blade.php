@@ -87,7 +87,7 @@
                 </svg>
                 <!--end::Svg Icon-->
             </span>
-            <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">0</span>
+            <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">{{ $userCount }}</span>
             <span class="font-weight-bold text-muted  font-size-sm">Total User</span>
         </div>
         <!--end::Body-->

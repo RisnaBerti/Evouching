@@ -10,50 +10,72 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="form_user">
+                <form id="form_user" action="datauser/add" method="post">
+                    @csrf
                     <div class="modal-body">
                         <input class="d-none" type="text" id="id_user" name="id_user" autocomplete="off" />
                         <div class="form-group row">
-                            <label class="col-form-label col-4" for="nama_user ">Nama </label>
+                            <label class="col-form-label col-4" for="name ">Nama </label>
                             <div class="col-8">
-                                <input class="form-control " type="text" placeholder="masukan nama user" id="nama_user"
-                                    name="nama_user" autocomplete="off" />
+                                <input class="form-control @error('name') is-invalid @enderror" type="text" placeholder="masukan nama user" id="name" name="name" autocomplete="off" />
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-form-label col-4" for="harga_user ">Divisi</label>
+                            <label class="col-form-label col-4" for="email">Email</label>
                             <div class="col-8">
-                                <input class="form-control " type="text" placeholder="masukan divisi" id="nama_user"
-                                    name="nama_user" autocomplete="off" />
+                                <input class="form-control @error('email') is-invalid @enderror" type="text" placeholder="masukan nama user" id="email" name="email" autocomplete="off" />
+                                @error('email')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-form-label col-4" for="jml_komisi ">Jabatan</label>
+                            <label class="col-form-label col-4" for="no_hp">No Telepon</label>
                             <div class="col-8">
-                                <input class="form-control " type="text" placeholder="masukan jabatan" id="nama_user"
-                                    name="nama_user" autocomplete="off" />
+                                <input class="form-control @error('no_hp') is-invalid @enderror" type="text" placeholder="masukan nama user" id="no_hp" name="no_hp" autocomplete="off" />
+                                @error('no_hp')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-form-label col-4" for="deskripsi_user">Email</label>
+                            <label class="col-form-label col-4" for="divisi ">Divisi</label>
                             <div class="col-8">
-                                <input class="form-control " type="text" placeholder="masukan email" id="deskripsi_user"
-                                    name="deskripsi_user" autocomplete="off" />
+                                <input class="form-control @error('divisi') is-invalid @enderror" type="text" placeholder="masukan nama user" id="divisi" name="divisi" autocomplete="off" />
+                                @error('divisi')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-form-label col-4" for="link_user">No Telepon</label>
+                            <label class="col-form-label col-4" for="jabatan ">Jabatan</label>
                             <div class="col-8">
-                                <input class="form-control " type="text" placeholder="masukan no telepon" id="link_user"
-                                    name="link_user" autocomplete="off" />
+                                <input class="form-control @error('jabatan') is-invalid @enderror" type="text" placeholder="masukan nama user" id="jabatan" name="jabatan" autocomplete="off" />
+                                @error('jabatan')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-4" for="alamat">Alamat</label>
+                            <div class="col-8">
+                                <input class="form-control @error('alamat') is-invalid @enderror" type="text" placeholder="masukan nama user" id="alamat" name="alamat" autocomplete="off" />
+                                @error('alamat')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
+                        
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-light-primary">Simpan</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    </div>
                 </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-primary" onclick="save($(this))">Simpan</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -178,15 +200,17 @@
                                                 </td>
                                                 <td>
                                                     <center>
-                                                        @if ($user->is_active == 0)
-                                                            <button type="button" class="btn btn-primary btn-sm"
-                                                                onclick="edituser({{ $user->id }})">Active</button>
-                                                        @else
+                                                        @if ($user->is_active == 0 && $user->role_id != 1 )
+                                                            <a href="{{ url('/datauser/active/{id_user}') }}"><button type="submit" class="btn btn-primary btn-sm"
+                                                                 >Active</button></a>
+                                                            <button type="button" class="btn btn-danger btn-sm"
+                                                                onclick="hapususer({{ $user->id }})">Hapus</button>
+                                                        @elseif ($user->is_active == 1 && $user->role_id != 1 )
                                                             <button type="button" class="btn btn-warning btn-sm"
                                                                 onclick="edituser({{ $user->id }})">Non Active</button>
+                                                            <button type="button" class="btn btn-danger btn-sm"
+                                                                onclick="hapususer({{ $user->id }})">Hapus</button>
                                                         @endif
-                                                        <button type="button" class="btn btn-danger btn-sm"
-                                                            onclick="hapususer({{ $user->id }})">Hapus</button>
                                                     </center>
                                                 </td>
                                             </tr>
@@ -238,5 +262,45 @@
             $('#form_user')[0].reset()
             $('#modal_user').modal('show')
         }
+
+        //alert active user dengan onclik edituser
+        // const edituser = async (id_user) => {
+        //     const {
+        //         value: is_active //status di sini sebagai apa? sebagai variabel?  atau sebagai value? 
+        //     } = await Swal.fire({
+        //         title: 'Apakah anda yakin?',
+        //         // text: "Anda tidak dapat mengembalikan ini!",
+        //         icon: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: 'Yes, active it!'
+        //     })
+
+        //     if (is_active) {
+        //         $.ajax({
+        //             url: "{{ url('DataUserController/active') }}/" + id_user,
+        //             type: "GET",
+        //             dataType: "JSON",
+        //             success: function(data) {
+        //                 Swal.fire(
+        //                     'Active!',
+        //                     'User berhasil di active.',
+        //                     'success'
+        //                 )
+        //                 location.reload()
+        //             },
+        //             error: function() {
+        //                 Swal.fire(
+        //                     'Gagal!',
+        //                     'User gagal di active.',
+        //                     'error'
+        //                 )
+        //             }
+        //         })
+        //     }
+        // }
+
+
     </script>
 @endsection

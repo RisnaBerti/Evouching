@@ -5,7 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\PengajuanAdmin;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\DataUserController;
+use App\Http\Controllers\Admin\DataUserController;
+use App\Http\Controllers\Admin\LaporanController;
 
 // use Illuminate\Support\Facades\Auth;
 // use App\Http\Controllers\UserController;
@@ -24,9 +25,7 @@ use App\Http\Controllers\DataUserController;
 $controller_path = 'App\Http\Controllers';
 
 //main route
-Route::get('/', function () {
-    return view('auth/login', ["title" => "Sign In"]);
-});
+Route::get('/', [AuthController::class, 'login'])->name('auth-login');
 
 // authentification
 Route::middleware('guest')->group(function () {
@@ -52,8 +51,24 @@ Route::middleware('guest')->group(function () {
     });
 
     //admin
-    Route::get('/datauser', [DataUserController::class, 'index']);
-    Route::get('/pengajuan', [PengajuanAdmin::class, 'index']);
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('/admin', 'index')->name('admin');
+    });
+
+    Route::controller(PengajuanAdmin::class)->group(function () {
+        Route::get('/pengajuan', 'index')->name('pengajuan');
+    });
+
+    Route::controller(DataUserController::class)->group(function () {
+        Route::get('/datauser', 'index')->name('auth.user');
+        Route::post('/datauser/add', 'add');
+        Route::get('/datauser/active/{id_user}', 'active');
+    });
+
+    Route::controller(LaporanController::class)->group(function () {
+        Route::get('/laporanadmin', 'index')->name('laporanadmin');
+    });
+
 
     
 // });
@@ -78,9 +93,9 @@ Route::middleware('guest')->group(function () {
 
 
 // //ROUTE FOR ADMIN
-Route::get('/admin', function () {
-    return view('admin/dashboard-admin', ["title" => "Dashboard"]);
-})->middleware('auth');
+// Route::get('/admin', function () {
+//     return view('admin/dashboard-admin', ["title" => "Dashboard"]);
+// })->middleware('auth');
 
 // Route::get('/pengajuan', function () {
 //     return view('admin/pengajuan-admin', ["title" => "Pengajuan Dana"]);

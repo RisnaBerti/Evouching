@@ -16,11 +16,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Bendahara',
+            'name' => 'Admin',
             'email' => 'bendahara@gmail.com',
             'password' => bcrypt('123'),
             'no_hp' => '081234567890',
-            'divisi' => 'IT',
+            'divisi' => 'Bendahara',
             'jabatan' => 'Bendahara',
             'alamat' => 'Jl. Jalan',
             'is_active' => 1,
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'email' => 'manajer@gmail.com',
             'password' => bcrypt('123'),
             'no_hp' => '081234567890',
-            'divisi' => 'IT',
+            'divisi' => 'Manajer',
             'jabatan' => 'Manajer',
             'alamat' => 'Jl. Jalan',
             'is_active' => 1,
@@ -44,10 +44,10 @@ class UserSeeder extends Seeder
             'email' => 'pemeriksa@gmail.com',
             'password' => bcrypt('123'),
             'no_hp' => '081234567890',
-            'divisi' => 'IT',
+            'divisi' => 'Pemeriksa',
             'jabatan' => 'Pemeriksa',
             'alamat' => 'Jl. Jalan',
-            'is_active' => 0,
+            'is_active' => 1,
             'role_id' => 3,
         ]);
 
@@ -57,9 +57,9 @@ class UserSeeder extends Seeder
             'password' => bcrypt('123'),
             'no_hp' => '081234567890',
             'divisi' => 'IT',
-            'jabatan' => 'Pengurus',
+            'jabatan' => 'Ketua Divisi',
             'alamat' => 'Jl. Jalan',
-            'is_active' => 0,
+            'is_active' => 1,
             'role_id' => 4,
         ]);
     }

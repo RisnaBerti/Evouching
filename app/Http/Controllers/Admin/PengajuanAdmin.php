@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
@@ -8,6 +9,9 @@ class PengajuanAdmin extends Controller
 {
     public function index()
     {
-        return view('admin/pengajuan-admin', ["title" => "Pengajuan Dana"]);
+        return view('admin/pengajuan-admin', 
+        ["title" => "Pengajuan Dana"],
+        ["active" => "Pengajuan Dana"]
+        );
     }
 }
