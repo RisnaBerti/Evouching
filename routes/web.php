@@ -13,8 +13,6 @@ use App\Http\Controllers\Admin\PengajuanAdmin;
 use App\Http\Controllers\Admin\ReimbuseController;
 
 
-
-
 // use Illuminate\Support\Facades\Auth;
 // use App\Http\Controllers\UserController;
 // use App\Models\User;
@@ -42,15 +40,11 @@ Route::middleware('guest')->group(function () {
         Route::get('/forgot_password', 'forgot_password');
         Route::get('/reset-password', 'reset_password');
         Route::post('/reset-password', 'reset_password');
-        Route::get('/profile', 'profile');
-        Route::post('/profile', 'update_profile');
-        Route::get('/changepassword', 'change_password');
-        Route::post('/changepassword', 'change_password');
     });
 });
 
 
-// Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
 
     Route::get('/logout', [AuthController::class, 'logout']);
 
@@ -59,15 +53,15 @@ Route::middleware('guest')->group(function () {
         Route::get('/profile', 'profile')->name('profile');
         Route::post('/profile', 'update_profile');
         Route::get('/change_password', 'change_password');
-        Route::post('/change_password', 'change_password');
+        Route::post('/change_password', 'update_password');
     });
 
     //admin
     Route::controller(AdminController::class)->group(function () {
-        Route::get('/admin', 'index')->name('admin');
+        Route::get('/bendahara', 'index')->name('bendahara');
     });
     Route::controller(PengajuanAdmin::class)->group(function () {
-        Route::get('/pengajuan', 'index')->name('pengajuan');
+        Route::get('/permohonan', 'index')->name('pemohon');
     });
     Route::controller(DataUserController::class)->group(function () {
         Route::get('/datauser', 'index')->name('auth.user');
@@ -75,68 +69,25 @@ Route::middleware('guest')->group(function () {
         Route::get('/datauser/active/{id_user}', 'active');
     });
     Route::controller(LaporanController::class)->group(function () {
-        Route::get('/laporanadmin', 'index')->name('laporanadmin');
+        Route::get('/laporan', 'index')->name('laporan');
+    });
+    Route::controller(BankController::class)->group(function () {
+        Route::get('/penerimaanbank', 'index')->name('bank');
+        Route::get('/pembayaranbank', 'pembayaran_bank')->name('pembayaran-bank');
+    });
+    Route::controller(CaController::class)->group(function () {
+        Route::get('/penerimaanca', 'index')->name('ca');
+        Route::get('/pembayaranca', 'pembayaran_ca')->name('pembayaran-ca');
+    });
+    Route::controller(KasController::class)->group(function () {
+        Route::get('/penerimaankas', 'index')->name('kas');
+        Route::get('/pembayarankas', 'pembayaran_kas')->name('pembayaran-kas');
+    });
+    Route::controller(ReimbuseController::class)->group(function () {
+        Route::get('/reimbuse', 'index')->name('reimbuse');
+        Route::get('/pegajuan_reimbuse', 'pegajuan_reimbuse');
     });
 
     
-// });
+});
 
-
-
-
-
-// ----------------------------------------------------------------------------------------
-// Route::group(['middleware' => ['auth']], function () {
-
-//     //Route for Admin
-//     Route::group(['middleware' => ['role:bendahara']], function () {
-//         // Route::resource('/admin', AdminController::class)->only(['index', 'show']);
-//         // Route::resource('/pengajuan/admin', PengajuanAdmin::class)->only(['index', 'show']);
-//     });
-
-//     //route for admin
-// });
-
-
-
-
-// //ROUTE FOR ADMIN
-// Route::get('/admin', function () {
-//     return view('admin/dashboard-admin', ["title" => "Dashboard"]);
-// })->middleware('auth');
-
-// Route::get('/pengajuan', function () {
-//     return view('admin/pengajuan-admin', ["title" => "Pengajuan Dana"]);
-// });
-// Route::get('/penerimaankas', function () {
-//     return view('admin/penerimaan-kas', ["title" => "Penerimaan Kas"]);
-// });
-// Route::get('/pembayarankas', function () {
-//     return view('admin/pembayaran-kas', ["title" => "Pembayaran Kas"]);
-// });
-// Route::get('/penerimaanbank', function () {
-//     return view('admin/penerimaan-bank', ["title" => "Penerimaan Bank"]);
-// });
-// Route::get('/pembayaranbank', function () {
-//     return view('admin/pembayaran-bank', ["title" => "Pembayaran Bank"]);
-// });
-// Route::get('/pengajuandanabank', function () {
-//     return view('admin/pengajuan-bank', ["title" => "Pengajuan Dana Bank"]);
-// });
-// Route::get('/datauser', function () {
-//     return view('admin/data-user', ["title" => "Data User"]);
-// });
-// Route::get('/laporanadmin', function () {
-//     return view('admin/laporan-admin', ["title" => "Laporan"]);
-// });
-// Route::get('/settingaccount', function () {
-//     return view('auth/edit-profile', ["title" => "Edit Profile"]);
-// });
-// Route::get('/settingchangepassword', function () {
-//     return view('auth/change-password', ["title" => "Change Password"]);
-// });
-
-//ROUTE FOR MANAJER
-// Route::get('/manajer', function () {
-//     return view('manajer/dashboard-manajer', ["title" => "Dashboard"]);
-// });

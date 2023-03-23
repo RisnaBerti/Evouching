@@ -14,4 +14,12 @@ class KasController extends Controller
             'active' => 'Kas'
         ]);
     }
+
+    public function pembayaran_kas()
+    {
+        return view('admin.pembayaran-kas', [
+            'title' => 'Pembayaran Kas',
+            'active' => 'Pembayaran Kas'
+        ]);
+    }
 }

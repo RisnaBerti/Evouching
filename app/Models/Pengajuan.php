@@ -12,7 +12,7 @@ class Pengajuan extends Model
     protected $table = 'pengajuan';
     protected $primaryKey = 'id_pengajuan';
     protected $fillable = [
-        'id_user',
+        'user_id',
         'no_resi_pengajuan',
         'tanggal_pengajuan',
         'nama_perkiraan',
@@ -26,7 +26,7 @@ class Pengajuan extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user', 'id_user');
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
     

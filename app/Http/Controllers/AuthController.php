@@ -35,7 +35,7 @@ class AuthController extends Controller
 
                 // cek role
                 if ($user->role_id == 1) {
-                    return redirect()->intended('admin');
+                    return redirect()->intended('bendahara');
                 } else if ($user->role_id == 2) {
                     return redirect()->intended('manajer');
                 } else if ($user->role_id == 3) {
@@ -75,38 +75,10 @@ class AuthController extends Controller
         );
     }
 
-    public function change_password()
-    {
-        return view(
-            'auth.change-password',
-            ['title' => 'Change Password']
-        );
-    }
+    
 
-    // public function update_password(Request $request)
-    // {
-    //     $request->validate([
-    //         'old_password' => 'required',
-    //         'new_password' => 'required',
-    //         'confirm_password' => 'required|same:new_password',
-    //     ]);
 
-    //     $user = Auth::user();
-    //     if (Hash::check($request->old_password, $user->password)) {
-    //         $user->password = Hash::make($request->new_password);
-    //         $user->save();
-    //         return redirect()->route('profile')->with('status', 'Password changed successfully!');
-    //     } else {
-    //         return redirect()->route('change_password')->with('status', 'Old password is incorrect!');
-    //     }
-    // }
-
-    public function profile()
-    {
-        return view( 'auth.edit-profile',
-            ['title' => 'Profile']
-        );
-    }
+   
 
     // public function update_profile(Request $request)
     // {

@@ -14,4 +14,12 @@ class BankController extends Controller
             'active' => 'Bank'
         ]);
     }
+
+    public function pembayaran_bank()
+    {
+        return view('admin.pembayaran-bank', [
+            'title' => 'Pembayaran Bank',
+            'active' => 'Pembayaran Bank'
+        ]);
+    }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,7 +14,7 @@ class UserController extends Controller
     //fungsi profile
     public function profile()
     {
-        return view('auth.profile', [
+        return view('auth.edit-profile', [
             'title' => 'Profile',
             'active' => 'Profile'
         ]);
@@ -44,18 +45,32 @@ class UserController extends Controller
     }
 
     //fungsi change password
-    public function change_password(Request $request)
+    public function change_password()
     {
-        $request->validate([
-            'password' => 'required|confirmed',
+        return view('auth.change-password', [
+            'title' => 'Change Password',
+            'active' => 'Change Password'
         ]);
-
-        $user = User::find(Auth::user()->id_user);
-        $user->password = bcrypt($request->password);
-        $user->save();
-
-        return redirect()->route('profile')->with('success', 'Password berhasil diupdate');
     }
+
+    // public function update_password(Request $request)
+    // {
+    //     $request->validate([
+    //         'old_password' => 'required',
+    //         'new_password' => 'required',
+    //         'confirm_password' => 'required|same:new_password',
+    //     ]);
+
+    //     $user = Auth::user();
+    //     if (Hash::check($request->old_password, $user->password)) {
+    //         $user->password = Hash::make($request->new_password);
+    //         $user->save();
+    //         return redirect()->route('profile')->with('status', 'Password changed successfully!');
+    //     } else {
+    //         return redirect()->route('change_password')->with('status', 'Old password is incorrect!');
+    //     }
+    // }
+    
 
 
 }

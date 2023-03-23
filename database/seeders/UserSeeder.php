@@ -15,51 +15,52 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        
         User::create([
-            'name' => 'Admin',
-            'email' => 'bendahara@gmail.com',
-            'password' => bcrypt('123'),
+            'name' => 'Administrator',
+            'email' => 'admin@gcs.ac.id',
+            'password' => bcrypt('admin123'),
             'no_hp' => '081234567890',
-            'divisi' => 'Bendahara',
-            'jabatan' => 'Bendahara',
-            'alamat' => 'Jl. Jalan',
+            'divisi' => 'Keuangan',
+            'jabatan' => 'Bendahara I',
+            'alamat' => 'Jl. Jalanin aja dulu',
             'is_active' => 1,
             'role_id' => 1,
         ]);
 
         User::create([
             'name' => 'Manajer',
-            'email' => 'manajer@gmail.com',
-            'password' => bcrypt('123'),
+            'email' => 'manajer@gsc.ac.id',
+            'password' => bcrypt('manajer123'),
             'no_hp' => '081234567890',
-            'divisi' => 'Manajer',
-            'jabatan' => 'Manajer',
-            'alamat' => 'Jl. Jalan',
+            'divisi' => 'HRD',
+            'jabatan' => 'Manajer HRD',
+            'alamat' => 'Jl. Bareng ga jadian',
             'is_active' => 1,
             'role_id' => 2,
         ]);
 
         User::create([
             'name' => 'Pemeriksa',
-            'email' => 'pemeriksa@gmail.com',
-            'password' => bcrypt('123'),
+            'email' => 'pemeriksa@gcs.ac.id',
+            'password' => bcrypt('pemeriksa123'),
             'no_hp' => '081234567890',
-            'divisi' => 'Pemeriksa',
+            'divisi' => 'Audit Internal',
             'jabatan' => 'Pemeriksa',
-            'alamat' => 'Jl. Jalan',
-            'is_active' => 1,
+            'alamat' => 'Jl. Buntu bersama mu',
+            'is_active' => 0,
             'role_id' => 3,
         ]);
 
         User::create([
             'name' => 'Pengaju',
-            'email' => 'pengaju@gmail.com',
-            'password' => bcrypt('123'),
+            'email' => 'sulthan@gsc.ac.id',
+            'password' => bcrypt('sulthan123'),
             'no_hp' => '081234567890',
-            'divisi' => 'IT',
-            'jabatan' => 'Ketua Divisi',
-            'alamat' => 'Jl. Jalan',
-            'is_active' => 1,
+            'divisi' => 'Development Team',
+            'jabatan' => 'Mobile Developer',
+            'alamat' => 'Jl. Doang kagak jadian',
+            'is_active' => 0,
             'role_id' => 4,
         ]);
     }

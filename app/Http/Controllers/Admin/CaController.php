@@ -10,8 +10,16 @@ class CaController extends Controller
     public function index()
     {
         return view('admin.penerimaan-ca', [
-            'title' => 'CA',
-            'active' => 'CA'
+            'title' => 'PENERIMAAN CA',
+            'active' => 'PENERIMAAN CA'
+        ]);
+    }
+
+    public function pembayaran_ca()
+    {
+        return view('admin.pembayaran-ca', [
+            'title' => 'PEMBAYARAN CA',
+            'active' => 'PEMBAYARAN CA'
         ]);
     }
 }

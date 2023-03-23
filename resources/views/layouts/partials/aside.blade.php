@@ -57,7 +57,7 @@
 
                 <!-- START DASHBOARD -->
                 <li class="menu-item " aria-haspopup="true">
-                    <a href="{{ url('/admin') }}" class="menu-link">
+                    <a href="{{ url('/bendahara') }}" class="menu-link">
                         <span class="svg-icon menu-icon svg-icon-primary">
                             <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Layout\Layout-4-blocks.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -85,7 +85,7 @@
 
                 <!-- START PENGAJUAN DANA MENU -->
                 <li class="menu-item " aria-haspopup="true">
-                    <a href="{{ url('/pengajuan') }}" class="menu-link">
+                    <a href="{{ url('/permohonan') }}" class="menu-link">
                         <span class="svg-icon menu-icon svg-icon-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -100,7 +100,7 @@
                                 </g>
                             </svg>
                         </span>
-                        <span class=" menu-text">Pengajuan Dana</span>
+                        <span class=" menu-text">Permohonan Dana</span>
                     </a>
                 </li>
                 <!-- END PENGAJUAN DANA MENU -->
@@ -231,7 +231,7 @@
                             </li>
                             <!--MENU PENERIMAAN CA-->
                             <li class="menu-item " aria-haspopup="true">
-                                <a href="#" class="menu-link">
+                                <a href="/penerimaanca" class="menu-link">
                                     <span class="svg-icon menu-icon svg-icon-primary">
                                         <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Chart-bar1.svg-->
                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -259,7 +259,7 @@
                             <!-- END MENU PENERIMAAN CA-->
                             <!-- END MENU PEMBAYARAN CA-->
                             <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
-                                <a href="#" class="menu-link menu-toggle">
+                                <a href="/pembayaranca" class="menu-link menu-toggle">
                                     <span class="svg-icon menu-icon svg-icon-primary">
                                         <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Files\Export.svg-->
                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -325,7 +325,7 @@
                             </li>
                             <!--MENU PENGAJUAN REIMBUSE -->
                             <li class="menu-item " aria-haspopup="true">
-                                <a href="" class="menu-link">
+                                <a href="/pegajuan_reimbuse" class="menu-link">
                                     <span class="svg-icon menu-icon svg-icon-primary">
                                         <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Chart-bar1.svg-->
                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -353,7 +353,7 @@
                             <!-- END MENU PENGAJUAN REIMBUSE -->
                             <!-- END MENU PEMBAYARAN REIMBUSE-->
                             <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
-                                <a href="javascript:;" class="menu-link menu-toggle">
+                                <a href="reimbuse" class="menu-link menu-toggle">
                                     <span class="svg-icon menu-icon svg-icon-primary">
                                         <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Files\Export.svg-->
                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -628,7 +628,7 @@
 
                 <!-- START Laporan MENU -->
                 <li class="menu-item " aria-haspopup="true">
-                    <a href="{{ url('/laporanadmin') }}" class="menu-link">
+                    <a href="{{ url('/laporan') }}" class="menu-link">
                         <span class="svg-icon menu-icon svg-icon-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -708,7 +708,7 @@
                             <!-- END MENU Account Setting -->
                             <!-- END MENU Password Setting-->
                             <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
-                                <a href="{{ url('/changepassword') }}" class="menu-link menu-toggle">
+                                <a href="{{ url('/change_password') }}" class="menu-link menu-toggle">
                                     <span class="svg-icon menu-icon svg-icon-primary">
                                         <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Files\Export.svg-->
                                         <svg xmlns="http://www.w3.org/2000/svg"
