@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
@@ -40,17 +41,14 @@ class AuthController extends Controller
                 } else if ($user->role_id == 3) {
                     return redirect()->intended('pemeriksa');
                 } else {
-                    return redirect()->intended('pengaju');
+                    return redirect()->intended('pemohon');
                 }
-
             } else {
                 return redirect()->route('auth-login')->with('status', 'Your account is not active, please contact admin!');
             }
-
         }
 
         return redirect()->route('auth-login')->with('status', 'Your email or password is incorrect!');
-        
     }
 
     public function logout(Request $request)
@@ -63,7 +61,67 @@ class AuthController extends Controller
 
     public function forgot_password()
     {
-        return view('auth/forgot-password', 
-        ['title' => 'Forgot Password']);
+        return view(
+            'auth.forgot-password',
+            ['title' => 'Forgot Password']
+        );
     }
+
+    public function reset_password()
+    {
+        return view(
+            'auth.reset-password',
+            ['title' => 'Reset Password']
+        );
+    }
+
+    public function change_password()
+    {
+        return view(
+            'auth.change-password',
+            ['title' => 'Change Password']
+        );
+    }
+
+    // public function update_password(Request $request)
+    // {
+    //     $request->validate([
+    //         'old_password' => 'required',
+    //         'new_password' => 'required',
+    //         'confirm_password' => 'required|same:new_password',
+    //     ]);
+
+    //     $user = Auth::user();
+    //     if (Hash::check($request->old_password, $user->password)) {
+    //         $user->password = Hash::make($request->new_password);
+    //         $user->save();
+    //         return redirect()->route('profile')->with('status', 'Password changed successfully!');
+    //     } else {
+    //         return redirect()->route('change_password')->with('status', 'Old password is incorrect!');
+    //     }
+    // }
+
+    public function profile()
+    {
+        return view( 'auth.edit-profile',
+            ['title' => 'Profile']
+        );
+    }
+
+    // public function update_profile(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'email' => 'required|email:dns',
+    //     ]);
+
+    //     $user = Auth::user();
+    //     $user->name = $request->name;
+    //     $user->email = $request->email;
+    //     $user->save();
+
+    //     return redirect()->route('profile')->with('status', 'Profile updated successfully!');
+    // }
+
+
 }

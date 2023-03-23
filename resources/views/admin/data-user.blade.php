@@ -184,7 +184,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 {{-- <td><center>{{ $user->id }}</center></td> --}}
                                                 <td>
-                                                    <center>{{ $user->name }}</center>
+                                                    <center>{{ $user->name}}</center>
                                                 </td>
                                                 <td>
                                                     <center>{{ $user->divisi }}</center>

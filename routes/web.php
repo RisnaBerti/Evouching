@@ -3,10 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\Admin\PengajuanAdmin;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BankController;
+use App\Http\Controllers\Admin\CaController;
 use App\Http\Controllers\Admin\DataUserController;
+use App\Http\Controllers\Admin\KasController;
 use App\Http\Controllers\Admin\LaporanController;
+use App\Http\Controllers\Admin\PengajuanAdmin;
+use App\Http\Controllers\Admin\ReimbuseController;
+
+
+
 
 // use Illuminate\Support\Facades\Auth;
 // use App\Http\Controllers\UserController;
@@ -32,8 +39,13 @@ Route::middleware('guest')->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('/login', 'login')->name('auth-login');
         Route::post('/login', 'authenticate')->name('auth-authenticate');
-        Route::get('/forgot_password', 'forgot_password', ["title" => "Forgot Password"]);
-        Route::get('/reset-password', 'reset_password', ["title" => "Reset Password"]);
+        Route::get('/forgot_password', 'forgot_password');
+        Route::get('/reset-password', 'reset_password');
+        Route::post('/reset-password', 'reset_password');
+        Route::get('/profile', 'profile');
+        Route::post('/profile', 'update_profile');
+        Route::get('/changepassword', 'change_password');
+        Route::post('/changepassword', 'change_password');
     });
 });
 
@@ -54,21 +66,17 @@ Route::middleware('guest')->group(function () {
     Route::controller(AdminController::class)->group(function () {
         Route::get('/admin', 'index')->name('admin');
     });
-
     Route::controller(PengajuanAdmin::class)->group(function () {
         Route::get('/pengajuan', 'index')->name('pengajuan');
     });
-
     Route::controller(DataUserController::class)->group(function () {
         Route::get('/datauser', 'index')->name('auth.user');
         Route::post('/datauser/add', 'add');
         Route::get('/datauser/active/{id_user}', 'active');
     });
-
     Route::controller(LaporanController::class)->group(function () {
         Route::get('/laporanadmin', 'index')->name('laporanadmin');
     });
-
 
     
 // });

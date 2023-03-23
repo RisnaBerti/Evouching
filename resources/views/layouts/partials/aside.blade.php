@@ -680,7 +680,7 @@
                             </li>
                             <!--MENU Account Setting -->
                             <li class="menu-item " aria-haspopup="true">
-                                <a href="{{ url('/settingaccount') }}" class="menu-link">
+                                <a href="{{ url('/profile') }}" class="menu-link">
                                     <span class="svg-icon menu-icon svg-icon-primary">
                                         <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Chart-bar1.svg-->
                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -708,7 +708,7 @@
                             <!-- END MENU Account Setting -->
                             <!-- END MENU Password Setting-->
                             <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
-                                <a href="{{ url('/settingchangepassword') }}" class="menu-link menu-toggle">
+                                <a href="{{ url('/changepassword') }}" class="menu-link menu-toggle">
                                     <span class="svg-icon menu-icon svg-icon-primary">
                                         <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Files\Export.svg-->
                                         <svg xmlns="http://www.w3.org/2000/svg"
