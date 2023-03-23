@@ -37,11 +37,11 @@ class AuthController extends Controller
                 if ($user->role_id == 1) {
                     return redirect()->intended('bendahara');
                 } else if ($user->role_id == 2) {
-                    return redirect()->intended('manajer');
+                    return redirect()->intended('dashboard-manajer');
                 } else if ($user->role_id == 3) {
                     return redirect()->intended('pemeriksa');
                 } else {
-                    return redirect()->intended('pemohon');
+                    return redirect()->intended('dashboard-pemohon');
                 }
             } else {
                 return redirect()->route('auth-login')->with('status', 'Your account is not active, please contact admin!');
