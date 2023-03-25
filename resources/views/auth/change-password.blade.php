@@ -44,12 +44,13 @@
                                         class="flaticon2-new-email mr-2 font-size-lg"></i>{{ old('email', Auth::user()->email) }}</a>
                                 <a href=""
                                     class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2"><i
-                                        class="flaticon2-calendar-3 mr-2 font-size-lg"></i>{{ old('jabatan', Auth::user()->jabatan) }} </a>
+                                        class="flaticon2-calendar-3 mr-2 font-size-lg"></i>{{ old('jabatan', Auth::user()->jabatan) }}
+                                </a>
                                 <a href="" class="text-dark-50 text-hover-primary font-weight-bold"><i
                                         class="flaticon2-placeholder mr-2 font-size-lg"></i>{{ old('alamat', Auth::user()->alamat) }}</a>
                             </div>
 
-                                            {{-- <span class="font-weight-bold text-dark-50">I distinguish three main text objectives could be merely to inform people.</span>
+                            {{-- <span class="font-weight-bold text-dark-50">I distinguish three main text objectives could be merely to inform people.</span>
                                         <span class="font-weight-bold text-dark-50">A second could be persuade people.You want people to bay objective</span>
                                     --}}
                         </div>
@@ -76,37 +77,56 @@
                         <h3 class="card-label font-weight-bolder text-dark">Account Information</h3>
                         <span class="text-muted font-weight-bold font-size-sm mt-1">Change your password</span>
                     </div>
-                    <div class="card-toolbar">
-                        <button type="reset" class="btn btn-success mr-2">Save Changes</button>
-                    </div>
                 </div>
                 <!--end::Header-->
                 <!--begin::Form-->
-                <form class="form">
+                <form class="form" method="post" action="/change-password">
+                    @csrf
                     <div class="card-body">
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                {{ $message }}
+                            </div>
+                        @endif
                         <!--begin::Form Group-->
                         <div class="form-group row">
-                            <label class="col-xl-5 col-lg-3 col-form-label">Current Password</label>
+                            <label class="col-xl-5 col-lg-3 col-form-label" for="old_password">Current Password</label>
                             <div class="col-lg-9 col-xl-7">
-                                <input class="form-control form-control-lg form-control-solid" type="Password"
-                                    value="">
+                                <input
+                                    class="form-control form-control-lg form-control-solid @error('old_password') is-invalid @enderror"
+                                    type="Password" name="old_password" id="old_password">
+                                @error('old_password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <!--begin::Form Group-->
                         <div class="form-group row">
-                            <label class="col-xl-5 col-lg-3 col-form-label">New Password</label>
+                            <label class="col-xl-5 col-lg-3 col-form-label" for="new_password">New Password</label>
                             <div class="col-lg-9 col-xl-7">
-                                <input class="form-control form-control-lg form-control-solid" type="Password"
-                                    value="">
+                                <input
+                                    class="form-control form-control-lg form-control-solid @error('new_password') is-invalid @enderror"
+                                    type="Password" name="new_password" id="new_password">
+                                @error('new_password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <!--begin::Form Group-->
                         <div class="form-group row">
-                            <label class="col-xl-5 col-lg-3 col-form-label">Confirm New Password</label>
+                            <label class="col-xl-5 col-lg-3 col-form-label" for="confirm_password">Confirm New
+                                Password</label>
                             <div class="col-lg-9 col-xl-7">
-                                <input class="form-control form-control-lg form-control-solid" type="Password"
-                                    value="">
+                                <input
+                                    class="form-control form-control-lg form-control-solid @error('confirm_password') is-invalid @enderror"
+                                    type="Password" name="confirm_password" id="confirm_password">
+                                @error('confirm_password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
+                        </div>
+                        <div class="card-toolbar">
+                            <button type="submit" class="btn btn-success mr-2">Save Changes</button>
                         </div>
                         <!--begin::Form Group-->
                         <div class="separator separator-dashed "></div>

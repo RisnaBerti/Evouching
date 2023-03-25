@@ -1,13 +1,16 @@
 @include('layouts.index')
 
 <!--begin::Body-->
-<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+
+<body id="kt_body"
+    class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
     <!--begin::Main-->
     <div class="d-flex flex-column flex-root">
         <!--begin::Login-->
         <div class="login login-4 wizard d-flex flex-column flex-lg-row flex-column-fluid">
             <!--begin::Content-->
-            <div class="login-container order-2 order-lg-1 d-flex flex-center flex-row-fluid px-7 pt-lg-0 pb-lg-0 pt-4 pb-6 bg-white">
+            <div
+                class="login-container order-2 order-lg-1 d-flex flex-center flex-row-fluid px-7 pt-lg-0 pb-lg-0 pt-4 pb-6 bg-white">
                 <!--begin::Wrapper-->
                 <div class="login-content d-flex flex-column pt-lg-0 pt-12">
                     <!--begin::Logo-->
@@ -20,7 +23,7 @@
                     <div class="login-form">
                         <!--begin::Form-->
                         <form action="/login" method="post" class="form" id="kt_login_singin_form">
-                        @csrf
+                            @csrf
                             <!--begin::Title-->
                             <div class="pb-5">
                                 <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Sign In</h3>
@@ -34,8 +37,12 @@
 
                             <!--begin::Form group-->
                             <div class="form-group">
-                                <label class="font-size-h6 font-weight-bolder text-dark" for="email">Your Email</label>
-                                <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0 @error('email') is-invalid @enderror" type="email" name="email" id="email"  autocomplete="email" value="" autofocus/>
+                                <label class="font-size-h6 font-weight-bolder text-dark" for="email">Your
+                                    Email</label>
+                                <input
+                                    class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0 @error('email') is-invalid @enderror"
+                                    type="email" name="email" id="email" autocomplete="email"
+                                    value="{{ old('email') }}" autofocus />
                             </div>
                             @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -48,12 +55,16 @@
                             <!--begin::Form group-->
                             <div class="form-group">
                                 <div class="d-flex justify-content-between mt-n5">
-                                    <label class="font-size-h6 font-weight-bolder text-dark pt-5" for="password">Your Password</label>
-                                    <a href="{{ url('forgot_password') }}" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">
+                                    <label class="font-size-h6 font-weight-bolder text-dark pt-5" for="password">Your
+                                        Password</label>
+                                    <a href="{{ url('forgot_password') }}"
+                                        class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">
                                         Forgot Password ?
                                     </a>
                                 </div>
-                                <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0 @error('password') is-invalid @enderror" type="password" name="password" id="password" autocomplete="off"/>
+                                <input
+                                    class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0 @error('password') is-invalid @enderror"
+                                    type="password" name="password" id="password" autocomplete="off" />
                             </div>
                             @error('password')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -62,7 +73,8 @@
 
                             <!--begin::Action-->
                             <div class="pb-lg-0 pb-5">
-                                <button type="submit" id="kt_login_singin_form_submit_button" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
+                                <button type="submit" id="kt_login_singin_form_submit_button"
+                                    class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
                                     Sign In </button>
                             </div>
                             <!--end::Action-->

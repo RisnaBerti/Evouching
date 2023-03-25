@@ -20,9 +20,10 @@ class DataUserController extends Controller
     //fungsi add user
     public function add(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'no_hp' => 'required',
             'divisi' => 'required',
@@ -40,7 +41,7 @@ class DataUserController extends Controller
                 'divisi' => $request->divisi,
                 'jabatan' => $request->jabatan,
                 'alamat' => $request->alamat,
-                'is_active' => 1,
+                'is_active' => 0,
                 'role_id' => 4,
             ]
         );
@@ -48,10 +49,11 @@ class DataUserController extends Controller
     }
 
     //fungsi active user
-    public function active($id_user)
-    {
-        $user = User::where('id_user', $id_user)->first();
-        $user->is_active = 1;
-        $user->save();
-    }
+    // public function is_active($id)
+    // {
+    //     $user = User::find($id);
+    //     $user->is_active = 1;
+    //     $user->update();
+    //     return redirect()->route('auth.user')->with(['success' => 'User berhasil diaktifkan']);
+    // }
 }

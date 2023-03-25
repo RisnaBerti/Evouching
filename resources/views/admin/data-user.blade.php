@@ -10,10 +10,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="form_user" action="datauser/add" method="post">
+                <form id="form_user" action="/datauser/add" method="POST">
                     @csrf
                     <div class="modal-body">
-                        <input class="d-none" type="text" id="id_user" name="id_user" autocomplete="off" />
                         <div class="form-group row">
                             <label class="col-form-label col-4" for="name ">Nama </label>
                             <div class="col-8">
@@ -163,17 +162,19 @@
                                                 <center>NAMA</center>
                                             </th>
                                             <th>
+                                                <center>EMAIL</center>
+                                            </th>
+                                            <th>
+                                                <center>NO TELEPON</center>
+                                            </th>
+                                            <th>
                                                 <center>DIVISI</center>
                                             </th>
                                             <th>
                                                 <center>JABATAN</center>
                                             </th>
                                             <th>
-                                                <center>EMAIL</center>
-                                            </th>
-                                            <th>
-                                                <center>NO TELEPON</center>
-                                            </th>
+                                                <center>ALAMAT</center>
                                             <th>
                                                 <center>SETTING</center>
                                             </th>
@@ -187,21 +188,23 @@
                                                     <center>{{ $user->name}}</center>
                                                 </td>
                                                 <td>
-                                                    <center>{{ $user->divisi }}</center>
-                                                </td>
-                                                <td>
-                                                    <center>{{ $user->jabatan }}</center>
-                                                </td>
-                                                <td>
                                                     <center>{{ $user->email }}</center>
                                                 </td>
                                                 <td>
                                                     <center>{{ $user->no_hp }}</center>
                                                 </td>
                                                 <td>
+                                                    <center>{{ $user->divisi }}</center>
+                                                </td>
+                                                <td>
+                                                    <center>{{ $user->jabatan }}</center>
+                                                </td>
+                                                <td>
+                                                    <center>{{ $user->alamat }}</center>
+                                                <td>
                                                     <center>
                                                         @if ($user->is_active == 0 && $user->role_id != 1 )
-                                                            <a href="{{ url('/datauser/active/{id_user}') }}"><button type="submit" class="btn btn-primary btn-sm"
+                                                            <a href="{{ url('/is_active'), $user->id }}"><button type="submit" class="btn btn-primary btn-sm"
                                                                  >Active</button></a>
                                                             <button type="button" class="btn btn-danger btn-sm"
                                                                 onclick="hapususer({{ $user->id }})">Hapus</button>

@@ -4,29 +4,6 @@
 
 <div class="row">
     <div class="col-xl-4">
-        <!--begin::Stats Widget 29-->
-        <div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto;">
-        <!--begin::Body-->
-        <div class="card-body">
-            <span class="svg-icon svg-icon-primary svg-icon-2x">
-                <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Cart1.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect x="0" y="0" width="24" height="24"></rect>
-                        <path d="M18.1446364,11.84388 L17.4471627,16.0287218 C17.4463569,16.0335568 17.4455155,16.0383857 17.4446387,16.0432083 C17.345843,16.5865846 16.8252597,16.9469884 16.2818833,16.8481927 L4.91303792,14.7811299 C4.53842737,14.7130189 4.23500006,14.4380834 4.13039941,14.0719812 L2.30560137,7.68518803 C2.28007524,7.59584656 2.26712532,7.50338343 2.26712532,7.4104669 C2.26712532,6.85818215 2.71484057,6.4104669 3.26712532,6.4104669 L16.9929851,6.4104669 L17.606173,3.78251876 C17.7307772,3.24850086 18.2068633,2.87071314 18.7552257,2.87071314 L20.8200821,2.87071314 C21.4717328,2.87071314 22,3.39898039 22,4.05063106 C22,4.70228173 21.4717328,5.23054898 20.8200821,5.23054898 L19.6915238,5.23054898 L18.1446364,11.84388 Z" fill="#000000" opacity="0.3"></path>
-                        <path d="M6.5,21 C5.67157288,21 5,20.3284271 5,19.5 C5,18.6715729 5.67157288,18 6.5,18 C7.32842712,18 8,18.6715729 8,19.5 C8,20.3284271 7.32842712,21 6.5,21 Z M15.5,21 C14.6715729,21 14,20.3284271 14,19.5 C14,18.6715729 14.6715729,18 15.5,18 C16.3284271,18 17,18.6715729 17,19.5 C17,20.3284271 16.3284271,21 15.5,21 Z" fill="#000000"></path>
-                    </g>
-                </svg>
-                <!--end::Svg Icon-->
-            </span>
-            <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">Rp. 0</span>
-            <span class="font-weight-bold text-muted  font-size-sm">Total Dana ACC</span>
-        </div>
-        <!--end::Body-->
-        </div>
-        <!--end::Stats Widget 29-->
-    </div>
-
-    <div class="col-xl-4">
         <!--begin::Stats Widget 30-->
         <div class="card card-custom card-stretch gutter-b " style="background-color: #2C3580">
         <!--begin::Body-->
@@ -42,65 +19,17 @@
                 <!--end::Svg Icon-->
             </span>
             <span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">Rp. 0</span>
-            <span class="font-weight-bold text-white  font-size-sm">Total Dana Kas</span>
+            <span class="font-weight-bold text-white  font-size-sm">Total Dana Acc</span>
         </div>
         <!--end::Body-->
         </div>
         <!--end::Stats Widget 30-->
     </div>
-
-    <div class="col-xl-4">
-        <!--begin::Stats Widget 29-->
-        <div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto;">
-        <!--begin::Body-->
-        <div class="card-body">
-            <span class="svg-icon svg-icon-primary svg-icon-2x">
-                <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Gift.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect x="0" y="0" width="24" height="24"></rect>
-                        <path d="M4,6 L20,6 C20.5522847,6 21,6.44771525 21,7 L21,8 C21,8.55228475 20.5522847,9 20,9 L4,9 C3.44771525,9 3,8.55228475 3,8 L3,7 C3,6.44771525 3.44771525,6 4,6 Z M5,11 L10,11 C10.5522847,11 11,11.4477153 11,12 L11,19 C11,19.5522847 10.5522847,20 10,20 L5,20 C4.44771525,20 4,19.5522847 4,19 L4,12 C4,11.4477153 4.44771525,11 5,11 Z M14,11 L19,11 C19.5522847,11 20,11.4477153 20,12 L20,19 C20,19.5522847 19.5522847,20 19,20 L14,20 C13.4477153,20 13,19.5522847 13,19 L13,12 C13,11.4477153 13.4477153,11 14,11 Z" fill="#000000"></path>
-                        <path d="M14.4452998,2.16794971 C14.9048285,1.86159725 15.5256978,1.98577112 15.8320503,2.4452998 C16.1384028,2.90482849 16.0142289,3.52569784 15.5547002,3.83205029 L12,6.20185043 L8.4452998,3.83205029 C7.98577112,3.52569784 7.86159725,2.90482849 8.16794971,2.4452998 C8.47430216,1.98577112 9.09517151,1.86159725 9.5547002,2.16794971 L12,3.79814957 L14.4452998,2.16794971 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                    </g>
-                </svg>
-                <!--end::Svg Icon-->
-            </span>
-            <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">Rp. 0</span>
-            <span class="font-weight-bold text-muted  font-size-sm">Total Dana BANK</span>
-        </div>
-        <!--end::Body-->
-        </div>
-        <!--end::Stats Widget 29-->
-    </div>
-
-    <div class="col-xl-4">
-        <!--begin::Stats Widget 29-->
-        <div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; ">
-        <!--begin::Body-->
-        <div class="card-body">
-            <span class="svg-icon svg-icon-primary svg-icon-2x">
-                <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Gift.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect x="0" y="0" width="24" height="24"></rect>
-                        <path d="M4,6 L20,6 C20.5522847,6 21,6.44771525 21,7 L21,8 C21,8.55228475 20.5522847,9 20,9 L4,9 C3.44771525,9 3,8.55228475 3,8 L3,7 C3,6.44771525 3.44771525,6 4,6 Z M5,11 L10,11 C10.5522847,11 11,11.4477153 11,12 L11,19 C11,19.5522847 10.5522847,20 10,20 L5,20 C4.44771525,20 4,19.5522847 4,19 L4,12 C4,11.4477153 4.44771525,11 5,11 Z M14,11 L19,11 C19.5522847,11 20,11.4477153 20,12 L20,19 C20,19.5522847 19.5522847,20 19,20 L14,20 C13.4477153,20 13,19.5522847 13,19 L13,12 C13,11.4477153 13.4477153,11 14,11 Z" fill="#000000"></path>
-                        <path d="M14.4452998,2.16794971 C14.9048285,1.86159725 15.5256978,1.98577112 15.8320503,2.4452998 C16.1384028,2.90482849 16.0142289,3.52569784 15.5547002,3.83205029 L12,6.20185043 L8.4452998,3.83205029 C7.98577112,3.52569784 7.86159725,2.90482849 8.16794971,2.4452998 C8.47430216,1.98577112 9.09517151,1.86159725 9.5547002,2.16794971 L12,3.79814957 L14.4452998,2.16794971 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                    </g>
-                </svg>
-                <!--end::Svg Icon-->
-            </span>
-            <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">{{ $userCount }}</span>
-            <span class="font-weight-bold text-muted  font-size-sm">Total User</span>
-        </div>
-        <!--end::Body-->
-        </div>
-        <!--end::Stats Widget 29-->
-    </div>
 </div>
 <!--End::Row-->
 
 
-{{-- /////////////////// --}}
-
-
+{{-- begin --}}
 <div class="card card-custom gutter-b">
 	<div class="card-header flex-wrap border-0 pt-6 pb-0">
 		<div class="card-title">
@@ -286,6 +215,7 @@
 		<!--end: Datatable-->
 	</div>
 </div>
+{{-- end --}}
 
 
 @endsection

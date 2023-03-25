@@ -12,7 +12,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $primaryKey = 'user_id';
 
     protected $fillable = [
         'name',
@@ -44,7 +43,7 @@ class User extends Authenticatable
 
     public function pengajuan()
     {
-        return $this->hasMany(Pengajuan::class, 'user_id', 'user_id');
+        return $this->hasMany(Pengajuan::class, 'id', 'id');
     }
 
     
