@@ -17,9 +17,9 @@ class UserSeeder extends Seeder
     {
         
         User::create([
-            'name' => 'Administrator',
-            'email' => 'admin@gcs.ac.id',
-            'password' => bcrypt('admin123'),
+            'name' => 'Bendahara',
+            'email' => 'Bendahara@gcs.ac.id',
+            'password' => bcrypt('Bendahara123'),
             'no_hp' => '081234567890',
             'divisi' => 'Keuangan',
             'jabatan' => 'Bendahara I',
