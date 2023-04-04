@@ -18,8 +18,8 @@ class UserSeeder extends Seeder
         
         User::create([
             'name' => 'Bendahara',
-            'email' => 'Bendahara@gcs.ac.id',
-            'password' => bcrypt('Bendahara123'),
+            'email' => 'bendahara@gmail.com',
+            'password' => bcrypt('bendahara123'),
             'no_hp' => '081234567890',
             'divisi' => 'Keuangan',
             'jabatan' => 'Bendahara I',
@@ -28,40 +28,40 @@ class UserSeeder extends Seeder
             'role_id' => 1,
         ]);
 
-        User::create([
-            'name' => 'Manajer',
-            'email' => 'manajer@gsc.ac.id',
-            'password' => bcrypt('manajer123'),
-            'no_hp' => '081234567890',
-            'divisi' => 'HRD',
-            'jabatan' => 'Manajer HRD',
-            'alamat' => 'Jl. Bareng ga jadian',
-            'is_active' => 1,
-            'role_id' => 2,
-        ]);
+        // User::create([
+        //     'name' => 'Manajer',
+        //     'email' => 'manajer@gsc.ac.id',
+        //     'password' => bcrypt('manajer123'),
+        //     'no_hp' => '081234567890',
+        //     'divisi' => 'HRD',
+        //     'jabatan' => 'Manajer HRD',
+        //     'alamat' => 'Jl. Bareng ga jadian',
+        //     'is_active' => 1,
+        //     'role_id' => 2,
+        // ]);
 
-        User::create([
-            'name' => 'Pemeriksa',
-            'email' => 'pemeriksa@gcs.ac.id',
-            'password' => bcrypt('pemeriksa123'),
-            'no_hp' => '081234567890',
-            'divisi' => 'Audit Internal',
-            'jabatan' => 'Pemeriksa',
-            'alamat' => 'Jl. Buntu bersama mu',
-            'is_active' => 0,
-            'role_id' => 3,
-        ]);
+        // User::create([
+        //     'name' => 'Pemeriksa',
+        //     'email' => 'pemeriksa@gcs.ac.id',
+        //     'password' => bcrypt('pemeriksa123'),
+        //     'no_hp' => '081234567890',
+        //     'divisi' => 'Audit Internal',
+        //     'jabatan' => 'Pemeriksa',
+        //     'alamat' => 'Jl. Buntu bersama mu',
+        //     'is_active' => 0,
+        //     'role_id' => 3,
+        // ]);
 
-        User::create([
-            'name' => 'Pengaju',
-            'email' => 'sulthan@gsc.ac.id',
-            'password' => bcrypt('sulthan123'),
-            'no_hp' => '081234567890',
-            'divisi' => 'Development Team',
-            'jabatan' => 'Mobile Developer',
-            'alamat' => 'Jl. Doang kagak jadian',
-            'is_active' => 0,
-            'role_id' => 4,
-        ]);
+        // User::create([
+        //     'name' => 'Pengaju',
+        //     'email' => 'sulthan@gsc.ac.id',
+        //     'password' => bcrypt('sulthan123'),
+        //     'no_hp' => '081234567890',
+        //     'divisi' => 'Development Team',
+        //     'jabatan' => 'Mobile Developer',
+        //     'alamat' => 'Jl. Doang kagak jadian',
+        //     'is_active' => 0,
+        //     'role_id' => 4,
+        // ]);
     }
 }

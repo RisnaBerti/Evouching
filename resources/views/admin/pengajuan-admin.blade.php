@@ -3,37 +3,48 @@
 @section('content')
 <!--begin::Card-->
 <div class="card card-custom gutter-b example example-compact">
-    <div class="card-header">
-        <h3 class="card-title">
-            PENGAJUAN PERMOHONAN DANA
-        </h3>
-        <div class="card-toolbar">
-            {{-- <div class="example-tools justify-content-center">
-                <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
-                <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
-            </div> --}}
-            {{-- <div class="form-group row mt-3">
-                <label class="col-lg-1 col-form-label text-right">Full Name</label>
-                <div class="col-lg-3">
-                    <input type="email" class="form-control" placeholder="Full name"/>
-                </div>
-                <label class="col-lg-1 col-form-label text-right">Email:</label>
-                <div class="col-lg-3">
-                    <input type="email" class="form-control" placeholder="Email"/>
-                </div>
-                <label class="col-lg-1 col-form-label text-right">Username:</label>
-                <div class="col-lg-3">
-                    <div class="input-group">
-                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
-                        <input type="text" class="form-control" placeholder=""/>
-                    </div>
-                </div>
-            </div> --}}
-        </div>
-    </div>
     <!--begin::Form-->
     <form class="form">
         <div class="card-body">
+            <div class="row">
+                <div class="col-7 align-self-start">
+                    <div class="col">
+                        <h3 class="card-title">
+                            PENGAJUAN PERMOHONAN DANA
+                        </h3>
+                    </div>
+                </div>
+                {{-- <div class="col align-self-center">
+                </div> --}}
+                <div class="col-5 align-items-start">
+                    <div class="col align-self-end">
+                        <div class="form-group row ">
+                            <label  class="col-3 col-form-label">Full Name</label>
+                            <div class="col-9">
+                                <input type="email" class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col align-self-end">
+                        <div class="form-group row ">
+                            <label  class="col-3 col-form-label">Full Name</label>
+                            <div class="col-9">
+                                <input type="email" class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col align-self-end">
+                        <div class="form-group row ">
+                            <label  class="col-3 col-form-label">Full Name</label>
+                            <div class="col-9">
+                                <input type="email" class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+              </div>
+            
             {{-- <div class="form-group row mt-3">
                 <label class="col-lg-1 col-form-label text-right">Full Name</label>
                 <div class="col-lg-3">

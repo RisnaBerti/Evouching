@@ -84,7 +84,7 @@
                 </span>
                 <div class="d-flex flex-column text-dark-75">
                     <span class="font-weight-bolder font-size-sm">Member since</span>
-                    <span class="font-weight-bolder font-size-h5"><span class="text-dark-50 font-weight-bold">{{ old('created_at', Auth::user()->created_at) }}</span></span>
+                    <span class="font-weight-bolder font-size-h5"><span class="text-dark-50 font-weight-bold">{{ old('created_at', Auth::user()->created_at->format('D, d M Y')) }}</span></span>
                 </div>
             </div>
             <!--end::Item-->

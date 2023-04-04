@@ -26,6 +26,7 @@ use App\Http\Controllers\Pemohon\PemohonController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 $controller_path = 'App\Http\Controllers';
 
 //main route
@@ -45,18 +46,16 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    // all user
-    Route::controller(UserController::class)->group(function () {
-        Route::get('/profile', 'index')->name('profile');
-        Route::get('/edit-profile', 'profile');
-        Route::post('/edit-profile', 'update_profile');
-        Route::get('/change-password', 'change_password');
-        Route::post('/change-password', 'update_password')->name('change-password');
-    });
-
     // admin
-    // Route::group(['middleware' => ['UserCheckLogin:1']], function() {
-    // Route::middleware('UserCheckLogin:1')->group(function () {
+    Route::group(['middleware' => ['UserCheckLogin:1']], function () {
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/profile-bendahara', 'index')->name('profile_bendahara');
+            Route::get('/edit-profile-bendahara', 'profile')->name('edit_profile_bendahara');
+            Route::post('/edit-profile-bendahara', 'update_profile')->name('update_profile_bendahara');
+            Route::get('/change-password-bendahara', 'change_password')->name('change_password_bendahara');
+            Route::post('/change-password-bendahara', 'update_password')->name('update_password_bendahara');
+        });
+
         Route::controller(AdminController::class)->group(function () {
             Route::get('/bendahara', 'index')->name('bendahara');
         });
@@ -94,24 +93,36 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/reimbuse', 'index')->name('reimbuse');
             Route::get('/pegajuan_reimbuse', 'pegajuan_reimbuse');
         });
-    // });
+    });
 
     // manajer
-    // Route::middleware('UserCheckLogin:2')->group(function () {
+    Route::middleware('UserCheckLogin:2')->group(function () {
         Route::controller(ManajerController::class)->group(function () {
             Route::get('/dashboard-manajer', 'index')->name('dashboard-manajer');
         });
-    // });
+
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/profile-manajer', 'index')->name('profile_manajer');
+            Route::get('/edit-profile-manajer', 'profile')->name('edit_profile_manajer');
+            Route::post('/edit-profile-manajer', 'update_profile')->name('update_profile_manajer');
+            Route::get('/change-password-manajer', 'change_password')->name('change_password_manajer');
+            Route::post('/change-password-manajer', 'update_password')->name('update_password_manajer');
+        });
+    });
 
     // pemohon
-    // Route::group(['middleware' => ['userCheckLogin:3']], function() {
-    // Route::middleware('UserCheckLogin:4')->group(function () {
+    Route::group(['middleware' => ['userCheckLogin:3']], function () {
         Route::controller(PemohonController::class)->group(function () {
             Route::get('/dashboard-pemohon', 'index')->name('dashboard-pemohon');
             Route::get('/permohonan-pengurus', 'permohonan_pengurus')->name('permohonan-pengurus');
         });
-    // });
 
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/profile-pemohon', 'index')->name('profile_pemohon');
+            Route::get('/edit-profile-pemohon', 'profile')->name('edit_profile_pemohon');
+            Route::post('/edit-profile-pemohon', 'update_profile')->name('update_profile_pemohon');
+            Route::get('/change-password-pemohon', 'change_password')->name('change_password_pemohon');
+            Route::post('/change-password-pemohon', 'update_password')->name('update_password_pemohon');
+        });
+    });
 });
-
-
