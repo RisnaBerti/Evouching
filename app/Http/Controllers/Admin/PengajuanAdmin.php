@@ -10,8 +10,8 @@ class PengajuanAdmin extends Controller
     public function index()
     {
         return view('admin/pengajuan-admin', 
-        ["title" => "Pengajuan Dana"],
-        ["active" => "Pengajuan Dana"]
+        ["title" => "Permohonan Dana"],
+        ["active" => "Permohonan Dana"]
         );
     }
 }

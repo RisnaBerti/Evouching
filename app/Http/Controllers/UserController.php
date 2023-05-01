@@ -37,7 +37,6 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email:dns|unique:users,email,' . Auth::user()->id . ',id',
             'no_hp' => 'required|numeric|digits_between:10,13|unique:users,no_hp,' . Auth::user()->id . ',id',
             'divisi' => 'required',
             'jabatan' => 'required',
@@ -46,14 +45,13 @@ class UserController extends Controller
 
         $user = User::find(Auth::user()->id);
         $user->name = $request->name;
-        $user->email = $request->email;
-        $user->no_hp = $request->no_hp;
         $user->divisi = $request->divisi;
         $user->jabatan = $request->jabatan;
+        $user->no_hp = $request->no_hp;
         $user->alamat = $request->alamat;
         $user->update();
 
-        return redirect()->route('profile')->with('success', 'Profile berhasil diupdate');
+        return redirect()->route('profile_bendahara')->with('success', 'Profile berhasil diupdate');
     }
 
     //fungsi change password
@@ -77,9 +75,9 @@ class UserController extends Controller
         if (Hash::check($request->old_password, $user->password)) {
             $user->password = Hash::make($request->new_password);
             $user->update();
-            return redirect()->route('change-password')->with('success', 'Password berhasil diupdate');
+            return redirect()->route('change_password_bendahara')->with('success', 'Password berhasil diupdate');
         } else {
-            return redirect()->route('change-password')->with('error', 'Password lama tidak sesuai');
+            return redirect()->route('change_password_bendahara')->with('error', 'Password lama tidak sesuai');
         }
     }
 }

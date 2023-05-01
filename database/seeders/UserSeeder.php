@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Bendahara',
             'email' => 'bendahara@gmail.com',
-            'password' => bcrypt('bendahara123'),
+            'password' => bcrypt('123'),
             'no_hp' => '081234567890',
             'divisi' => 'Keuangan',
             'jabatan' => 'Bendahara I',
@@ -28,21 +28,21 @@ class UserSeeder extends Seeder
             'role_id' => 1,
         ]);
 
-        // User::create([
-        //     'name' => 'Manajer',
-        //     'email' => 'manajer@gsc.ac.id',
-        //     'password' => bcrypt('manajer123'),
-        //     'no_hp' => '081234567890',
-        //     'divisi' => 'HRD',
-        //     'jabatan' => 'Manajer HRD',
-        //     'alamat' => 'Jl. Bareng ga jadian',
-        //     'is_active' => 1,
-        //     'role_id' => 2,
-        // ]);
+        User::create([
+            'name' => 'Manajer',
+            'email' => 'manajer@gmail.com',
+            'password' => bcrypt('123'),
+            'no_hp' => '081234567890',
+            'divisi' => 'HRD',
+            'jabatan' => 'Manajer HRD',
+            'alamat' => 'Jl. Bareng ga jadian',
+            'is_active' => 0,
+            'role_id' => 2,
+        ]);
 
         // User::create([
         //     'name' => 'Pemeriksa',
-        //     'email' => 'pemeriksa@gcs.ac.id',
+        //     'email' => 'pemeriksa@gmail.com',
         //     'password' => bcrypt('pemeriksa123'),
         //     'no_hp' => '081234567890',
         //     'divisi' => 'Audit Internal',
@@ -54,7 +54,7 @@ class UserSeeder extends Seeder
 
         // User::create([
         //     'name' => 'Pengaju',
-        //     'email' => 'sulthan@gsc.ac.id',
+        //     'email' => 'sulthan@gmail.com',
         //     'password' => bcrypt('sulthan123'),
         //     'no_hp' => '081234567890',
         //     'divisi' => 'Development Team',

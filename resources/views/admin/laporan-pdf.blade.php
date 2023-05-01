@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-bendahara')
 
 @section('content')
     <div class="card card-custom gutter-b">

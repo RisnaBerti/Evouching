@@ -45,9 +45,9 @@ Route::middleware('guest')->group(function () {
     });
 });
 
-Route::group(['middleware' => ['auth']], function () {
+// Route::group(['middleware' => ['auth']], function () {
     // admin
-    Route::group(['middleware' => ['UserCheckLogin:1']], function () {
+    // Route::group(['middleware' => ['UserCheckLogin:1']], function () {
         Route::controller(UserController::class)->group(function () {
             Route::get('/profile-bendahara', 'index')->name('profile_bendahara');
             Route::get('/edit-profile-bendahara', 'profile')->name('edit_profile_bendahara');
@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
         });
 
         Route::controller(PengajuanAdmin::class)->group(function () {
-            Route::get('/permohonan', 'index')->name('pemohon-admin');
+            Route::get('/permohonan-bendahara', 'index')->name('pemohon-admin');
         });
 
         Route::controller(DataUserController::class)->group(function () {
@@ -93,36 +93,40 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/reimbuse', 'index')->name('reimbuse');
             Route::get('/pegajuan_reimbuse', 'pegajuan_reimbuse');
         });
-    });
+    // });
 
     // manajer
-    Route::middleware('UserCheckLogin:2')->group(function () {
+    // Route::middleware('UserCheckLogin:2')->group(function () {
         Route::controller(ManajerController::class)->group(function () {
             Route::get('/dashboard-manajer', 'index')->name('dashboard-manajer');
-        });
-
-        Route::controller(UserController::class)->group(function () {
-            Route::get('/profile-manajer', 'index')->name('profile_manajer');
-            Route::get('/edit-profile-manajer', 'profile')->name('edit_profile_manajer');
+            Route::get('/permohonan-manajer', 'permohonan')->name('permohonan-manajer');
+            Route::get('/laporan-manajer', 'laporan')->name('laporan-manajer');
+            Route::get('/profile-manajer', 'profile')->name('profile_manajer');
+            Route::get('/edit-profile-manajer', 'edit_profile')->name('edit_profile_manajer');
             Route::post('/edit-profile-manajer', 'update_profile')->name('update_profile_manajer');
             Route::get('/change-password-manajer', 'change_password')->name('change_password_manajer');
             Route::post('/change-password-manajer', 'update_password')->name('update_password_manajer');
         });
-    });
+    // });
 
     // pemohon
-    Route::group(['middleware' => ['userCheckLogin:3']], function () {
+    // Route::group(['middleware' => ['userCheckLogin:3']], function () {
         Route::controller(PemohonController::class)->group(function () {
             Route::get('/dashboard-pemohon', 'index')->name('dashboard-pemohon');
             Route::get('/permohonan-pengurus', 'permohonan_pengurus')->name('permohonan-pengurus');
-        });
-
-        Route::controller(UserController::class)->group(function () {
-            Route::get('/profile-pemohon', 'index')->name('profile_pemohon');
-            Route::get('/edit-profile-pemohon', 'profile')->name('edit_profile_pemohon');
+            Route::get('/profile-pemohon', 'profile')->name('profile_pemohon');
+            Route::get('/edit-profile-pemohon', 'edit_profile')->name('edit_profile_pemohon');
             Route::post('/edit-profile-pemohon', 'update_profile')->name('update_profile_pemohon');
             Route::get('/change-password-pemohon', 'change_password')->name('change_password_pemohon');
             Route::post('/change-password-pemohon', 'update_password')->name('update_password_pemohon');
         });
-    });
-});
+
+        // Route::controller(UserController::class)->group(function () {
+        //     Route::get('/profile-pemohon', 'index')->name('profile_pemohon');
+        //     Route::get('/edit-profile-pemohon', 'profile')->name('edit_profile_pemohon');
+        //     Route::post('/edit-profile-pemohon', 'update_profile')->name('update_profile_pemohon');
+        //     Route::get('/change-password-pemohon', 'change_password')->name('change_password_pemohon');
+        //     Route::post('/change-password-pemohon', 'update_password')->name('update_password_pemohon');
+        // });
+    // });
+// });
