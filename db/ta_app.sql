@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Bulan Mei 2023 pada 09.43
--- Versi server: 10.4.24-MariaDB
--- Versi PHP: 8.1.6
+-- Generation Time: May 02, 2023 at 02:15 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -40,7 +40,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -50,7 +50,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -59,12 +59,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2019_08_19_000000_create_failed_jobs_table', 1),
 (10, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (11, '2023_03_13_234206_create_roles_table', 1),
-(14, '2023_03_14_001135_add_role_id_column_to_users_table', 2);
+(12, '2023_03_14_001135_add_role_id_column_to_users_table', 1),
+(13, '2023_05_02_112350_create_tb_permohonan_table', 2);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `password_reset_tokens`
+-- Table structure for table `password_reset_tokens`
 --
 
 CREATE TABLE `password_reset_tokens` (
@@ -76,7 +77,7 @@ CREATE TABLE `password_reset_tokens` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `personal_access_tokens`
+-- Table structure for table `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
@@ -95,7 +96,7 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `roles`
+-- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
@@ -105,24 +106,47 @@ CREATE TABLE `roles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data untuk tabel `roles`
+-- Table structure for table `tb_penerimaankas`
 --
 
-INSERT INTO `roles` (`role_id`, `role_name`, `created_at`, `updated_at`) VALUES
-(1, 'Bendahara', '2023-03-13 17:32:56', '2023-03-13 17:32:56'),
-(2, 'Manajer', '2023-03-13 17:32:57', '2023-03-13 17:32:57'),
-(3, 'Pemeriksa', '2023-03-13 17:32:57', '2023-03-13 17:32:57'),
-(4, 'Pemohon', '2023-03-13 17:32:57', '2023-03-13 17:32:57');
+CREATE TABLE `tb_penerimaankas` (
+  `id_penerimaankas` int(11) NOT NULL,
+  `id_pengajuan` int(11) DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `no_resi_bayar` varchar(10) DEFAULT NULL,
+  `tanggal_penerimaan_kas` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `tb_permohonan`
+--
+
+CREATE TABLE `tb_permohonan` (
+  `id_permohonan` int(11) NOT NULL,
+  `id_user` bigint(11) NOT NULL,
+  `no_resi_permohonan` int(11) DEFAULT NULL,
+  `tanggal_permohonan` date DEFAULT NULL,
+  `nama_perkiraan` varchar(50) DEFAULT NULL,
+  `harga_satuan` int(11) DEFAULT NULL,
+  `jumlah_satuan` int(11) DEFAULT NULL,
+  `total_harga` int(11) DEFAULT NULL,
+  `nominal_acc` int(11) DEFAULT NULL,
+  `keterangan_permohonan` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -139,38 +163,30 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `no_hp`, `divisi`, `jabatan`, `alamat`, `is_active`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`, `role_id`) VALUES
-(1, 'Bendahara', 'bendahara@gmail.com', '$2y$10$0hN6BHcvzvW1m8YJmWYPl.jR50MbxUlR8ITih31Hv.hrsCapzhGZm', '081234567890', 'Keuangan', 'Bendahara I', 'Jl. Jalanin aja dulu', 1, NULL, NULL, '2023-04-29 06:07:01', '2023-04-30 22:48:27', 1),
-(2, 'Manajer', 'manajer@gmail.com', '$2y$10$21vCoknkXBB3r/GoKgKbIODkcWcQhdfG7dj9iLJCTDkjMIdBjIhgO', '081234567890', 'HRD', 'Manajer HRD', 'Jl. Bareng ga jadian', 0, NULL, NULL, '2023-04-29 06:07:01', '2023-04-29 06:07:01', 2);
-
---
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `failed_jobs`
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indeks untuk tabel `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `password_reset_tokens`
+-- Indexes for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indeks untuk tabel `personal_access_tokens`
+-- Indexes for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -178,59 +194,65 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indeks untuk tabel `roles`
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`role_id`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `tb_permohonan`
+--
+ALTER TABLE `tb_permohonan`
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `users_email_unique` (`email`),
   ADD KEY `users_role_id_foreign` (`role_id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `failed_jobs`
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT untuk tabel `personal_access_tokens`
+-- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `roles`
+-- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `role_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `role_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `users`
+-- Constraints for table `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`);
