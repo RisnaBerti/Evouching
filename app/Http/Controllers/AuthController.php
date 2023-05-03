@@ -25,7 +25,6 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
@@ -45,7 +44,7 @@ class AuthController extends Controller
                 }
             } else {
                 return redirect()->route('auth-login')->with('status', 'Your account is not active, please contact admin!');
-            }
+            } 
         }
 
         return redirect()->route('auth-login')->with('status', 'Your email or password is incorrect!');
