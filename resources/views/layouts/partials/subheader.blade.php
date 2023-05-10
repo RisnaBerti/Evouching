@@ -35,7 +35,7 @@
 								d-none d-md-inline
 								mr-3
 							">
-                            Admin</span>
+                            {{ Auth::user()->name; }}</span>
                         <span class="symbol symbol-35 symbol-light-success">
                             <span class="symbol-label font-size-h5 font-weight-bold">a</span>
                         </span>
@@ -83,7 +83,7 @@
 
             <!--begin::Actions-->
             <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
-            <span class="text-muted font-weight-bold mr-4">{{ Auth::user()->jabatan }}</span>
+            <span class="text-muted font-weight-bold mr-4">{{ Auth::user()->jabatan; }}</span>
 
             <!--end::Actions-->
 

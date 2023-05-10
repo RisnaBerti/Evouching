@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-pemohon')
 
 @section('content')
     <!--begin::Card-->
@@ -39,13 +39,13 @@
                     <div class="d-flex flex-wrap justify-content-between mt-1">
                         <div class="d-flex flex-column flex-grow-1 pr-8">
                             <div class="d-flex flex-wrap mb-4">
-                                <a href="/profile"
+                                <a href="/profile-pemohon"
                                     class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2"><i
                                         class="flaticon2-new-email mr-2 font-size-lg"></i>{{ old('name', Auth::user()->email) }}</a>
-                                <a href="/profile"
+                                <a href="/profile-pemohon"
                                     class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2"><i
                                         class="flaticon2-calendar-3 mr-2 font-size-lg"></i>{{ old('jabatan', Auth::user()->jabatan) }}</a>
-                                <a href="/profile" class="text-dark-50 text-hover-primary font-weight-bold"><i
+                                <a href="/profile-pemohon" class="text-dark-50 text-hover-primary font-weight-bold"><i
                                         class="flaticon2-placeholder mr-2 font-size-lg"></i>{{ old('alamat', Auth::user()->alamat) }}</a>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                 </div>
                 <!--end::Header-->
                 <!--begin::Form-->
-                <form action="/edit-profile-pemohon" method="POST" class="form">
+                <form class="form" action="" method="">
                     @csrf
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">

@@ -16,7 +16,9 @@
                         <div class="form-group row">
                             <label class="col-form-label col-4" for="name ">Nama </label>
                             <div class="col-8">
-                                <input class="form-control @error('name') is-invalid @enderror" type="text" placeholder="masukan nama user" id="name" name="name" autocomplete="off" />
+                                <input required class="form-control @error('name') is-invalid @enderror" type="text"
+                                    value="" placeholder="masukan nama user" id="name" name="name"
+                                    autocomplete="off" />
                                 @error('name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -25,7 +27,9 @@
                         <div class="form-group row">
                             <label class="col-form-label col-4" for="email">Email</label>
                             <div class="col-8">
-                                <input class="form-control @error('email') is-invalid @enderror" type="text" placeholder="masukan nama user" id="email" name="email" autocomplete="off" />
+                                <input required class="form-control @error('email') is-invalid @enderror" type="text"
+                                    value="" placeholder="masukan nama user" id="email" name="email"
+                                    autocomplete="off" />
                                 @error('email')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -34,7 +38,9 @@
                         <div class="form-group row">
                             <label class="col-form-label col-4" for="no_hp">No Telepon</label>
                             <div class="col-8">
-                                <input class="form-control @error('no_hp') is-invalid @enderror" type="text" placeholder="masukan nama user" id="no_hp" name="no_hp" autocomplete="off" />
+                                <input required class="form-control @error('no_hp') is-invalid @enderror" type="text"
+                                    value="" placeholder="masukan nama user" id="no_hp" name="no_hp"
+                                    autocomplete="off" />
                                 @error('no_hp')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -43,7 +49,9 @@
                         <div class="form-group row">
                             <label class="col-form-label col-4" for="divisi ">Divisi</label>
                             <div class="col-8">
-                                <input class="form-control @error('divisi') is-invalid @enderror" type="text" placeholder="masukan nama user" id="divisi" name="divisi" autocomplete="off" />
+                                <input required class="form-control @error('divisi') is-invalid @enderror" value=""
+                                    type="text" placeholder="masukan nama user" id="divisi" name="divisi"
+                                    autocomplete="off" />
                                 @error('divisi')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -52,7 +60,9 @@
                         <div class="form-group row">
                             <label class="col-form-label col-4" for="jabatan ">Jabatan</label>
                             <div class="col-8">
-                                <input class="form-control @error('jabatan') is-invalid @enderror" type="text" placeholder="masukan nama user" id="jabatan" name="jabatan" autocomplete="off" />
+                                <input required class="form-control @error('jabatan') is-invalid @enderror" value=""
+                                    type="text" placeholder="masukan nama user" id="jabatan" name="jabatan"
+                                    autocomplete="off" />
                                 @error('jabatan')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -61,20 +71,138 @@
                         <div class="form-group row">
                             <label class="col-form-label col-4" for="alamat">Alamat</label>
                             <div class="col-8">
-                                <input class="form-control @error('alamat') is-invalid @enderror" type="text" placeholder="masukan nama user" id="alamat" name="alamat" autocomplete="off" />
+                                <input required class="form-control @error('alamat') is-invalid @enderror" value=""
+                                    type="text" placeholder="masukan nama user" id="alamat" name="alamat"
+                                    autocomplete="off" />
                                 @error('alamat')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                     </div>
-                        
+
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-light-primary">Simpan</button>
+                        <button type="submit" class="btn btn-light-primary simpan-user">Simpan</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     </div>
                 </form>
-                
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal_ubah" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kelola User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="form_user" action="/datauser/edit" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <input hidden type="text" id="id" name="id">
+                        <div class="form-group row">
+                            <label class="col-form-label col-4" for="name ">Nama </label>
+                            <div class="col-8">
+                                <input required class="form-control @error('name') is-invalid @enderror" type="text"
+                                    placeholder="masukan nama user" id="name" name="name" autocomplete="off" />
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-4" for="email">Email</label>
+                            <div class="col-8">
+                                <input required class="form-control @error('email') is-invalid @enderror" type="text"
+                                    value="" placeholder="masukan nama user" id="email" name="email"
+                                    autocomplete="off" />
+                                @error('email')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-4" for="no_hp">No Telepon</label>
+                            <div class="col-8">
+                                <input required class="form-control @error('no_hp') is-invalid @enderror" type="text"
+                                    value="" placeholder="masukan nama user" id="no_hp" name="no_hp"
+                                    autocomplete="off" />
+                                @error('no_hp')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-4" for="divisi ">Divisi</label>
+                            <div class="col-8">
+                                <input required class="form-control @error('divisi') is-invalid @enderror" value=""
+                                    type="text" placeholder="masukan nama user" id="divisi" name="divisi"
+                                    autocomplete="off" />
+                                @error('divisi')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-4" for="jabatan ">Jabatan</label>
+                            <div class="col-8">
+                                <input required class="form-control @error('jabatan') is-invalid @enderror"
+                                    value="" type="text" placeholder="masukan nama user" id="jabatan"
+                                    name="jabatan" autocomplete="off" />
+                                @error('jabatan')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-4" for="alamat">Alamat</label>
+                            <div class="col-8">
+                                <input required class="form-control @error('alamat') is-invalid @enderror" value=""
+                                    type="text" placeholder="masukan nama user" id="alamat" name="alamat"
+                                    autocomplete="off" />
+                                @error('alamat')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-primary ubah-user">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal_hapus" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Hapus User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="form_user" action="/datauser/delete" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <input hidden type="text" id="id_hapus" name="id_hapus">
+                        Data pegguna yang anda pilih akan dihapus tekan konfirmasi, untuk mengahapus.
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-light-primary hapus-user">Ya</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -82,14 +210,14 @@
     {{-- //////////// --}}
 
     <div class="card card-custom gutter-b">
-        <div class="card-header flex-wrap border-0 pt-6 pb-0">
+        <div class="card-header">
             <div class="card-title">
-                <span class="symbol symbol-40 symbol-light-primary mr-2">
+                <span class="symbol symbol-30 symbol-light-primary mr-2">
                     <span class="symbol-label">
-                        <span class="svg-icon svg-icon-xl svg-icon-primary">
+                        <span class="svg-icon svg-icon-sm svg-icon-primary">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg--><svg
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px"
-                                height="18px" viewBox="0 0 24 24" version="1.1">
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <polygon points="0 0 24 0 24 24 0 24"></polygon>
                                     <path
@@ -104,158 +232,87 @@
                         </span>
                     </span>
                 </span>
-                <h3 class="card-label">
-                    Kelola Users
-                </h3>
+                <h3 class="card-label">Kelola Data User</h3>
             </div>
             <div class="card-toolbar">
-
-                <!--begin::Dropdown-->
-                <div class="dropdown dropdown-inline mr-2">
-                    <button onclick="tambahuser()" type="button" class="btn btn-light-primary font-weight-bolder"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Tambah Data
-                    </button>
-                </div>
-                <!--end::Dropdown-->
+                <button onclick="tambahuser()" type="button" class="btn btn-light-primary font-weight-bolder"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Tambah Data
+                </button>
             </div>
         </div>
 
         <div class="card-body">
             <!--begin: Datatable-->
-            <div id="kt_datatable1_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="dataTables_length" id="kt_datatable1_length">
-                            <label>Show
-                                <select name="kt_datatable1_length" aria-controls="kt_datatable1"
-                                    class="custom-select custom-select-sm form-control form-control-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select> entries
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div id="kt_datatable1_filter" class="dataTables_filter">
-                            <label>Search:<input type="search" class="form-control form-control-sm" placeholder=""
-                                    aria-controls="kt_datatable1"></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="dataTables_scroll">
-                            <div class="dataTables_scrollBody"
-                                style="position: relative; overflow: auto; width: 100%; max-height: 50vh;">
-                                <table class="table table-bordered table-head-custom table-checkable dataTable "
-                                    id="kt_datatable1" role="grid" aria-describedby="kt_datatable1_info"
-                                    style="width: 1159px;">
-                                    <thead>
-                                        <tr role="row" style="height: 0px;">
-                                            <th>
-                                                <center>ID</center>
-                                            </th>
-                                            <th>
-                                                <center>NAMA</center>
-                                            </th>
-                                            <th>
-                                                <center>EMAIL</center>
-                                            </th>
-                                            <th>
-                                                <center>NO TELEPON</center>
-                                            </th>
-                                            <th>
-                                                <center>DIVISI</center>
-                                            </th>
-                                            <th>
-                                                <center>JABATAN</center>
-                                            </th>
-                                            <th>
-                                                <center>ALAMAT</center>
-                                            <th>
-                                                <center>SETTING</center>
-                                            </th>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($users as $user)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                {{-- <td><center>{{ $user->id }}</center></td> --}}
-                                                <td>
-                                                    <center>{{ $user->name}}</center>
-                                                </td>
-                                                <td>
-                                                    <center>{{ $user->email }}</center>
-                                                </td>
-                                                <td>
-                                                    <center>{{ $user->no_hp }}</center>
-                                                </td>
-                                                <td>
-                                                    <center>{{ $user->divisi }}</center>
-                                                </td>
-                                                <td>
-                                                    <center>{{ $user->jabatan }}</center>
-                                                </td>
-                                                <td>
-                                                    <center>{{ $user->alamat }}</center>
-                                                <td>
-                                                    <center>
-                                                        @if ($user->is_active == 0 && $user->role_id != 1 )
-                                                            <a href="{{ url('/is_active'), $user->id }}"><button type="submit" class="btn btn-primary btn-sm"
-                                                                 >Active</button></a>
-                                                            <button type="button" class="btn btn-danger btn-sm"
-                                                                onclick="hapususer({{ $user->id }})">Hapus</button>
-                                                        @elseif ($user->is_active == 1 && $user->role_id != 1 )
-                                                            <button type="button" class="btn btn-warning btn-sm"
-                                                                onclick="edituser({{ $user->id }})">Non Active</button>
-                                                            <button type="button" class="btn btn-danger btn-sm"
-                                                                onclick="hapususer({{ $user->id }})">Hapus</button>
-                                                        @endif
-                                                    </center>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="kt_datatable1_info" role="status" aria-live="polite">Showing 1
-                            to 10 of 50 entries</div>
-                    </div>
-                    <div class="col-sm-12 col-md-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="kt_datatable1_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="kt_datatable1_previous"><a
-                                        href="#" aria-controls="kt_datatable1" data-dt-idx="0" tabindex="0"
-                                        class="page-link"><i class="ki ki-arrow-back"></i></a></li>
-                                <li class="paginate_button page-item active"><a href="#"
-                                        aria-controls="kt_datatable1" data-dt-idx="1" tabindex="0"
-                                        class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="kt_datatable1"
-                                        data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="kt_datatable1"
-                                        data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="kt_datatable1"
-                                        data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="kt_datatable1"
-                                        data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                <li class="paginate_button page-item next" id="kt_datatable1_next"><a href="#"
-                                        aria-controls="kt_datatable1" data-dt-idx="6" tabindex="0"
-                                        class="page-link"><i class="ki ki-arrow-next"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <table class="table table-bordered" id="table_datauser" style="margin-top: 13px !important">
+                <thead>
+                    </tr>
+                    <th>
+                        <center>NO</center>
+                    </th>
+                    <th hidden>
+                        <center>ID</center>
+                    </th>
+                    <th>
+                        <center>NAMA</center>
+                    </th>
+                    <th>
+                        <center>EMAIL</center>
+                    </th>
+                    <th>
+                        <center>NO TELEPON</center>
+                    </th>
+                    <th>
+                        <center>DIVISI</center>
+                    </th>
+                    <th>
+                        <center>JABATAN</center>
+                    </th>
+                    <th>
+                        <center>ALAMAT</center>
+                    <th>
+                        <center>SETTING</center>
+                    </th>
+                </thead>
+                <tbody>
+                    @foreach ($users as $user)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td hidden>
+                                <center>{{ $user->id }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $user->name }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $user->email }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $user->no_hp }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $user->divisi }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $user->jabatan }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $user->alamat }}</center>
+                            <td>
+                                <center>
+                                    @if ($user->is_active == 0 && $user->role_id != 1)
+                                        <i class='fas fas fa-toggle-off  btn btn-icon btn-light-primary item-aktivasi'></i>
+                                        <i class='fas fa-trash-alt btn btn-icon btn-light-danger item-hapus'></i>
+                                    @elseif ($user->is_active == 1 && $user->role_id != 1)
+                                        <i class='fas fa-edit btn btn-icon btn-light-primary item-ubah'></i>
+                                        <i class='fas fas fa-toggle-on btn btn-icon btn-light-danger item-nonaktivasi'></i>
+                                    @endif
+                                </center>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
             <!--end: Datatable-->
         </div>
     </div>
@@ -266,10 +323,180 @@
             $('#modal_user').modal('show')
         }
 
+        $(document).ready(function() {
+
+            //Mengaktifkan datatable
+            $('#table_datauser').DataTable({
+                paging: true,
+            });
+
+            //Update Nonaktif menjadi Aktif
+            $('#table_datauser').on('click', '.item-aktivasi', function() {
+
+                var currow = $(this).closest('tr');
+
+                var id = currow.find('td:eq(1)').text();
+
+                $.get("{{ url('datauser/active/') }}/" + id.trim(), {
+
+                    })
+                    .done(function(data) {
+                        Swal.fire(
+                            'Active!',
+                            'User berhasil di active.',
+                            'success'
+                        )
+                        location.reload()
+                    });
+
+            });
+
+            //Update Aktif menjadi NonAktif
+            $('#table_datauser').on('click', '.item-nonaktivasi', function() {
+
+                var currow = $(this).closest('tr');
+
+                var id = currow.find('td:eq(1)').text();
+
+                $.get("{{ url('datauser/nonactive/') }}/" + id.trim(), {
+
+                    })
+                    .done(function(data) {
+                        Swal.fire(
+                            'Non Aktif!',
+                            'User berhasil di non aktifkan.',
+                            'success'
+                        )
+                        location.reload()
+                    });
+
+            });
+
+            //Update pengguna
+            $('#table_datauser').on('click', '.item-ubah', function() {
+
+                var currow = $(this).closest('tr');
+
+                var id = currow.find('td:eq(1)').text();
+                var name = currow.find('td:eq(2)').text();
+                var email = currow.find('td:eq(3)').text();
+                var hp = currow.find('td:eq(4)').text();
+                var divisi = currow.find('td:eq(5)').text();
+                var jabatan = currow.find('td:eq(6)').text();
+                var alamat = currow.find('td:eq(7)').text();
+
+                $('#id').val(id.trim());
+                $('#name').val(name.trim());
+                $('#email').val(email.trim());
+                $('#no_hp').val(hp.trim());
+                $('#divisi').val(divisi.trim());
+                $('#jabatan').val(jabatan.trim());
+                $('#alamat').val(alamat.trim());
+
+                $('#modal_ubah').modal('show');
+            });
+
+            $(".ubah-user").click(function() {
+
+                var id = $('#id').val();
+                var name = $('#name').val();
+                var email = $('#email').val();
+                var no_hp = $('#no_hp').val();
+                var divisi = $('#divisi').val();
+                var jabatan = $('#jabatan').val();
+                var alamat = $('#alamat').val();
+
+                $('.ubah-user').attr("disabled", "disabled");
+
+                if (!id) {
+
+                    alert("ID User tidak terdefinisi!");
+
+                    $('.ubah-user').attr("disabled", false);
+
+                } else {
+
+                    $.post("{{ url('/datauser/edit') }}", {
+                        _token: "{{ csrf_token() }}",
+                        id: id,
+                        name: name,
+                        email: email,
+                        no_hp: no_hp,
+                        divisi: divisi,
+                        jabatan: jabatan,
+                        alamat: alamat,
+
+                    }).done(function(response) {
+
+                        if (response == "success") {
+                            Swal.fire(
+                                'Ubah User!',
+                                'User berhasil diubah.',
+                                'success'
+                            )
+                            location.reload()
+
+                            // get();
+
+                            $(".ubah-user").attr("disabled", false);
+
+                            $('#id').val('');
+                            $('#name').val('');
+                            $('#email').val('');
+                            $('#no_hp').val('');
+                            $('#divisi').val('');
+                            $('#jabatan').val('');
+                            $('#alamat').val('');
+
+                            $('#modalubah').modal('hide');
+
+                        } else {
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'User gagal diubah',
+                                text: 'User gagal diubah.',
+                                showCancelButton: false,
+                                confirmButtonColor: '#FF6347',
+                                confirmButtonText: 'Siap',
+                            })
+
+                            $(".ubah-user").attr("disabled", false);
+
+                        }
+
+                    });
+
+                }
+
+            });
+
+            // $('#table_datauser').modal('hide');
+            // 			Swal.fire("", "Berhasil menyimpan data", "success");
+            // 			table.ajax.reload();
+
+
+            //Hapus user
+            $('#table_datauser').on('click', '.item-hapus', function() {
+
+                var currow = $(this).closest('tr');
+
+                var id = currow.find('td:eq(1)').text();
+
+                $('#id_hapus').val(id.trim());
+
+                $('#modal_hapus').modal('show');
+
+            });
+
+        });
+    </script>
+
+    <script>
         //alert active user dengan onclik edituser
         // const edituser = async (id_user) => {
         //     const {
-        //         value: is_active //status di sini sebagai apa? sebagai variabel?  atau sebagai value? 
+        //         value: is_active //status di sini sebagai apa? sebagai variabel?  atau sebagai value?
         //     } = await Swal.fire({
         //         title: 'Apakah anda yakin?',
         //         // text: "Anda tidak dapat mengembalikan ini!",
@@ -303,7 +530,5 @@
         //         })
         //     }
         // }
-
-
     </script>
 @endsection

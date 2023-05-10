@@ -37,7 +37,15 @@
 
 	<!--end::Layout Themes-->
 	<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
-	<script src="assets/js/jquery.js"></script>
+	<link rel="stylesheet" href="assets/dropzone/593/dropzone.min.css" type="text/css" />
+
+    <link href="/assets/datatable/datatables.min.css" rel="stylesheet" />
+
+    <script src="/assets/jquery/jquery-3.6.4.min.js"></script>
+
+    <script src="/assets/dropzone/593/dropzone.min.js"></script>
+
+    <script src="/assets/datatable/datatables.min.js"></script>
 
 </head>
 <!--end::Head-->

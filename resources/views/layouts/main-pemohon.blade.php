@@ -37,7 +37,17 @@
 
 	<!--end::Layout Themes-->
 	<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
-	<script src="assets/js/jquery.js"></script>
+
+	<link rel="stylesheet" href="assets/dropzone/593/dropzone.min.css" type="text/css" />
+
+
+    <link href="/assets/datatable/datatables.min.css" rel="stylesheet" />
+
+    <script src="/assets/jquery/jquery-3.6.4.min.js"></script>
+
+    <script src="/assets/dropzone/593/dropzone.min.js"></script>
+
+    <script src="/assets/datatable/datatables.min.js"></script>
 
 </head>
 <!--end::Head-->
@@ -130,8 +140,14 @@
 
 	<!--begin::Page Scripts(used by this page)-->
 	<script src="assets/js/pages/widgets.js"></script>
-	<script src="assets/js/sweetalert.min.js"></script>
-	<script src="assets/js/numeral.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+
+	 <!-- our project just needs Font Awesome Solid + Brands -->
+	 <link href="/assets/fontawesome/css/fontawesome.css" rel="stylesheet">
+	 <link href="/assets/fontawesome/css/brands.css" rel="stylesheet">
+	 <link href="/assets/fontawesome/css/solid.css" rel="stylesheet">
+ 
 
 	<!--end::Page Scripts-->
 </body>

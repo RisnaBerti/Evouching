@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-pemohon')
 
 @section('content')
     <!--begin::Card-->

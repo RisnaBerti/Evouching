@@ -31,7 +31,7 @@ class AuthController extends Controller
             //cek user active atau tidak
             $user = Auth::user();
             if ($user->is_active == 1) {
-
+                $request->session()->regenerate();
                 // cek role
                 if ($user->role_id == 1) {
                     return redirect()->intended('bendahara');

@@ -35,20 +35,39 @@ class UserController extends Controller
     //fungsi update profile
     public function update_profile(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'no_hp' => 'required|numeric|digits_between:10,13|unique:users,no_hp,' . Auth::user()->id . ',id',
-            'divisi' => 'required',
-            'jabatan' => 'required',
-            'alamat' => 'required',
-        ]);
+        // if (!$request->id == Auth::id()) {
+            // $request->validate([
+            //     'name' => 'required',
+            //     'no_hp' => 'required|numeric|digits_between:10,13|unique:users,no_hp,',
+            //     'divisi' => 'required',
+            //     'jabatan' => 'required',
+            //     'alamat' => 'required',
+            // ]);
+        // }
 
-        $user = User::find(Auth::user()->id);
+        // $user = User::find($request->id);
+        // $user->name = $request->name;
+        // $user->divisi = $request->divisi;
+        // $user->jabatan = $request->jabatan;
+        // $user->no_hp = $request->no_hp;
+        // $user->alamat = $request->alamat;
+        // $user->update();
+
+        if (!$request->id == Auth::id()) {
+
+            $request->validate([
+                'email' => 'required|email|unique:users,email' 
+            ]);
+        }
+        
+
+        $user = User::find(Auth::id());
         $user->name = $request->name;
+        $user->email = $request->email;
+        $user->no_hp = $request->no_hp;
         $user->divisi = $request->divisi;
         $user->jabatan = $request->jabatan;
-        $user->no_hp = $request->no_hp;
-        $user->alamat = $request->alamat;
+        $user->alamat =  $request->alamat;
         $user->update();
 
         return redirect()->route('profile_bendahara')->with('success', 'Profile berhasil diupdate');

@@ -1,12 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Pemohon;
-use App\Models\User;
+
+use App\Models\Permohonan;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Console\View\Components\Alert;
+use Illuminate\Support\Str;
 
 class PemohonController extends Controller
 {
@@ -18,7 +22,7 @@ class PemohonController extends Controller
         ]);
     }
 
-    public function permohonan_pengurus()
+    public function permohonan_pemohon()
     {
         return view('pemohon.permohonan-dana', [
             'title' => 'Permohonan',
@@ -26,71 +30,49 @@ class PemohonController extends Controller
         ]);
     }
 
-    //fungsi profile
-    public function profile()
+    public function add(Request $request)
     {
-        return view('pemohon.profile-pemohon', [
-            'title' => 'Profile',
-            'active' => 'Profile'
-        ]);
-    }
+        //fungsi add permohonan
 
-    public function edit_profile()
-    {
-        return view('pemohon.edit-profile-pemohon', [
-            'title' => 'Profile',
-            'active' => 'Profile'
-        ]);
-    }
-
-    //fungsi update profile
-    public function update_profile(Request $request)
-    {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email:dns|unique:users,email,' . Auth::user()->id . ',id',
-            'no_hp' => 'required|numeric|digits_between:10,13|unique:users,no_hp,' . Auth::user()->id . ',id',
-            'divisi' => 'required',
-            'jabatan' => 'required',
-            'alamat' => 'required',
+            'no_resi_ajuan' => 'required',
+            'tanggal_permohonan' => 'required',
+            'harga_satuan' => 'required|numeric',
+            'jumlah_satuan' => 'required|numeric',
+            'total_harga' => 'required|numeric',
+            'nominal_acc' => 'required|numeric',
+            'terbilang' => 'required',
         ]);
 
-        $user = User::find(Auth::user()->id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->no_hp = $request->no_hp;
-        $user->divisi = $request->divisi;
-        $user->jabatan = $request->jabatan;
-        $user->alamat = $request->alamat;
-        $user->update();
+        Permohonan::create(
+            [
+                'id_permohonan' => str_replace('-', '', Str::uuid()),
+                'id' => Auth::user()->id,
+                'no_resi_ajuan' => $request->no_resi_ajuan,
+                'tanggal_permohonan' => $request->tanggal_permohonan,
+                'harga_satuan' => $request->harga_satuan,
+                'jumlah_satuan' => $request->jumlah_satuan,
+                'total_harga' => $request->total_harga,
+                'nominal_acc' => $request->nominal_acc,
+                'keterangan_permohonan' => '0',
+                'terbilang' => $request->terbilang,
+                'status_permohonan' => '0',
+            ]
+        );
+        return "success";
+        // return 'success'
 
-        return redirect()->route('profile_manajer')->with('success', 'Profile berhasil diupdate');
-    }
 
-    //fungsi change password
-    public function change_password()
-    {
-        return view('pemohon.change-password-pemohon', [
-            'title' => 'Change Password',
-            'active' => 'Change Password'
-        ]);
-    }
+        // $user = User::find($request->id);
+        // $user->name = $request->name;
+        // $user->email = $request->email;
+        // $user->no_hp = $request->no_hp;
+        // $user->divisi = $request->divisi;
+        // $user->jabatan = $request->jabatan;
+        // $user->alamat =  $request->alamat;
+        // $user->update();
 
-    public function update_password(Request $request)
-    {
-        $request->validate([
-            'old_password' => 'required',
-            'new_password' => 'required',
-            'confirm_password' => 'required|same:new_password',
-        ]);
+        // Alert::success('Success', 'User berhasil diubah');
 
-        $user = User::find(Auth::user()->id);
-        if (Hash::check($request->old_password, $user->password)) {
-            $user->password = Hash::make($request->new_password);
-            $user->update();
-            return redirect()->route('change_password_pemohon')->with('success', 'Password berhasil diupdate');
-        } else {
-            return redirect()->route('change_password_pemohon')->with('error', 'Password lama tidak sesuai');
-        }
     }
 }

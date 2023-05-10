@@ -22,21 +22,23 @@ class RoleSeeder extends Seeder
 
         $roles = [
             [
-                'name_role' => 'Bendahara',
+                'role_name' => 'Bendahara',
             ],
             [
-                'name_role' => 'Manajer',
+                'role_name' => 'Manajer',
             ],
             [
-                'name_role' => 'Pemeriksa',
+                'role_name' => 'Pemeriksa',
             ],
             [
-                'name_role' => 'Pengurus',
+                'role_name' => 'Pengurus',
             ],
         ];
 
         foreach ($roles as $role) {
             \App\Models\Role::create($role);
         }
+
+        
     }
 }
