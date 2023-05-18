@@ -9,6 +9,7 @@ class Permohonan extends Model
 {
     use HasFactory;
 
+    public $incrementing = false; //ini penting sekali tau
     protected $table = 'tb_permohonan';
     protected $primaryKey = 'id_permohonan';
     protected $fillable = [
@@ -22,6 +23,7 @@ class Permohonan extends Model
         'nominal_acc',
         'keterangan_permohonan',
         'terbilang',
+        'jenis_dana',
         'status_permohonan',
     ];
 

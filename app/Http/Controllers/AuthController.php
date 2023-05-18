@@ -30,21 +30,20 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             //cek user active atau tidak
             $user = Auth::user();
-            if ($user->is_active == 1) {
-                $request->session()->regenerate();
+            if ($user->is_active == '1') {
                 // cek role
-                if ($user->role_id == 1) {
+                if ($user->role_id == '1') {
                     return redirect()->intended('bendahara');
-                } else if ($user->role_id == 2) {
+                } else if ($user->role_id == '2') {
                     return redirect()->intended('dashboard-manajer');
-                } else if ($user->role_id == 3) {
+                } else if ($user->role_id == '3') {
                     return redirect()->intended('pemeriksa');
-                } else {
+                } else if ($user->role_id == '4') {
                     return redirect()->intended('dashboard-pemohon');
                 }
             } else {
                 return redirect()->route('auth-login')->with('status', 'Your account is not active, please contact admin!');
-            } 
+            }
         }
 
         return redirect()->route('auth-login')->with('status', 'Your email or password is incorrect!');
@@ -74,10 +73,10 @@ class AuthController extends Controller
         );
     }
 
-    
 
 
-   
+
+
 
     // public function update_profile(Request $request)
     // {

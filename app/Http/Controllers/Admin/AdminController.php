@@ -1,24 +1,28 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 
 use App\Models\User;
-use App\Models\Pengajuan;
+use App\Models\Permohonan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        $userCount = User::count();
-        // $danaAccCount = Pengajuan::where(['status_pengajuan', 'ACC'], ['status_pengajuan', 'PENDING'])->sum('nominal_acc');
-        // $danaAccCount = Pengajuan::where('status_pengajuan', 'ACC')->sum('nominal_acc');
-        return view('admin.dashboard-admin',
+        // $userCount = DB::table('users')->where('role_id', '4')->count();
+        // $danaAccCount = DB::table('tb_permohonan')->where('status_permohonan', '1')->sum('nominal_acc');
+        $userCount = User::all()->count();
+        //$danaAccCount = Permohonan::where('status_permohonan', '1')->sum('nominal_acc');
+        return view(
+            'admin.dashboard-admin',
             ["title" => "Dashboard"],
+            ["active" => "Dashboard"],
             ["userCount" => $userCount],
-            ["active" => "Dashboard"]
+            // ["danaAccCount" => $danaAccCount],
         );
     }
 }
-  

@@ -100,77 +100,77 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="form_user" action="/datauser/edit" method="POST">
-                    @csrf
-                    <div class="modal-body">
-                        <input hidden type="text" id="id" name="id">
-                        <div class="form-group row">
-                            <label class="col-form-label col-4" for="name ">Nama </label>
-                            <div class="col-8">
-                                <input required class="form-control @error('name') is-invalid @enderror" type="text"
-                                    placeholder="masukan nama user" id="name" name="name" autocomplete="off" />
-                                @error('name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-4" for="email">Email</label>
-                            <div class="col-8">
-                                <input required class="form-control @error('email') is-invalid @enderror" type="text"
-                                    value="" placeholder="masukan nama user" id="email" name="email"
-                                    autocomplete="off" />
-                                @error('email')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-4" for="no_hp">No Telepon</label>
-                            <div class="col-8">
-                                <input required class="form-control @error('no_hp') is-invalid @enderror" type="text"
-                                    value="" placeholder="masukan nama user" id="no_hp" name="no_hp"
-                                    autocomplete="off" />
-                                @error('no_hp')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-4" for="divisi ">Divisi</label>
-                            <div class="col-8">
-                                <input required class="form-control @error('divisi') is-invalid @enderror" value=""
-                                    type="text" placeholder="masukan nama user" id="divisi" name="divisi"
-                                    autocomplete="off" />
-                                @error('divisi')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-4" for="jabatan ">Jabatan</label>
-                            <div class="col-8">
-                                <input required class="form-control @error('jabatan') is-invalid @enderror"
-                                    value="" type="text" placeholder="masukan nama user" id="jabatan"
-                                    name="jabatan" autocomplete="off" />
-                                @error('jabatan')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-4" for="alamat">Alamat</label>
-                            <div class="col-8">
-                                <input required class="form-control @error('alamat') is-invalid @enderror" value=""
-                                    type="text" placeholder="masukan nama user" id="alamat" name="alamat"
-                                    autocomplete="off" />
-                                @error('alamat')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+
+                @csrf
+                <div class="modal-body">
+                    <input hidden type="text" id="id_ubah" name="id">
+                    <div class="form-group row">
+                        <label class="col-form-label col-4" for="name ">Nama </label>
+                        <div class="col-8">
+                            <input required class="form-control @error('name') is-invalid @enderror" type="text"
+                                placeholder="masukan nama user" id="name_ubah" name="name" autocomplete="off" />
+                            @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
-                </form>
+                    <div class="form-group row">
+                        <label class="col-form-label col-4" for="email">Email</label>
+                        <div class="col-8">
+                            <input required class="form-control @error('email') is-invalid @enderror" type="text"
+                                value="" placeholder="masukan nama user" id="email_ubah" name="email"
+                                autocomplete="off" />
+                            @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-4" for="no_hp">No Telepon</label>
+                        <div class="col-8">
+                            <input required class="form-control @error('no_hp') is-invalid @enderror" type="text"
+                                value="" placeholder="masukan nama user" id="no_hp_ubah" name="no_hp"
+                                autocomplete="off" />
+                            @error('no_hp')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-4" for="divisi ">Divisi</label>
+                        <div class="col-8">
+                            <input required class="form-control @error('divisi') is-invalid @enderror" value=""
+                                type="text" placeholder="masukan nama user" id="divisi_ubah" name="divisi"
+                                autocomplete="off" />
+                            @error('divisi')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-4" for="jabatan ">Jabatan</label>
+                        <div class="col-8">
+                            <input required class="form-control @error('jabatan') is-invalid @enderror" value=""
+                                type="text" placeholder="masukan nama user" id="jabatan_ubah" name="jabatan"
+                                autocomplete="off" />
+                            @error('jabatan')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-4" for="alamat">Alamat</label>
+                        <div class="col-8">
+                            <input required class="form-control @error('alamat') is-invalid @enderror" value=""
+                                type="text" placeholder="masukan nama user" id="alamat_ubah" name="alamat"
+                                autocomplete="off" />
+                            @error('alamat')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-primary ubah-user">Simpan</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -212,7 +212,7 @@
     <div class="card card-custom gutter-b">
         <div class="card-header">
             <div class="card-title">
-                <span class="symbol symbol-30 symbol-light-primary mr-2">
+                <span class="symbol symbol-40 symbol-light-primary mr-2">
                     <span class="symbol-label">
                         <span class="svg-icon svg-icon-sm svg-icon-primary">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg--><svg
@@ -232,7 +232,8 @@
                         </span>
                     </span>
                 </span>
-                <h3 class="card-label">Kelola Data User</h3>
+                <h3 class="card-label">Kelola Data User
+                </h3>
             </div>
             <div class="card-toolbar">
                 <button onclick="tambahuser()" type="button" class="btn btn-light-primary font-weight-bolder"
@@ -302,7 +303,7 @@
                                 <center>
                                     @if ($user->is_active == 0 && $user->role_id != 1)
                                         <i class='fas fas fa-toggle-off  btn btn-icon btn-light-primary item-aktivasi'></i>
-                                        <i class='fas fa-trash-alt btn btn-icon btn-light-danger item-hapus'></i>
+                                        {{-- <i class='fas fa-trash-alt btn btn-icon btn-light-danger item-hapus'></i> --}}
                                     @elseif ($user->is_active == 1 && $user->role_id != 1)
                                         <i class='fas fa-edit btn btn-icon btn-light-primary item-ubah'></i>
                                         <i class='fas fas fa-toggle-on btn btn-icon btn-light-danger item-nonaktivasi'></i>
@@ -385,26 +386,26 @@
                 var jabatan = currow.find('td:eq(6)').text();
                 var alamat = currow.find('td:eq(7)').text();
 
-                $('#id').val(id.trim());
-                $('#name').val(name.trim());
-                $('#email').val(email.trim());
-                $('#no_hp').val(hp.trim());
-                $('#divisi').val(divisi.trim());
-                $('#jabatan').val(jabatan.trim());
-                $('#alamat').val(alamat.trim());
+                $('#id_ubah').val(id.trim());
+                $('#name_ubah').val(name.trim());
+                $('#email_ubah').val(email.trim());
+                $('#no_hp_ubah').val(hp.trim());
+                $('#divisi_ubah').val(divisi.trim());
+                $('#jabatan_ubah').val(jabatan.trim());
+                $('#alamat_ubah').val(alamat.trim());
 
                 $('#modal_ubah').modal('show');
             });
 
             $(".ubah-user").click(function() {
 
-                var id = $('#id').val();
-                var name = $('#name').val();
-                var email = $('#email').val();
-                var no_hp = $('#no_hp').val();
-                var divisi = $('#divisi').val();
-                var jabatan = $('#jabatan').val();
-                var alamat = $('#alamat').val();
+                var id = $('#id_ubah').val();
+                var name = $('#name_ubah').val();
+                var email = $('#email_ubah').val();
+                var no_hp = $('#no_hp_ubah').val();
+                var divisi = $('#divisi_ubah').val();
+                var jabatan = $('#jabatan_ubah').val();
+                var alamat = $('#alamat_ubah').val();
 
                 $('.ubah-user').attr("disabled", "disabled");
 
@@ -440,13 +441,13 @@
 
                             $(".ubah-user").attr("disabled", false);
 
-                            $('#id').val('');
-                            $('#name').val('');
-                            $('#email').val('');
-                            $('#no_hp').val('');
-                            $('#divisi').val('');
-                            $('#jabatan').val('');
-                            $('#alamat').val('');
+                            $('#id_ubah').val('');
+                            $('#name_ubah').val('');
+                            $('#email_ubah').val('');
+                            $('#no_hp_ubah').val('');
+                            $('#divisi_ubah').val('');
+                            $('#jabatan_ubah').val('');
+                            $('#alamat_ubah').val('');
 
                             $('#modalubah').modal('hide');
 
@@ -489,46 +490,14 @@
 
             });
 
+            $(".hapus-user").click(function() {
+
+
+            });
+
+
+
         });
     </script>
 
-    <script>
-        //alert active user dengan onclik edituser
-        // const edituser = async (id_user) => {
-        //     const {
-        //         value: is_active //status di sini sebagai apa? sebagai variabel?  atau sebagai value?
-        //     } = await Swal.fire({
-        //         title: 'Apakah anda yakin?',
-        //         // text: "Anda tidak dapat mengembalikan ini!",
-        //         icon: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#3085d6',
-        //         cancelButtonColor: '#d33',
-        //         confirmButtonText: 'Yes, active it!'
-        //     })
-
-        //     if (is_active) {
-        //         $.ajax({
-        //             url: "{{ url('DataUserController/active') }}/" + id_user,
-        //             type: "GET",
-        //             dataType: "JSON",
-        //             success: function(data) {
-        //                 Swal.fire(
-        //                     'Active!',
-        //                     'User berhasil di active.',
-        //                     'success'
-        //                 )
-        //                 location.reload()
-        //             },
-        //             error: function() {
-        //                 Swal.fire(
-        //                     'Gagal!',
-        //                     'User gagal di active.',
-        //                     'error'
-        //                 )
-        //             }
-        //         })
-        //     }
-        // }
-    </script>
 @endsection

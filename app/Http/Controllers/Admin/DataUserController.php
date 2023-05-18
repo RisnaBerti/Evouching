@@ -48,6 +48,8 @@ class DataUserController extends Controller
                 'role_id' => 4,
             ]
         );
+
+        // return "success";
         return redirect()->route('datauser')->with(['success' => 'User berhasil ditambahkan']);
     }
 
@@ -61,15 +63,14 @@ class DataUserController extends Controller
             ]);
         }
 
-        $user = User::find($request->id);
+        $user = User::findOrFail($request->id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->no_hp = $request->no_hp;
         $user->divisi = $request->divisi;
         $user->jabatan = $request->jabatan;
         $user->alamat =  $request->alamat;
-        dd($user);
-        $user->save();
+        $user->update();
 
         return "success";
     }
@@ -78,7 +79,7 @@ class DataUserController extends Controller
     public function active($id)
     {
         $user = User::find($id);
-        $user->is_active = 1;
+        $user->is_active = "1";
         $user->update();
         return redirect()->route('datauser')->with(['success' => 'User berhasil diaktifkan']);
     }
@@ -87,7 +88,7 @@ class DataUserController extends Controller
     public function nonactive($id)
     {
         $user = User::find($id);
-        $user->is_active = 0;
+        $user->is_active = "0";
         $user->update();
         return redirect()->route('datauser')->with(['success' => 'User berhasil diaktifkan']);
     }
@@ -96,8 +97,7 @@ class DataUserController extends Controller
     {
         //delete post
         User::where('id', $request->id_hapus)->delete();
-
         //redirect to index
-        return redirect()->route('datauser')->with(['success' => 'User berhasil dihapus']);
+        return redirect()->route('datauser')->with(["success"]);
     }
 }

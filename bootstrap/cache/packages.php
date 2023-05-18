@@ -10,6 +10,18 @@
       'Debugbar' => 'Barryvdh\\Debugbar\\Facades\\Debugbar',
     ),
   ),
+  'barryvdh/laravel-dompdf' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Barryvdh\\DomPDF\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Pdf' => 'Barryvdh\\DomPDF\\Facade\\Pdf',
+      'PDF' => 'Barryvdh\\DomPDF\\Facade\\Pdf',
+    ),
+  ),
   'laravel/sail' => 
   array (
     'providers' => 
@@ -61,6 +73,17 @@
     'aliases' => 
     array (
       'Alert' => 'RealRashid\\SweetAlert\\Facades\\Alert',
+    ),
+  ),
+  'riskihajar/terbilang' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Riskihajar\\Terbilang\\TerbilangServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Terbilang' => 'Riskihajar\\Terbilang\\Facades\\Terbilang',
     ),
   ),
   'spatie/laravel-ignition' => 

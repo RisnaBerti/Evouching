@@ -12,8 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public $incrementing = false; //ini penting sekali tau
     protected $primaryKey = 'id';
-
     protected $fillable = [
         'id',
         'name',
