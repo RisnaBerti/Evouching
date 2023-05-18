@@ -22,4 +22,5 @@ yarn-error.log
 /datatabeluser
 /new_form.php
 /database/migrations/2023_05_08_071241_create_tb_permohonan_table.php
-/views/ex.php
+/resources/views/ex.php
+/resources/views/admin/penerimaan-kas.blade copy.php
