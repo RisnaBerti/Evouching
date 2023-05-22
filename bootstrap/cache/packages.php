@@ -22,6 +22,17 @@
       'PDF' => 'Barryvdh\\DomPDF\\Facade\\Pdf',
     ),
   ),
+  'codedge/laravel-fpdf' => 
+  array (
+    'aliases' => 
+    array (
+      'Fpdf' => 'Codedge\\Fpdf\\Facades\\Fpdf',
+    ),
+    'providers' => 
+    array (
+      0 => 'Codedge\\Fpdf\\FpdfServiceProvider',
+    ),
+  ),
   'laravel/sail' => 
   array (
     'providers' => 

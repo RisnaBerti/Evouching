@@ -19,7 +19,7 @@
                                     <div class="col-7 align-self-start">
                                         <div class="col">
                                             <h3 class="card-title">
-                                                BUKTI PENERIMAAN KAS
+                                                BUKTI PEMBAYARAN KAS
                                             </h3>
                                         </div>
                                     </div>
@@ -99,7 +99,7 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary mr-2 save-pembayaran-kas">Submit</button>
+                                <button type="submit" class="btn btn-primary mr-2 save-pembayaran-kas">Simpan</button>
                             </div>
                         </form>
                         <!--end::Form-->
@@ -307,7 +307,9 @@
 
             // ubah
             $('#table-pembayarankas').on('click', '.item-ubah-pembayarankas', function() {
+                
                 console.log('Jalan gak sih');
+
                 // var id_penerimaan_kas = $(this).data('ipk');
                 var id_permohonan = $(this).data('ip');
                 var name = $(this).data('nm');

@@ -46,7 +46,7 @@ class AkunControllerPemohon extends Controller
 
         $user = User::find(Auth::id());
         $user->name = $request->name;
-        $user->email = $request->email;
+        // $user->email = $request->email;
         $user->no_hp = $request->no_hp;
         $user->divisi = $request->divisi;
         $user->jabatan = $request->jabatan;

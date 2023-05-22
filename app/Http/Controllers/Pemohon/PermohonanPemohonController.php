@@ -22,29 +22,23 @@ class PermohonanPemohonController extends Controller
 
     public function getmax()
     {
-
         $maxValue = Permohonan::max('no_resi_ajuan');
 
+        if($maxValue == null){
+            $maxValue = 0;
+        }
         return response()->json($maxValue);
-
-        // if (Auth::check()) {
-        //     // The user is logged in...
-        //     $u = Auth::user();
-        //     //bentar
-        //     echo $u;
-        // }
-
     }
 
     public function add(Request $request)
     {
         //fungsi add permohonan
 
-        $request->validate([
-            'no_resi_ajuan' => 'required',
-            'tanggal_permohonan' => 'required',
-            'terbilang' => 'required',
-        ]);
+        // $request->validate([
+        //     'no_resi_ajuan' => 'required',
+        //     'tanggal_permohonan' => 'required',
+        //     'terbilang' => 'required',
+        // ]);
 
         Permohonan::create(
             [
@@ -54,14 +48,19 @@ class PermohonanPemohonController extends Controller
                 'id' => ($id),
                 'no_resi_ajuan' => $request->no_resi_ajuan,
                 'tanggal_permohonan' => $request->tanggal_permohonan,
-                'harga_satuan' => $request->harga_satuan,
-                'jumlah_satuan' => $request->jumlah_satuan,
-                'total_harga' => $request->total_harga,
-                'nominal_acc' => $request->nominal_acc,
-                'keterangan_permohonan' => '0',
+                'harga_satuan' => $request->harga_satuan_sum,
+                'jumlah_satuan' => $request->jumlah_satuan_sum,
+                'total_harga' => $request->total_harga_sum,
+                'nominal_acc' => '0',
+                'keterangan_permohonan' => $request->keterangan_permohonan,
                 'terbilang' => $request->terbilang,
-                'jenis_dana' => $request->jenis_dana,
-                'status_permohonan' => '0'
+                'jenis_dana' => '0',
+                'status_permohonan' => '0',
+                'ttd_pemohonan' => '0',
+                'ttd_manajer' => '0',
+                'ttd_pemeriksa' => '0',
+                'ttd_bendahara' => '0'
+
             ]
         );
 

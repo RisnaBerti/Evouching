@@ -30,8 +30,9 @@
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
                                                     Bayar:</span>
                                             </div>
-                                            <input readonly type="text" class="form-control" id="no_resi_ajuan" name="no_resi_ajuan"
-                                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                            <input readonly type="text" class="form-control" id="no_resi_ajuan"
+                                                name="no_resi_ajuan" aria-label="Sizing example input"
+                                                aria-describedby="inputGroup-sizing-sm">
                                         </div>
                                         <div class="input-group input-group-sm mb-3">
                                             <div class="input-group-prepend">
@@ -47,18 +48,18 @@
                                 <div class="form-group row">
                                     <div class="col-lg-4">
                                         <label>Dibayarkan Kepada</label>
-                                        <input type="text" class="form-control" placeholder="Nama Legkap" id="name" name="name"
-                                            readonly disabled />
+                                        <input type="text" class="form-control" placeholder="Nama Legkap" id="name"
+                                            name="name" readonly disabled />
                                     </div>
                                     <div class="col-lg-4">
                                         <label>Jabatan</label>
-                                        <input type="text" class="form-control" placeholder="Jabatan" id="jabatan" name="jabatan"
-                                            readonly disabled />
+                                        <input type="text" class="form-control" placeholder="Jabatan" id="jabatan"
+                                            name="jabatan" readonly disabled />
                                     </div>
                                     <div class="col-lg-4">
                                         <label>Divisi / Departemen</label>
-                                        <input type="text" class="form-control" placeholder="Divisi" id="divisi" name="divisi"
-                                            readonly disabled />
+                                        <input type="text" class="form-control" placeholder="Divisi" id="divisi"
+                                            name="divisi" readonly disabled />
                                     </div>
                                 </div>
 
@@ -66,13 +67,15 @@
                                 <div class="form-group row">
                                     <div class="col-lg-6">
                                         <label>Total Taksiran</label>
-                                        <input type="text" class="form-control" placeholder="Total" id="nominal_acc" name="nominal_acc" />
+                                        <input type="text" class="form-control" placeholder="Total" id="nominal_acc"
+                                            name="nominal_acc" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-lg-6">
                                         <label>Terbilang</label>
-                                        <input type="text" class="form-control" placeholder="Terbilang" id="terbilang" name="terbilang" />
+                                        <input type="text" class="form-control" placeholder="Terbilang" id="terbilang"
+                                            name="terbilang" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -96,7 +99,7 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary mr-2 save-pembayaran-bank">Submit</button>
+                                <button type="submit" class="btn btn-primary mr-2 save-pembayaran-bank">Simpan</button>
                             </div>
                         </form>
                         <!--end::Form-->
@@ -254,25 +257,30 @@
                         {
                             "render": function(data, type, row) {
 
-                                if(row.bukti_transaksi == null) 
-                                {
+                                if (row.bukti_transaksi == null) {
                                     return '<a class="dropdown-item item-ubah-pembayaranbank" href="#" data-ip="' +
-                                    row.id_permohonan + '" data-nm="' + row.name + '" data-jbt="' +
-                                    row.jabatan + '" data-dvs="' + row.divisi + '" data-acc="' + row
-                                    .nominal_acc + '" data-trb="' + row.terbilang + '" data-kp="' +
-                                    row.keterangan_permohonan + '" data-st="' +
-                                    row.status +
-                                    '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah-pembayaranbank"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
-                                    row.id_permohonan +
-                                    '"><span class="badge bg-danger">Belum Di Unggah</span></a>';
+                                        row.id_permohonan + '" data-nm="' + row.name +
+                                        '" data-jbt="' +
+                                        row.jabatan + '" data-dvs="' + row.divisi + '" data-acc="' +
+                                        row
+                                        .nominal_acc + '" data-trb="' + row.terbilang +
+                                        '" data-kp="' +
+                                        row.keterangan_permohonan + '" data-st="' +
+                                        row.status +
+                                        '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah-pembayaranbank"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
+                                        row.id_permohonan +
+                                        '"><span class="badge bg-danger">Belum Di Unggah</span></a>';
                                 } else {
                                     return '<a class="dropdown-item item-ubah-pembayaranbank" href="#" data-ip="' +
-                                    row.id_permohonan + '" data-nm="' + row.name + '" data-jbt="' +
-                                    row.jabatan + '" data-dvs="' + row.divisi + '" data-acc="' + row
-                                    .nominal_acc + '" data-trb="' + row.terbilang + '" data-kp="' +
-                                    row.keterangan_permohonan + '" data-st="' +
-                                    row.status +
-                                    '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah-pembayaranbank"></i></a> <span class="badge bg-success">Bukti Telah Di Unggah</span>';
+                                        row.id_permohonan + '" data-nm="' + row.name +
+                                        '" data-jbt="' +
+                                        row.jabatan + '" data-dvs="' + row.divisi + '" data-acc="' +
+                                        row
+                                        .nominal_acc + '" data-trb="' + row.terbilang +
+                                        '" data-kp="' +
+                                        row.keterangan_permohonan + '" data-st="' +
+                                        row.status +
+                                        '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah-pembayaranbank"></i></a> <span class="badge bg-success">Bukti Telah Di Unggah</span>';
                                 }
 
 
@@ -292,7 +300,8 @@
                 });
             }
 
-            $('#table-pembayarankas').on('click', '.item-ubah-pembayaranbank', function() {
+            $('#table-pembayaranbank').on('click', '.item-ubah-pembayaranbank', function() {
+                // console.log('Jalan gak sih');
 
                 // var id_penerimaan_kas = $(this).data('ipk');
                 var id_permohonan = $(this).data('ip');

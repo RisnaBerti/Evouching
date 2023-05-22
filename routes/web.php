@@ -39,6 +39,8 @@ Route::get('/', [AuthController::class, 'login'])->name('auth-login');
 // authentification
 Route::get('/logout', [AuthController::class, 'logout']);
 
+Route::get('/la', [KasController::class, 'laporan']);
+
 Route::middleware('guest')->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('/login', 'login')->name('auth-login');
@@ -86,6 +88,7 @@ Route::controller(KasController::class)->group(function () {
     Route::get('/penerimaankas', 'index')->name('kas');
     Route::post('/penerimaan-kas/get', 'get_penerimaan_kas');
     Route::post('/penerimaan-kas/edit', 'edit_penerimaan_kas');
+    Route::get('/penerimaan-kas/getmax', 'getmax');
     Route::get('/pembayarankas', 'pembayaran_kas')->name('pembayaran-kas');
     Route::post('/pembayaran-kas/get', 'get_pembayaran_kas')->name('pembayaran-kas');
     Route::post('/pembayaran-kas/edit', 'edit_pembayaran_kas')->name('pembayaran-kas');
@@ -95,6 +98,7 @@ Route::controller(BankController::class)->group(function () {
     Route::get('/penerimaanbank', 'index')->name('bank');
     Route::post('/penerimaan-bank/get', 'get_penerimaan_bank');
     Route::post('/penerimaan-bank/edit', 'edit_penerimaan_bank');
+    
     Route::get('/pembayaranbank', 'pembayaran_bank')->name('pembayaran-bank');
     Route::post('/pembayaran-bank/get', 'get_pembayaran_bank')->name('pembayaran-bank');
     Route::post('/pembayaran-bank/edit', 'edit_pembayaran_bank')->name('pembayaran-bank');
@@ -114,7 +118,8 @@ Route::controller(AntarBankController::class)->group(function () {
     Route::get('/penerimaan-antarbank', 'index')->name('antarbank');
     Route::post('/penerimaan-antarbank/add', 'add_penerimaan_antarbank');
     Route::get('/pembayaran-antarbank', 'pembayaran_antar_bank')->name('pembayaran-antarbank');
-    Route::post('/pembayaran-antarbank/add', 'add_pembayaran_antarbank')->name('pembayaran-antarbank');
+    Route::post('/pembayaran-antarbank/add', 'pembayaran_antar_bank_add')->name('pembayaran-antarbank');
+    Route::post('/pembayaran-antarbank/edit', 'edit_pembayaran_antarbank')->name('pembayaran-antarbank');
 });
 
 Route::controller(LaporanController::class)->group(function () {
@@ -146,7 +151,7 @@ Route::controller(PemohonController::class)->group(function () {
 Route::controller(PermohonanPemohonController::class)->group(function () {
     Route::get('/permohonan-pemohon', 'permohonan_pemohon')->name('permohonan_pemohon');
     Route::post('/permohonan/add', 'add');
-    Route::post('/permohonan/add/kas', 'simpanPembayaranKas');
+    // Route::post('/permohonan/add/kas', 'simpanPembayaranKas');
     Route::get('/permohonan/getmax', 'getmax');
 });
 Route::controller((AkunControllerPemohon::class))->group(function () {

@@ -11,7 +11,7 @@
                     <div class="card card-custom gutter-b example example-compact">
                         <!--begin::Form-->
                         {{-- <form class="form" id="form_ubah"> --}}
-                        <form method="POST" action="{{ url('/pembayaran-bank/edit') }}" id="form_edit_penerimaankas"
+                        <form method="POST" action="{{ url('/penerimaan-bank/edit') }}" id="form_edit_penerimaankas"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
@@ -24,6 +24,7 @@
                                         </div>
                                     </div>
                                     <div class="col-5 align-items-start">
+                                        <input hidden type="text" id="id_penerimaan_bank">
                                         <input hidden type="text" id="id_permohonan">
                                         <div class="input-group input-group-sm mb-1">
                                             <div class="input-group-prepend">
@@ -96,7 +97,7 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary mr-2 save-penerimaan-bank">Submit</button>
+                                <button type="submit" class="btn btn-primary mr-2 save-penerimaan-bank">Simpan</button>
                             </div>
                         </form>
                         <!--end::Form-->

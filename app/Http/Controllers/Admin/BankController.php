@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\PembayaranBank;
+use App\Models\PenerimaanBank;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -50,18 +51,18 @@ class BankController extends Controller
         $fileName = $request->id_permohonan . '.' . $request->file->extension();
         $request->file->move(public_path('bukti'), $fileName);
 
-        // PenerimaanKas::create(
-        //     [
-        //         $id = Auth::user()->id,
-        //         'id_penerimaan_kas' => str_replace('-', '', Str::uuid()),
-        //         'id_permohonan' => $request->id_permohonan,
-        //         'id' => ($id),
-        //         'no_resi_terima_kas' => '0',
-        //         'tanggal_penerimaan_kas' => $request->tanggal_penerimaan_kas,
-        //         'bukti_transaksi' => $fileName,
-        //         'status' => '1'
-        //     ]
-        // );
+        PenerimaanBank::create(
+            [
+                $id = Auth::user()->id,
+                'id_penerimaan_kas' => str_replace('-', '', Str::uuid()),
+                'id_permohonan' => $request->id_permohonan,
+                'id' => ($id),
+                'no_resi_terima_bank' => '0',
+                'tanggal_penerimaan_bank' => $request->tanggal_penerimaan_bank,
+                'bukti_transaksi' => $fileName,
+                'status' => '1'
+            ]
+        );
 
         return Redirect::back()->with('message', 'Operation Successful !');
     }
@@ -90,11 +91,11 @@ class BankController extends Controller
         PembayaranBank::create(
             [
                 $id = Auth::user()->id,
-                'id_pembayaran_bank' => str_replace('-', '', Str::uuid()),
+                'id_penerimaan_bank' => str_replace('-', '', Str::uuid()),
                 'id_permohonan' => $request->id_permohonan,
                 'id' => ($id),
-                'no_resi_bayar_bank' => $request->no_resi_bayar_bank,
-                'tanggal_penerimaan_kas' => $request->tanggal_penerimaan_kas,
+                'no_resi_terima_bank' => $request->no_resi_bayar_bank,
+                'tanggal_penerimaan_bank' => $request->tanggal_penerimaan_bank,
                 'bukti_transaksi' => $fileName,
                 'status' => '1'
             ]

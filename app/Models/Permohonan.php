@@ -25,6 +25,10 @@ class Permohonan extends Model
         'terbilang',
         'jenis_dana',
         'status_permohonan',
+        'ttd_pemohon',
+        'ttd_pemeriksa',
+        'ttd_manajer',
+        'ttd_bendahara'
     ];
 
     public function user()

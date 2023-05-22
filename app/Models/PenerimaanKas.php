@@ -17,7 +17,7 @@ class PenerimaanKas extends Model
         'id',
         'id_permohonan',
         'no_resi_terima_kas',
-        'tanggal_penerimaan_kas',
+        'tanggal_penerimaan_bank',
         'bukti_transaksi',
         'status'
     ];

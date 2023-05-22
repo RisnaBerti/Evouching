@@ -30,7 +30,7 @@
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
                                                     Bayar:</span>
                                             </div>
-                                            <input readonly disabled type="text" class="form-control" id="no_resi_ajuan"
+                                            <input readonly disabled type="text" class="form-control" id="no_resi_terima_kas"
                                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                         </div>
                                         <div class="input-group input-group-sm mb-3">
@@ -88,14 +88,14 @@
                                             <input type="file" class="custom-file-input" name="file" id="inputFile" />
                                             <label class="custom-file-label" for="inputFile">Choose file</label>
                                         </div>
-                                        <span class="form-text text-muted">File wajib scan</span>
+                                        <span class="form-text text-muted">File wajib scan JPG/JPEG/PNG</span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary mr-2 save-pembayaran-kas">Submit</button>
+                                <button type="submit" class="btn btn-primary mr-2 save-pembayaran-kas">Simpan</button>
                             </div>
                         </form>
                         <!--end::Form-->
@@ -144,6 +144,7 @@
     <script>
         $(document).ready(function() {
             get();
+
             function get() {
                 $('#table-penerimaankas').DataTable({
 
@@ -248,48 +249,57 @@
                         },
 
                         {
-                            "render": function(data, type, row) {
-                                return '<a class="dropdown-item item-ubah-penerimaankas" href="#" data-ip="' +
-                                    row.id_permohonan + '" data-nm="' + row.name + '" data-jbt="' +
-                                    row.jabatan + '" data-dvs="' + row.divisi + '" data-acc="' + row
-                                    .nominal_acc + '" data-trb="' + row.terbilang + '" data-kp="' +
-                                    row.keterangan_permohonan +
-                                    '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah-penerimaankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
-                                    row.id_permohonan +
-                                    '"><i class="fas fa-trash-alt btn btn-icon btn-light-danger item-hapus"></i></a>'
-                            },
                             // "render": function(data, type, row) {
-
-                            //     if (row.status == 1) {
-                            //         '<a class="dropdown-item item-ubah-penerimaankas" href="#" data-ipk="' +
-                            //         row.id_permohonan + '" data-nm="' + row.name +
-                            //             '" data-jbt="' +
-                            //             row.jabatan + '" data-dvs="' + row.divisi + '" data-acc="' +
-                            //             row
-                            //             .nominal_acc + '" data-trb="' + row.terbilang +
-                            //             '" data-kp="' +
-                            //             row.keterangan_permohonan +
-                            //             '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah-penerimaankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
-                            //             row.id_permohonan +
-                            //             '"><span class="badge bg-success">Sudah Diarsip</span></a>'
-                            //     } else if (row.status == 0) {
-                            //         return '<a class="dropdown-item item-ubah-penerimaankas" href="#" data-ipk="' +
-                            //             row.id_permohonan + '" data-nm="' + row.name +
-                            //             '" data-jbt="' +
-                            //             row.jabatan + '" data-dvs="' + row.divisi + '" data-acc="' +
-                            //             row
-                            //             .nominal_acc + '" data-trb="' + row.terbilang +
-                            //             '" data-kp="' +
-                            //             row.keterangan_permohonan +
-                            //             '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah-penerimaankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
-                            //             row.id_permohonan +
-                            //             '"><span class="badge bg-success">Sudah Diarsip</span></a>'
-                            //     }
+                            // return '<a class="dropdown-item item-ubah-penerimaankas" href="#" data-ip="' +
+                            //     row.id_permohonan + '" data-nm="' + row.name + '" data-jbt="' +
+                            //     row.jabatan + '" data-dvs="' + row.divisi + '" data-acc="' + row
+                            //     .nominal_acc + '" data-trb="' + row.terbilang + '" data-kp="' +
+                            //     row.keterangan_permohonan +
+                            //     '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah-penerimaankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
+                            //     row.id_permohonan +
+                            //     '"><i class="fas fa-trash-alt btn btn-icon btn-light-danger item-hapus"></i></a>'
                             // },
+                            "render": function(data, type, row) {
+
+                                if (row.bukti_transaksi == null) {
+                                    return '<a class="dropdown-item item-ubah-pembayarankas" href="#" data-ip="' +
+                                        row.id_permohonan + '" data-nm="' + row.name +
+                                        '" data-jbt="' +
+                                        row.jabatan + '" data-dvs="' + row.divisi + '" data-acc="' +
+                                        row
+                                        .nominal_acc + '" data-trb="' + row.terbilang +
+                                        '" data-kp="' +
+                                        row.keterangan_permohonan +
+                                        '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah-pembayarankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
+                                        row.id_permohonan +
+                                        '"><span class="badge bg-danger">Belum Di Unggah</span></a>';
+                                } else {
+                                    return '<a class="dropdown-item item-ubah-pembayarankas" href="#" data-ip="' +
+                                        row.id_permohonan + '" data-nm="' + row.name +
+                                        '" data-jbt="' +
+                                        row.jabatan + '" data-dvs="' + row.divisi + '" data-acc="' +
+                                        row
+                                        .nominal_acc + '" data-trb="' + row.terbilang +
+                                        '" data-kp="' +
+                                        row.keterangan_permohonan +
+                                        '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah-pembayarankas"></i></a> <span class="badge bg-success">Bukti Telah Di Unggah</span>';
+                                }
+                            },
                             padding: '5px',
                         }
                     ],
                 });
+            }
+
+            function getmax() {
+
+                $.get("{{ url('/penerimaan-kas/getmax') }}", {
+                        _token: "{{ csrf_token() }}"
+                    })
+                    .done(function(data) {
+                        var total = parseInt(data) + 1;
+                        $("#no_resi_terima_kas").val(total);
+                    });
             }
 
             $('#table-penerimaankas').on('click', '.item-ubah-penerimaankas', function() {

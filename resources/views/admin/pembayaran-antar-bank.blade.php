@@ -1,131 +1,7 @@
 @extends('layouts.main-bendahara')
 
 @section('content')
-    <!--begin::Card-->
-    <div class="card card-custom gutter-b example example-compact">
-        <!--begin::Form-->
-        {{-- <form class="form" id="form_ubah"> --}}
-        <form method="POST" action="{{ url('/pembayaran-bank/edit') }}" id="form_edit_penerimaankas"
-            enctype="multipart/form-data">
-            @csrf
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-7 align-self-start">
-                        <div class="col">
-                            <h3 class="card-title">
-                                PERMOHONAN DANA ANTAR BANK
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="col-5 align-items-start">
-                        <input hidden type="text" id="id_permohonan">
-                        <div class="input-group input-group-sm mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">No. Formulir:</span>
-                            </div>
-                            <input readonly type="text" class="form-control" id="no_resi_ajuan" name="no_resi_ajuan"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        </div>
-                        <div class="input-group input-group-sm mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
-                                    Ajuan:</span>
-                            </div>
-                            <input readonly type="text" class="form-control" id="no_resi_ajuan" name="no_resi_ajuan"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        </div>
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">Tanggal:</span>
-                            </div>
-                            <input type="date" value="{{ date('d-m-Y') }}" class="form-control"
-                                id="tanggal_pembayaran_bank" name="tanggal_pembayaran_bank"
-                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-lg-4">
-                        <div class="input-group input-group-sm mb-1">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">Nama</span>
-                            </div>
-                            <input readonly type="text" class="form-control" id="no_resi_ajuan" name="no_resi_ajuan"
-                                value="Mutasi Antar BANK" aria-label="Sizing example input"
-                                aria-describedby="inputGroup-sizing-sm">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-lg-6">
-                        <label>Dari Bank</label>
-                        <select class="form-control form-control-sm jenis_dana" id="jenis_dana">
-                            <option>Bank</option>
-                            <option>Bank</option>
-                            <option>Bank</option>
-                            <option>Bank</option>
-                            <option>Bank</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-6">
-                        <label>Ke Bank</label>
-                        <select class="form-control form-control-sm jenis_dana" id="jenis_dana">
-                            <option>Bank</option>
-                            <option>Bank</option>
-                            <option>Bank</option>
-                            <option>Bank</option>
-                            <option>Bank</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-6">
-                        <label>Nominal ACC</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Nominal ACC"
-                            id="nominal_acc" name="nominal_acc" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-6">
-                        <label>Terbilang</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Terbilang" id="terbilang"
-                            name="terbilang" />
-                    </div>
-                    <div class="col-lg-6">
-                        <label>Keterangan</label>
-                        <textarea readonly class="form-control form-control-sm" placeholder="Keterangan" id="keterangan_permohonan"
-                            rows="3"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-lg-3">
-                        <label class="text-center">Mengetahui,</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                    <div class="col-lg-3">
-                        <label class="text-center">Menyetujui,</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                    <div class="col-lg-3">
-                        <label class="text-center">Yang Menerima</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                    <div class="col-lg-3">
-                        <label class="text-center">Yang Membayarkan</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary mr-2 save-pembayaran-bank">Submit</button>
-            </div>
-        </form>
-        <!--end::Form-->
-    </div>
-    <!--end::Card-->
+   
 
     <!-- Modal -->
     <div class="modal fade modal-ubah-pembayaranbank" id="staticBackdrop modal-ubah-pembayaranbank"
@@ -138,7 +14,7 @@
                     <div class="card card-custom gutter-b example example-compact">
                         <!--begin::Form-->
                         {{-- <form class="form" id="form_ubah"> --}}
-                        <form method="POST" action="{{ url('/pembayaran-bank/edit') }}" id="form_edit_penerimaankas"
+                        <form method="POST" action="{{ url('/pembayaran-antarbank/edit') }}" id="form_edit_penerimaankas"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
@@ -146,7 +22,7 @@
                                     <div class="col-7 align-self-start">
                                         <div class="col">
                                             <h3 class="card-title">
-                                                BUKTI PENERIMAAN KAS
+                                                BUKTI PEMBAYARAN BANK
                                             </h3>
                                         </div>
                                     </div>
@@ -157,8 +33,8 @@
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
                                                     Bayar:</span>
                                             </div>
-                                            <input readonly type="text" class="form-control" id="no_resi_ajuan"
-                                                name="no_resi_ajuan" aria-label="Sizing example input"
+                                            <input readonly type="text" class="form-control" id="no_resi_bayar"
+                                                name="no_resi_bayar" aria-label="Sizing example input"
                                                 aria-describedby="inputGroup-sizing-sm">
                                         </div>
                                         <div class="input-group input-group-sm mb-3">
@@ -166,7 +42,7 @@
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">Tanggal:</span>
                                             </div>
                                             <input type="date" value="{{ date('d-m-Y') }}" class="form-control"
-                                                id="tanggal_pembayaran_bank" name="tanggal_pembayaran_bank"
+                                                id="tanggal_mutasi" name="tanggal_mutasi"
                                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                         </div>
                                     </div>
@@ -227,7 +103,7 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary mr-2 save-pembayaran-bank">Submit</button>
+                                <button type="submit" class="btn btn-primary mr-2 save-pembayaran-bank">Simpan</button>
                             </div>
                         </form>
                         <!--end::Form-->
