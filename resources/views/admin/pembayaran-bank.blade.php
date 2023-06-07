@@ -19,7 +19,7 @@
                                     <div class="col-7 align-self-start">
                                         <div class="col">
                                             <h3 class="card-title">
-                                                BUKTI PENERIMAAN KAS
+                                                BUKTI PEMBAYARAN KAS
                                             </h3>
                                         </div>
                                     </div>
@@ -30,8 +30,8 @@
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
                                                     Bayar:</span>
                                             </div>
-                                            <input readonly type="text" class="form-control" id="no_resi_ajuan"
-                                                name="no_resi_ajuan" aria-label="Sizing example input"
+                                            <input readonly type="text" class="form-control" id="no_resi_bayar_bank"
+                                                name="no_resi_bayar_bank" aria-label="Sizing example input"
                                                 aria-describedby="inputGroup-sizing-sm">
                                         </div>
                                         <div class="input-group input-group-sm mb-3">
@@ -115,7 +115,7 @@
         <div class="card-header">
             <div class="card-title">
                 <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
-                <h3 class="card-label">Permohonan Dana</h3>
+                <h3 class="card-label">Pembayaran Bank</h3>
             </div>
         </div>
         <div class="card-body">

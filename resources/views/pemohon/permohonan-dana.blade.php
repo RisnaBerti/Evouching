@@ -3,11 +3,6 @@
 @section('content')
     <!--begin::Card-->
     <div class="card card-custom gutter-b example example-compact">
-        <!--begin::Form-->
-        {{-- <form class="form" id="form_ubah"> --}}
-        {{-- <form method="POST" action="{{ url('/permohonan/add') }}" id="form_permohonan" class="form_permohonan"
-            enctype="multipart/form-data">
-            @csrf --}}
         <div class="card-body">
             <div class="row">
                 <div class="col-7 align-self-start">
@@ -19,6 +14,7 @@
                 </div>
                 <div class="col-5 align-items-start">
 
+                    <input type="text" id="id_detail_permohonan">
                     <input hidden type="text" id="id" value="{{ Auth::user()->id }}">
                     <div class="input-group input-group-sm mb-1">
                         <div class="input-group-prepend">
@@ -33,20 +29,21 @@
                                 Ajuan:</span>
                         </div>
                         <input readonly type="text" class="form-control form-control-sm" id="no_resi_ajuan"
-                            name="no_resi_ajuan" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            name="no_resi_ajuan" value="{{ $permohonan->no_resi_ajuan }}" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm">
                     </div>
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Tanggal:</span>
                         </div>
                         <input type="date" value="{{ date('Y-m-d') }}" class="form-control form-control-sm"
-                            id="tanggal_permohonan" name="tanggal_permohonan" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-sm">
+                            id="tanggal_permohonan" name="tanggal_permohonan" value="{{ $permohonan->tanggal_permohonan }}"
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                     </div>
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div hidden class="form-group row">
                 <div class="col-lg-4">
                     <label>Nama </label>
                     <input type="text" class="form-control form-control-sm" placeholder="Nama Legkap" id="name"
@@ -63,63 +60,82 @@
                         value="{{ Auth::user()->divisi }}" readonly disabled />
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-lg-6">
+                    <label>Nama Perkiraan</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Nama Legkap" id="name"
+                        value="{{ Auth::user()->name }}" readonly disabled />
+                </div>
+                <div class="col-lg-6">
+                    <label>Dana Yang Di ajukan</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Nominal ACC"
+                        id="total_dana_ajuan" name="total_dana_ajuan" value="{{ $permohonan->total_dana_ajuan }}" readonly
+                        disabled />
+                </div>
+            </div>
 
             <div class="form-group row">
                 <div class="col-lg-3">
-                    <label>Nama Perkiraan</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Nama Legkap"
-                        name="nama_perkiraan" id="nama_perkiraan" value="{{ Auth::user()->name }}" readonly />
+                    <label>Nama Barang</label>
+                    <input type="text" class="form-control form-control-sm" name="nama_barang" placeholder="Nama Barang"
+                        id="nama_barang" />
                 </div>
                 <div class="col-lg-3">
                     <label>Harga Satuan</label>
-                    <input type="text" class="form-control form-control-sm" name="harga_satuan_sum"
-                        placeholder="Harga Satuan" id="harga_satuan_sum" />
+                    <input type="text" class="form-control form-control-sm" name="harga_satuan"
+                        placeholder="Harga Satuan" id="harga_satuan" />
                 </div>
                 <div class="col-lg-3">
-                    <label>Jumlah</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Jumlah" name="jumlah_satuan_sum"
-                        id="jumlah_satuan_sum" />
+                    <label>Qty</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Jumlah Barang" name="qty"
+                        id="qty" />
                 </div>
                 <div class="col-lg-3">
-                    <label>Total</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Total" name="total_harga_sum"
-                        id="total_harga_sum" readonly disabled />
+                    <label>Total Harga</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Total"
+                        name="total_harga_barang" id="total_harga_barang" readonly disabled />
                 </div>
             </div>
-            <div class="form-group row">
+            <div hidden class="form-group row">
                 <div class="col-lg-6">
                     <label>Nominal ACC</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Nominal ACC" id="nominal_acc"
-                        name="nominal_acc" value="000" readonly disabled />
+                    <input type="text" class="form-control form-control-sm" placeholder="Di isi oleh bendahara"
+                        id="nominal_acc" name="nominal_acc" value="" readonly disabled />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-lg-6">
                     <label>Terbilang</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Terbilang" id="terbilang"
-                        name="terbilang" />
+                    <input readonly disabled type="text" class="form-control form-control-sm" placeholder="Terbilang"
+                        value="{{ $permohonan->terbilang }}" id="terbilang" name="terbilang" />
                 </div>
                 <div class="col-lg-6">
                     <label>Keterangan</label>
-                    <textarea class="form-control form-control-sm" name="keterangan_permohonan" id="keterangan_permohonan"
+                    <textarea readonly disabled class="form-control form-control-sm" name="keterangan_detail" id="keterangan_detail"
                         placeholder="Keterangan" rows="4"></textarea>
                 </div>
-                <input hidden type="text" id="jenis_dana" value="0">
+
+                <select class="form-control text-right" id="ket">
+                   
+                </select>
+
+                {{-- <input hidden type="text" id="jenis_dana" value="0">
                 <input hidden type="text" id="ttd_pemohon" value="0">
                 <input hidden type="text" id="ttd_manajer" value="0">
                 <input hidden type="text" id="ttd_bendahara" value="0">
-                <input hidden type="text" id="ttd_pemeriksa" value="0">
-
+                <input hidden type="text" id="ttd_pemeriksa" value="0"> --}}
             </div>
-
-            <div class="form-group row">
+            {{-- ttd --}}
+            {{-- <div class="form-group row">
                 <div class="col-lg-3">
                     <label class="text-center">Mengetahui,</label><br>
-                    <span class="badge badge-pill badge-warning">Menunggu proses persetujuan</span>
+                    <textarea class="form-control form-control-sm" name="" id=""
+                        placeholder="Keterangan" rows="4"></textarea>
                 </div>
                 <div class="col-lg-3">
                     <label class="text-center">Menyetujui,</label>
-                    <span class="badge badge-pill badge-warning">Menunggu proses persetujuan</span>
+                    <textarea class="form-control form-control-sm" name="" id=""
+                        placeholder="Keterangan" rows="4"></textarea>
                 </div>
                 <div class="col-lg-3">
                     <label class="text-center">Yang Menerima</label>
@@ -129,102 +145,170 @@
                 </div>
                 <div class="col-lg-3">
                     <label class="text-center">Yang Membayarkan</label>
-                    <span class="badge badge-pill badge-warning">Menunggu proses persetujuan</span>
+                    <textarea class="form-control form-control-sm" name="" id=""
+                        placeholder="Keterangan" rows="4"></textarea>
                 </div>
-            </div>
+            </div> --}}
+            {{-- end ttd --}}
         </div>
         <div class="card-footer">
             <div class="row">
+                <div class="col-lg-3 ">
+                    <button type="button" class="btn btn-primary mr-2 simpan-permohonan">Simpan</button>
+                </div>
                 <div class="col-lg-3">
-                    <button type="button" class="btn btn-primary mr-2 simpan-permohonan">Submit</button>
+                    <button type="button" id="ubah-permohonan"
+                        class="btn btn-primary mr-2 ubah-permohonan">Ubah</button>
                 </div>
             </div>
         </div>
-        {{-- </form> --}}
-        <!--end::Form-->
     </div>
     <!--end::Card-->
 
+    <div class="card card-custom">
+        <div class="card-header">
+            <div class="card-title">
+                <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
+                <h3 class="card-label">Permohonan Dana</h3>
+            </div>
+        </div>
+        <div class="card-body">
+            <!--begin: Datatable-->
+            <table class="table table-bordered display nowrap table-permohonan" id="table-permohonan"
+                style="width:100%; margin-top: 13px;">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th hidden>id_permohonan</th>
+                        <th hidden>id_detail_permohonan</th>
+                        <th>Nama</th>
+                        <th>Tanggal</th>
+                        <th>Nama Barang</th>
+                        <th>Harga Satuan</th>
+                        <th>Qty </th>
+                        <th>Total Harga Barang</th>
+                        <th>Status</th>
+                        <th>
+                            <center>Aksi</center>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <!--end: Datatable-->
+        </div>
+    </div>
+
     <script>
         $(document).ready(function() {
-            getmax();
-            coba();
 
+            get();
 
-            $("#harga_satuan_sum, #jumlah_satuan_sum").keyup(function() {
+            getdetailbarang();
 
-                var harga = $("#harga_satuan_sum").val();
-                var jumlah = $("#jumlah_satuan_sum").val();
+            $("#harga_satuan, #qty").keyup(function() {
+
+                var harga = $("#harga_satuan").val();
+                var jumlah = $("#qty").val();
 
                 var total = parseInt(harga.replace(/,/g, '')) * parseInt(jumlah);
-                $("#total_harga_sum").val(uang(total));
-                $('#terbilang').val(terbilang(total));
+                $("#total_harga_barang").val(uang(total));
+            });
+
+            $('#total_dana_ajuan').change(function() {
+                var total_dana_ajuan = $('#total_dana_ajuan').val();
+                $('#total_dana_ajuan').val(uang(total_dana_ajuan));
+            });
+
+            $('#table-permohonan').on('click', '.item-ubah', function() {
+
+                // var id_permohonan = $(this).data('ip');
+                var id_detail_permohonan = $(this).data('idp');
+                var name = $(this).data('nama');
+                var tanggal_permohonan = $(this).data('tgl');
+                var nama_barang = $(this).data('brg');
+                var harga_satuan = $(this).data('hrg');
+                var qty = $(this).data('qty');
+                var total_harga_barang = $(this).data('ttlhrg');
+
+                $('#id_detail_permohonan').val(id_detail_permohonan);
+                $('#name').val(name);
+                $('#tanggal_permohonan').val(tanggal_permohonan);
+                $('#nama_barang').val(nama_barang);
+                $('#harga_satuan').val(harga_satuan);
+                $('#qty').val(qty);
+                $('#total_harga_barang').val(total_harga_barang);
+
+                // ('#ubah-permohonan').attr("hidden",false);
+                //('.btn-simpan-hide').attr('hidden', true);
 
             });
 
-            $('#harga_satuan_sum').change(function() {
-                var harga_satuan = $('#harga_satuan_sum').val();
-                $('#harga_satuan_sum').val(uang(harga_satuan));
+            $(".simpan-permohonan").click(function() {
+                simpandata();
             });
 
-            function coba() {
+            $(".ubah-permohonan").click(function() {
+                ubahdata();
+            });
 
-                var no_resi_ajuan = $('#no_resi_ajuan').val();
-                var tanggal_permohonan = $('#tanggal_permohonan').val();
-                var name = $('#name').val();
-                var jabatan = $('#jabatan').val();
-                var divisi = $('#divisi').val();
-                var nama_perkiraan = $('#nama_perkiraan').val();
-                var harga_satuan_sum = $('#harga_satuan_sum').val();
-                var jumlah_satuan_sum = $('#jumlah_satuan_sum').val();
-                var total_harga_sum = $('#total_harga_sum').val();
-                var nominal_acc = $('#nominal_acc').val();
-                var keterangan_permohonan = $('#keterangan_permohonan').val();
-                var jenis_dana = $('#jenis_dana').val();
-                var terbilang = $('#terbilang').val();
-                var ttd_pemeriksa = $('#ttd_pemeriksa').val();
-                var ttd_bendahara = $('#ttd_bendahara').val();
-                var ttd_pemohon = $('#ttd_pemohon').val();
-                var ttd_manajer = $('#ttd_manajer').val();
+            $('#table-permohonan').on('click', '.item-hapus', function() {
 
-                $.post("{{ url('/permohonan/add') }}", {
+                var currow = $(this).closest('tr');
+
+                var id = currow.find('td:eq(1)').text();
+
+                $('#id_hapus').val(id.trim());
+
+                $('#modal_hapus').modal('show');
+
+            });
+
+            $('#qty').change(function() {
+
+                $('#keterangan_permohonan').val($('#nama_barang').val() + '=' + $('#harga_satuan').val() +
+                    'x' + $('#qty').val());
+
+            });
+
+            function simpandata() {
+
+                var nama_barang = $('#nama_barang').val();
+                var id_permohonan = '{{ Request::segment(2) }}';
+                var qty = $('#qty').val();
+                var harga_satuan = $('#harga_satuan').val();
+                $('#harga_satuan').val(uang(harga_satuan));
+                var total_harga_barang = $('#total_harga_barang').val();
+
+                $.post("{{ url('/detail-permohonan/add') }}", {
                     _token: "{{ csrf_token() }}",
-                    no_resi_ajuan: no_resi_ajuan,
-                    tanggal_permohonan: tanggal_permohonan,
-                    name: name,
-                    jabatan: jabatan,
-                    divisi: divisi,
-                    nama_perkiraan: nama_perkiraan,
-                    harga_satuan_sum: harga_satuan_sum,
-                    jumlah_satuan_sum: jumlah_satuan_sum,
-                    total_harga_sum: total_harga_sum,
-                    nominal_acc: nominal_acc,
-                    keterangan_permohonan: keterangan_permohonan,
-                    jenis_dana: jenis_dana,
-                    terbilang: terbilang,
-                    ttd_pemeriksa: ttd_pemeriksa,
+                    id_permohonan: id_permohonan,
+                    nama_barang: nama_barang,
+                    qty: qty,
+                    harga_satuan: harga_satuan,
+                    total_harga_barang: total_harga_barang
+
                 }).done(function(response) {
                     if (response != null) {
 
                         Swal.fire(
-                            'Permohonan Dana!',
-                            'Permohonan Dana Sedang Diproses.',
+                            'Detail Permohonan!',
+                            'Detail Permohonan Telah Ditambah.',
                             'success'
                         )
                         location.reload()
-                        getmax();
 
                         $(".simpan-permohonan").attr("disabled", false);
 
-                        $('#id').val('');
-                        $('#harga_satuan_sum').val('');
-                        $('#jumlah_satuan_sum').val('');
-                        $('#total_harga_sum').val('');
+                        $('#nama_barang').val('');
+                        $('#qty').val('');
+                        $('#harga_satuan').val('');
                         $('#nominal_acc').val('');
-                        $('#keterangan_permohonan').val('');
-                        $('#terbilang').val('');
+                        $('#total_harga_barang').val('');
 
-                        $('#modalubah').modal('hide');
+                        // $('#modalubah').modal('hide');
 
                     } else {
 
@@ -232,8 +316,8 @@
 
                         Swal.fire({
                             icon: 'error',
-                            title: 'Permohonan Dana gagal diubah',
-                            text: 'Permohonan Dana gagal diubah.',
+                            title: 'Detail Permohonan Dana gagal diubah',
+                            text: 'Detail Permohonan Dana gagal diubah.',
                             showCancelButton: false,
                             confirmButtonColor: '#FF6347',
                             confirmButtonText: 'Siap',
@@ -246,152 +330,222 @@
                 }, "json");
             }
 
-            // $(".simpan-permohonan").click(function() {
-            //     coba();
-            // });
+            function ubahdata() {
 
+                var id_detail_permohonan = $('#id_detail_permohonan').val();
+                var nama_barang = $('#nama_barang').val();
+                var harga_satuan = $('#harga_satuan').val();
+                var qty = $('#qty').val();
+                var total_harga_barang = $('#total_harga_barang').val();
 
-            $(".simpan-permohonan").click(function() {
+                $('.simpan-permohonan').attr("disabled", "disabled");
 
-                coba();
+                $.post("{{ url('/detail-permohonan/edit') }}", {
+                    _token: "{{ csrf_token() }}",
+                    id_detail_permohonan: id_detail_permohonan,
+                    nama_barang: nama_barang,
+                    harga_satuan: harga_satuan,
+                    qty: qty,
+                    total_harga_barang: total_harga_barang
 
-                // var no_resi_ajuan = $('#no_resi_ajuan').val();
-                // var tanggal_permohonan = $('#tanggal_permohonan').val();
-                // var name = $('#name').val();
-                // var jabatan = $('#jabatan').val();
-                // var divisi = $('#divisi').val();
-                // var nama_perkiraan = $('#nama_perkiraan').val();
-                // var harga_satuan_sum = $('#harga_satuan_sum').val();
-                // var jumlah_satuan_sum = $('#jumlah_satuan_sum').val();
-                // var total_harga_sum = $('#total_harga_sum').val();
-                // var nominal_acc = $('#nominal_acc').val();
-                // var keterangan_permohonan = $('#keterangan_permohonan').val();
-                // var terbilang = $('#terbilang').val();
-                // var ttd_pemeriksa = $('#ttd_pemeriksa').val();
-                // var ttd_bendahara = $('#ttd_bendahara').val();
-                // var ttd_pemohon = $('#ttd_pemohon').val();
-                // var ttd_manajer = $('#ttd_manajer').val();
+                }).done(function(response) {
 
-                // $('.simpan-permohonan').attr("disabled", "disabled");
+                    if (response == "success") {
+                        Swal.fire(
+                            'Disetujui!',
+                            'Permohonan Dana Di setujui.',
+                            'success'
+                        )
+                        // location.reload()
 
-                // $.post("{{ url('/permohonan/add') }}", {
-                //     _token: "{{ csrf_token() }}",
-                //     id: id,
-                //     no_resi_ajuan: no_resi_ajuan,
-                //     tanggal_permohonan: tanggal_permohonan,
-                //     // jenis_dana: jenis_dana,
-                //     name: name,
-                //     jabatan: jabatan,
-                //     divisi: divisi,
-                //     nama_perkiraan: nama_perkiraan,
-                //     harga_satuan_sum: harga_satuan_sum,
-                //     jumlah_satuan_sum: jumlah_satuan_sum,
-                //     total_harga_sum: total_harga_sum,
-                //     nominal_acc: nominal_acc,
-                //     keterangan_permohonan: keterangan_permohonan,
-                //     terbilang: terbilang,
-                //     ttd_pemeriksa: ttd_pemeriksa,
-                //     ttd_bendahara: ttd_bendahara,
-                //     ttd_manajer: ttd_manajer,
-                //     ttd_pemohon: ttd_pemohon
+                        $(".simpan-permohonan").attr("disabled", false);
 
-                // }).done(function(response) {
+                        get();
 
+                        $(".item-ubah").attr("disabled", false);
 
-                //     if (response != null) {
+                        $('#id_detail_permohonan').val('');
+                        $('#name').val('');
+                        $('#nama_barang').val('');
+                        $('#tanggal_permohonan').val('');
+                        $('#harga_satuan').val('');
+                        $('#qty').val('');
+                        $('#total_harga_barang').val('');
+                        $('#keterangan_permohonan').val('');
 
-                //         Swal.fire(
-                //             'Permohonan Dana!',
-                //             'Permohonan Dana Sedang Diproses.',
-                //             'success'
-                //         )
-                //         location.reload()
+                        // $('#modalubah').modal('hide');
 
-                //         // simpanPembayaran(response.toString());
+                    } else {
+                        Swal.fire(
+                            'Tidak Disetujui!',
+                            'Permohonan Dana Tidak Di setujui.',
+                            'error'
+                        )
+                        location.reload()
 
-                //         getmax();
+                        $(".item-ubah").attr("disabled", false);
 
-                //         $(".simpan-permohonan").attr("disabled", false);
+                    }
 
-                //         $('#id').val('');
-                //         $('#no_resi_ajuan').val('');
-                //         $('#tanggal_permohonan').val('');
-                //         // $('#jenis_dana').val('');
-                //         $('#name').val('');
-                //         $('#jabatan').val('');
-                //         $('#divisi').val('');
-                //         $('#nama_perkiraan').val('');
-                //         $('#harga_satuan_sum').val('');
-                //         $('#jumlah_satuan_sum').val('');
-                //         $('#total_harga_sum').val('');
-                //         $('#nominal_acc').val('');
-                //         $('#keterangan_permohonan').val('');
-                //         $('#terbilang').val('');
-                //         $('#ttd_pemeriksa').val('');
-                //         $('#ttd_bendahara').val('');
-                //         $('#ttd_manajer').val('');
-                //         $('#ttd_pemohon').val('');
+                }, "json");
+            }
 
-                //         $('#modalubah').modal('hide');
+            function get() {
+                $('#table-permohonan').DataTable({
 
-                //     } else {
+                    "destroy": true,
+                    "processing": true,
+                    "ordering": true,
+                    "pageLength": 10,
+                    "ajax": {
 
-                //         getmax();
+                        url: "{{ url('/detail-permohonan/getdata') }}/{{ Request::segment(2) }}",
+                        type: 'POST',
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id_permohonan: "id_permohonan",
+                            id_detail_permohonan: "id_detail_permohonan"
+                        },
+                        async: true,
+                        dataType: 'json',
+                    },
 
-                //         Swal.fire({
-                //             icon: 'error',
-                //             title: 'Permohonan Dana gagal diubah',
-                //             text: 'Permohonan Dana gagal diubah.',
-                //             showCancelButton: false,
-                //             confirmButtonColor: '#FF6347',
-                //             confirmButtonText: 'Siap',
-                //         })
+                    "deferRender": true,
 
-                //         $(".simpan-permohonan").attr("disabled", false);
+                    "aLengthMenu": [
+                        [5, 10, 50],
+                        [5, 10, 50]
+                    ],
 
-                //     }
+                    "columns": [
 
-                // });
+                        {
+                            "render": function(data, type, row, meta) {
+                                return meta.row + meta.settings._iDisplayStart + 1;
+                            },
 
-            });
+                            padding: '5px'
+                        },
 
-            // function simpanPembayaran(id_permohonan) {
+                        {
+                            "render": function(data, type, row) {
 
-            //     $.post("{{ url('/permohonan/add/kas') }}", {
-            //         _token: "{{ csrf_token() }}",
-            //         id_permohonan: id_permohonan
+                                return String(row.id_permohonan);
 
-            //     }).done(function(response) {
+                            },
+                            padding: '5px',
+                            visible: false
+                        },
 
-            //         if (response == "success") {
+                        {
+                            "render": function(data, type, row) {
 
-            //             getmax();
+                                return String(row.id_detail_permohonan);
 
-            //         } else {
+                            },
+                            padding: '5px',
+                            visible: false
+                        },
 
-            //             getmax();
+                        {
+                            "render": function(data, type, row) {
 
-            //         }
+                                return String(row.name);
 
-            //     });
+                            },
+                            padding: '5px'
+                        },
 
+                        {
+                            "render": function(data, type, row) {
 
-            // 
+                                return row.tanggal_permohonan;
 
-            function getmax() {
+                            },
+                            padding: '5px'
+                        },
 
-                $.get("{{ url('/permohonan/getmax') }}", {
-                        _token: "{{ csrf_token() }}"
-                    })
-                    .done(function(data) {
-                        var total = parseInt(data) + 1;
-                        $("#no_resi_ajuan").val(total);
-                    });
+                        {
+                            "render": function(data, type, row) {
+
+                                return row.nama_barang;
+
+                            },
+                            padding: '5px'
+                        },
+                        {
+                            "render": function(data, type, row) {
+
+                                return 'Rp ' + String(uang(row.harga_satuan));
+
+                            },
+                            padding: '5px'
+                        },
+                        {
+                            "render": function(data, type, row) {
+
+                                return String(uang(row.qty));
+
+                            },
+                            padding: '5px'
+                        },
+
+                        {
+                            "render": function(data, type, row) {
+
+                                return String(uang(row.total_harga_barang));
+
+                            },
+                            padding: '5px'
+                        },
+
+                        {
+                            "render": function(data, type, row) {
+
+                                if (row.status_permohonan == 0) {
+                                    return '<span class="badge bg-warning text-dark">Belum Disetujui</span>';
+                                } else if (row.status_permohonan == 1) {
+                                    return '<span class="badge bg-success">Disetujui Bendahara</span>';
+                                } else if (row.status_permohonan == 2) {
+                                    return '<span class="badge bg-success">Disetujui Manajer</span>';
+                                } else if (row.status_permohonan == 3) {
+                                    return '<span class="badge bg-success">Disetujui</span>';
+                                } else {
+                                    return '<span class="badge bg-danger">Ditolak</span>';
+                                }
+
+                            },
+                            padding: '5px'
+                        },
+
+                        {
+                            "render": function(data, type, row) {
+                                return '<a class="dropdown-item item-ubah" href="#" data-idp="' +
+                                    row.id_detail_permohonan + '" data-nama="' + row
+                                    .name +
+                                    '" data-tgl="' + row.tanggal_permohonan +
+                                    '" data-brg="' + row
+                                    .nama_barang +
+                                    '" data-hrg="' + row.harga_satuan +
+                                    '"  data-qty="' + row
+                                    .qty +
+                                    '" data-ttlhrg="' + row.total_harga_barang +
+                                    '" data-st="' + row.status_permohonan +
+                                    '"><i class="fas fa-edit btn btn-icon btn-light-primary"></i></a> <a class="dropdown-item item-hapus" href="#" data-idp="' +
+                                    row.id_detail_permohonan +
+                                    '"><i class="fas fa-trash-alt btn btn-icon btn-light-danger item-hapus"></i></a>'
+                            },
+                            padding: '5px'
+                        }
+                    ],
+                });
+
             }
 
             function terbilang(angka) {
 
-                var bilne = ["", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan",
+                var bilne = ["", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan",
+                    "sembilan",
                     "sepuluh", "sebelas"
                 ];
 
@@ -405,7 +559,8 @@
 
                 } else if (angka < 100) {
 
-                    return terbilang(Math.floor(parseInt(angka) / 10)) + " puluh " + terbilang(parseInt(angka) %
+                    return terbilang(Math.floor(parseInt(angka) / 10)) + " puluh " + terbilang(parseInt(
+                            angka) %
                         10);
 
                 } else if (angka < 200) {
@@ -414,7 +569,8 @@
 
                 } else if (angka < 1000) {
 
-                    return terbilang(Math.floor(parseInt(angka) / 100)) + " ratus " + terbilang(parseInt(
+                    return terbilang(Math.floor(parseInt(angka) / 100)) + " ratus " + terbilang(
+                        parseInt(
                             angka) %
                         100);
 
@@ -424,13 +580,15 @@
 
                 } else if (angka < 1000000) {
 
-                    return terbilang(Math.floor(parseInt(angka) / 1000)) + " ribu " + terbilang(parseInt(
+                    return terbilang(Math.floor(parseInt(angka) / 1000)) + " ribu " + terbilang(
+                        parseInt(
                             angka) %
                         1000);
 
                 } else if (angka < 1000000000) {
 
-                    return terbilang(Math.floor(parseInt(angka) / 1000000)) + " juta " + terbilang(parseInt(
+                    return terbilang(Math.floor(parseInt(angka) / 1000000)) + " juta " + terbilang(
+                        parseInt(
                             angka) %
                         1000000);
 
@@ -442,8 +600,9 @@
 
                 } else if (angka < 1000000000000000) {
 
-                    return terbilang(Math.floor(parseInt(angka) / 1000000000000)) + " trilyun " + terbilang(
-                        parseInt(angka) % 1000000000000);
+                    return terbilang(Math.floor(parseInt(angka) / 1000000000000)) + " trilyun " +
+                        terbilang(
+                            parseInt(angka) % 1000000000000);
 
                 }
 
@@ -475,6 +634,32 @@
 
             }
 
+            function getdetailbarang() {
+
+                $('#keterangan_detail').empty();
+
+                $.post("{{ route('keterangan.all') }}", {
+                    _token: "{{ csrf_token() }}",
+                    id_permohonan: "{{ Request::segment(2) }}"
+                }).done(function(data) {
+
+                    // var res = JSON.parse(data);
+                    var res = data;
+
+                    // var res = $.parseJSON(data);
+
+                    $.each(res, function(index, value) {
+
+                        $('#keterangan_detail').val(value.nama_barang + ' ' + value.qty +
+                            ' ' + value.harga_satuan + '\n');
+
+                        // alert(value.nama_barang + ' ' + value.qty +
+                        //     ' ' + value.satuan + '<br>')
+
+                    });
+                });
+
+            }
 
         });
     </script>

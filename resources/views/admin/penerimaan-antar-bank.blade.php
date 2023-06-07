@@ -12,7 +12,7 @@
                 <div class="col-7 align-self-start">
                     <div class="col">
                         <h3 class="card-title">
-                            BUKTI PENERIMAAN BANK
+                            BUKTI PENERIMAAN ANTAR BANK
                         </h3>
                     </div>
                 </div>

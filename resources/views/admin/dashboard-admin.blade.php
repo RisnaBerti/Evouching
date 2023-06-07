@@ -46,8 +46,7 @@
                                             <feGaussianBlur id="SvgjsFeGaussianBlur1098" stdDeviation="3 "
                                                 result="SvgjsFeGaussianBlur1098Out" in="SvgjsFeOffset1097Out">
                                             </feGaussianBlur>
-                                            <feMerge id="SvgjsFeMerge1099" result="SvgjsFeMerge1099Out"
-                                                in="SourceGraphic">
+                                            <feMerge id="SvgjsFeMerge1099" result="SvgjsFeMerge1099Out" in="SourceGraphic">
                                                 <feMergeNode id="SvgjsFeMergeNode1100" in="SvgjsFeGaussianBlur1098Out">
                                                 </feMergeNode>
                                                 <feMergeNode id="SvgjsFeMergeNode1101" in="[object Arguments]">
@@ -205,19 +204,27 @@
                         <div class="row m-0">
                             <div class="col bg-light-white px-6 py-8 rounded-xl mr-7 mb-7">
                                 <span class="svg-icon svg-icon-primary svg-icon-3x">
-                                    <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Gift.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Gift.svg--><svg
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                             <rect x="0" y="0" width="24" height="24"></rect>
-                                            <path d="M4,6 L20,6 C20.5522847,6 21,6.44771525 21,7 L21,8 C21,8.55228475 20.5522847,9 20,9 L4,9 C3.44771525,9 3,8.55228475 3,8 L3,7 C3,6.44771525 3.44771525,6 4,6 Z M5,11 L10,11 C10.5522847,11 11,11.4477153 11,12 L11,19 C11,19.5522847 10.5522847,20 10,20 L5,20 C4.44771525,20 4,19.5522847 4,19 L4,12 C4,11.4477153 4.44771525,11 5,11 Z M14,11 L19,11 C19.5522847,11 20,11.4477153 20,12 L20,19 C20,19.5522847 19.5522847,20 19,20 L14,20 C13.4477153,20 13,19.5522847 13,19 L13,12 C13,11.4477153 13.4477153,11 14,11 Z" fill="#000000"></path>
-                                            <path d="M14.4452998,2.16794971 C14.9048285,1.86159725 15.5256978,1.98577112 15.8320503,2.4452998 C16.1384028,2.90482849 16.0142289,3.52569784 15.5547002,3.83205029 L12,6.20185043 L8.4452998,3.83205029 C7.98577112,3.52569784 7.86159725,2.90482849 8.16794971,2.4452998 C8.47430216,1.98577112 9.09517151,1.86159725 9.5547002,2.16794971 L12,3.79814957 L14.4452998,2.16794971 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                            <path
+                                                d="M4,6 L20,6 C20.5522847,6 21,6.44771525 21,7 L21,8 C21,8.55228475 20.5522847,9 20,9 L4,9 C3.44771525,9 3,8.55228475 3,8 L3,7 C3,6.44771525 3.44771525,6 4,6 Z M5,11 L10,11 C10.5522847,11 11,11.4477153 11,12 L11,19 C11,19.5522847 10.5522847,20 10,20 L5,20 C4.44771525,20 4,19.5522847 4,19 L4,12 C4,11.4477153 4.44771525,11 5,11 Z M14,11 L19,11 C19.5522847,11 20,11.4477153 20,12 L20,19 C20,19.5522847 19.5522847,20 19,20 L14,20 C13.4477153,20 13,19.5522847 13,19 L13,12 C13,11.4477153 13.4477153,11 14,11 Z"
+                                                fill="#000000"></path>
+                                            <path
+                                                d="M14.4452998,2.16794971 C14.9048285,1.86159725 15.5256978,1.98577112 15.8320503,2.4452998 C16.1384028,2.90482849 16.0142289,3.52569784 15.5547002,3.83205029 L12,6.20185043 L8.4452998,3.83205029 C7.98577112,3.52569784 7.86159725,2.90482849 8.16794971,2.4452998 C8.47430216,1.98577112 9.09517151,1.86159725 9.5547002,2.16794971 L12,3.79814957 L14.4452998,2.16794971 Z"
+                                                fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
                                         </g>
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block"></span>
-                                <span class="font-weight-bold text-muted  font-size-sm">Total User</span>
+                                <span
+                                    class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block"></span>
+                                <span class="font-weight-bold text-muted  font-size-sm">Total Dana ACC </span>
+                                <span class="font-weight-bold text-muted  font-size-sm">{{ $danaAccCount }}</span>
                             </div>
-                            <div class="col bg-light-white px-6 py-8 rounded-xl mb-7" >
+                            <div class="col bg-light-white px-6 py-8 rounded-xl mb-7">
                                 <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg--><svg
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -233,8 +240,9 @@
                                         </g>
                                     </svg>
                                     <!--end::Svg Icon-->
-                                </span>    
-                                <span class="font-weight-bold text-muted  font-size-sm">Total User</span>
+                                </span>
+                                <span class="font-weight-bold text-muted  font-size-sm">Total User
+                                    {{ $danabank }}</span>
                             </div>
                         </div>
                         <!--end::Row-->
@@ -256,8 +264,9 @@
                                         </g>
                                     </svg>
                                     <!--end::Svg Icon-->
-                                </span>    
-                                <span class="font-weight-bold text-muted  font-size-sm">Total User</span>
+                                </span>
+                                <span class="font-weight-bold text-muted  font-size-sm">Total Dana Kas
+                                    {{ $danakas }}</span>
                             </div>
                             <div class="col px-6 py-8 rounded-xl" style="background-color: #2C3580">
                                 <span class="svg-icon svg-icon-3x svg-icon-white d-block my-2">
@@ -275,8 +284,9 @@
                                         </g>
                                     </svg>
                                     <!--end::Svg Icon-->
-                                </span> 
-                                <span class="font-weight-bold text-muted  font-size-sm">Total User</span>
+                                </span>
+                                <span class="font-weight-bold text-muted  font-size-sm">Total User
+                                    {{ $userCount }}</span>
                             </div>
                         </div>
                         <!--end::Row-->
@@ -481,229 +491,100 @@
     <!-- end dashboard -->
 
     <div class="card card-custom gutter-b">
-        <div class="card-header flex-wrap border-0 pt-6 pb-0">
+        <div class="card-header">
             <div class="card-title">
                 <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
-                <h3 class="card-label">
-                    Pengajuan Permohonan Dana
-                </h3>
+                <h3 class="card-label">Permohonan Dana</h3>
             </div>
         </div>
-
         <div class="card-body">
             <!--begin: Datatable-->
-            <div id="kt_datatable1_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="dataTables_length" id="kt_datatable1_length">
-                            <label>Show
-                                <select name="kt_datatable1_length" aria-controls="kt_datatable1"
-                                    class="custom-select custom-select-sm form-control form-control-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select> entries
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div id="kt_datatable1_filter" class="dataTables_filter">
-                            <label>Search:<input type="search" class="form-control form-control-sm" placeholder=""
-                                    aria-controls="kt_datatable1"></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="dataTables_scroll">
-                            <div class="dataTables_scrollHead"
-                                style="overflow: hidden; position: relative; border: 0px; width: 100%;">
-                                <div class="dataTables_scrollHeadInner"
-                                    style="box-sizing: content-box; width: 1128.22px; padding-right: 17px;">
-                                    <table
-                                        class="table table-separate table-head-custom table-checkable dataTable no-footer"
-                                        role="grid" style="margin-left: 0px; width: 1128.22px;">
-                                        <thead>
-                                            <tr role="row">
-                                                <th>
-                                                    <center>NO</center>
-                                                </th>
-                                                <th hidden>
-                                                    <center>ID</center>
-                                                </th>
-                                                <th>
-                                                    <center>NAMA</center>
-                                                </th>
-                                                <th>
-                                                    <center>EMAIL</center>
-                                                </th>
-                                                <th>
-                                                    <center>NO TELEPON</center>
-                                                </th>
-                                                <th>
-                                                    <center>DIVISI</center>
-                                                </th>
-                                                <th>
-                                                    <center>JABATAN</center>
-                                                </th>
-                                                <th>
-                                                    <center>ALAMAT</center>
-                                                <th>
-                                                    <center>SETTING</center>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="dataTables_scrollBody"
-                                style="position: relative; overflow: auto; width: 100%; max-height: 50vh;">
-                                <table class="table table-separate table-head-custom table-checkable dataTable no-footer"
-                                    id="kt_datatable1" role="grid" aria-describedby="kt_datatable1_info"
-                                    style="width: 1159px;">
-                                    <thead>
-                                        <tr role="row" style="height: 0px;">
-                                            <th class="sorting_asc" aria-controls="kt_datatable1" rowspan="1"
-                                                colspan="1"
-                                                style="width: 55.2083px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
-                                                <div style="height: 0px; overflow: hidden;">Record ID</div>
-                                            </th>
-                                            <th class="sorting" aria-controls="kt_datatable1" rowspan="1"
-                                                colspan="1"
-                                                style="width: 44.875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"
-                                                aria-label="Order ID: activate to sort column ascending">
-                                                <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                    Order ID</div>
-                                            </th>
-                                            <th class="sorting" aria-controls="kt_datatable1" rowspan="1"
-                                                colspan="1"
-                                                style="width: 64.875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"
-                                                aria-label="Country: activate to sort column ascending">
-                                                <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                    Country</div>
-                                            </th>
-                                            <th class="sorting" aria-controls="kt_datatable1" rowspan="1"
-                                                colspan="1"
-                                                style="width: 74.875px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"
-                                                aria-label="Ship City: activate to sort column ascending">
-                                                <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                    Ship
-                                                    City</div>
-                                            </th>
-                                            <th class="sorting" aria-controls="kt_datatable1" rowspan="1"
-                                                colspan="1"
-                                                style="width: 61.4792px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"
-                                                aria-label="Ship Address: activate to sort column ascending">
-                                                <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                    Ship
-                                                    Address</div>
-                                            </th>
-                                            <th class="sorting" aria-controls="kt_datatable1" rowspan="1"
-                                                colspan="1"
-                                                style="width: 68.2396px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"
-                                                aria-label="Company Agent: activate to sort column ascending">
-                                                <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                    Company Agent</div>
-                                            </th>
-                                            <th class="sorting" aria-controls="kt_datatable1" rowspan="1"
-                                                colspan="1"
-                                                style="width: 68.2396px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"
-                                                aria-label="Company Name: activate to sort column ascending">
-                                                <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                    Company Name</div>
-                                            </th>
-                                            <th class="sorting" aria-controls="kt_datatable1" rowspan="1"
-                                                colspan="1"
-                                                style="width: 51.3958px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"
-                                                aria-label="Ship Date: activate to sort column ascending">
-                                                <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                    Ship
-                                                    Date</div>
-                                            </th>
-                                            <th class="sorting" aria-controls="kt_datatable1" rowspan="1"
-                                                colspan="1"
-                                                style="width: 59.5208px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;"
-                                                aria-label="Status: activate to sort column ascending">
-                                                <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">
-                                                    Status</div>
-                                            </th>
-                                    </thead>
-                                    <tbody>
-                                        <tr role="row" class="odd">
-                                            {{-- <td>{{ $loop->iteration }}</td> --}}
-                                            <td hidden>
-                                                <center></center>
-                                            </td>
-                                            <td>
-                                                <center></center>
-                                            </td>
-                                            <td>
-                                                <center></center>
-                                            </td>
-                                            <td>
-                                                <center></center>
-                                            </td>
-                                            <td>
-                                                <center></center>
-                                            </td>
-                                            <td>
-                                                <center></center>
-                                            </td>
-                                            <td>
-                                                <center></center>
-                                            <td>
-                                                <center>
-                                                    {{-- @if ($user->is_active == 0 && $user->role_id != 1)
-                                    <i class='fas fas fa-toggle-off  btn btn-icon btn-light-primary item-aktivasi'></i>
-                                    <i class='fas fa-trash-alt btn btn-icon btn-light-danger item-hapus'></i>
-                                @elseif ($user->is_active == 1 && $user->role_id != 1)
-                                    <i class='fas fa-edit btn btn-icon btn-light-primary item-ubah'></i>
-                                    <i class='fas fas fa-toggle-on btn btn-icon btn-light-danger item-nonaktivasi'></i>
-                                @endif --}}
-                                                </center>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="kt_datatable1_info" role="status" aria-live="polite">
-                            Showing 1
-                            to 10 of 50 entries</div>
-                    </div>
-                    <div class="col-sm-12 col-md-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="kt_datatable1_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="kt_datatable1_previous"><a
-                                        href="#" aria-controls="kt_datatable1" data-dt-idx="0" tabindex="0"
-                                        class="page-link"><i class="ki ki-arrow-back"></i></a></li>
-                                <li class="paginate_button page-item active"><a href="#"
-                                        aria-controls="kt_datatable1" data-dt-idx="1" tabindex="0"
-                                        class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="kt_datatable1"
-                                        data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="kt_datatable1"
-                                        data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="kt_datatable1"
-                                        data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="kt_datatable1"
-                                        data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                <li class="paginate_button page-item next" id="kt_datatable1_next"><a href="#"
-                                        aria-controls="kt_datatable1" data-dt-idx="6" tabindex="0"
-                                        class="page-link"><i class="ki ki-arrow-next"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <table class="table table-bordered table-permohonandana" id="table-permohonandana"
+                style="margin-top: 13px !important">
+                <thead>
+                    </tr>
+                    <th>
+                        <center>NO</center>
+                    </th>
+                    <th hidden>
+                        <center>id_permohonan</center>
+                    </th>
+                    <th>
+                        <center>NAMA</center>
+                    </th>
+                    <th>
+                        <center>DIVISI</center>
+                    </th>
+                    <th>
+                        <center>JABATAN</center>
+                    </th>
+                    <th>
+                        <center>TOTAL HARGA</center>
+                    </th>
+                    <th>
+                        <center>NOMINAL ACC</center>
+                    </th>
+                    <th>
+                        <center>KETERANGAN</center>
+                    </th>
+                    <th>
+                        <center>STATUS</center>
+                    </th>
+                </thead>
+                <tbody>
+                    @foreach ($data as $d)
+                        <tr>
+                            <td>
+                                <center> {{ $loop->iteration }} </center>
+                            </td>
+                            <td hidden>
+                                <center>{{ $d->id_permohonan }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $d->name }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $d->divisi }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $d->jabatan }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $d->total_dana_ajuan }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $d->nominal_acc }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $d->keterangan_permohonan }}</center>
+                            </td>
+                            <td>
+                                <center>
+                                    @if ($d->ttd_bendahara == '0')
+                                        <span class="label label-lg font-weight-bold label-light-danger label-inline">Belum
+                                            ACC</span>
+                                    @elseif ($d->ttd_bendahara == '1')
+                                        <span
+                                            class="label label-lg font-weight-bold label-light-primary label-inline">Sudah
+                                            ACC
+                                        </span>
+                                    @endif
+                                </center>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
             <!--end: Datatable-->
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            //Mengaktifkan datatable
+            $('#table-permohonandana').DataTable({
+                paging: true,
+            });
+
+        });
+    </script>
 @endsection

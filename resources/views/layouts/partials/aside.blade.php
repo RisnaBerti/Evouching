@@ -85,7 +85,7 @@
 
                 <!-- START PENGAJUAN DANA MENU -->
                 <li class="menu-item " aria-haspopup="true">
-                    <a href="{{ url('/permohonan') }}" class="menu-link">
+                    <a href="{{ url('/permohonan-manajer') }}" class="menu-link">
                         <span class="svg-icon menu-icon svg-icon-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

@@ -35,10 +35,11 @@
     31 => 'RealRashid\\SweetAlert\\SweetAlertServiceProvider',
     32 => 'Riskihajar\\Terbilang\\TerbilangServiceProvider',
     33 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
-    34 => 'App\\Providers\\AppServiceProvider',
-    35 => 'App\\Providers\\AuthServiceProvider',
-    36 => 'App\\Providers\\EventServiceProvider',
-    37 => 'App\\Providers\\RouteServiceProvider',
+    34 => 'Barryvdh\\DomPDF\\ServiceProvider',
+    35 => 'App\\Providers\\AppServiceProvider',
+    36 => 'App\\Providers\\AuthServiceProvider',
+    37 => 'App\\Providers\\EventServiceProvider',
+    38 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -62,10 +63,11 @@
     17 => 'RealRashid\\SweetAlert\\SweetAlertServiceProvider',
     18 => 'Riskihajar\\Terbilang\\TerbilangServiceProvider',
     19 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
-    20 => 'App\\Providers\\AppServiceProvider',
-    21 => 'App\\Providers\\AuthServiceProvider',
-    22 => 'App\\Providers\\EventServiceProvider',
-    23 => 'App\\Providers\\RouteServiceProvider',
+    20 => 'Barryvdh\\DomPDF\\ServiceProvider',
+    21 => 'App\\Providers\\AppServiceProvider',
+    22 => 'App\\Providers\\AuthServiceProvider',
+    23 => 'App\\Providers\\EventServiceProvider',
+    24 => 'App\\Providers\\RouteServiceProvider',
   ),
   'deferred' => 
   array (

@@ -16,38 +16,41 @@
 	<!--end::Fonts-->
 
 	<!--begin::Page Vendors Styles(used by this page)-->
-	<link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="{{ url('') }}/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
 
-	<link href="assets/plugins/custom/datatables/datatables.bundle.css?v=7.1.6" rel="stylesheet" type="text/css" />
+	<link href="{{ url('') }}/assets/plugins/custom/datatables/datatables.bundle.css?v=7.1.6" rel="stylesheet" type="text/css" />
 	<!--end::Page Vendors Styles-->
 
 	<!--begin::Global Theme Styles(used by all pages)-->
-	<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-	<link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
-	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-	<!-- <link href="assets/css/sweetalert2.min.css" rel="stylesheet" type="text/css" /> -->
+	<link href="{{ url('') }}/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="{{ url('') }}/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="{{ url('') }}/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	<!-- <link href="{{ url('') }}/assets/css/sweetalert2.min.css" rel="stylesheet" type="text/css" /> -->
 
 	<!--end::Global Theme Styles-->
 
 	<!--begin::Layout Themes(used by all pages)-->
-	<link href="assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
-	<link href="assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
-	<link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
-	<link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
+	<link href="{{ url('') }}/assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
+	<link href="{{ url('') }}/assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
+	<link href="{{ url('') }}/assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
+	<link href="{{ url('') }}/assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
 
 	<!--end::Layout Themes-->
-	<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+	<link rel="shortcut icon" href="{{ url('') }}/assets/media/logos/favicon.ico" />
 
-	<link rel="stylesheet" href="assets/dropzone/593/dropzone.min.css" type="text/css" />
+	<link rel="stylesheet" href="{{ url('') }}/assets/dropzone/593/dropzone.min.css" type="text/css" />
 
 
-    <link href="/assets/datatable/datatables.min.css" rel="stylesheet" />
+    <link href="{{ url('') }}/assets/datatable/datatables.min.css" rel="stylesheet" />
 
-    <script src="/assets/jquery/jquery-3.6.4.min.js"></script>
+    <script src="{{ url('') }}/assets/jquery/jquery-3.6.4.min.js"></script>
 
-    <script src="/assets/dropzone/593/dropzone.min.js"></script>
+    <script src="{{ url('') }}/assets/dropzone/593/dropzone.min.js"></script>
 
-    <script src="/assets/datatable/datatables.min.js"></script>
+    <script src="{{ url('') }}/assets/datatable/datatables.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 </head>
 <!--end::Head-->
@@ -126,27 +129,27 @@
 	<!--end::Global Config-->
 
 	<!--begin::Global Theme Bundle(used by all pages)-->
-	<script src="assets/plugins/global/plugins.bundle.js"></script>
-	<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-	<script src="assets/js/scripts.bundle.js"></script>
-	<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
-	<script src="assets/js/pages/crud/datatables/extensions/responsive.min.js"></script>
+	<script src="{{ url('') }}/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="{{ url('') }}/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+	<script src="{{ url('') }}/assets/js/scripts.bundle.js"></script>
+	<script src="{{ url('') }}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+	<script src="{{ url('') }}/assets/js/pages/crud/datatables/extensions/responsive.min.js"></script>
 	<!--end::Global Theme Bundle-->
 
 	<!--begin::Page Vendors(used by this page)-->
-	<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+	<script src="{{ url('') }}/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 
 	<!--end::Page Vendors-->
 
 	<!--begin::Page Scripts(used by this page)-->
-	<script src="assets/js/pages/widgets.js"></script>
+	<script src="{{ url('') }}/assets/js/pages/widgets.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
 	 <!-- our project just needs Font Awesome Solid + Brands -->
-	 <link href="/assets/fontawesome/css/fontawesome.css" rel="stylesheet">
-	 <link href="/assets/fontawesome/css/brands.css" rel="stylesheet">
-	 <link href="/assets/fontawesome/css/solid.css" rel="stylesheet">
+	 <link href="{{ url('') }}/assets/fontawesome/css/fontawesome.css" rel="stylesheet">
+	 <link href="{{ url('') }}/assets/fontawesome/css/brands.css" rel="stylesheet">
+	 <link href="{{ url('') }}/assets/fontawesome/css/solid.css" rel="stylesheet">
  
 
 	<!--end::Page Scripts-->

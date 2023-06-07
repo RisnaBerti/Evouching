@@ -14,11 +14,9 @@ class PenerimaanKas extends Model
     protected $primaryKey = 'id_penerimaan_kas';
     protected $fillable = [
         'id_penerimaan_kas',
-        'id',
         'id_permohonan',
         'no_resi_terima_kas',
         'tanggal_penerimaan_bank',
-        'bukti_transaksi',
-        'status'
+        'bukti_transaksi'
     ];
 }

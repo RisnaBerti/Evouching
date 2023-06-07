@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('tanggal_permohonan');
             $table->string('harga_satuan', 20);
             $table->string('jumlah_satuan', 20);
-            $table->string('total_harga', 20);
+            $table->string('total_dana_ajuan', 20);
             $table->string('nominal_acc', 20);
             $table->string('keterangan_permohonan', 100);
             $table->string('terbilang', 50);

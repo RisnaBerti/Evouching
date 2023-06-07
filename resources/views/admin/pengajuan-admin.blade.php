@@ -20,6 +20,7 @@
                                         </div>
                                     </div>
                                     <div class="col-5 align-items-start">
+                                        <input type="text" id="id">
                                         <div class="input-group input-group-sm mb-1">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">No.
@@ -102,8 +103,8 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Total</label>
-                                        <input type="text" class="form-control" placeholder="Total" id="total_harga"
-                                            readonly disabled />
+                                        <input type="text" class="form-control" placeholder="Total"
+                                            id="total_dana_ajuan" readonly disabled />
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -124,6 +125,7 @@
                                             id="terbilang" readonly disabled />
                                     </div>
                                     <input type="text" id="status_permohonan" hidden>
+                                    <input type="text" id="ttd_bendahara" hidden>
                                 </div>
                             </div>
                             <!--end::Form-->
@@ -184,6 +186,7 @@
         $(document).ready(function() {
             //fungsi menampilkan data permohonan
             get();
+
             function get() {
                 $('#table-permohonan').DataTable({
 
@@ -278,7 +281,7 @@
                         {
                             "render": function(data, type, row) {
 
-                                return String(uang(row.total_harga));
+                                return String(uang(row.total_dana_ajuan));
 
                             },
                             padding: '5px'
@@ -327,13 +330,14 @@
                         {
                             "render": function(data, type, row) {
 
-                                return '<a class="dropdown-item item-ubah-permohonan" href="#" data-ip="' +
+                                return '<a class="dropdown-item item-ubah-permohonan" href="#" data-id="' +
+                                    row.id + '" data-ip="' +
                                     row.id_permohonan + '" data-nama="' + row.name +
                                     '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
                                     '" data-nra="' + row.no_resi_ajuan + '"  data-tp="' + row
                                     .tanggal_permohonan +
                                     '" data-hrg="' + row.harga_satuan + '" data-jml="' + row
-                                    .jumlah_satuan + '" data-ttl="' + row.total_harga +
+                                    .jumlah_satuan + '" data-ttl="' + row.total_dana_ajuan +
                                     '" data-acc="' + row.nominal_acc + '" data-kp="' + row
                                     .keterangan_permohonan + '" data-trb="' + row.terbilang +
                                     '" data-st="' + row.status_permohonan +
@@ -356,6 +360,7 @@
             $('#table-permohonan').on('click', '.item-ubah-permohonan', function() {
 
                 var id_permohonan = $(this).data('ip');
+                var id = $(this).data('id');
                 var name = $(this).data('nama');
                 var jabatan = $(this).data('jbt');
                 var divisi = $(this).data('dvs');
@@ -370,6 +375,7 @@
                 var status = $(this).data('st');
 
                 $('#id_permohonan').val(id_permohonan);
+                $('#id').val(id);
                 $('#name').val(name);
                 $('#jabatan').val(jabatan);
                 $('#divisi').val(divisi);
@@ -378,7 +384,7 @@
                 $('#tanggal_permohonan').val(tanggal);
                 $('#harga_satuan').val(harga);
                 $('#jumlah_satuan').val(jumlah);
-                $('#total_harga').val(total);
+                $('#total_dana_ajuan').val(total);
                 $('#nominal_acc').val(uang(acc));
                 $('#keterangan_permohonan').val(keterangan);
                 $('#terbilang').val(terbilang);
@@ -390,6 +396,7 @@
             $(".button-menyetujui").click(function() {
 
                 var id_permohonan = $('#id_permohonan').val();
+                var id = $('#id').val();
                 var nominal_acc = $('#nominal_acc').val();
                 var status_permohonan = $('#status_permohonan').val();
                 var jenis_dana = $('#jenis_dana').val();
@@ -406,6 +413,7 @@
 
                     $.post("{{ url('/permohonan-bendahara/edit') }}", {
                         _token: "{{ csrf_token() }}",
+                        id:id,
                         id_permohonan: id_permohonan,
                         nominal_acc: nominal_acc,
                         status_permohonan: status_permohonan,
@@ -421,17 +429,18 @@
                             )
                             location.reload()
 
-                            // get();
+                            get();
 
                             $(".item-ubah").attr("disabled", false);
 
                             $('#id_permohonan').val('');
+                            $('#id').val('');
                             $('#name').val('');
                             $('#no_resi_ajuan').val('');
                             $('#tanggal_permohonan').val('');
                             $('#harga_satuan').val('');
                             $('#jumlah_satuan').val('');
-                            $('#total_harga').val('');
+                            $('#total_dana_ajuan').val('');
                             $('#nominal_acc').val('');
                             $('#jenis_dana').val('');
                             $('#keterangan_permohonan').val('');

@@ -2,25 +2,27 @@
 
 namespace App\Http\Controllers\Pemohon;
 
-use App\Models\Permohonan;
-
-use Illuminate\Http\Request;
+use App\Models\ModelUmum;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Console\View\Components\Alert;
-use Illuminate\Support\Str;
 
 class PemohonController extends Controller
 {
     public function index()
     {
+        $data = ModelUmum::datapermohonandana()->where('id', Auth::user()->id);
         return view('pemohon.dashboard-pemohon', [
             'title' => 'Dashboard',
-            'active' => 'dashboard-pemohon'
+            'active' => 'dashboard-pemohon',
+            'data' => $data
         ]);
     }
 
-    
+    public function permohonan_dana()
+    {
+        return view('pemohon.permohonan-dana', [
+            'title' => 'Permohonan',
+            'active' => 'permohonan'
+        ]);
+    }
 }

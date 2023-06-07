@@ -278,7 +278,9 @@
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>
+                                <center> {{ $loop->iteration }} </center>
+                            </td>
                             <td hidden>
                                 <center>{{ $user->id }}</center>
                             </td>
@@ -499,5 +501,4 @@
 
         });
     </script>
-
 @endsection

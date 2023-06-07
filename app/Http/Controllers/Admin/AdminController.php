@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\ModelUmum;
 use App\Models\User;
 use App\Models\Permohonan;
 use Illuminate\Http\Request;
@@ -13,16 +13,23 @@ class AdminController extends Controller
 {
     public function index()
     {
-        // $userCount = DB::table('users')->where('role_id', '4')->count();
-        // $danaAccCount = DB::table('tb_permohonan')->where('status_permohonan', '1')->sum('nominal_acc');
-        $userCount = User::all()->count();
-        //$danaAccCount = Permohonan::where('status_permohonan', '1')->sum('nominal_acc');
+        $data = ModelUmum::datapermohonandana();
+        $userCount = ModelUmum::countuser();
+        $danaAccCount = ModelUmum::countdanaacc();
+        $danakas = ModelUmum::countpermohonankas();
+        $danabank = ModelUmum::countpermohonanbank();
+
         return view(
             'admin.dashboard-admin',
-            ["title" => "Dashboard"],
-            ["active" => "Dashboard"],
-            ["userCount" => $userCount],
-            // ["danaAccCount" => $danaAccCount],
+            [
+                'title' => 'Dashboard',
+                'active' => 'Dashboard',
+                'data' => $data,
+                'userCount' => $userCount,
+                'danaAccCount' => $danaAccCount,
+                'danakas' => $danakas,
+                'danabank' => $danabank
+            ]
         );
     }
 }

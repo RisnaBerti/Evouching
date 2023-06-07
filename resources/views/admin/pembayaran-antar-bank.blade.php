@@ -119,7 +119,7 @@
         <div class="card-header">
             <div class="card-title">
                 <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
-                <h3 class="card-label">Permohonan Dana</h3>
+                <h3 class="card-label">Bukti Pembayaran Antar Bank</h3>
             </div>
         </div>
         <div class="card-body">

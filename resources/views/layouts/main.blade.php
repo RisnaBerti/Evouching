@@ -47,6 +47,9 @@
 
     <script src="/assets/datatable/datatables.min.js"></script>
 
+	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 </head>
 <!--end::Head-->
 

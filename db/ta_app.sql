@@ -134,7 +134,7 @@ CREATE TABLE `tb_permohonan` (
   `nama_perkiraan` varchar(50) DEFAULT NULL,
   `harga_satuan` int(11) DEFAULT NULL,
   `jumlah_satuan` int(11) DEFAULT NULL,
-  `total_harga` int(11) DEFAULT NULL,
+  `total_dana_ajuan` int(11) DEFAULT NULL,
   `nominal_acc` int(11) DEFAULT NULL,
   `keterangan_permohonan` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

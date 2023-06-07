@@ -115,7 +115,7 @@
                         <center>PJ</center>
                     </th>
                     <th>
-                        <center>SETTING</center>
+                        <center>BUKTI</center>
                     </th>
                 </thead>
                 <tbody>
@@ -126,7 +126,7 @@
                                 <center>{{ $dt->tanggal_permohonan }}</center>
                             </td>
                             <td>
-                                <center>{{ $dt->nama_perkiraan }}</center>
+                                <center>{{ $dt->name }}</center>
                             </td>
                             <td>
                                 <center>
@@ -166,19 +166,19 @@
                                 <center>{{ $dt->name }}</center>
                             </td>
                             <td>
-                                <center>{{ $dt->bukti_transaksi }}</center>
+                                <center><img src="{{ url('/bukti') }}/{{ $dt->bukti_transaksi }}" class="rounded float-left" width="75" alt="Bukti Transaksi"></center>
                             </td>
-                            <td>
+                            {{-- <td>
                                 <center>
-                                    {{-- @if ($user->is_active == 0 && $user->role_id != 1)
-                                        <i class='fas fas fa-toggle-off  btn btn-icon btn-light-primary item-aktivasi'></i> --}}
-                                    {{-- <i class='fas fa-trash-alt btn btn-icon btn-light-danger item-hapus'></i> --}}
-                                    {{-- @elseif ($user->is_active == 1 && $user->role_id != 1)
+                                    @if ($user->is_active == 0 && $user->role_id != 1)
+                                        <i class='fas fas fa-toggle-off  btn btn-icon btn-light-primary item-aktivasi'></i>
+                                    <i class='fas fa-trash-alt btn btn-icon btn-light-danger item-hapus'></i>
+                                    @elseif ($user->is_active == 1 && $user->role_id != 1)
                                         <i class='fas fa-edit btn btn-icon btn-light-primary item-ubah'></i>
                                         <i class='fas fas fa-toggle-on btn btn-icon btn-light-danger item-nonaktivasi'></i>
-                                    @endif --}}
+                                    @endif
                                 </center>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>

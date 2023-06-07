@@ -20,10 +20,10 @@ class AuthController extends Controller
 
     public function authenticate(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email:dns',
-            'password' => 'required',
-        ]);
+        // $request->validate([
+        //     'email' => 'required|email:dns',
+        //     'password' => 'required',
+        // ]);
 
         $credentials = $request->only('email', 'password');
 
@@ -32,13 +32,13 @@ class AuthController extends Controller
             $user = Auth::user();
             if ($user->is_active == '1') {
                 // cek role
-                if ($user->role_id == '1') {
+                if ($user->role_id == 1) {
                     return redirect()->intended('bendahara');
-                } else if ($user->role_id == '2') {
+                } else if ($user->role_id == 2) {
                     return redirect()->intended('dashboard-manajer');
-                } else if ($user->role_id == '3') {
+                } else if ($user->role_id == 3) {
                     return redirect()->intended('pemeriksa');
-                } else if ($user->role_id == '4') {
+                } else if ($user->role_id == 4) {
                     return redirect()->intended('dashboard-pemohon');
                 }
             } else {

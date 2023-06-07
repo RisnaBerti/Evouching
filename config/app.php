@@ -185,6 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         //  'Terbilang' => Riskihajar\Terbilang\Facades\Terbilang::class,
 

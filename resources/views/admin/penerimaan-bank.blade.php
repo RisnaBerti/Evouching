@@ -19,7 +19,7 @@
                                     <div class="col-7 align-self-start">
                                         <div class="col">
                                             <h3 class="card-title">
-                                                BUKTI PENERIMAAN KAS
+                                                BUKTI PENERIMAAN BANK
                                             </h3>
                                         </div>
                                     </div>
@@ -31,15 +31,15 @@
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
                                                     Bayar:</span>
                                             </div>
-                                            <input readonly type="text" class="form-control" id="no_resi_ajuan" name="no_resi_ajuan"
+                                            <input readonly type="text" class="form-control" id="no_resi_terima_bank " name="no_resi_terima_bank "
                                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                         </div>
                                         <div class="input-group input-group-sm mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">Tanggal:</span>
                                             </div>
-                                            <input type="date" value="{{ date('d-m-Y') }}" class="form-control"
-                                                id="tanggal_pembayaran_bank" name="tanggal_pembayaran_bank"
+                                            <input type="date" value="{{ date('Y-m-d') }}" class="form-control"
+                                                id="tanggal_penerimaan_bank" name="tanggal_penerimaan_bank"
                                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                         </div>
                                     </div>
@@ -113,7 +113,7 @@
         <div class="card-header">
             <div class="card-title">
                 <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
-                <h3 class="card-label">Permohonan Dana</h3>
+                <h3 class="card-label">Penerimaan Bank</h3>
             </div>
         </div>
         <div class="card-body">
@@ -237,20 +237,6 @@
                             },
                             padding: '5px'
                         },
-
-                        // {
-                        //     "render": function(data, type, row) {
-
-                        //         if (row.status == '0')
-                        //             return '<span class="label label-lg font-weight-bold label-light-danger label-inline">Belum Diarsipkan</span>';
-                        //         else if (row.status == '1')
-                        //             return '<span class="label label-lg font-weight-bold label-light-success label-inline">Sudah Diarsipkan</span>';
-                        //         else
-                        //         return row.status;
-
-                        //     },
-                        //     padding: '5px'
-                        // },
 
                         {
                             "render": function(data, type, row) {

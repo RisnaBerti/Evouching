@@ -3,19 +3,22 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\AntarBankController;
-use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\CaController;
-use App\Http\Controllers\Admin\DataUserController;
 use App\Http\Controllers\Admin\KasController;
-use App\Http\Controllers\Admin\LaporanController;
+use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\PengajuanAdmin;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\LaporanController;
+use App\Http\Controllers\Admin\DataUserController;
 use App\Http\Controllers\Admin\ReimbuseController;
+use App\Http\Controllers\Admin\AntarBankController;
 use App\Http\Controllers\Manajer\ManajerController;
-use App\Http\Controllers\Pemohon\AkunControllerPemohon;
+use App\Http\Controllers\Manajer\PermohonanManajerController;
+use App\Http\Controllers\Pemeriksa\AkunPemeriksaController;
 use App\Http\Controllers\Pemohon\PemohonController;
+use App\Http\Controllers\Pemohon\AkunControllerPemohon;
 use App\Http\Controllers\Pemohon\PermohonanPemohonController;
+use App\Http\Controllers\Pemeriksa\PemeriksaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,18 +90,25 @@ Route::controller(PengajuanAdmin::class)->group(function () {
 Route::controller(KasController::class)->group(function () {
     Route::get('/penerimaankas', 'index')->name('kas');
     Route::post('/penerimaan-kas/get', 'get_penerimaan_kas');
-    Route::post('/penerimaan-kas/edit', 'edit_penerimaan_kas');
+    Route::post('/penerimaan-kas/edit', 'edit_penerimaan_kas')->name('penerimaankas.upload');
+    Route::post('/penerimaan-kas/ubah', 'ubah_penerimaan_kas')->name('penerimaankas.ubah');
+    Route::post('/penerimaan-kas/editid', 'edit_penerimaan_kas_id')->name('penerimaankas.uploadid');
+    Route::post('/penerimaan-kas/ubahid', 'ubah_penerimaan_kas_id')->name('penerimaankas.ubahid');
+    Route::post('/penerimaan-kas/getid', 'get_penerimaan_kas_id')->name('penerimaankas.getid');
     Route::get('/penerimaan-kas/getmax', 'getmax');
-    Route::get('/pembayarankas', 'pembayaran_kas')->name('pembayaran-kas');
-    Route::post('/pembayaran-kas/get', 'get_pembayaran_kas')->name('pembayaran-kas');
-    Route::post('/pembayaran-kas/edit', 'edit_pembayaran_kas')->name('pembayaran-kas');
+
+    Route::get('/pembayarankas', 'pembayaran_kas');
+    Route::post('/pembayaran-kas/get', 'get_pembayaran_kas');
+    Route::post('/pembayaran-kas/edit', 'edit_pembayaran_kas')->name('pembayarankas.upload');
+    Route::post('/pembayaran-kas/ubah', 'ubah_pembayaran_kas')->name('pembayarankas.ubah');
+    Route::get('/pembayaran-kas/getmax2', 'getmax2');
 });
 
 Route::controller(BankController::class)->group(function () {
     Route::get('/penerimaanbank', 'index')->name('bank');
     Route::post('/penerimaan-bank/get', 'get_penerimaan_bank');
     Route::post('/penerimaan-bank/edit', 'edit_penerimaan_bank');
-    
+
     Route::get('/pembayaranbank', 'pembayaran_bank')->name('pembayaran-bank');
     Route::post('/pembayaran-bank/get', 'get_pembayaran_bank')->name('pembayaran-bank');
     Route::post('/pembayaran-bank/edit', 'edit_pembayaran_bank')->name('pembayaran-bank');
@@ -123,8 +133,8 @@ Route::controller(AntarBankController::class)->group(function () {
 });
 
 Route::controller(LaporanController::class)->group(function () {
-    Route::get('/laporan-bendahara', 'index')->name('laporan');
-    Route::post('/laporan-bendahara/pdf', 'export_pdf');
+    Route::get('/laporan-bendahara', 'index');
+    Route::get('/laporan-bendahara/pdf', 'export_pdf');
 });
 // });
 
@@ -133,7 +143,12 @@ Route::controller(LaporanController::class)->group(function () {
 Route::controller(ManajerController::class)->group(function () {
     Route::get('/dashboard-manajer', 'index')->name('dashboard-manajer');
 });
-Route::controller((AkunControllerPemohon::class))->group(function () {
+Route::controller(PermohonanManajerController::class)->group(function () {
+    Route::get('/permohonan-manajer', 'index')->name('permohonan-manajer');
+    Route::post('/permohonan-manajer/get', 'get');
+    Route::post('/permohonan-manajer/edit', 'edit');
+});
+Route::controller((AkunControllerManajer::class))->group(function () {
     Route::get('/profile-manajer', 'index')->name('profile_manajer');
     Route::get('/edit-profile-manajer', 'profile');
     Route::post('/edit-profile-manajer', 'update_profile');
@@ -142,14 +157,39 @@ Route::controller((AkunControllerPemohon::class))->group(function () {
 });
 // });
 
+//pemeriksa
+// Route::group(['middleware' => ['UserCheckLogin:3']], function() {
+// Route::middleware('UserCheckLogin:3')->group(function () {
+Route::controller(PemeriksaController::class)->group(function () {
+    Route::get('/dashboard-pemeriksa', 'index')->name('dashboard-pemeriksa');
+});
+Route::controller((AkunPemeriksaController::class))->group(function () {
+    Route::get('/profile-pemeriksa', 'index')->name('profile_pemeriksa');
+    Route::get('/edit-profile-pemeriksa', 'profile');
+    Route::post('/edit-profile-pemeriksa', 'update_profile');
+    Route::get('/change-password-pemeriksa', 'change_password');
+    Route::post('/change-password-pemeriksa', 'update_password')->name('change_password_pemeriksa');
+});
+
+
 // pemohon
 // Route::group(['middleware' => ['userCheckLogin:3']], function() {
 // Route::middleware('UserCheckLogin:4')->group(function () {
 Route::controller(PemohonController::class)->group(function () {
     Route::get('/dashboard-pemohon', 'index')->name('dashboard-pemohon');
+    Route::get('/dashboard-pemohon/get', 'permohonan_dana');
 });
 Route::controller(PermohonanPemohonController::class)->group(function () {
-    Route::get('/permohonan-pemohon', 'permohonan_pemohon')->name('permohonan_pemohon');
+    Route::get('/detail-permohonan', 'index');
+    Route::post('/detail-permohonan/add', 'addDetailPermohonan');
+    Route::post('/detail-permohonan/getdata/{id}', 'getDetailPermohonan');
+    Route::post('/detail-permohonan/edit', 'editDetailPermohonan');
+
+    Route::post('/keterangan/all', 'keterangan')->name('keterangan.all');
+
+
+    Route::get('/permohonan-dana', 'getPermohonan');
+    Route::get('/permohonan-pemohon/{id}', 'permohonan_pemohon');
     Route::post('/permohonan/add', 'add');
     // Route::post('/permohonan/add/kas', 'simpanPembayaranKas');
     Route::get('/permohonan/getmax', 'getmax');

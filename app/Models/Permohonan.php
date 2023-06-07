@@ -19,7 +19,7 @@ class Permohonan extends Model
         'tanggal_permohonan',
         'harga_satuan',
         'jumlah_satuan',
-        'total_harga',
+        'total_dana_ajuan',
         'nominal_acc',
         'keterangan_permohonan',
         'terbilang',

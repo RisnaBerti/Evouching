@@ -1,4 +1,4 @@
-@extends('layouts.main-manajer')
+@extends('layouts.main')
 
 @section('content')
     <!--begin::Card-->
@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="my-lg-0 my-3">
-                            <a href="/profile-pemohon"
+                            <a href="/profile-manajer"
                                 class="btn btn-sm btn-light-success font-weight-bolder text-uppercase">Back</a>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
                 </div>
                 <!--end::Header-->
                 <!--begin::Form-->
-                <form class="form" method="post" action="/edit-profile-pemohon">
+                <form class="form" method="post" action="/edit-profile-manajer"> 
                     @csrf
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
@@ -170,8 +170,8 @@
                         <div class="form-group row">
                             <label class="col-xl-5 col-lg-3 col-form-label" for="no_hp">Contact Phone</label>
                             <div class="col-lg-9 col-xl-7">
-                                <input class="form-control form-control-lg form-control-solid" name="no_hp"
-                                    id="no_hp" type="text" value="{{ old('no_hp', Auth::user()->no_hp) }}">
+                                <input class="form-control form-control-lg form-control-solid" name="no_hp" id="no_hp"
+                                    type="text" value="{{ old('no_hp', Auth::user()->no_hp) }}">
                             </div>
                         </div>
                         <!--begin::Form Group-->

@@ -41,8 +41,7 @@ class KasController extends Controller
 
     public function getmax()
     {
-
-        $maxValue = Permohonan::max('no_resi_ajuan');
+        $maxValue = PenerimaanKas::max('no_resi_terima_kas');
 
         if ($maxValue == null) {
             $maxValue = 0;
@@ -52,48 +51,105 @@ class KasController extends Controller
 
     public function get_penerimaan_kas()
     {
-
         $data['data'] = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
+            ->join('tb_penerimaan_kas', 'tb_penerimaan_kas.id_permohonan', '=', 'tb_permohonan.id_permohonan')
             ->where('tb_permohonan.jenis_dana', '=', 'Penerimaan Kas')
-            ->get(['users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.*']);
+            ->get(['users.id', 'users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.id_permohonan', 'tb_permohonan.nominal_acc', 'tb_permohonan.keterangan_permohonan', 'tb_penerimaan_kas.bukti_transaksi']);
 
         return $data;
+    }
+
+    function ubah_penerimaan_kas(Request $request)
+    { 
+        PenerimaanKas::where('id_permohonan', $request->id_permohonan)
+        ->update(['bukti_transaksi' => $request->bukti_transaksi, 
+                'no_resi_terima_kas' => $request->no_resi_terima_kas, 
+                'tanggal_penerimaan_kas' => $request->tanggal_penerimaan_kas]);
+
+        return response()->json(['message' => 'success']);
     }
 
     //fungsi edit penerimaan kas
     public function edit_penerimaan_kas(Request $request)
     {
         $request->validate([
-
             'file' => 'required|mimes:jpg,jpeg,png|max:5048',
-
         ]);
 
-        $fileName = $request->id_permohonan . '.' . $request->file->extension();
+        $ip = $request->id_permohonan;
+
+        $fileName = $ip . '.' . $request->file->extension();
         $request->file->move(public_path('bukti'), $fileName);
 
-        PenerimaanKas::create(
-            [
-                $id = Auth::user()->id,
-                'id_penerimaan_kas' => str_replace('-', '', Str::uuid()),
-                'id_permohonan' => $request->id_permohonan,
-                'id' => ($id),
-                'no_resi_terima_kas' => '0',
-                'tanggal_penerimaan_kas' => $request->tanggal_penerimaan_kas,
-                'bukti_transaksi' => $fileName,
-                'status' => '1'
-            ]
-        );
+        return response()->json(['message' => 'Operation Successful !', 'filename' => $fileName, 'no_resi_terima_kas' => $request->no_resi_terima_kas,  'id_permohonan' => $request->id_permohonan, 'tanggal_penerimaan_kas' => $request->tanggal_penerimaan_kas]);
+    }
 
-        return Redirect::back()->with('message', 'Operation Successful !');
+    public function get_penerimaan_kas_id(Request $request)
+    {
+        $data = PenerimaanKas::where('id_permohonan', $request->id_permohonan)->first();
+        return response()->json($data);
+    }
+
+    public function ubah_penerimaan_kas_id(Request $request)
+    {
+        PenerimaanKas::where('id_permohonan', $request->id_permohonan)
+        ->update(['bukti_transaksi' => $request->bukti_transaksi_edit, 
+                'no_resi_terima_kas' => $request->no_resi_terima_kas_edit, 
+                'tanggal_penerimaan_kas' => $request->tanggal_penerimaan_kas_edit]);
+
+        return response()->json(['message' => 'success']);
+    }
+
+    public function edit_penerimaan_kas_id(Request $request)
+    {
+        $request->validate([
+            'file_edit' => 'required|mimes:jpg,jpeg,png|max:5048',
+        ]);
+
+        $ip = $request->id_permohonan_edit;
+
+        $fileName = $ip . '.' . $request->file_edit->extension();
+        $request->file_edit->move(public_path('bukti'), $fileName);
+
+        return response()->json(['message' => 'Operation Successful !', 'filename' => $fileName, 'no_resi_terima_kas' => $request->no_resi_terima_kas_edit,  'id_permohonan' => $request->id_permohonan_edit, 'tanggal_penerimaan_kas' => $request->tanggal_penerimaan_kas_edit]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // ---------------------------------------------------------------------------------------------
+
+    public function getmax2()
+    {
+
+        $maxValue = PembayaranKas::max('no_resi_bayar_kas');
+
+        if ($maxValue == null) {
+            $maxValue = 0;
+        }
+        return response()->json($maxValue);
     }
 
     //fungsi get data pembayaran kas
     public function get_pembayaran_kas()
     {
         $data['data'] = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
+            ->join('tb_pembayaran_kas', 'tb_pembayaran_kas.id_permohonan', '=', 'tb_permohonan.id_permohonan')
             ->where('tb_permohonan.jenis_dana', '=', 'Pembayaran Kas')
-            ->get(['users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.*']);
+            ->get(['users.id', 'users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.id_permohonan', 'tb_permohonan.nominal_acc', 'tb_permohonan.keterangan_permohonan', 'tb_pembayaran_kas.bukti_transaksi']);
+
         return response()->json($data);
     }
 
@@ -107,22 +163,37 @@ class KasController extends Controller
 
         ]);
 
-        $fileName = $request->id_permohonan . '.' . $request->file->extension();
+        $ip = $request->id_permohonan;
+
+        $fileName = $ip . '.' . $request->file->extension();
         $request->file->move(public_path('bukti'), $fileName);
 
-        PembayaranKas::create(
-            [
-                'id_pembayaran_kas' => str_replace('-', '', Str::uuid()),
-                'id_permohonan' => $request->id_permohonan,
-                'id' =>  Auth::user()->id,
-                'no_resi_bayar_kas' => $request->no_resi_bayar_kas,
-                'tanggal_pembayaran_kas' => $request->tanggal_pembayaran_kas,
-                'bukti_transaksi' => $fileName
-            ]
-        );
+        return response()->json(['message' => 'Operation Successful !', 'filename' => $fileName, 'no_resi_bayar_kas' => $request->no_resi_bayar_kas,  'id_permohonan' => $request->id_permohonan]);
 
-        return Redirect::back()->with('message', 'Operation Successful !');
+        // return Redirect::back()->with('message', 'Operation Successful !');
     }
+
+    function ubah_pembayaran_kas(Request $request)
+    { 
+        PembayaranKas::where('id_permohonan', $request->id_permohonan)
+        ->update(['bukti_transaksi' => $request->bukti_transaksi, 
+                'no_resi_bayar_kas' => $request->no_resi_bayar_kas, 
+                'tanggal_pembayaran_kas' => $request->tanggal_pembayaran_kas]);
+
+        return response()->json(['message' => 'Operation Successful !']);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Get data from the text file
     function getDataFrmFile($file)

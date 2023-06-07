@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\PembayaranKas;
@@ -12,20 +13,24 @@ class AntarBankController extends Controller
 {
     public function index()
     {
-        return view('admin.penerimaan-antar-bank',
-        [
-            'title' => 'Penerimaan Antar Bank',
-            'menu' => 'penerimaan-antar-bank'
-        ]);
+        return view(
+            'admin.penerimaan-antar-bank',
+            [
+                'title' => 'Penerimaan Antar Bank',
+                'menu' => 'penerimaan-antar-bank'
+            ]
+        );
     }
 
     public function pembayaran_antar_bank()
     {
-        return view('admin.pembayaran-antar-bank',
-        [
-            'title' => 'Pembayaran Antar Bank',
-            'menu' => 'pembayaran-antar-bank'
-        ]);
+        return view(
+            'admin.pembayaran-antar-bank',
+            [
+                'title' => 'Pembayaran Antar Bank',
+                'menu' => 'pembayaran-antar-bank'
+            ]
+        );
     }
 
     public function pembayaran_antar_bank_add(Request $request)
@@ -44,7 +49,7 @@ class AntarBankController extends Controller
                 'nama_mutasi' => $request->nama_mutasi,
                 'asal_bank' => $request->asal_bank,
                 'bank_tujuan' => $request->bank_tujuan,
-                'total_harga' => $request->total_harga,
+                'total_dana_ajuan' => $request->total_dana_ajuan,
                 'nominal_acc' => $request->nominal_acc,
                 'keterangan_permohonan' => '0',
                 'terbilang' => $request->terbilang,
@@ -58,7 +63,7 @@ class AntarBankController extends Controller
 
     public function pembayaran_antar_bank_edit(Request $request)
     {
-        
+
         PembayaranBank::create(
             [
                 'id_pembayaran_antar_bank' => str_replace('-', '', Str::uuid()),
