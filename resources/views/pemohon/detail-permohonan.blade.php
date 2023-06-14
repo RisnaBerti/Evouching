@@ -19,7 +19,6 @@
                 </div>
             </div>
 
-         
 
             <div class="form-group row">
                 <div class="col-lg-4">
@@ -92,7 +91,7 @@
                 <h3 class="card-label">Permohonan Dana</h3>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body" >
             <!--begin: Datatable-->
             <table class="table table-bordered display nowrap table-permohonan" id="table-permohonan"
                 style="width:100%; margin-top: 13px;">
@@ -126,7 +125,7 @@
                                 <center>{{ $d->tanggal_permohonan }}</center>
                             </td>
                             <td>
-                                <center>{{ $d->total_dana_ajuan }}</center>
+                                <center>{{ $d->total_dana_ajuan}}</center>
                             </td>
                             <td>
                                 <center>{{ $d->keterangan_permohonan }}</center>
@@ -168,6 +167,7 @@
             });
 
             getmax();
+
 
             $("#harga_satuan_sum, #jumlah_satuan_sum").keyup(function() {
 

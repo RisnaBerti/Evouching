@@ -39,11 +39,10 @@
 	<link rel="shortcut icon" href="{{ url('') }}/assets/media/logos/favicon.ico" />
 
 	<link rel="stylesheet" href="{{ url('') }}/assets/dropzone/593/dropzone.min.css" type="text/css" />
-
+	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <link href="{{ url('') }}/assets/datatable/datatables.min.css" rel="stylesheet" />
-
-   
 
     <script src="{{ url('') }}/assets/dropzone/593/dropzone.min.js"></script>
 
@@ -136,8 +135,7 @@
 	<!--begin::Page Vendors(used by this page)-->
 	<script src="{{ url('') }}/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 
-	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	
 
 	<!--end::Page Vendors-->
 

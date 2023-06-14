@@ -450,13 +450,7 @@
                         <center>NAMA</center>
                     </th>
                     <th>
-                        <center>HARGA SATUAN</center>
-                    </th>
-                    <th>
-                        <center>JUMLAH SATUAN</center>
-                    </th>
-                    <th>
-                        <center>TOTAL HARGA</center>
+                        <center>TOTAL PERMOHONAN</center>
                     </th>
                     <th>
                         <center>NOMINAL ACC</center>
@@ -481,12 +475,6 @@
                                 <center>{{ $d->name }}</center>
                             </td>
                             <td>
-                                <center>{{ $d->harga_satuan }}</center>
-                            </td>
-                            <td>
-                                <center>{{ $d->jumlah_satuan }}</center>
-                            </td>
-                            <td>
                                 <center>{{ $d->total_dana_ajuan }}</center>
                             </td>
                             <td>
@@ -497,16 +485,26 @@
                             </td>
                             <td>
                                 <center>
-                                    @if ($d->ttd_manajer == '0' || $d->ttd_pemeriksa == '0' || $d->ttd_bendahara == '0')
-                                        <span class="label label-lg font-weight-bold label-light-danger label-inline">Belum
+                                    @if ($d->status_permohonan  == '0')
+                                        <span class="label label-lg font-weight-bold label-light-secondary label-inline">Belum
                                             ACC</span>
-                                    @elseif ($d->ttd_manajer == '0' || $d->ttd_pemeriksa == '0' || $d->ttd_bendahara == '1')
-                                        <span class="label label-lg font-weight-bold label-light-primary label-inline">ACC
-                                            Bendahara</span>
-                                        <span class="label label-lg font-weight-bold label-light-danger label-inline">Belum
-                                            ACC Manajer</span>
-                                        <span class="label label-lg font-weight-bold label-light-danger label-inline">Belum
-                                            ACC Pemeriksa</span>
+                                    @elseif ($d->status_permohonan  == '1')
+                                        <span
+                                            class="label label-lg font-weight-bold label-light-warning label-inline">Diperiksa
+                                            Pemeriksa
+                                        </span>
+                                    @elseif ($d->status_permohonan  == '2')
+                                        <span class="label label-lg font-weight-bold label-light-primary label-inline">
+                                            Diperiksa Bendahara</span>
+                                    @elseif ($d->status_permohonan  == '3')
+                                        <span
+                                            class="label label-lg font-weight-bold label-light-success label-inline">SUDAH
+                                            ACC
+                                        </span>
+                                    @elseif ($d->status_permohonan  == '4')
+                                        <span
+                                            class="label label-lg font-weight-bold label-light-danger label-inline">DITOLAK
+                                        </span>
                                     @endif
                                 </center>
                             </td>

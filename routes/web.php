@@ -19,6 +19,7 @@ use App\Http\Controllers\Pemohon\PemohonController;
 use App\Http\Controllers\Pemohon\AkunControllerPemohon;
 use App\Http\Controllers\Pemohon\PermohonanPemohonController;
 use App\Http\Controllers\Pemeriksa\PemeriksaController;
+use App\Http\Controllers\Pemohon\PengajuanCaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,22 +102,38 @@ Route::controller(KasController::class)->group(function () {
     Route::post('/pembayaran-kas/get', 'get_pembayaran_kas');
     Route::post('/pembayaran-kas/edit', 'edit_pembayaran_kas')->name('pembayarankas.upload');
     Route::post('/pembayaran-kas/ubah', 'ubah_pembayaran_kas')->name('pembayarankas.ubah');
+    Route::post('/pembayaran-kas/editid', 'edit_pembayaran_kas_id')->name('pembayarankas.uploadid');
+    Route::post('/pembayaran-kas/ubahid', 'ubah_pembayaran_kas_id')->name('pembayarankas.ubahid');
+    Route::post('/pembayaran-kas/getid', 'get_pembayaran_kas_id')->name('pembayarankas.getid');
     Route::get('/pembayaran-kas/getmax2', 'getmax2');
 });
 
 Route::controller(BankController::class)->group(function () {
     Route::get('/penerimaanbank', 'index')->name('bank');
     Route::post('/penerimaan-bank/get', 'get_penerimaan_bank');
-    Route::post('/penerimaan-bank/edit', 'edit_penerimaan_bank');
+    Route::post('/penerimaan-bank/edit', 'edit_penerimaan_bank')->name('penerimaanbank.upload');
+    Route::post('/penerimaan-bank/ubah', 'ubah_penerimaan_bank')->name('penerimaanbank.ubah');
+    Route::post('/penerimaan-bank/editid', 'edit_penerimaan_bank_id')->name('penerimaanbank.uploadid');
+    Route::post('/penerimaan-bank/ubahid', 'ubah_penerimaan_bank_id')->name('penerimaanbank.ubahid');
+    Route::post('/penerimaan-bank/getid', 'get_penerimaan_bank_id')->name('penerimaanbank.getid');
+    Route::get('/penerimaan-bank/getmax', 'getmax');
 
-    Route::get('/pembayaranbank', 'pembayaran_bank')->name('pembayaran-bank');
-    Route::post('/pembayaran-bank/get', 'get_pembayaran_bank')->name('pembayaran-bank');
-    Route::post('/pembayaran-bank/edit', 'edit_pembayaran_bank')->name('pembayaran-bank');
+    Route::get('/pembayaranbank', 'pembayaran_bank');
+    Route::post('/pembayaran-bank/get', 'get_pembayaran_bank');
+    Route::post('/pembayaran-bank/edit', 'edit_pembayaran_bank')->name('pembayaranbank.upload');
+    Route::post('/pembayaran-bank/ubah', 'ubah_pembayaran_bank')->name('pembayaranbank.ubah');
+    Route::post('/pembayaran-bank/editid', 'edit_pembayaran_bank_id')->name('pembayaranbank.uploadid');
+    Route::post('/pembayaran-bank/ubahid', 'ubah_pembayaran_bank_id')->name('pembayaranbank.ubahid');
+    Route::post('/pembayaran-bank/getid', 'get_pembayaran_bank_id')->name('pembayaranbank.getid');
+    Route::get('/pembayaran-bank/getmax', 'getmax2');
 });
 
 Route::controller(CaController::class)->group(function () {
     Route::get('/penerimaanca', 'index')->name('ca');
     Route::get('/pembayaranca', 'pembayaran_ca')->name('pembayaran-ca');
+    Route::get('/pembayaran-ca/getmax_ca', 'getmax_ca');
+    Route::post('/pembayaran-ca/get', 'get');
+
 });
 
 Route::controller(ReimbuseController::class)->group(function () {
@@ -125,11 +142,18 @@ Route::controller(ReimbuseController::class)->group(function () {
 });
 
 Route::controller(AntarBankController::class)->group(function () {
-    Route::get('/penerimaan-antarbank', 'index')->name('antarbank');
-    Route::post('/penerimaan-antarbank/add', 'add_penerimaan_antarbank');
+    Route::get('/penerimaan-antarbank', 'index')->name('penerimaan-antarbank');
+    Route::get('/penerimaan-antarbank/getmax', 'getmax');
+    Route::post('/penerimaan-antarbank/get', 'get_penerimaan_antar_bank');
+    Route::post('/penerimaan-antarbank/add', 'penerimaan_antar_bank_add');
+    Route::post('/penerimaan-antarbank/edit', 'penerimaan_antar_bank_edit');
+
     Route::get('/pembayaran-antarbank', 'pembayaran_antar_bank')->name('pembayaran-antarbank');
-    Route::post('/pembayaran-antarbank/add', 'pembayaran_antar_bank_add')->name('pembayaran-antarbank');
-    Route::post('/pembayaran-antarbank/edit', 'edit_pembayaran_antarbank')->name('pembayaran-antarbank');
+    Route::get('/pembayaran-antarbank/getmax', 'getmax2');
+    Route::post('/pembayaran-antarbank/get', 'get_pembayaran_antar_bank');
+    Route::post('/pembayaran-antarbank/add', 'pembayaran_antar_bank_add');
+    Route::post('/pembayaran-antarbank/edit', 'pembayaran_antar_bank_edit');
+    Route::post('/pembayaran-antarbank/delete', 'pembayaran_antar_bank_delete');
 });
 
 Route::controller(LaporanController::class)->group(function () {
@@ -200,6 +224,14 @@ Route::controller((AkunControllerPemohon::class))->group(function () {
     Route::post('/edit-profile-pemohon', 'update_profile');
     Route::get('/change-password-pemohon', 'change_password');
     Route::post('/change-password-pemohon', 'update_password')->name('change_password_pemohon');
+});
+
+Route::controller((PengajuanCaController::class))->group(function () {
+    Route::get('/pengajuan-ca/getmax3', 'getmax3');
+    Route::get('/pengajuan-ca', 'index');
+    Route::post('/pengajuan-ca/get', 'get');
+    Route::post('/pengajuan-ca/add', 'add');
+
 });
     // });
 

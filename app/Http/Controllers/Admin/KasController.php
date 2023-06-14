@@ -114,26 +114,10 @@ class KasController extends Controller
         return response()->json(['message' => 'Operation Successful !', 'filename' => $fileName, 'no_resi_terima_kas' => $request->no_resi_terima_kas_edit,  'id_permohonan' => $request->id_permohonan_edit, 'tanggal_penerimaan_kas' => $request->tanggal_penerimaan_kas_edit]);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // ---------------------------------------------------------------------------------------------
+    // ======== PEMBAYARAN KAS =========
 
     public function getmax2()
     {
-
         $maxValue = PembayaranKas::max('no_resi_bayar_kas');
 
         if ($maxValue == null) {
@@ -153,26 +137,7 @@ class KasController extends Controller
         return response()->json($data);
     }
 
-    //fungsi edit pembayaran kas
-    public function edit_pembayaran_kas(Request $request)
-    {
-
-        $request->validate([
-
-            'file' => 'required|mimes:jpg,jpeg,png|max:5048',
-
-        ]);
-
-        $ip = $request->id_permohonan;
-
-        $fileName = $ip . '.' . $request->file->extension();
-        $request->file->move(public_path('bukti'), $fileName);
-
-        return response()->json(['message' => 'Operation Successful !', 'filename' => $fileName, 'no_resi_bayar_kas' => $request->no_resi_bayar_kas,  'id_permohonan' => $request->id_permohonan]);
-
-        // return Redirect::back()->with('message', 'Operation Successful !');
-    }
-
+    //fungsi ubah data pembayaran kas
     function ubah_pembayaran_kas(Request $request)
     { 
         PembayaranKas::where('id_permohonan', $request->id_permohonan)
@@ -180,8 +145,57 @@ class KasController extends Controller
                 'no_resi_bayar_kas' => $request->no_resi_bayar_kas, 
                 'tanggal_pembayaran_kas' => $request->tanggal_pembayaran_kas]);
 
-        return response()->json(['message' => 'Operation Successful !']);
+        return response()->json(['message' => 'success']);
     }
+
+    //fungsi get data pembayaran kas by id
+    public function get_pembayaran_kas_id(Request $request)
+    {
+        $data = PembayaranKas::where('id_permohonan', $request->id_permohonan)->first();
+        return response()->json($data);
+    }
+
+    //fungsi edit pembayaran kas
+    public function edit_pembayaran_kas(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:jpg,jpeg,png|max:5048',
+        ]);
+
+        $ip = $request->id_permohonan;
+
+        $fileName = $ip . '.' . $request->file->extension();
+        $request->file->move(public_path('bukti'), $fileName);
+
+        return response()->json(['message' => 'Operation Successful !', 'filename' => $fileName, 'no_resi_bayar_kas' => $request->no_resi_bayar_kas,  'id_permohonan' => $request->id_permohonan, 'tanggal_pembayaran_kas' => $request->tanggal_pembayaran_kas]);
+    }
+
+    public function ubah_pembayaran_kas_id(Request $request)
+    {
+        PembayaranKas::where('id_permohonan', $request->id_permohonan)
+        ->update(['bukti_transaksi' => $request->bukti_transaksi_edit, 
+                'no_resi_bayar_kas' => $request->no_resi_bayar_kas_edit, 
+                'tanggal_pembayaran_kas' => $request->tanggal_pembayaran_kas_edit]);
+
+        return response()->json(['message' => 'success']);
+    }
+
+    public function edit_pembayaran_kas_id(Request $request)
+    {
+        $request->validate([
+            'file_edit' => 'required|mimes:jpg,jpeg,png|max:5048',
+        ]);
+
+        $ip = $request->id_permohonan_edit;
+
+        $fileName = $ip . '.' . $request->file_edit->extension();
+        $request->file_edit->move(public_path('bukti'), $fileName);
+
+        return response()->json(['message' => 'Operation Successful !', 'filename' => $fileName, 'no_resi_bayar_kas' => $request->no_resi_bayar_kas_edit,  'id_permohonan' => $request->id_permohonan_edit, 'tanggal_pembayaran_kas' => $request->tanggal_pembayaran_kas_edit]);
+    }
+
+
+    
 
 
 

@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-5 align-items-start">
 
-                    <input type="text" id="id_detail_permohonan">
+                    <input hidden type="text" id="id_detail_permohonan">
                     <input hidden type="text" id="id" value="{{ Auth::user()->id }}">
                     <div class="input-group input-group-sm mb-1">
                         <div class="input-group-prepend">
@@ -111,19 +111,10 @@
                 </div>
                 <div class="col-lg-6">
                     <label>Keterangan</label>
-                    <textarea readonly disabled class="form-control form-control-sm" name="keterangan_detail" id="keterangan_detail"
+                    <textarea readonly disabled class="form-control form-control-sm" name="keterangan_detail" id="keteranang_detail"
                         placeholder="Keterangan" rows="4"></textarea>
                 </div>
 
-                <select class="form-control text-right" id="ket">
-                   
-                </select>
-
-                {{-- <input hidden type="text" id="jenis_dana" value="0">
-                <input hidden type="text" id="ttd_pemohon" value="0">
-                <input hidden type="text" id="ttd_manajer" value="0">
-                <input hidden type="text" id="ttd_bendahara" value="0">
-                <input hidden type="text" id="ttd_pemeriksa" value="0"> --}}
             </div>
             {{-- ttd --}}
             {{-- <div class="form-group row">
@@ -203,9 +194,13 @@
 
     <script>
         $(document).ready(function() {
+            $('#table-permohonan').DataTable({
+                paging: true,
+                scrollY: 200,
+                scrollX: true,
+            });
 
             get();
-
             getdetailbarang();
 
             $("#harga_satuan, #qty").keyup(function() {
@@ -268,7 +263,7 @@
 
             $('#qty').change(function() {
 
-                $('#keterangan_permohonan').val($('#nama_barang').val() + '=' + $('#harga_satuan').val() +
+                $('#keteranang_detail').val($('#nama_barang').val() + '=' + $('#harga_satuan').val() +
                     'x' + $('#qty').val());
 
             });
@@ -371,7 +366,7 @@
                         $('#harga_satuan').val('');
                         $('#qty').val('');
                         $('#total_harga_barang').val('');
-                        $('#keterangan_permohonan').val('');
+                        $('#keteranang_detail').val('');
 
                         // $('#modalubah').modal('hide');
 
@@ -636,22 +631,25 @@
 
             function getdetailbarang() {
 
-                $('#keterangan_detail').empty();
+                $('#keteranang_detail').empty();
 
                 $.post("{{ route('keterangan.all') }}", {
                     _token: "{{ csrf_token() }}",
                     id_permohonan: "{{ Request::segment(2) }}"
                 }).done(function(data) {
 
-                    // var res = JSON.parse(data);
+                    // var res = JSON.parse(response);
                     var res = data;
 
                     // var res = $.parseJSON(data);
 
                     $.each(res, function(index, value) {
 
-                        $('#keterangan_detail').val(value.nama_barang + ' ' + value.qty +
-                            ' ' + value.harga_satuan + '\n');
+                        $('#keteranang_detail').val(value.nama_barang + ' ' + value.qty + '\n'); // Append item to list
+                        //item.val(''); // Clear new item
+
+                        // $('#keteranang_detail').text(value.nama_barang + ' ' + value.qty +
+                        //     ' ' + value.harga_satuan + '\n');
 
                         // alert(value.nama_barang + ' ' + value.qty +
                         //     ' ' + value.satuan + '<br>')

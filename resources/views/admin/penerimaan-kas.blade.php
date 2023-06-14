@@ -106,7 +106,6 @@
             </div>
         </div>
     </div>
-    </div>
     <!--end::Modal-->
 
     <!-- Modal -->
@@ -215,7 +214,6 @@
                 <!--end::Card-->
             </div>
         </div>
-    </div>
     </div>
     <!--end::Modal-->
 
@@ -357,7 +355,7 @@
                                                 '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
                                                 '" data-acc="' + row.nominal_acc + '" data-trb="' + row
                                                 .terbilang + '" data-kp="' + row.keterangan_permohonan +
-                                                '"><i class="fas fa-edit btn btn-icon btn-light-danger item-ubah-penerimaankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
+                                                '"><i class="ki ki-plus text-danger btn btn-icon btn-light-danger item-ubah-penerimaankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
                                                 row.id_permohonan +
                                                 '"></a>';
 
@@ -403,22 +401,43 @@
                                 $("#no_resi_terima_kas_edit").val(data.no_resi_terima_kas);
                                 $("#tanggal_penerimaan_kas_edit").val(data.tanggal_penerimaan_kas);
                                 $("#file_edit").val(data.bukti_transaksi);
-                                alert(data.no_resi_terima_kas);
+                                // alert(data.no_resi_terima_kas);
                             });
                     }
 
-                    // ubah
+                    // edit nota
                     $('#table-penerimaankas').on('click', '.item-edit-penerimaankas', function() {
-
                         var id_permohonan = $(this).data('ip');
+                        var name = $(this).data('nm');
+                        var jabatan = $(this).data('jbt');
+                        var divisi = $(this).data('dvs');
+                        var acc = $(this).data(uang('acc'));
+                        var keterangan = $(this).data('kp');
+                        var terbilang = $(this).data('trb');
+                        var bukti_transaksi = $(this).data('bkt');
+
+                        // $('#id_penerimaan_kas').val(id_penerimaan_kas);
+                        $('#id_permohonan').val(id_permohonan);
+                        $('#id').val(id);
+                        $('#name_edit').val(name);
+                        $('#jabatan_edit').val(jabatan);
+                        $('#divisi_edit').val(divisi);
+                        if (acc == null) {
+                            $('#nominal_acc_edit').val('0');
+                        } else {
+                            $('#nominal_acc_edit').val(uang(acc));
+                        }
+                        $('#keterangan_permohonan_edit').val(keterangan);
+                        $('#terbilang_edit').val(terbilang);
+                        $('#bukti_transaksi_edit').val(bukti_transaksi);
+
 
                         getdatapenerimaanid(id_permohonan);
 
 
                         $('.modal-edit-pembayarankas').modal('show');
                     });
-                    // end of ubah
-
+                    // end of 
 
                     // uang
                     $('#nominal_acc').change(function() {
@@ -427,7 +446,7 @@
                     });
                     // end of uang
 
-                    // ubah
+                    // upload nota
                     $('#table-penerimaankas').on('click', '.item-ubah-penerimaankas', function() {
 
                         // console.log('ubah');
@@ -464,9 +483,7 @@
 
                         $('.modal-ubah-pembayarankas').modal('show');
                     });
-                    // end of ubah
-
-
+                    
                     function uang(num) {
 
                         var str = num.toString().replace("", ""),
@@ -492,171 +509,11 @@
                         return ("" + formatted + ((parts) ? "." + parts[1].substr(0, 2) : ""));
 
                     }
-
-                    // <script type = "text/javascript">
-                    //     jQuery(document).ready(function($) {
-                    $.ajaxSetup({
-                        headers: {
-
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-
-                    function updateid(filename, no_resi_terima_kas, id_permohonan, tanggal_penerimaan_kas) {
-
-                        $.post("{{ route('penerimaankas.ubahid') }}", {
-                            _token: "{{ csrf_token() }}",
-                            id_permohonan: id_permohonan,
-                            no_resi_terima_kas: no_resi_terima_kas,
-                            tanggal_penerimaan_kas: tanggal_penerimaan_kas,
-                            bukti_transaksi: filename
-
-                        }).done(function(response) {
-
-                            if (response.message == "success") {
-                                Swal.fire(
-                                    'Disetujui!',
-                                    'Permohonan Dana Di setujui.',
-                                    'success'
-                                )
-                                location.reload()
-
-                                $(".item-ubah").attr("disabled", false);
-
-                                $('#id_permohonan').val('');
-
-                                $('#modalubah').modal('hide');
-
-                            } else {
-                                Swal.fire(
-                                    'Tidak Disetujui!',
-                                    'Permohonan Dana Tidak Di setujui.',
-                                    'error'
-                                )
-                                location.reload()
-
-                                $(".item-ubah").attr("disabled", false);
-
-                            }
-
-                        });
-                    }
-
-                    $('#file-upload-edit').submit(function(e) {
-                        e.preventDefault();
-                        let formData = new FormData(this);
-                        $('#file-input-error').text('');
-
-                        $.ajax({
-
-                            type: 'POST',
-                            url: "{{ route('penerimaankas.uploadid') }}",
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-
-                            success: (response) => {
-
-                                if (response) {
-                                    this.reset();
-                                    update(response.filename, response
-                                        .no_resi_terima_kas_edit, response
-                                        .id_permohonan_edit,
-                                        response.tanggal_penerimaan_kas_edit);
-
-                                    alert('File has been uploaded successfully');
-                                }
-
-                            },
-
-                            error: function(response) {
-                                $('#file-input-error').text(response.responseJSON.message);
-                            }
-
-                        });
-
-                    });
-
-
-                    function update(filename, no_resi_terima_kas, id_permohonan, tanggal_penerimaan_kas) {
-
-
-                        $.post("{{ route('penerimaankas.ubah') }}", {
-                            _token: "{{ csrf_token() }}",
-                            id_permohonan: id_permohonan,
-                            no_resi_terima_kas: no_resi_terima_kas,
-                            tanggal_penerimaan_kas: tanggal_penerimaan_kas,
-                            bukti_transaksi: filename
-
-                        }).done(function(response) {
-
-                            if (response.message == "success") {
-                                Swal.fire(
-                                    'Disetujui!',
-                                    'Permohonan Dana Di setujui.',
-                                    'success'
-                                )
-                                location.reload()
-
-                                $(".item-ubah").attr("disabled", false);
-
-                                $('#id_permohonan').val('');
-
-                                $('#modalubah').modal('hide');
-
-                            } else {
-                                Swal.fire(
-                                    'Tidak Disetujui!',
-                                    'Permohonan Dana Tidak Di setujui.',
-                                    'error'
-                                )
-                                location.reload()
-
-                                $(".item-ubah").attr("disabled", false);
-
-                            }
-
-                        });
-                    }
-
-                    $('#file-upload').submit(function(e) {
-                        e.preventDefault();
-                        let formData = new FormData(this);
-                        $('#file-input-error').text('');
-
-                        $.ajax({
-
-                            type: 'POST',
-                            url: "{{ route('penerimaankas.upload') }}",
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-
-                            success: (response) => {
-
-                                if (response) {
-                                    this.reset();
-                                    update(response.filename, response.no_resi_terima_kas,
-                                        response
-                                        .id_permohonan,
-                                        response.tanggal_penerimaan_kas);
-
-                                    alert('File has been uploaded successfully');
-                                }
-
-                            },
-
-                            error: function(response) {
-                                $('#file-input-error').text(response.responseJSON.message);
-                            }
-
-                        });
-
-                    });
+                  
         });
     </script>
 
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
         jQuery(document).ready(function($) {
             $.ajaxSetup({
                 headers: {
@@ -678,8 +535,8 @@
 
                     if (response.message == "success") {
                         Swal.fire(
-                            'Disetujui!',
-                            'Permohonan Dana Di setujui.',
+                            'Terpload!',
+                            'Bukti Transaksi Berhasil Di Edit.',
                             'success'
                         )
                         location.reload()
@@ -815,5 +672,5 @@
 
             });
         });
-    </script> --}}
+    </script>
 @endsection

@@ -35,7 +35,7 @@
 								d-none d-md-inline
 								mr-3
 							">
-                            {{ Auth::user()->name; }}</span>
+                            {{ Auth::user()->name }}</span>
                         <span class="symbol symbol-35 symbol-light-success">
                             <span class="symbol-label font-size-h5 font-weight-bold">a</span>
                         </span>
@@ -73,6 +73,28 @@
 <div class="subheader py-2 py-lg-4  subheader-solid " id="kt_subheader">
     <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
         <!--begin::Info-->
+        <div class="d-flex align-items-center flex-wrap mr-1">
+            <!--begin::Mobile Toggle-->
+            <button class="burger-icon burger-icon-left mr-4 d-inline-block d-lg-none" id="kt_subheader_mobile_toggle">
+                <span></span>
+            </button>
+            <!--end::Mobile Toggle-->
+
+            <!--begin::Page Heading-->
+            <div class="d-flex align-items-baseline flex-wrap mr-5">
+                <!--begin::Page Title-->
+                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">
+                    {{ $title }}
+                </h5>
+                <span class="text-muted font-weight-bold mr-4">{{ Auth::user()->jabatan; }}</span>
+
+            </div>
+            <!--end::Page Heading-->
+        </div>
+        <!--end::Info-->
+
+
+        {{-- <!--begin::Info-->
         <div class="d-flex align-items-center flex-wrap mr-2">
 
             <!--begin::Page Title-->
@@ -82,6 +104,7 @@
             <!--end::Page Title-->
 
             <!--begin::Actions-->
+            
             <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
             <span class="text-muted font-weight-bold mr-4">{{ Auth::user()->jabatan; }}</span>
 
@@ -92,26 +115,8 @@
 
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
-            <!--begin::Actions-->
-            {{-- <a href="#" class="btn btn-clean  btn-sm font-weight-bold font-size-base mr-1">
-                Today
-            </a>
-            <a href="#" class="btn btn-clean btn-sm font-weight-bold font-size-base  mr-1">
-                Month
-            </a>
-            <a href="#" class="btn btn-clean btn-sm font-weight-bold font-size-base mr-1">
-                Year
-            </a> --}}
-            <!--end::Actions-->
-
-            <!--begin::Daterange-->
-            {{-- <a href="#" class="btn btn-sm btn-light font-weight-bold mr-2" id="kt_dashboard_daterangepicker" data-toggle="tooltip" title="" data-placement="left" data-original-title="Select dashboard daterange">
-                    <span class="text-muted font-size-base font-weight-bold mr-2" id="kt_dashboard_daterangepicker_title">Today:</span>
-                    <span class="text-primary font-size-base font-weight-bolder" id="kt_dashboard_daterangepicker_date">Nov 24</span>
-                </a> --}}
-            <!--end::Daterange-->
         </div>
-        <!--end::Toolbar-->
+        <!--end::Toolbar--> --}}
 
     </div>
 </div>

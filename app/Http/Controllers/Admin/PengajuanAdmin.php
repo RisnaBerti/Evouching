@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use App\Models\PembayaranKas;
 use App\Models\PenerimaanKas;
 use App\Http\Controllers\Controller;
+use App\Models\PembayaranBank;
+use App\Models\PenerimaanBank;
+use App\Models\PengajuanCA;
 use Illuminate\Support\Facades\Auth;
 use DB; //import fungsi query builder
 
@@ -24,7 +27,8 @@ class PengajuanAdmin extends Controller
                 'title' => 'Permohonan Dana',
                 'active' => 'Permohonan Dana',
                 'data' => $data
-            ]);
+            ]
+        );
     }
 
     //fungsi get data
@@ -45,6 +49,7 @@ class PengajuanAdmin extends Controller
         $permohonan->nominal_acc = $request->nominal_acc;
         $permohonan->status_permohonan = '1';
         $permohonan->jenis_dana = $request->jenis_dana;
+        $permohonan->status_permohonan = '3';
         $permohonan->ttd_bendahara = '1';
         $permohonan->update();
 
@@ -55,8 +60,7 @@ class PengajuanAdmin extends Controller
                     'id_permohonan' => $request->id_permohonan,
                     'no_resi_bayar_kas' => '0',
                     'tanggal_pembayaran_kas' => '0',
-                    'bukti_transaksi' => '0',
-                    'status' => '0'
+                    'bukti_transaksi' => '0'
                 ]
             );
         } else if ($permohonan->jenis_dana == 'Penerimaan Kas') {
@@ -66,23 +70,41 @@ class PengajuanAdmin extends Controller
                     'id_permohonan' => $request->id_permohonan,
                     'no_resi_terima_kas' => '0',
                     'tanggal_penerimaan_kas' => '0',
-                    'bukti_transaksi' => '0',
-                    'status' => '0'
+                    'bukti_transaksi' => '0'
                 ]
             );
-        } else if ($permohonan->jenis_dana == 'Pengajuan Dana') {
-            // PengajuanDana::create(
-            //     [
-            //         'id_pengajuan_dana' => str_replace('-', '', Str::uuid()),
-            //         'id_permohonan' => $request->id_permohonan,
-            //         'no_resi_pengajuan_dana' => '0',
-            //         'tanggal_pengajuan_dana' => '0',
-            //         'bukti_transaksi' => '0',
-            //         'status' => '0'
-            //     ]
-            // );
+        } else if ($permohonan->jenis_dana == 'Pembayaran Bank') {
+            PembayaranBank::create(
+                [
+                    'id_pembayaran_bank' => str_replace('-', '', Str::uuid()),
+                    'id_permohonan' => $request->id_permohonan,
+                    'no_resi_bayar_bank' => '0',
+                    // 'tanggal_pembayaran_bank' => '0',
+                    'bukti_transaksi' => '0'
+                ]
+            );
+        } else if ($permohonan->jenis_dana == 'Penerimaan Bank') {
+            PenerimaanBank::create(
+                [
+                    'id_penerimaan_bank' => str_replace('-', '', Str::uuid()),
+                    'id_permohonan' => $request->id_permohonan,
+                    'no_resi_terima_bank' => '0',
+                    // 'tanggal_penerimaan_bank' => '0',
+                    'bukti_transaksi' => '0'
+                ]
+            );
+        } else {
+            PengajuanCA::create(
+                [
+                    'id_ca' => str_replace('-', '', Str::uuid()),
+                    'id_permohonan' => $request->id_permohonan,
+                    'no_resi_ca' => '0',
+                    'tanggal_penerimaan_ca' => '0',
+                    'bukti_transaksi' => '0'
+                ]
+            );
         }
-        
+
         return "success";
     }
 }

@@ -309,11 +309,11 @@
                             "render": function(data, type, row) {
 
                                 if (row.status_permohonan == 0) {
-                                    return '<span class="badge bg-warning">Belum Disetujui</span>';
+                                    return '<span class="badge bg-secondary">Belum Disetujui</span>';
                                 } else if (row.status_permohonan == 1) {
-                                    return '<span class="badge bg-success">Disetujui Bendahara</span>';
+                                    return '<span class="badge bg-warning">Diperiksa Pemeriksa</span>';
                                 } else if (row.status_permohonan == 3) {
-                                    return '<span class="badge bg-success">Disetujui Pemeriksa</span>';
+                                    return '<span class="badge bg-primary">Diperiksa Bendahara</span>';
                                 } else if (row.status_permohonan == 2) {
                                     return '<span class="badge bg-success">DANA ACC</span>';
                                 } else {

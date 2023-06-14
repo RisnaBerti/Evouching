@@ -32,14 +32,12 @@ class AuthController extends Controller
             $user = Auth::user();
             if ($user->is_active == '1') {
                 // cek role
-                if ($user->role_id == 1) {
-                    return redirect()->intended('bendahara');
-                } else if ($user->role_id == 2) {
-                    return redirect()->intended('dashboard-manajer');
-                } else if ($user->role_id == 3) {
-                    return redirect()->intended('pemeriksa');
-                } else if ($user->role_id == 4) {
-                    return redirect()->intended('dashboard-pemohon');
+                if ($user->role_id == '1') {
+                    return redirect()->route('bendahara');
+                } else if ($user->role_id == '2' || $user->role_id == '3') {
+                    return redirect()->route('dashboard-manajer');
+                }  else if ($user->role_id == '4') {
+                    return redirect()->route('dashboard-pemohon');
                 }
             } else {
                 return redirect()->route('auth-login')->with('status', 'Your account is not active, please contact admin!');

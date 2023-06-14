@@ -19,7 +19,7 @@
                                         <div class="col-7 align-self-start">
                                             <div class="col">
                                                 <h3 class="card-title">
-                                                    BUKTI PEMBAYARAN KAS
+                                                    BUKTI pembayaran KAS
                                                 </h3>
                                             </div>
                                         </div>
@@ -106,13 +106,122 @@
             </div>
         </div>
     </div>
+    <!--end::Modal-->
+
+    <!-- Modal -->
+    <div class="modal fade modal-edit-pembayarankas" id="staticBackdrop" data-backdrop="static" data-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <!--begin::Card-->
+                    <div class="card card-custom gutter-b example example-compact">
+                        <div class="panel-body card-body">
+                            <form action="{{ route('pembayarankas.ubahid') }}" method="POST" id="file-upload-edit"
+                                enctype="multipart/form-data">
+                                @csrf
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-7 align-self-start">
+                                            <div class="col">
+                                                <h3 class="card-title">
+                                                    EDIT BUKTI PEMBAYARAN KAS
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-5 align-items-start">
+                                            <input type="text" name="id_permohonan_edit" id="id_permohonan_edit">
+                                            {{-- <input type="text" name="id_edit" id="id_edit"> --}}
+                                            <div class="input-group input-group-sm mb-1">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
+                                                        Bayar:</span>
+                                                </div>
+                                                <input readonly type="text" class="form-control"
+                                                    id="no_resi_bayar_kas_edit" name="no_resi_bayar_kas_edit"
+                                                    aria-label="Sizing example input"
+                                                    aria-describedby="inputGroup-sizing-sm">
+                                            </div>
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"
+                                                        id="inputGroup-sizing-sm">Tanggal:</span>
+                                                </div>
+                                                <input type="date" value="{{ date('Y-m-d') }}" class="form-control"
+                                                    id="tanggal_pembayaran_kas_edit" name="tanggal_pembayaran_kas_edit"
+                                                    aria-label="Sizing example input"
+                                                    aria-describedby="inputGroup-sizing-sm">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-lg-4">
+                                            <label>Dibayarkan Kepada</label>
+                                            <input type="text" class="form-control" placeholder="Nama Legkap"
+                                                id="name_edit" readonly disabled />
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label>Jabatan</label>
+                                            <input type="text" class="form-control" placeholder="Jabatan"
+                                                id="jabatan_edit" readonly disabled />
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label>Divisi / Departemen</label>
+                                            <input type="text" class="form-control" placeholder="Divisi"
+                                                id="divisi_edit" readonly disabled />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Total Taksiran</label>
+                                            <input type="text" class="form-control" placeholder="Total"
+                                                id="nominal_acc_edit" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Terbilang</label>
+                                            <input type="text" class="form-control" placeholder="Terbilang"
+                                                id="terbilang_edit" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Untuk Keperluan</label>
+                                            <input type="text" class="form-control" placeholder="Keterangan"
+                                                id="keterangan_permohonan_edit" />
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="form-label" for="inputFile">Bukti Nota</label>
+                                            <input type="file" name="file_edit" id="inputFile" class="form-control">
+                                            <span class="text-danger" id="file-input-error"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success">Edit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Card-->
+            </div>
+        </div>
     </div>
     <!--end::Modal-->
+
     <div class="card card-custom">
         <div class="card-header">
             <div class="card-title">
                 <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
-                <h3 class="card-label">Pembayaran Kas</h3>
+                <h3 class="card-label">pembayaran Kas</h3>
             </div>
         </div>
         <div class="card-body">
@@ -246,20 +355,21 @@
                                         '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
                                         '" data-acc="' + row.nominal_acc + '" data-trb="' + row
                                         .terbilang + '" data-kp="' + row.keterangan_permohonan +
-                                        '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah-pembayarankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
+                                        '"><i class="ki ki-plus text-danger btn btn-icon btn-light-danger item-ubah-pembayarankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
                                         row.id_permohonan +
-                                        '"><span class="badge bg-danger">Belum Di Unggah</span></a>';
+                                        '"></a>';
 
 
                                 } else {
-                                    return '<a class="dropdown-item item-ubah-pembayarankas" href="#" data-id="' +
+                                    return '<a class="dropdown-item item-edit-pembayarankas" href="#" data-id="' +
                                         row.id + '" data-ip="' +
                                         row.id_permohonan + '" data-nm="' + row.name +
                                         '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
                                         '" data-acc="' + row.nominal_acc + '" data-trb="' + row
                                         .terbilang + '" data-kp="' + row.keterangan_permohonan +
-                                        '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah-pembayarankas"></i></a> <span class="badge bg-success">Bukti Telah Di Unggah</span>';
-
+                                        '"><i class="fas fa-edit btn btn-icon btn-light-primary item-edit-pembayarankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
+                                        row.id_permohonan +
+                                        '"></a>';
                                 }
                             },
                             padding: '5px',
@@ -280,6 +390,55 @@
                     });
             }
 
+            function getdatapembayaranid(id_permohonan) {
+
+                $.post("{{ route('pembayarankas.getid') }}", {
+                        _token: "{{ csrf_token() }}",
+                        id_permohonan: id_permohonan
+                    })
+                    .done(function(data) {
+                        $("#id_permohonan_edit").val(data.id_permohonan);
+                        $("#no_resi_bayar_kas_edit").val(data.no_resi_bayar_kas);
+                        $("#tanggal_pembayaran_kas_edit").val(data.tanggal_pembayaran_kas);
+                        $("#file_edit").val(data.bukti_transaksi);
+                        // alert(data.no_resi_bayar_kas);
+                    });
+            }
+
+            // edit nota
+            $('#table-pembayarankas').on('click', '.item-edit-pembayarankas', function() {
+                var id_permohonan = $(this).data('ip');
+                var name = $(this).data('nm');
+                var jabatan = $(this).data('jbt');
+                var divisi = $(this).data('dvs');
+                var acc = $(this).data(uang('acc'));
+                var keterangan = $(this).data('kp');
+                var terbilang = $(this).data('trb');
+                var bukti_transaksi = $(this).data('bkt');
+
+                // $('#id_pembayaran_kas').val(id_pembayaran_kas);
+                $('#id_permohonan').val(id_permohonan);
+                $('#id').val(id);
+                $('#name_edit').val(name);
+                $('#jabatan_edit').val(jabatan);
+                $('#divisi_edit').val(divisi);
+                if (acc == null) {
+                    $('#nominal_acc_edit').val('0');
+                } else {
+                    $('#nominal_acc_edit').val(uang(acc));
+                }
+                $('#keterangan_permohonan_edit').val(keterangan);
+                $('#terbilang_edit').val(terbilang);
+                $('#bukti_transaksi_edit').val(bukti_transaksi);
+
+
+                getdatapembayaranid(id_permohonan);
+
+
+                $('.modal-edit-pembayarankas').modal('show');
+            });
+            // end of 
+
             // uang
             $('#nominal_acc').change(function() {
                 var acc = $('#nominal_acc').val();
@@ -287,14 +446,11 @@
             });
             // end of uang
 
-            // ubah
+            // upload nota
             $('#table-pembayarankas').on('click', '.item-ubah-pembayarankas', function() {
-
-                // console.log('ubah');
-
                 getmax();
 
-                // var id_penerimaan_kas = $(this).data('ipk');
+                // var id_pembayaran_kas = $(this).data('ipk');
                 var id = $(this).data('id');
                 var id_permohonan = $(this).data('ip');
                 var name = $(this).data('nm');
@@ -305,7 +461,7 @@
                 var terbilang = $(this).data('trb');
                 var bukti_transaksi = $(this).data('bkt');
 
-                // $('#id_penerimaan_kas').val(id_penerimaan_kas);
+                // $('#id_pembayaran_kas').val(id_pembayaran_kas);
                 $('#id_permohonan').val(id_permohonan);
                 $('#id').val(id);
                 $('#name').val(name);
@@ -324,76 +480,6 @@
 
                 $('.modal-ubah-pembayarankas').modal('show');
             });
-            // end of ubah
-
-            // $(".save-pembayaran-kas").click(function() {
-
-            //     var id_permohonan = $('#id_permohonan').val();
-            //     var bukti_transaksi = $('#bukti_transaksi').val();
-            //     // var status_permohonan = $('#status_permohonan').val();
-            //     // var jenis_dana = $('#jenis_dana').val();
-
-            //     $('.save-pembayaran-kas').attr("disabled", "disabled");
-
-            //     if (!id_permohonan) {
-
-            //         alert("ID User tidak terdefinisi!");
-
-            //         $('.save-pembayaran-kas').attr("disabled", false);
-
-            //     } else {
-
-            //         $.post("{{ url('/permohonan-bendahara/edit') }}", {
-            //             _token: "{{ csrf_token() }}",
-            //             id_permohonan: id_permohonan,
-            //             nominal_acc: nominal_acc,
-            //             status_permohonan: status_permohonan,
-            //             jenis_dana: jenis_dana
-
-            //         }).done(function(response) {
-
-            //             if (response == "success") {
-            //                 Swal.fire(
-            //                     'Disetujui!',
-            //                     'Permohonan Dana Di setujui.',
-            //                     'success'
-            //                 )
-            //                 location.reload()
-
-            //                 // get();
-
-            //                 $(".item-ubah").attr("disabled", false);
-
-            //                 $('#id_permohonan').val('');
-            //                 $('#name').val('');
-            //                 $('#no_resi_ajuan').val('');
-            //                 $('#tanggal_permohonan').val('');
-            //                 $('#harga_satuan').val('');
-            //                 $('#jumlah_satuan').val('');
-            //                 $('#total_dana_ajuan').val('');
-            //                 $('#nominal_acc').val('');
-            //                 $('#jenis_dana').val('');
-            //                 $('#keterangan_permohonan').val('');
-
-            //                 $('#modalubah').modal('hide');
-
-            //             } else {
-            //                 Swal.fire(
-            //                     'Tidak Disetujui!',
-            //                     'Permohonan Dana Tidak Di setujui.',
-            //                     'error'
-            //                 )
-            //                 location.reload()
-
-            //                 $(".item-ubah").attr("disabled", false);
-
-            //             }
-
-            //         });
-
-            //     }
-
-            // });
 
             function uang(num) {
 
@@ -420,98 +506,164 @@
                 return ("" + formatted + ((parts) ? "." + parts[1].substr(0, 2) : ""));
 
             }
+
         });
     </script>
+
     <script type="text/javascript">
-        $.ajaxSetup({
-            headers: {
+        jQuery(document).ready(function($) {
+            $.ajaxSetup({
+                headers: {
 
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-
-        function update(filename, no_resi_bayar_kas, id_permohonan) {
-
-            var tanggal_pembayaran_kas = $('#tanggal_pembayaran_kas').val();
-
-            $.post("{{ route('pembayarankas.ubah') }}", {
-                _token: "{{ csrf_token() }}",
-                id_permohonan: id_permohonan,
-                no_resi_terima_kas:  no_resi_terima_kas,
-                tanggal_pembayaran_kas: tanggal_pembayaran_kas,
-                bukti_transaksi: filename
-
-
-            }).done(function(response) {
-
-                if (response == "success") {
-                    Swal.fire(
-                        'Disetujui!',
-                        'Permohonan Dana Di setujui.',
-                        'success'
-                    )
-                    location.reload()
-
-                    // get();
-
-                    $(".item-ubah").attr("disabled", false);
-
-                    $('#id_permohonan').val('');
-
-                    $('#modalubah').modal('hide');
-
-                } else {
-                    Swal.fire(
-                        'Tidak Disetujui!',
-                        'Permohonan Dana Tidak Di setujui.',
-                        'error'
-                    )
-                    location.reload()
-
-                    $(".item-ubah").attr("disabled", false);
-
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-
             });
-        }
 
+            function updateid(filename, no_resi_bayar_kas, id_permohonan, tanggal_pembayaran_kas) {
 
+                $.post("{{ route('pembayarankas.ubahid') }}", {
+                    _token: "{{ csrf_token() }}",
+                    id_permohonan: id_permohonan,
+                    no_resi_bayar_kas: no_resi_bayar_kas,
+                    tanggal_pembayaran_kas: tanggal_pembayaran_kas,
+                    bukti_transaksi: filename
 
-        $('#file-upload').submit(function(e) {
+                }).done(function(response) {
 
-            e.preventDefault();
-            let formData = new FormData(this);
-            $('#file-input-error').text('');
+                    if (response.message == "success") {
+                        Swal.fire(
+                            'Terpload!',
+                            'Bukti Transaksi Berhasil Di Edit.',
+                            'success'
+                        )
+                        location.reload()
 
-            $.ajax({
+                        $(".item-ubah").attr("disabled", false);
 
-                type: 'POST',
-                url: "{{ route('pembayarankas.upload') }}",
-                data: formData,
-                contentType: false,
-                processData: false,
+                        $('#id_permohonan').val('');
 
-                success: (response) => {
+                        $('#modalubah').modal('hide');
 
-                    if (response) {
-                        this.reset();
-                        update(response.filename, response.no_resi_bayar_kas, response.id_permohonan);
+                    } else {
+                        Swal.fire(
+                            'Tidak Disetujui!',
+                            'Permohonan Dana Tidak Di setujui.',
+                            'error'
+                        )
+                        location.reload()
 
-                        alert('File has been uploaded successfully');
+                        $(".item-ubah").attr("disabled", false);
 
                     }
 
-                },
+                });
+            }
 
-                error: function(response) {
+            $('#file-upload-edit').submit(function(e) {
+                e.preventDefault();
+                let formData = new FormData(this);
+                $('#file-input-error').text('');
 
-                    $('#file-input-error').text(response.responseJSON.message);
+                $.ajax({
 
-                }
+                    type: 'POST',
+                    url: "{{ route('pembayarankas.uploadid') }}",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+
+                    success: (response) => {
+
+                        if (response) {
+                            this.reset();
+                            update(response.filename, response.no_resi_bayar_kas_edit, response.id_permohonan_edit, response.tanggal_pembayaran_kas_edit);
+
+                            alert('File has been uploaded successfully');
+                        }
+
+                    },
+
+                    error: function(response) {
+                        $('#file-input-error').text(response.responseJSON.message);
+                    }
+
+                });
 
             });
 
+
+            function update(filename, no_resi_bayar_kas, id_permohonan, tanggal_pembayaran_kas) {
+
+
+                $.post("{{ route('pembayarankas.ubah') }}", {
+                    _token: "{{ csrf_token() }}",
+                    id_permohonan: id_permohonan,
+                    no_resi_bayar_kas: no_resi_bayar_kas,
+                    tanggal_pembayaran_kas: tanggal_pembayaran_kas,
+                    bukti_transaksi: filename
+
+                }).done(function(response) {
+
+                    if (response.message == "success") {
+                        Swal.fire(
+                            'Disetujui!',
+                            'Permohonan Dana Di setujui.',
+                            'success'
+                        )
+                        location.reload()
+
+                        $(".item-ubah").attr("disabled", false);
+
+                        $('#id_permohonan').val('');
+
+                        $('#modalubah').modal('hide');
+
+                    } else {
+                        Swal.fire(
+                            'Tidak Disetujui!',
+                            'Permohonan Dana Tidak Di setujui.',
+                            'error'
+                        )
+                        location.reload()
+
+                        $(".item-ubah").attr("disabled", false);
+
+                    }
+
+                });
+            }
+
+            $('#file-upload').submit(function(e) {
+                e.preventDefault();
+                let formData = new FormData(this);
+                $('#file-input-error').text('');
+
+                $.ajax({
+
+                    type: 'POST',
+                    url: "{{ route('pembayarankas.upload') }}",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+
+                    success: (response) => {
+
+                        if (response) {
+                            this.reset();
+                            update(response.filename, response.no_resi_bayar_kas, response.id_permohonan, response.tanggal_pembayaran_kas);
+
+                            alert('File has been uploaded successfully');
+                        }
+
+                    },
+
+                    error: function(response) {
+                        $('#file-input-error').text(response.responseJSON.message);
+                    }
+
+                });
+
+            });
         });
     </script>
 @endsection

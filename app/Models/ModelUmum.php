@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -56,6 +57,15 @@ class ModelUmum extends Model
         ->join('users', 'users.id', '=', 'tb_permohonan.id')
         ->where('tb_detail_permohonan.id_permohonan', $id)
         ->get(['tb_detail_permohonan.*', 'tb_permohonan.tanggal_permohonan', 'tb_permohonan.no_resi_ajuan', 'tb_permohonan.total_dana_ajuan', 'tb_permohonan.terbilang', 'tb_permohonan.status_permohonan', 'users.name']);
+        return $data;
+    }
+
+    public static function getDataPengajuanCa()
+    {
+        $data = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
+        ->where('tb_permohonan.id', Auth::user()->id)
+        ->where('jenis_dana', 'Pengajuan CA')
+        ->get(['users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.*']);
         return $data;
     }
 }

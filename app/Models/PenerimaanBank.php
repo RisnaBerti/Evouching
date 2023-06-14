@@ -15,10 +15,8 @@ class PenerimaanBank extends Model
     protected $fillable = [
         'id_penerimaan_bank',
         'id_permohonan',
-        'id',
         'no_resi_terima_bank',
-        'tanggal_pembayaran_kas',
-        'bukti_transaksi',
-        'status'
+        'tanggal_penerimaan_bank',
+        'bukti_transaksi'
     ];
 }

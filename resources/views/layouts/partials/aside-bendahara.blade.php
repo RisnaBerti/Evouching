@@ -312,7 +312,7 @@
                             </svg>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-text">Pengembalian CA</span>
+                        <span class="menu-text">Chartered Accountant</span>
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="menu-submenu">

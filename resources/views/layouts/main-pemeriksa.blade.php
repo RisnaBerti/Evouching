@@ -38,6 +38,8 @@
 	<!--end::Layout Themes-->
 	<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
 	<link rel="stylesheet" href="assets/dropzone/593/dropzone.min.css" type="text/css" />
+	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <link href="/assets/datatable/datatables.min.css" rel="stylesheet" />
 

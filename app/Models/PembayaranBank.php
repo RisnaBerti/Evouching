@@ -15,9 +15,8 @@ class PembayaranBank extends Model
     protected $fillable = [
         'id_pembayaran_bank',
         'id_permohonan',
-        'id',
         'no_resi_bayar_bank',
         'tanggal_pembayaran_bank',
-        'bukti_transaksi'
+        'bukti_transaksi' 
     ];
 }

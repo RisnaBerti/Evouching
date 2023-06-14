@@ -88,8 +88,6 @@ class PermohonanPemohonController extends Controller
             ]
         );
 
-
-
         return "success";
     }
 
@@ -153,9 +151,9 @@ class PermohonanPemohonController extends Controller
         return $permohonan;
     }
 
-    public function keterangan()
+    public function keterangan(Request $request)
     {
-        $permohonan = DetailPermohonan::all();
-        return $permohonan;
+        $permohonan = DetailPermohonan::where('id_permohonan',  $request->id_permohonan)->get();
+        return response()->json($permohonan);
     }
 }

@@ -29,7 +29,7 @@ class PermohonanManajerController extends Controller
     public function edit(Request $request)
     {
         $permohonan = Permohonan::findOrFail($request->id_permohonan);
-        $permohonan->status_permohonan = '2';
+        $permohonan->status_permohonan = '1';
         $permohonan->ttd_manajer = '1';
         $permohonan->update();
 
