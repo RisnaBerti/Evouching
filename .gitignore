@@ -24,3 +24,5 @@ yarn-error.log
 /database/migrations/2023_05_08_071241_create_tb_permohonan_table.php
 /resources/views/ex.php
 /resources/views/admin/penerimaan-kas.blade copy.php
+/resources/views/admin/pembayaran-kas.blade copy.php
+/resources/views/admin/penerimaan-bank.blade copy.php
