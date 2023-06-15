@@ -387,7 +387,7 @@
                 <!-- END MENU PENGEMBALIAN CA -->
 
 
-                <!-- START MENU REIMBURSE -->
+                {{-- <!-- START MENU REIMBURSE -->
                 <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
                         <span class="svg-icon menu-icon svg-icon-primary">
@@ -478,7 +478,7 @@
                         </ul>
                     </div>
                 </li>
-                <!-- END MENU REIMBUSE-->
+                <!-- END MENU REIMBUSE--> --}}
 
 
                 <!-- START MENU ANTAR BANK -->

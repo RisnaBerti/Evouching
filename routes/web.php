@@ -133,6 +133,11 @@ Route::controller(CaController::class)->group(function () {
     Route::get('/pembayaranca', 'pembayaran_ca')->name('pembayaran-ca');
     Route::get('/pembayaran-ca/getmax_ca', 'getmax_ca');
     Route::post('/pembayaran-ca/get', 'get');
+    Route::post('/pembayaran-ca/upload', 'upload_pembayaran')->name('pembayaranca.upload');
+    Route::post('/pembayaran-ca/edit', 'edit_upload_pembayaran')->name('pembayaranca.edit');
+    Route::post('/pembayaranca/getid', 'get_id')->name('pembayaranca.getid');
+    Route::post('/pembayaran-ca/uploadid', 'upload_pembayaran_id')->name('pembayaranca.uploadid');
+    Route::post('/pembayaran-ca/editid', 'edit_upload_pembayaran_id')->name('pembayaranca.editid');
 
 });
 
@@ -147,6 +152,7 @@ Route::controller(AntarBankController::class)->group(function () {
     Route::post('/penerimaan-antarbank/get', 'get_penerimaan_antar_bank');
     Route::post('/penerimaan-antarbank/add', 'penerimaan_antar_bank_add');
     Route::post('/penerimaan-antarbank/edit', 'penerimaan_antar_bank_edit');
+    Route::post('/penerimaan-antarbank/delete', 'penerimaan_antar_bank_delete');
 
     Route::get('/pembayaran-antarbank', 'pembayaran_antar_bank')->name('pembayaran-antarbank');
     Route::get('/pembayaran-antarbank/getmax', 'getmax2');

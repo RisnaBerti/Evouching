@@ -64,12 +64,12 @@
                                     <span class="navi-text">PDF</span>
                                 </a>
                             </li>
-                            <li class="navi-item">
+                            {{-- <li class="navi-item">
                                 <a href="#" class="navi-link">
                                     <span class="navi-icon"><i class="la la-file-excel-o"></i></span>
                                     <span class="navi-text">Excel</span>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                         <!--end::Navigation-->
                     </div>
@@ -81,7 +81,7 @@
 
         <div class="card-body">
             <!--begin: Datatable-->
-            <table class="table table-bordered" id="table_datauser" style="margin-top: 13px !important">
+            <table class="table table-bordered" id="table_laporan" style="margin-top: 13px !important">
                 <thead>
                     </tr>
                     <th>
@@ -98,12 +98,6 @@
                     </th>
                     <th>
                         <center>URAIAN TRANSAKSI</center>
-                    </th>
-                    <th>
-                        <center>MASUK</center>
-                    </th>
-                    <th>
-                        <center>KELUAR</center>
                     </th>
                     <th>
                         <center>SALDO</center>
@@ -130,7 +124,7 @@
                             </td>
                             <td>
                                 <center>
-                                    @if ($dt->jenis_dana == 'Penerimaan Kas' && $dt->jenis_dana == 'Pembayaran Kas')
+                                    @if ($dt->jenis_dana == 'Penerimaan Kas' || $dt->jenis_dana == 'Pembayaran Kas')
                                         <span class="label label-lg label-light-primary label-inline">CASH</span>
                                     @else
                                         <span class="label label-lg label-light-success label-inline">TF</span>
@@ -139,20 +133,6 @@
                             </td>
                             <td>
                                 <center>{{ $dt->keterangan_permohonan }}</center>
-                            </td>
-                            <td>
-                                <center>
-                                    @if ($dt->jenis_dana == 'Penerimaan Kas' && $dt->jenis_dana == 'Penerimaan Bank')
-                                        {{ $dt->nominal_acc }}
-                                    @endif
-                                </center>
-                            </td>
-                            <td>
-                                <center>
-                                    @if ($dt->jenis_dana == 'Pembayaran Kas' && $dt->jenis_dana == 'Pembayaran Bank')
-                                        {{ $dt->nominal_acc }}
-                                    @endif
-                                </center>
                             </td>
                             <td>
                                 <center>
@@ -166,7 +146,8 @@
                                 <center>{{ $dt->name }}</center>
                             </td>
                             <td>
-                                <center><img src="{{ url('/bukti') }}/{{ $dt->bukti_transaksi }}" class="rounded float-left" width="75" alt="Bukti Transaksi"></center>
+                                <center><img src="{{ url('/bukti') }}/{{ $dt->bukti_transaksi }}"
+                                        class="rounded float-left" width="75" alt="Bukti Transaksi"></center>
                             </td>
                             {{-- <td>
                                 <center>
@@ -186,4 +167,14 @@
             <!--end: Datatable-->
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+
+                    //Mengaktifkan datatable
+                    $('#table_laporan').DataTable({
+                        paging: true,
+                    });
+                });
+    </script>
 @endsection

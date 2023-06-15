@@ -19,7 +19,7 @@
                                     </div>
                                 </div>
                                 <div class="col-5 align-items-start">
-                                    <input type="text" id="id_pembayaran_antar_bank_edit">
+                                    <input hidden type="text" id="id_pembayaran_antar_bank_edit">
                                     <div class="input-group input-group-sm mb-1">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
@@ -499,7 +499,7 @@
                                     row.keperluan +
                                     '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
                                     row.id_pembayaran_antar_bank +
-                                    '"><i class="fas fa-edit btn btn-icon btn-light-danger"></i></a>';
+                                    '"><i class="far fa-trash-alt btn btn-icon btn-light-danger"></i></a>';
                             },
                             padding: '5px',
                         }

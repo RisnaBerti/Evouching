@@ -100,6 +100,7 @@ class PengajuanAdmin extends Controller
                     'id_permohonan' => $request->id_permohonan,
                     'no_resi_ca' => '0',
                     'tanggal_penerimaan_ca' => '0',
+                    'nominal_terpakai' => '0',
                     'bukti_transaksi' => '0'
                 ]
             );

@@ -131,7 +131,7 @@
                                             </div>
                                         </div>
                                         <div class="col-5 align-items-start">
-                                            <input type="text" name="id_permohonan_edit" id="id_permohonan_edit">
+                                            <input hidden type="text" name="id_permohonan_edit" id="id_permohonan_edit">
                                             {{-- <input type="text" name="id_edit" id="id_edit"> --}}
                                             <div class="input-group input-group-sm mb-1">
                                                 <div class="input-group-prepend">
@@ -221,7 +221,7 @@
         <div class="card-header">
             <div class="card-title">
                 <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
-                <h3 class="card-label">Pembayaran Kas</h3>
+                <h3 class="card-label">Pembayaran Bank</h3>
             </div>
         </div>
         <div class="card-body">
