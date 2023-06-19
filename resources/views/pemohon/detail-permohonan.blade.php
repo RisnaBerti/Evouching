@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-lg-4">
                     <label>Terbilang</label>
-                    <input type="text" class="form-control form-control-sm" name="terbilang" placeholder="Terbilang"
+                    <input readonly type="text" class="form-control form-control-sm" name="terbilang" placeholder="Terbilang"
                         id="terbilang" />
                 </div>
             </div>

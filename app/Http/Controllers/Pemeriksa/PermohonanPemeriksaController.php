@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Manajer;
+namespace App\Http\Controllers\Pemeriksa;
 
 use App\Models\Permohonan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class PermohonanManajerController extends Controller
+class PermohonanPemeriksaController extends Controller
 {
     public function index()
     {
-        return view('manajer.permohonan-dana', [
+        return view('pemeriksa.permohonan-acc', [
             'title' => 'Permohonan',
             'active' => 'permohonan',
         ]);
@@ -29,21 +29,10 @@ class PermohonanManajerController extends Controller
     public function edit(Request $request)
     {
         $permohonan = Permohonan::findOrFail($request->id_permohonan);
-        $permohonan->status_permohonan = '3';
-        $permohonan->ttd_manajer = '1';
-        $permohonan->update();
-
-        return "success";
-    }
-
-    public function menolak(Request $request)
-    {
-        $permohonan = Permohonan::findOrFail($request->id_permohonan);
-        $permohonan->status_permohonan = '4';
-        $permohonan->ttd_manajer = '1';
+        $permohonan->status_permohonan = '2';
+        $permohonan->ttd_pemeriksa = '1';
         $permohonan->update();
 
         return "success";
     }
 }
-

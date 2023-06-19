@@ -555,8 +555,6 @@
             });
             // end of 
 
-
-
             function uang(num) {
 
                 var str = num.toString().replace("", ""),
@@ -591,6 +589,8 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+
 
         function update(filename, no_resi_ca, id_ca, id_permohonan, tanggal_penerimaan_ca, nominal_terpakai) {
 
@@ -665,7 +665,89 @@
                             .id_permohonan, response.tanggal_penerimaan_ca, response
                             .nominal_terpakai);
 
-                        alert('File has been uploaded successfully');
+                        // alert('File has been uploaded successfully');
+
+                    }
+
+                },
+
+                error: function(response) {
+
+                    $('#file-input-error').text(response.responseJSON.message);
+
+                }
+
+            });
+
+        });
+
+        function update_edit(filename, no_resi_ca, id_ca, id_permohonan, tanggal_penerimaan_ca, nominal_terpakai) {
+
+            $.post("{{ route('pembayaranca.editid') }}", {
+                _token: "{{ csrf_token() }}",
+                id_ca: id_ca,
+                id_permohonan: id_permohonan,
+                no_resi_ca: no_resi_ca,
+                tanggal_penerimaan_ca: tanggal_penerimaan_ca,
+                nominal_terpakai: nominal_terpakai,
+                bukti_transaksi: filename
+
+            }).done(function(response) {
+
+                if (response == "success") {
+                    Swal.fire(
+                        'Disetujui!',
+                        'Permohonan Dana Di setujui.',
+                        'success'
+                    )
+                    location.reload()
+
+
+                    $(".item-ubah").attr("disabled", false);
+
+                    $('#id_permohonan').val('');
+
+                    $('#modalubah').modal('hide');
+
+                } else {
+                    Swal.fire(
+                        'Tidak Disetujui!',
+                        'Permohonan Dana Tidak Di setujui.',
+                        'error'
+                    )
+                    location.reload()
+
+                    $(".item-ubah").attr("disabled", false);
+
+                }
+
+            });
+        }
+
+        $('#file-upload-edit').submit(function(e) {
+
+            e.preventDefault();
+            let formData = new FormData(this);
+            $('#file-input-error').text('');
+
+            $.ajax({
+
+                type: 'POST',
+                url: "{{ route('pembayaranca.uploadid') }}",
+                data: formData,
+                contentType: false,
+                processData: false,
+
+                success: (response) => {
+
+                    if (response) {
+                        this.reset();
+
+                        update(response.filename, response.no_resi_ca_edit, response.id_ca_edit, response
+                            .id_permohonan_edit, response.tanggal_penerimaan_ca_edit, response
+                            .nominal_terpakai_edit);
+
+                        // alert('File has been uploaded successfully');
 
                     }
 

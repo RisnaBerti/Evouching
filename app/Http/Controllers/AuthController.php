@@ -34,8 +34,10 @@ class AuthController extends Controller
                 // cek role
                 if ($user->role_id == '1') {
                     return redirect()->route('bendahara');
-                } else if ($user->role_id == '2' || $user->role_id == '3') {
+                } else if ($user->role_id == '2' ) {
                     return redirect()->route('dashboard-manajer');
+                } else if ($user->role_id == '3' ) {
+                    return redirect()->route('dashboard-pemeriksa');
                 }  else if ($user->role_id == '4') {
                     return redirect()->route('dashboard-pemohon');
                 }

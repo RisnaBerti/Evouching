@@ -12,14 +12,17 @@ use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\DataUserController;
 use App\Http\Controllers\Admin\ReimbuseController;
 use App\Http\Controllers\Admin\AntarBankController;
+use App\Http\Controllers\Manajer\LaporanManajer;
 use App\Http\Controllers\Manajer\ManajerController;
-use App\Http\Controllers\Manajer\PermohonanManajerController;
-use App\Http\Controllers\Pemeriksa\AkunPemeriksaController;
 use App\Http\Controllers\Pemohon\PemohonController;
-use App\Http\Controllers\Pemohon\AkunControllerPemohon;
-use App\Http\Controllers\Pemohon\PermohonanPemohonController;
 use App\Http\Controllers\Pemeriksa\PemeriksaController;
+use App\Http\Controllers\Pemohon\AkunControllerPemohon;
 use App\Http\Controllers\Pemohon\PengajuanCaController;
+use App\Http\Controllers\Pemeriksa\PermohonanPemeriksaController;
+use App\Http\Controllers\Pemeriksa\AkunPemeriksaController;
+use App\Http\Controllers\Manajer\PermohonanManajerController;
+use App\Http\Controllers\Pemeriksa\LaporanPemeriksa;
+use App\Http\Controllers\Pemohon\PermohonanPemohonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +89,7 @@ Route::controller(PengajuanAdmin::class)->group(function () {
     Route::get('/permohonan-bendahara', 'index')->name('permohonan_bendahara');
     Route::post('/permohonan-bendahara/get', 'get');
     Route::post('/permohonan-bendahara/edit', 'edit');
+    Route::post('/permohonan-bendahara/menolak', 'menolak');
 });
 
 Route::controller(KasController::class)->group(function () {
@@ -177,6 +181,11 @@ Route::controller(PermohonanManajerController::class)->group(function () {
     Route::get('/permohonan-manajer', 'index')->name('permohonan-manajer');
     Route::post('/permohonan-manajer/get', 'get');
     Route::post('/permohonan-manajer/edit', 'edit');
+    Route::post('/permohonan-manajer/menolak', 'menolak');
+});
+Route::controller(LaporanManajer::class)->group(function () {
+    Route::get('/laporan-pemeriksa', 'index');
+    Route::post('/laporan-pemeriksa/pdf', 'export_pdf');
 });
 Route::controller((AkunControllerManajer::class))->group(function () {
     Route::get('/profile-manajer', 'index')->name('profile_manajer');
@@ -185,6 +194,7 @@ Route::controller((AkunControllerManajer::class))->group(function () {
     Route::get('/change-password-manajer', 'change_password');
     Route::post('/change-password-manajer', 'update_password')->name('change_password_manajer');
 });
+
 // });
 
 //pemeriksa
@@ -193,6 +203,15 @@ Route::controller((AkunControllerManajer::class))->group(function () {
 Route::controller(PemeriksaController::class)->group(function () {
     Route::get('/dashboard-pemeriksa', 'index')->name('dashboard-pemeriksa');
 });
+Route::controller(PermohonanPemeriksaController::class)->group(function () {
+    Route::get('/permohonan-pemeriksa', 'index');
+    Route::post('/permohonan-pemeriksa/get', 'get');
+    Route::post('/permohonan-pemeriksa/edit', 'edit');
+});
+Route::controller(LaporanPemeriksa::class)->group(function () {
+    Route::get('/laporan-pemeriksa', 'index');
+    Route::post('/laporan-pemeriksa/pdf', 'export_pdf');
+});
 Route::controller((AkunPemeriksaController::class))->group(function () {
     Route::get('/profile-pemeriksa', 'index')->name('profile_pemeriksa');
     Route::get('/edit-profile-pemeriksa', 'profile');
@@ -200,6 +219,7 @@ Route::controller((AkunPemeriksaController::class))->group(function () {
     Route::get('/change-password-pemeriksa', 'change_password');
     Route::post('/change-password-pemeriksa', 'update_password')->name('change_password_pemeriksa');
 });
+
 
 
 // pemohon

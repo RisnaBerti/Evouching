@@ -225,11 +225,11 @@
                                 <span class="font-weight-bold text-muted  font-size-sm">{{ $danaAccCount }}</span>
                             </div>
                             <div class="col px-6 py-8 rounded-xl mb-7">
-                                
+
                             </div>
                         </div>
                         <!--end::Row-->
-                        
+
                     </div>
                     <!--end::Stats-->
                     <div class="resize-triggers">
@@ -500,7 +500,7 @@
                             </td>
                             <td>
                                 <center>
-                                    @if ($d->ttd_bendahara == '0')
+                                    {{-- @if ($d->ttd_bendahara == '0')
                                         <span class="label label-lg font-weight-bold label-light-danger label-inline">Belum
                                             ACC</span>
                                     @elseif ($d->ttd_bendahara == '1')
@@ -508,6 +508,18 @@
                                             class="label label-lg font-weight-bold label-light-primary label-inline">Sudah
                                             ACC
                                         </span>
+                                    @endif --}}
+
+                                    @if ($d->status_permohonan == '0')
+                                        <span class="badge bg-secondary">Belum Disetujui</span>
+                                    @elseif ($d->status_permohonan == '1')
+                                        <span class="badge bg-primary">Diperiksa Bendahara</span>
+                                    @elseif ($d->status_permohonan == '2')
+                                        <span class="badge bg-warning">Diperiksa Pemeriksa</span>
+                                    @elseif ($d->status_permohonan == '3')
+                                        <span class="badge bg-success">DANA ACC</span>
+                                    @else
+                                        <span class="badge bg-danger">Ditolak</span>
                                     @endif
                                 </center>
                             </td>

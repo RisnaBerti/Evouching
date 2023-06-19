@@ -49,7 +49,7 @@ class PengajuanAdmin extends Controller
         $permohonan->nominal_acc = $request->nominal_acc;
         $permohonan->status_permohonan = '1';
         $permohonan->jenis_dana = $request->jenis_dana;
-        $permohonan->status_permohonan = '3';
+        $permohonan->status_permohonan = '1';
         $permohonan->ttd_bendahara = '1';
         $permohonan->update();
 
@@ -105,6 +105,16 @@ class PengajuanAdmin extends Controller
                 ]
             );
         }
+
+        return "success";
+    }
+
+    public function menolak(Request $request)
+    {
+        $permohonan = Permohonan::findOrFail($request->id_permohonan);
+        $permohonan->status_permohonan = '4';
+        $permohonan->ttd_bendahara = '1';
+        $permohonan->update();
 
         return "success";
     }

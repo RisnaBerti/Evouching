@@ -579,7 +579,7 @@
                                 .id_permohonan_edit,
                                 response.tanggal_pembayaran_bank_edit);
 
-                            alert('File has been uploaded successfully');
+                            // alert('File has been uploaded successfully');
                         }
 
                     },

@@ -124,6 +124,7 @@
                                             id="terbilang" readonly disabled />
                                     </div>
                                     <input type="text" id="status_permohonan" hidden>
+                                    <input type="text" id="ttd_bendahara" hidden>
                                 </div>
                             </div>
                             <!--end::Form-->
@@ -191,6 +192,7 @@
                     "destroy": true,
                     "processing": true,
                     "ordering": true,
+                    "scrollX": true,
                     "pageLength": 10,
                     "ajax": {
 
@@ -307,13 +309,27 @@
                         {
                             "render": function(data, type, row) {
 
+                                // if (row.ttd_pemeriksa == 1) {
+
+                                //     return '<span class="badge bg-success">DI SETUJUI</span>';
+
+                                // } else if (row.ttd_pemeriksa == 0) {
+
+                                //     return '<span class="badge bg-warning text-dark">BELUM DI SETUJUI </span>';
+
+                                // } else {
+
+                                //     return '<span class="badge bg-danger">Ditolak</span>';
+
+                                // }
+
                                 if (row.status_permohonan == 0) {
-                                    return '<span class="badge bg-warning">Belum Disetujui</span>';
-                                } else if (row.status_permohonan == 1) {
-                                    return '<span class="badge bg-success">Disetujui Bendahara</span>';
-                                } else if (row.status_permohonan == 3) {
-                                    return '<span class="badge bg-success">Disetujui Pemeriksa</span>';
+                                    return '<span class="badge bg-secondary">Belum Disetujui</span>';
                                 } else if (row.status_permohonan == 2) {
+                                    return '<span class="badge bg-warning">Diperiksa Pemeriksa</span>';
+                                } else if (row.status_permohonan == 1) {
+                                    return '<span class="badge bg-primary">Diperiksa Bendahara</span>';
+                                } else if (row.status_permohonan == 3) {
                                     return '<span class="badge bg-success">DANA ACC</span>';
                                 } else {
                                     return '<span class="badge bg-danger">Ditolak</span>';
@@ -326,7 +342,14 @@
                         {
                             "render": function(data, type, row) {
 
-                                return '<a class="dropdown-item item-ubah-permohonan" href="#" data-ip="' +
+                                if (row.status_permohonan == 4) {
+                                return '<span class="svg-icon svg-icon-danger svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Code\Done-circle.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"> <g stroke = "none"stroke - width = "1" fill = "none" fill - rule = "evenodd"> <rect x = "0" y = "0" width = "24" height = "24" /> <circle fill = "#000000" opacity = "0.3" cx = "12" cy = "12" r = "10" /> <path d ="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z" fill = "#000000" fill - rule = "nonzero" / > </g> </svg><!--end::Svg Icon--></span >'
+                                } else if (row.status_permohonan == 2) {
+                                    return '<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Code\Done-circle.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"> <g stroke = "none"stroke - width = "1" fill = "none" fill - rule = "evenodd"> <rect x = "0" y = "0" width = "24" height = "24" /> <circle fill = "#000000" opacity = "0.3" cx = "12" cy = "12" r = "10" /> <path d ="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z" fill = "#000000" fill - rule = "nonzero" / > </g> </svg><!--end::Svg Icon--></span >'
+                                } else if (row.status_permohonan == 3) {
+                                    return '<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Code\Done-circle.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"> <g stroke = "none"stroke - width = "1" fill = "none" fill - rule = "evenodd"> <rect x = "0" y = "0" width = "24" height = "24" /> <circle fill = "#000000" opacity = "0.3" cx = "12" cy = "12" r = "10" /> <path d ="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z" fill = "#000000" fill - rule = "nonzero" / > </g> </svg><!--end::Svg Icon--></span >'
+                                }else {
+                                    return '<a class="dropdown-item item-ubah-permohonan" href="#" data-ip="' +
                                     row.id_permohonan + '" data-nama="' + row.name +
                                     '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
                                     '" data-nra="' + row.no_resi_ajuan + '"  data-tp="' + row
@@ -338,7 +361,22 @@
                                     '" data-st="' + row.status_permohonan +
                                     '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
                                     row.id_permohonan +
-                                    '"><i class="fas fa-trash-alt btn btn-icon btn-light-danger item-jenis-dana"></i></a>'
+                                    '"><i class="fas fa-trash-alt btn btn-icon btn-light-danger item-jenis-dana"></i></a>';
+                                }
+
+                                // return '<a class="dropdown-item item-ubah-permohonan" href="#" data-ip="' +
+                                //     row.id_permohonan + '" data-nama="' + row.name +
+                                //     '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
+                                //     '" data-nra="' + row.no_resi_ajuan + '"  data-tp="' + row
+                                //     .tanggal_permohonan +
+                                //     '" data-hrg="' + row.harga_satuan + '" data-jml="' + row
+                                //     .jumlah_satuan + '" data-ttl="' + row.total_dana_ajuan +
+                                //     '" data-acc="' + row.nominal_acc + '" data-kp="' + row
+                                //     .keterangan_permohonan + '" data-trb="' + row.terbilang +
+                                //     '" data-st="' + row.status_permohonan +
+                                //     '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
+                                //     row.id_permohonan +
+                                //     '"><i class="fas fa-trash-alt btn btn-icon btn-light-danger item-jenis-dana"></i></a>';
                             },
                             padding: '5px',
                         }

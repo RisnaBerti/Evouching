@@ -488,12 +488,12 @@
                                     @if ($d->status_permohonan  == '0')
                                         <span class="label label-lg font-weight-bold label-light-secondary label-inline">Belum
                                             ACC</span>
-                                    @elseif ($d->status_permohonan  == '1')
+                                    @elseif ($d->status_permohonan  == '2')
                                         <span
                                             class="label label-lg font-weight-bold label-light-warning label-inline">Diperiksa
                                             Pemeriksa
                                         </span>
-                                    @elseif ($d->status_permohonan  == '2')
+                                    @elseif ($d->status_permohonan  == '1')
                                         <span class="label label-lg font-weight-bold label-light-primary label-inline">
                                             Diperiksa Bendahara</span>
                                     @elseif ($d->status_permohonan  == '3')
