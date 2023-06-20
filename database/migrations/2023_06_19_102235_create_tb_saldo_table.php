@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tb_penerimaan_bank', function (Blueprint $table) {
-            $table->uuid('id_penerimaan_bank', 40)->primary()->comment('UUID');
-            $table->string('no_resi_terima_bank', 10);
-            $table->date('tanggal_penerimaan_bank');
-            $table->binary('bukti_transaksi', 40);
-            $table->boolean('status', 1)->default(0);
+        Schema::create('tb_saldo', function (Blueprint $table) {
+            $table->id('id_saldo')->autoIncrement()->length(11)->primaryKey();
+            $table->string('saldo_akhir', 40);
+            $table->string('bulan', 3);
+            $table->string('tahun', 5);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_penerimaan_bank');
+        Schema::dropIfExists('tb_saldo');
     }
 };

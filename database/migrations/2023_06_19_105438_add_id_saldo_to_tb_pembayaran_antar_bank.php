@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('tb_ca', function (Blueprint $table) {
-            $table->string('nominal_terpakai', 20)->nullable()->after('tanggal_penerimaan_ca');
+        Schema::table('tb_pembayaran_antar_bank', function (Blueprint $table) {
+            $table->string('bulan', 3)->after('sisa_saldo');
+            $table->string('tahun', 5)->after('bulan');
         });
     }
 
@@ -25,8 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('tb_ca', function (Blueprint $table) {
-            $table->dropColumn('nominal_terpakai');
+        Schema::table('tb_pembayaran_antar_bank', function (Blueprint $table) {
+            $table->dropColumn('bulan');
+            $table->dropColumn('tahun');
         });
     }
 };

@@ -9,6 +9,7 @@ use App\Models\PembayaranBank;
 use App\Http\Controllers\Controller;
 use App\Models\PembayaranAntarBank;
 use App\Models\PenerimaanAntarBank;
+use App\Models\Saldo;
 use Illuminate\Support\Facades\Auth;
 
 class AntarBankController extends Controller
@@ -144,14 +145,31 @@ class AntarBankController extends Controller
             ]
         );
 
+        $id_pembayaran_antar_bank = str_replace('-', '', Str::uuid());
+        $bulan = date('m');
+        $tahun = date('Y');
+
         PembayaranAntarBank::create(
             [
-                'id_pembayaran_antar_bank' => str_replace('-', '', Str::uuid()),
+                'id_pembayaran_antar_bank' => $id_pembayaran_antar_bank,
                 'no_resi_pembayaran_antar_bank' => $request->no_resi_pembayaran_antar_bank,
                 'tanggal_pembayaran_antar_bank' => $request->tanggal_pembayaran_antar_bank,
                 'total_dana' => $request->total_dana,
                 'terbilang' => $request->terbilang,
-                'keperluan' => $request->keperluan
+                'keperluan' => $request->keperluan,
+                'sisa_saldo' => $request->total_dana,
+                'bulan' => $bulan,
+                'tahun' => $tahun
+            ]
+        );
+
+        Saldo::create(
+            [
+                'id_saldo' => str_replace('-', '', Str::uuid()),
+                'id_pembayaran_antar_bank' => $id_pembayaran_antar_bank,
+                'saldo_akhir' => $request->total_dana,
+                'bulan' => $bulan,
+                'tahun' => $tahun
             ]
         );
 
@@ -198,5 +216,12 @@ class AntarBankController extends Controller
         } else {
             echo "false";
         }
+    }
+
+    public function update_saldo($bulan, $tahun, $total_dana)
+    {
+        $sisa_saldo = PembayaranAntarBank::where('bulan', $bulan)->where('tahun', $tahun)->first();
+        $sisa_saldo->sisa_saldo = $sisa_saldo->sisa_saldo + $total_dana;
+        $sisa_saldo->update();
     }
 }

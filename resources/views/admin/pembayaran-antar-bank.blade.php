@@ -192,8 +192,10 @@
                     <label>Untuk Keperluan</label>
                     <textarea class="form-control" id="keperluan" name="keperluan" rows="4"></textarea>
                 </div>
+                <input type="text" id="sisa_saldo" name="sisa_saldo" value="0">
+                <input type="text" id="bulan" name="bulan" value="{{ date('m') }}">
+                <input type="text" id="tahun" name="tahun" value="{{ date('Y') }}">
             </div>
-
         </div>
 
         <div class="modal-footer">
@@ -514,6 +516,9 @@
                 var total_dana = $('#total_dana').val();
                 var terbilang = $('#terbilang').val();
                 var keperluan = $('#keperluan').val();
+                var sisa_saldo = $('#sisa_saldo').val();
+                var bulan = $('#bulan').val();
+                var tahun = $('#tahun').val();
 
                 $.post("{{ url('/pembayaran-antarbank/add') }}", {
                     _token: "{{ csrf_token() }}",
@@ -521,7 +526,10 @@
                     tanggal_pembayaran_antar_bank: tanggal_pembayaran_antar_bank,
                     total_dana: total_dana,
                     terbilang: terbilang,
-                    keperluan: keperluan
+                    keperluan: keperluan,
+                    sisa_saldo: sisa_saldo,
+                    bulan: bulan,
+                    tahun: tahun
                 }).done(function(response) {
                     if (response != null) {
 
@@ -540,6 +548,7 @@
                         $('#total_dana').val('');
                         $('#terbilang').val('');
                         $('#keperluan').val('');
+                        $('#sisa_saldo').val('');
 
                         // $('#modalubah').modal('hide');
 

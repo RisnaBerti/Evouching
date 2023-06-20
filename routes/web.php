@@ -36,7 +36,7 @@ use App\Http\Controllers\Pemohon\PermohonanPemohonController;
 */
 
 $controller_path = 'App\Http\Controllers';
-Route::get('/cek', [DataUserController::class, 'cek']);
+Route::get('/cek', [PengajuanAdmin::class, 'coba']);
 
 Route::get('/cek2', [PermohonanPemohonController::class, 'getmax']);
 
@@ -90,6 +90,9 @@ Route::controller(PengajuanAdmin::class)->group(function () {
     Route::post('/permohonan-bendahara/get', 'get');
     Route::post('/permohonan-bendahara/edit', 'edit');
     Route::post('/permohonan-bendahara/menolak', 'menolak');
+    Route::get('/permohonan-bendahara/getsaldo', 'get_saldo');
+    Route::post('/permohonan-bendahara/updatesaldo', 'update_saldo');
+    Route::post('/permohonan-bendahara/updatesaldoakhir', 'update_saldo_akhir');
 });
 
 Route::controller(KasController::class)->group(function () {

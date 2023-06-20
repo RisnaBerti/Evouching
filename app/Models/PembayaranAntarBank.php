@@ -19,5 +19,8 @@ class PembayaranAntarBank extends Model
         'total_dana',
         'terbilang',
         'keperluan',
+        'sisa_saldo',
+        'bulan',
+        'tahun'
     ];
 }

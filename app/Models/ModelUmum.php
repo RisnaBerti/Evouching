@@ -33,14 +33,18 @@ class ModelUmum extends Model
     // menghitung jumlah data permohonan kas
     public static function countpermohonankas()
     {
-        $data = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')->where('status_permohonan', '1')->where('jenis_dana', 'Pembayaran Kas')->sum('nominal_acc');
+        $data = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
+        ->where('status_permohonan', '1')
+        ->where('jenis_dana', 'Pembayaran Kas')->sum('nominal_acc');
         return $data;
     }
 
     // menghitung jumlah data permohonan bank
     public static function countpermohonanbank()
     {
-        $data = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')->where('status_permohonan', '1')->where('jenis_dana', 'Pembayaran Bank')->sum('nominal_acc');
+        $data = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
+        ->where('status_permohonan', '1')
+        ->where('jenis_dana', 'Pembayaran Bank')->sum('nominal_acc');
         return $data;
     }
 

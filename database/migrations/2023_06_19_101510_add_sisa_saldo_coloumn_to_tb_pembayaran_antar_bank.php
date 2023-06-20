@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('tb_penerimaan_kas', function (Blueprint $table) {
-            $table->boolean('status', 1)->after('bukti_transaksi');
+        Schema::table('tb_pembayaran_antar_bank', function (Blueprint $table) {
+            $table->string('sisa_saldo', 40)->after('total_dana'); 
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('tb_penerimaan_kas', function (Blueprint $table) {
-            $table->dropColumn('status');
+        Schema::table('tb_pembayaran_antar_bank', function (Blueprint $table) {
+            $table->dropColumn('sisa_saldo');
         });
     }
 };

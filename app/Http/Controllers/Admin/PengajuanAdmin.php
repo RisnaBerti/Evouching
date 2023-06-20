@@ -9,10 +9,12 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\PembayaranKas;
 use App\Models\PenerimaanKas;
-use App\Http\Controllers\Controller;
+use App\Models\PembayaranAntarBank;
 use App\Models\PembayaranBank;
 use App\Models\PenerimaanBank;
 use App\Models\PengajuanCA;
+use App\Models\Saldo;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use DB; //import fungsi query builder
 
@@ -45,6 +47,7 @@ class PengajuanAdmin extends Controller
     //fungsi edit data
     public function edit(Request $request)
     {
+
         $permohonan = Permohonan::findOrFail($request->id_permohonan);
         $permohonan->nominal_acc = $request->nominal_acc;
         $permohonan->status_permohonan = '1';
@@ -106,6 +109,7 @@ class PengajuanAdmin extends Controller
             );
         }
 
+
         return "success";
     }
 
@@ -115,6 +119,42 @@ class PengajuanAdmin extends Controller
         $permohonan->status_permohonan = '4';
         $permohonan->ttd_bendahara = '1';
         $permohonan->update();
+
+        return "success";
+    }
+
+
+    public function get_saldo()
+    {
+        $bulan = date('m');
+        $tahun = date('Y');
+
+        $bank = PembayaranAntarBank::where('bulan', $bulan)
+            ->where('tahun', $tahun)
+            ->first();
+
+        return response()->json($bank);
+    }
+
+    public function update_saldo(Request $request)
+    {
+        $permohonan = PembayaranAntarBank::findOrFail($request->id_pembayaran_antar_bank);
+        $permohonan->sisa_saldo = $request->sisa_saldo;
+        $permohonan->update();
+
+        return "success";
+    }
+
+    public function update_saldo_akhir(Request $request)
+    {
+        Saldo::where('id_pembayaran_antar_bank', $request->id_pembayaran_antar_bank)
+        ->update([
+            'saldo_akhir' => $request->sisa_saldo,
+        ]);
+
+        // $saldo = Saldo::find($request->id_pembayaran_antar_bank);
+        // $saldo->saldo_akhir = $request->sisa_saldo;
+        // $saldo->update();
 
         return "success";
     }

@@ -21,6 +21,8 @@
                                     </div>
                                     <div class="col-5 align-items-start">
                                         <input hidden type="text" id="id">
+                                        <input type="text" id="sisa_saldo">
+                                        <input type="text" id="id_pembayaran_antar_bank">
                                         <div hidden class="input-group input-group-sm mb-1">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">No.
@@ -98,8 +100,8 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Jumlah</label>
-                                        <input type="text" class="form-control" placeholder="Jumlah" id="jumlah_satuan"
-                                            readonly disabled />
+                                        <input type="text" class="form-control" placeholder="Jumlah"
+                                            id="jumlah_satuan" readonly disabled />
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Total</label>
@@ -189,6 +191,7 @@
         $(document).ready(function() {
             //fungsi menampilkan data permohonan
             get();
+            getsaldo()
 
             // $('#table-permohonan').DataTable({
             //     scrollY: 200,
@@ -329,20 +332,6 @@
                                     return '<span class="badge bg-danger">Ditolak</span>';
                                 }
 
-                                // if (row.status_permohonan == 1) {
-
-                                //     return '<span class="badge bg-success">DI SETUJUI</span>';
-
-                                // } else if (row.status_permohonan == 4) {
-
-                                //     return '<span class="badge bg-warning text-dark">BELUM DI SETUJUI </span>';
-
-                                // } else {
-
-                                //     return '<span class="badge bg-danger">Ditolak</span>';
-
-                                // }
-
                             },
                             padding: '5px'
                         },
@@ -350,42 +339,26 @@
                         {
                             "render": function(data, type, row) {
                                 if (row.status_permohonan == 4) {
-                                return '<span class="svg-icon svg-icon-danger svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Code\Done-circle.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"> <g stroke = "none"stroke - width = "1" fill = "none" fill - rule = "evenodd"> <rect x = "0" y = "0" width = "24" height = "24" /> <circle fill = "#000000" opacity = "0.3" cx = "12" cy = "12" r = "10" /> <path d ="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z" fill = "#000000" fill - rule = "nonzero" / > </g> </svg><!--end::Svg Icon--></span >'
+                                    return '<span class="svg-icon svg-icon-danger svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Code\Done-circle.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"> <g stroke = "none"stroke - width = "1" fill = "none" fill - rule = "evenodd"> <rect x = "0" y = "0" width = "24" height = "24" /> <circle fill = "#000000" opacity = "0.3" cx = "12" cy = "12" r = "10" /> <path d ="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z" fill = "#000000" fill - rule = "nonzero" / > </g> </svg><!--end::Svg Icon--></span >'
                                 } else if (row.status_permohonan == 1) {
                                     return '<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Code\Done-circle.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"> <g stroke = "none"stroke - width = "1" fill = "none" fill - rule = "evenodd"> <rect x = "0" y = "0" width = "24" height = "24" /> <circle fill = "#000000" opacity = "0.3" cx = "12" cy = "12" r = "10" /> <path d ="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z" fill = "#000000" fill - rule = "nonzero" / > </g> </svg><!--end::Svg Icon--></span >'
                                 } else if (row.status_permohonan == 3) {
                                     return '<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Code\Done-circle.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"> <g stroke = "none"stroke - width = "1" fill = "none" fill - rule = "evenodd"> <rect x = "0" y = "0" width = "24" height = "24" /> <circle fill = "#000000" opacity = "0.3" cx = "12" cy = "12" r = "10" /> <path d ="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z" fill = "#000000" fill - rule = "nonzero" / > </g> </svg><!--end::Svg Icon--></span >'
-                                }else {
+                                } else {
                                     return '<a class="dropdown-item item-ubah-permohonan" href="#" data-ip="' +
-                                    row.id_permohonan + '" data-nama="' + row.name +
-                                    '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
-                                    '" data-nra="' + row.no_resi_ajuan + '"  data-tp="' + row
-                                    .tanggal_permohonan +
-                                    '" data-hrg="' + row.harga_satuan + '" data-jml="' + row
-                                    .jumlah_satuan + '" data-ttl="' + row.total_dana_ajuan +
-                                    '" data-acc="' + row.nominal_acc + '" data-kp="' + row
-                                    .keterangan_permohonan + '" data-trb="' + row.terbilang +
-                                    '" data-st="' + row.status_permohonan +
-                                    '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
-                                    row.id_permohonan +
-                                    '"><i class="fas fa-trash-alt btn btn-icon btn-light-danger item-jenis-dana"></i></a>';
+                                        row.id_permohonan + '" data-nama="' + row.name +
+                                        '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
+                                        '" data-nra="' + row.no_resi_ajuan + '"  data-tp="' + row
+                                        .tanggal_permohonan +
+                                        '" data-hrg="' + row.harga_satuan + '" data-jml="' + row
+                                        .jumlah_satuan + '" data-ttl="' + row.total_dana_ajuan +
+                                        '" data-acc="' + row.nominal_acc + '" data-kp="' + row
+                                        .keterangan_permohonan + '" data-trb="' + row.terbilang +
+                                        '" data-st="' + row.status_permohonan +
+                                        '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
+                                        row.id_permohonan +
+                                        '"><i class="fas fa-trash-alt btn btn-icon btn-light-danger item-jenis-dana"></i></a>';
                                 }
-                                // if (row.status_permohonan == '0') {
-                                //     return '<a class="dropdown-item item-ubah-permohonan" href="#" data-id="' +
-                                //         row.id + '" data-ip="' +
-                                //         row.id_permohonan + '" data-nama="' + row.name +
-                                //         '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
-                                //         '" data-nra="' + row.no_resi_ajuan + '"  data-tp="' + row
-                                //         .tanggal_permohonan +
-                                //         '" data-hrg="' + row.harga_satuan + '" data-jml="' + row
-                                //         .jumlah_satuan + '" data-ttl="' + row.total_dana_ajuan +
-                                //         '" data-acc="' + row.nominal_acc + '" data-kp="' + row
-                                //         .keterangan_permohonan + '" data-trb="' + row.terbilang +
-                                //         '" data-st="' + row.status_permohonan +
-                                //         '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah"></i></a> '
-                                // } else {
-                                //     return '<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Code\Done-circle.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"> <g stroke = "none"stroke - width = "1" fill = "none" fill - rule = "evenodd"> <rect x = "0" y = "0" width = "24" height = "24" /> <circle fill = "#000000" opacity = "0.3" cx = "12" cy = "12" r = "10" /> <path d ="M16.7689447,7.81768175 C17.1457787,7.41393107 17.7785676,7.39211077 18.1823183,7.76894473 C18.5860689,8.1457787 18.6078892,8.77856757 18.2310553,9.18231825 L11.2310553,16.6823183 C10.8654446,17.0740439 10.2560456,17.107974 9.84920863,16.7592566 L6.34920863,13.7592566 C5.92988278,13.3998345 5.88132125,12.7685345 6.2407434,12.3492086 C6.60016555,11.9298828 7.23146553,11.8813212 7.65079137,12.2407434 L10.4229928,14.616916 L16.7689447,7.81768175 Z" fill = "#000000" fill - rule = "nonzero" / > </g> </svg><!--end::Svg Icon--></span >'
-                                // }
 
                             },
                             padding: '5px',
@@ -398,6 +371,97 @@
             $('#nominal_acc').change(function() {
                 var acc = $('#nominal_acc').val();
                 $('#nominal_acc').val(uang(acc));
+            });
+
+            $("#nominal_acc").change(function() {
+
+                var nominal_pinjaman = $('#nominal_acc').val();
+                var minn = $('#nominal_acc').attr('min');
+                var maxx = $('#nominal_acc').attr('max');
+                var total_dana_ajuan = $('#total_dana_ajuan').val().replaceAll('.', '');
+
+                var n = $('#nominal_acc').val().replaceAll('.', '');
+
+
+                // if (n == 0) {
+
+                //     Swal.fire(
+                //         'Notifikasi',
+                //         'Nominal Acc Tidak Boleh Nol.',
+                //         'error'
+                //     )
+
+                //     $('#nominal_acc').val(uang(minn));
+
+                //     $('#nominal_acc_text').html(uang(minn));
+
+                //     // simpanNominal(minn);
+
+                // } else {
+                //     $('#nominal_acc').val(uangsuka(n));
+                //     $('#nominal_acc_text').html(uang(n));
+                //     // simpanNominal(n);
+                // }
+
+                // if (n <= 0) {
+
+                //     Swal.fire(
+                //         'Notifikasi',
+                //         'Nominal Acc Tidak Boleh Nol.',
+                //         'error'
+                //     )
+
+                //     $('#nominal_acc').val(uang(minn));
+
+                //     $('#nominal_acc_text').html(uang(minn));
+
+                //     // simpanNominal(minn);
+
+                // } else {
+                //     $('#nominal_acc').val(uangsuka(n));
+                //     $('#nominal_acc_text').html(uang(n));
+                //     // simpanNominal(n);
+                // }
+
+                if (n > total_dana_ajuan) {
+
+                    Swal.fire(
+                        'Notifikasi',
+                        'Nominal Acc Terlampaui.',
+                        'error'
+                    )
+
+                    $('#nominal_acc').val(uang(maxx));
+                    $('#nominal_acc_text').html(uang(maxx));
+
+                } else if (n < 0) {
+                    Swal.fire(
+                        'Notifikasi',
+                        'Nominal Acc Tidak Kurang dari nol.',
+                        'error'
+                    )
+                    $('#nominal_acc').val(uang(minn));
+                    $('#nominal_acc_text').html(uang(minn));
+                } else if (n == 0) {
+                    Swal.fire(
+                        'Notifikasi',
+                        'Nominal Acc Tidak Boleh Nol.',
+                        'error'
+                    )
+                    $('#nominal_acc').val(uang(minn));
+                    $('#nominal_acc_text').html(uang(minn));
+                } else if (n == '') {
+                    Swal.fire(
+                        'Notifikasi',
+                        'Nominal Acc Tidak Boleh Kosong.',
+                        'error'
+                    )
+                    $('#nominal_acc').val(uang(minn));
+                    $('#nominal_acc_text').html(uang(minn));
+                } else {
+                    $('#nominal_acc').val(uang(n));
+                    $('#nominal_acc_text').html(uang(n));
+                }
             });
 
             $('#table-permohonan').on('click', '.item-ubah-permohonan', function() {
@@ -440,71 +504,154 @@
 
                 var id_permohonan = $('#id_permohonan').val();
                 var id = $('#id').val();
-                var nominal_acc = $('#nominal_acc').val();
+                var nominal_acc = $('#nominal_acc').val().replace(",", "");
                 var status_permohonan = $('#status_permohonan').val();
                 var jenis_dana = $('#jenis_dana').val();
+                var sisa_saldo = $("#sisa_saldo").val();
 
-                $('.button-menyetujui').attr("disabled", "disabled");
+                var s = parseInt(sisa_saldo) - parseInt(nominal_acc);
 
-                if (!id_permohonan) {
+                alert(sisa_saldo + "-" + nominal_acc + "=" + s);
 
-                    alert("ID User tidak terdefinisi!");
+                if (parseInt(nominal_acc) > parseInt(sisa_saldo)) {
 
-                    $('.button-menyetujui').attr("disabled", false);
+                    Swal.fire(
+                        'Notifikasi',
+                        'Saldo Tidak Mencukupi.',
+                        'error'
+                    )
 
                 } else {
 
-                    $.post("{{ url('/permohonan-bendahara/edit') }}", {
-                        _token: "{{ csrf_token() }}",
-                        id: id,
-                        id_permohonan: id_permohonan,
-                        nominal_acc: nominal_acc,
-                        status_permohonan: status_permohonan,
-                        jenis_dana: jenis_dana
 
-                    }).done(function(response) {
 
-                        if (response == "success") {
-                            Swal.fire(
-                                'Disetujui!',
-                                'Permohonan Dana Di setujui.',
-                                'success'
-                            )
-                            location.reload()
+                    $('.button-menyetujui').attr("disabled", "disabled");
 
-                            get();
+                    if (!id_permohonan) {
 
-                            $(".item-ubah").attr("disabled", false);
+                        alert("ID User tidak terdefinisi!");
 
-                            $('#id_permohonan').val('');
-                            $('#id').val('');
-                            $('#name').val('');
-                            $('#no_resi_ajuan').val('');
-                            $('#tanggal_permohonan').val('');
-                            $('#harga_satuan').val('');
-                            $('#jumlah_satuan').val('');
-                            $('#total_dana_ajuan').val('');
-                            $('#nominal_acc').val('');
-                            $('#jenis_dana').val('');
-                            $('#keterangan_permohonan').val('');
+                        $('.button-menyetujui').attr("disabled", false);
 
-                            $('#modalubah').modal('hide');
+                    } else {
 
-                        } else {
-                            Swal.fire(
-                                'Tidak Disetujui!',
-                                'Permohonan Dana Tidak Di setujui.',
-                                'error'
-                            )
-                            location.reload()
+                        $.post("{{ url('/permohonan-bendahara/edit') }}", {
+                            _token: "{{ csrf_token() }}",
+                            id: id,
+                            id_permohonan: id_permohonan,
+                            nominal_acc: nominal_acc.replace(",", ""),
+                            status_permohonan: status_permohonan,
+                            jenis_dana: jenis_dana
 
-                            $(".item-ubah").attr("disabled", false);
+                        }).done(function(response) {
 
-                        }
+                            if (response == "success") {
+                                Swal.fire(
+                                    'Disetujui!',
+                                    'Permohonan Dana Di setujui.',
+                                    'success'
+                                )
 
-                    });
 
+                                updatesaldo(s);
+                                updatesaldo_akhir(s);
+
+                                get();
+
+                                $(".item-ubah").attr("disabled", false);
+
+                                $('#id_permohonan').val('');
+                                $('#id').val('');
+                                $('#name').val('');
+                                $('#no_resi_ajuan').val('');
+                                $('#tanggal_permohonan').val('');
+                                $('#harga_satuan').val('');
+                                $('#jumlah_satuan').val('');
+                                $('#total_dana_ajuan').val('');
+                                $('#nominal_acc').val('');
+                                $('#jenis_dana').val('');
+                                $('#keterangan_permohonan').val('');
+
+                                $('.modal-ubah-permohonan').modal('hide');
+
+                            } else {
+                                // Swal.fire(
+                                //     'Tidak Disetujui!',
+                                //     'Permohonan Dana Tidak Di setujui.',
+                                //     'error'
+                                // )
+                                // location.reload()
+
+                                $(".item-ubah").attr("disabled", false);
+
+                            }
+
+                        });
+
+                    }
                 }
+
+                // $('.button-menyetujui').attr("disabled", "disabled");
+
+                // if (!id_permohonan) {
+
+                //     alert("ID User tidak terdefinisi!");
+
+                //     $('.button-menyetujui').attr("disabled", false);
+
+                // } else {
+
+                //     $.post("{{ url('/permohonan-bendahara/edit') }}", {
+                //         _token: "{{ csrf_token() }}",
+                //         id: id,
+                //         id_permohonan: id_permohonan,
+                //         nominal_acc: nominal_acc.replace(",", ""),
+                //         status_permohonan: status_permohonan,
+                //         jenis_dana: jenis_dana
+
+                //     }).done(function(response) {
+
+                //         if (response == "success") {
+                //             Swal.fire(
+                //                 'Disetujui!',
+                //                 'Permohonan Dana Di setujui.',
+                //                 'success'
+                //             )
+                //             location.reload()
+
+                //             get();
+
+                //             $(".item-ubah").attr("disabled", false);
+
+                //             $('#id_permohonan').val('');
+                //             $('#id').val('');
+                //             $('#name').val('');
+                //             $('#no_resi_ajuan').val('');
+                //             $('#tanggal_permohonan').val('');
+                //             $('#harga_satuan').val('');
+                //             $('#jumlah_satuan').val('');
+                //             $('#total_dana_ajuan').val('');
+                //             $('#nominal_acc').val('');
+                //             $('#jenis_dana').val('');
+                //             $('#keterangan_permohonan').val('');
+
+                //             $('#modalubah').modal('hide');
+
+                //         } else {
+                //             // Swal.fire(
+                //             //     'Tidak Disetujui!',
+                //             //     'Permohonan Dana Tidak Di setujui.',
+                //             //     'error'
+                //             // )
+                //             // location.reload()
+
+                //             $(".item-ubah").attr("disabled", false);
+
+                //         }
+
+                //     });
+
+                // }
 
             });
 
@@ -573,6 +720,61 @@
                 }
 
             });
+
+            function updatesaldo(sisa_saldo) {
+
+                $.post("{{ url('/permohonan-bendahara/updatesaldo') }}", {
+                    _token: "{{ csrf_token() }}",
+                    id_pembayaran_antar_bank: $("#id_pembayaran_antar_bank").val(),
+                    sisa_saldo: sisa_saldo
+
+                }).done(function(response) {
+
+                    if (response == "success") {
+
+
+                        get();
+
+                    } else {
+
+                        get();
+
+                    }
+
+                });
+
+            }
+
+            function updatesaldo_akhir(sisa_saldo) {
+                $.post("{{ url('/permohonan-bendahara/updatesaldoakhir') }}", {
+                    _token: "{{ csrf_token() }}",
+                    id_pembayaran_antar_bank: $("#id_pembayaran_antar_bank").val(),
+                    sisa_saldo: sisa_saldo
+
+                }).done(function(response) {
+
+                    if (response == "success") {
+                        get();
+                    } else {
+                        get();
+                    }
+                });
+
+            }
+
+            function getsaldo() {
+                $.get("{{ url('/permohonan-bendahara/getsaldo') }}", {
+                        _token: "{{ csrf_token() }}"
+                    })
+                    .done(function(data) {
+
+                        $("#id_pembayaran_antar_bank").val(data.id_pembayaran_antar_bank);
+
+                        $("#sisa_saldo").val(data.sisa_saldo);
+
+
+                    });
+            }
 
             function uang(num) {
 
