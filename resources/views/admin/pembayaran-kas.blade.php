@@ -19,13 +19,13 @@
                                         <div class="col-7 align-self-start">
                                             <div class="col">
                                                 <h3 class="card-title">
-                                                    BUKTI pembayaran KAS
+                                                    BUKTI PEMBAYARAN KAS
                                                 </h3>
                                             </div>
                                         </div>
                                         <div class="col-5 align-items-start">
-                                            <input type="text" name="id_permohonan" id="id_permohonan">
-                                            <input type="text" name="id" id="id">
+                                            <input hidden type="text" name="id_permohonan" id="id_permohonan">
+                                            <input hidden type="text" name="id" id="id">
                                             <div class="input-group input-group-sm mb-1">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
@@ -88,7 +88,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" name="file" id="inputFile" class="form-control">
+                                            <input type="file" name="file" accept=".pdf" id="inputFile" class="form-control">
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -197,7 +197,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" name="file_edit" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file_edit" id="inputFile" class="form-control">
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -237,6 +237,7 @@
                         <th>Divisi</th>
                         <th>Total Mominal ACC</th>
                         <th>Keterangan</th>
+                        <th>Bukti Transaksi</th>
                         <th>
                             <center>Aksi</center>
                         </th>
@@ -348,7 +349,19 @@
 
                         {
                             "render": function(data, type, row) {
-                                if (row.bukti_transaksi == '0') {
+
+                               if (row.bukti_pembayaran_kas == '0' || row.bukti_pembayaran_kas == null) { 
+                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_pembayaran_kas +'" target="_blank"><span class="badge badge-pill  badge-danger">Belum Upload</span></a>';
+                                } else {
+                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_pembayaran_kas +'" target="_blank"><span class="badge badge-pill  badge-primary">Lihat Bukti</span></a>';
+                                }
+                            },
+                            padding: '5px'
+                        },
+
+                        {
+                            "render": function(data, type, row) {
+                                if (row.bukti_pembayaran_kas == '0' && row.bukti_pembayaran_kas == null) {
                                     return '<a class="dropdown-item item-ubah-pembayarankas" href="#" data-id="' +
                                         row.id + '" data-ip="' +
                                         row.id_permohonan + '" data-nm="' + row.name +
@@ -576,8 +589,9 @@
 
                         if (response) {
                             this.reset();
-                            update(response.filename, response.no_resi_bayar_kas_edit, response.id_permohonan_edit, response.tanggal_pembayaran_kas_edit);
+                            update(response.filename, response.no_resi_bayar_kas, response.id_permohonan, response.tanggal_pembayaran_kas);
 
+                            // alert(response.id_permohonan);
                             alert('File has been uploaded successfully');
                         }
 
@@ -649,10 +663,11 @@
                     success: (response) => {
 
                         if (response) {
-                            this.reset();
-                            update(response.filename, response.no_resi_bayar_kas, response.id_permohonan, response.tanggal_pembayaran_kas);
+                            // this.reset();
+                            // update(response.filename, response.no_resi_bayar_kas, response.id_permohonan, response.tanggal_pembayaran_kas);
 
-                            alert('File has been uploaded successfully');
+                            alert(response.id_permohonan);
+                            // alert('File has been uploaded successfully');
                         }
 
                     },

@@ -67,7 +67,7 @@
                                     <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Nominal ACC</label>
-                                            <input readonly type="text" class="form-control" placeholder="Total"
+                                            <input type="text" class="form-control" placeholder="Total"
                                                 name="nominal_acc" id="nominal_acc" />
                                         </div>
                                         <div class="col-lg-6">

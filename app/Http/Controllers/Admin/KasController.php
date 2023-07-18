@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
-use App\Models\Permohonan;
+use App\Models\Penerimaan;
 
+use App\Models\Permohonan;
+use Codedge\Fpdf\Fpdf\Fpdf;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Models\PembayaranKas;
-use App\Models\PenerimaanKas;
-use Codedge\Fpdf\Fpdf\Fpdf;
 use App\Http\Controllers\Controller;
+use App\Models\Pembayaran;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -41,7 +41,7 @@ class KasController extends Controller
 
     public function getmax()
     {
-        $maxValue = PenerimaanKas::max('no_resi_terima_kas');
+        $maxValue = Penerimaan::max('no_resi_terima_kas');
 
         if ($maxValue == null) {
             $maxValue = 0;
@@ -52,17 +52,17 @@ class KasController extends Controller
     public function get_penerimaan_kas()
     {
         $data['data'] = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
-            ->join('tb_penerimaan_kas', 'tb_penerimaan_kas.id_permohonan', '=', 'tb_permohonan.id_permohonan')
+            ->join('tb_penerimaan', 'tb_penerimaan.id_permohonan', '=', 'tb_permohonan.id_permohonan')
             ->where('tb_permohonan.jenis_dana', '=', 'Penerimaan Kas')
-            ->get(['users.id', 'users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.id_permohonan', 'tb_permohonan.nominal_acc', 'tb_permohonan.keterangan_permohonan', 'tb_penerimaan_kas.bukti_transaksi']);
+            ->get(['users.id', 'users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.id_permohonan', 'tb_permohonan.nominal_acc', 'tb_permohonan.keterangan_permohonan', 'tb_penerimaan.bukti_penerimaan_kas']);
 
         return $data;
     }
 
     function ubah_penerimaan_kas(Request $request)
     { 
-        PenerimaanKas::where('id_permohonan', $request->id_permohonan)
-        ->update(['bukti_transaksi' => $request->bukti_transaksi, 
+        Penerimaan::where('id_permohonan', $request->id_permohonan)
+        ->update(['bukti_penerimaan_kas' => $request->bukti_transaksi, 
                 'no_resi_terima_kas' => $request->no_resi_terima_kas, 
                 'tanggal_penerimaan_kas' => $request->tanggal_penerimaan_kas]);
 
@@ -73,7 +73,7 @@ class KasController extends Controller
     public function edit_penerimaan_kas(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:jpg,jpeg,png|max:5048',
+            'file' => 'required|mimes:pdf|max:8048',
         ]);
 
         $ip = $request->id_permohonan;
@@ -86,14 +86,14 @@ class KasController extends Controller
 
     public function get_penerimaan_kas_id(Request $request)
     {
-        $data = PenerimaanKas::where('id_permohonan', $request->id_permohonan)->first();
+        $data = Penerimaan::where('id_permohonan', $request->id_permohonan)->first();
         return response()->json($data);
     }
 
     public function ubah_penerimaan_kas_id(Request $request)
     {
-        PenerimaanKas::where('id_permohonan', $request->id_permohonan)
-        ->update(['bukti_transaksi' => $request->bukti_transaksi_edit, 
+        Penerimaan::where('id_permohonan', $request->id_permohonan)
+        ->update(['bukti_penerimaan_kas' => $request->bukti_transaksi_edit, 
                 'no_resi_terima_kas' => $request->no_resi_terima_kas_edit, 
                 'tanggal_penerimaan_kas' => $request->tanggal_penerimaan_kas_edit]);
 
@@ -103,7 +103,7 @@ class KasController extends Controller
     public function edit_penerimaan_kas_id(Request $request)
     {
         $request->validate([
-            'file_edit' => 'required|mimes:jpg,jpeg,png|max:5048',
+            'file_edit' => 'required|mimes:pdf|max:8048',
         ]);
 
         $ip = $request->id_permohonan_edit;
@@ -118,7 +118,7 @@ class KasController extends Controller
 
     public function getmax2()
     {
-        $maxValue = PembayaranKas::max('no_resi_bayar_kas');
+        $maxValue = Pembayaran::max('no_resi_bayar_kas');
 
         if ($maxValue == null) {
             $maxValue = 0;
@@ -130,18 +130,18 @@ class KasController extends Controller
     public function get_pembayaran_kas()
     {
         $data['data'] = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
-            ->join('tb_pembayaran_kas', 'tb_pembayaran_kas.id_permohonan', '=', 'tb_permohonan.id_permohonan')
+            ->join('tb_pembayaran', 'tb_pembayaran.id_permohonan', '=', 'tb_permohonan.id_permohonan')
             ->where('tb_permohonan.jenis_dana', '=', 'Pembayaran Kas')
-            ->get(['users.id', 'users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.id_permohonan', 'tb_permohonan.nominal_acc', 'tb_permohonan.keterangan_permohonan', 'tb_pembayaran_kas.bukti_transaksi']);
+            ->get(['users.id', 'users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.id_permohonan', 'tb_permohonan.nominal_acc', 'tb_permohonan.keterangan_permohonan', 'tb_pembayaran.bukti_pembayaran_kas']);
 
-        return response()->json($data);
+        return $data;
     }
 
     //fungsi ubah data pembayaran kas
     function ubah_pembayaran_kas(Request $request)
     { 
-        PembayaranKas::where('id_permohonan', $request->id_permohonan)
-        ->update(['bukti_transaksi' => $request->bukti_transaksi, 
+        Pembayaran::where('id_permohonan', $request->id_permohonan)
+        ->update(['bukti_pembayaran_kas' => $request->bukti_transaksi, 
                 'no_resi_bayar_kas' => $request->no_resi_bayar_kas, 
                 'tanggal_pembayaran_kas' => $request->tanggal_pembayaran_kas]);
 
@@ -151,7 +151,7 @@ class KasController extends Controller
     //fungsi get data pembayaran kas by id
     public function get_pembayaran_kas_id(Request $request)
     {
-        $data = PembayaranKas::where('id_permohonan', $request->id_permohonan)->first();
+        $data = Pembayaran::where('id_permohonan', $request->id_permohonan)->first();
         return response()->json($data);
     }
 
@@ -159,7 +159,7 @@ class KasController extends Controller
     public function edit_pembayaran_kas(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:jpg,jpeg,png|max:5048',
+            'file' => 'required|mimes:pdf|max:8048',
         ]);
 
         $ip = $request->id_permohonan;
@@ -172,8 +172,8 @@ class KasController extends Controller
 
     public function ubah_pembayaran_kas_id(Request $request)
     {
-        PembayaranKas::where('id_permohonan', $request->id_permohonan)
-        ->update(['bukti_transaksi' => $request->bukti_transaksi_edit, 
+        Pembayaran::where('id_permohonan', $request->id_permohonan)
+        ->update(['bukti_pembayaran_kas' => $request->bukti_transaksi_edit, 
                 'no_resi_bayar_kas' => $request->no_resi_bayar_kas_edit, 
                 'tanggal_pembayaran_kas' => $request->tanggal_pembayaran_kas_edit]);
 
@@ -183,7 +183,7 @@ class KasController extends Controller
     public function edit_pembayaran_kas_id(Request $request)
     {
         $request->validate([
-            'file_edit' => 'required|mimes:jpg,jpeg,png|max:5048',
+            'file_edit' => 'required|mimes:pdf|max:8048',
         ]);
 
         $ip = $request->id_permohonan_edit;
@@ -194,140 +194,4 @@ class KasController extends Controller
         return response()->json(['message' => 'Operation Successful !', 'filename' => $fileName, 'no_resi_bayar_kas' => $request->no_resi_bayar_kas_edit,  'id_permohonan' => $request->id_permohonan_edit, 'tanggal_pembayaran_kas' => $request->tanggal_pembayaran_kas_edit]);
     }
 
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Get data from the text file
-    function getDataFrmFile($file)
-    {
-        // Read file lines
-        $lines = file($file);
-
-        // Get a array for returning output data
-        $data = array();
-
-        // Read each line and separate the semicolons
-        foreach ($lines as $line)
-            $data[] = explode(';', chop($line));
-        return $data;
-    }
-
-    // Simple table
-    function getSimpleTable($header, $data)
-    {
-
-        // Header
-        foreach ($header as $column)
-            $this->fpdf->Cell(40, 7, $column, 1);
-        $this->fpdf->Ln(); // Set current position
-
-        // Data
-        foreach ($data as $row) {
-            foreach ($row as $col)
-                $this->fpdf->Cell(40, 6, $col, 1);
-            $this->fpdf->Ln(); // Set current position
-        }
-    }
-
-    // Get styled table
-    function getStyledTable($header, $data)
-    {
-
-        // Colors, line width and bold font
-        $this->fpdf->SetFillColor(255, 0, 0);
-        $this->fpdf->SetTextColor(255);
-        $this->fpdf->SetDrawColor(128, 0, 0);
-        $this->fpdf->SetLineWidth(.3);
-        $this->fpdf->SetFont('', 'B');
-
-        // Header
-        $colWidth = array(40, 35, 40, 45);
-        for ($i = 0; $i < count($header); $i++)
-            $this->fpdf->Cell(
-                $colWidth[$i],
-                7,
-                $header[$i],
-                1,
-                0,
-                'C',
-                1
-            );
-        $this->fpdf->Ln();
-
-        // Setting text color and color fill
-        // for the background
-        $this->fpdf->SetFillColor(224, 235, 255);
-        $this->fpdf->SetTextColor(0);
-        $this->fpdf->SetFont('');
-
-        // Data
-        $fill = 0;
-        foreach ($data as $row) {
-
-            // Prints a cell, first 2 columns  are left aligned
-            $this->fpdf->Cell($colWidth[0], 6, $row[0], 'LR', 0, 'L', $fill);
-            $this->fpdf->Cell($colWidth[1], 6, $row[1], 'LR', 0, 'L', $fill);
-
-            // Prints a cell,last 2 columns  are right aligned
-            $this->fpdf->Cell(
-                $colWidth[2],
-                6,
-                number_format($row[2]),
-                'LR',
-                0,
-                'R',
-                $fill
-            );
-            $this->fpdf->Cell(
-                $colWidth[3],
-                6,
-                number_format($row[3]),
-                'LR',
-                0,
-                'R',
-                $fill
-            );
-            $this->fpdf->Ln();
-            $fill = !$fill;
-        }
-        $this->fpdf->Cell(array_sum($colWidth), 0, '', 'T');
-    }
-
-    public function laporan()
-    {
-        // Instantiate a PDF object
-
-        // Column titles given by the programmer
-        $header = array('Name', 'City', 'Age', 'Salary(In thousands)');
-
-        // Get data from the text files
-        //$data = $$this->fpdf->getDataFrmFile('employees.txt')
-
-        $data = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
-            ->get(['tb_permohonan.no_resi_ajuan', 'tb_permohonan.tanggal_permohonan', 'tb_permohonan.harga_satuan', 'tb_permohonan.jumlah_satuan']);
-
-        // Set the font as required
-        $this->fpdf->SetFont('Arial', '', 14);
-
-        // Add a new page
-        $this->fpdf->AddPage();
-        $this->getSimpleTable($header, $data);
-        $this->fpdf->AddPage();
-        $this->getStyledTable($header, $data);
-        $this->fpdf->Output();
-
-        exit;
-    }
 }

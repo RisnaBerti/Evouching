@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Pemeriksa;
 
 use App\Models\ModelUmum;
+use App\Models\Permohonan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class PemeriksaController extends Controller
-{
+{ 
     public function index()
     {
         $danaAccCount = ModelUmum::countdanaacc();
@@ -20,5 +21,11 @@ class PemeriksaController extends Controller
             'danaAccCount' => $danaAccCount,
             'data' => $data
         ]);
+    }
+    
+    public function getDataActivity()
+    {
+        $data = Permohonan::all();
+        echo json_encode($data);
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.main-pemeriksa')
+@extends('layouts.main')
 
 @section('content')
     <div class="card card-custom ">
@@ -59,7 +59,7 @@
                                 Choose an option:
                             </li>
                             <li class="navi-item">
-                                <a href="/laporan-pemeriksa/pdf" target="_blank" class="navi-link">
+                                <a href="/laporan-bendahara/pdf" target="_blank" class="navi-link">
                                     <span class="navi-icon"><i class="la la-file-pdf-o"></i></span>
                                     <span class="navi-text">PDF</span>
                                 </a>
@@ -146,8 +146,18 @@
                                 <center>{{ $dt->name }}</center>
                             </td>
                             <td>
-                                <center><img src="{{ url('/bukti') }}/{{ $dt->bukti_transaksi }}"
-                                        class="rounded float-left" width="75" alt="Bukti Transaksi"></center>
+                                @if ($dt->jenis_dana == 'Pembayaran Kas')
+                                    <a target="_blank" href="{{ url('/bukti') }}/{{ $dt->bukti_pembayaran_kas }}">Lihat</a>
+                                @elseif ($dt->jenis_dana == 'Penerimaan Kas')
+                                    <a target="_blank" href="{{ url('/bukti') }}/{{ $dt->bukti_penerimaan_kas }}">Lihat</a>
+                                @elseif ($dt->jenis_dana == 'Pembayaran Bank')
+                                    <a target="_blank" href="{{ url('/bukti') }}/{{ $dt->bukti_pembayaran_bank }}">Lihat</a>
+                                @elseif ($dt->jenis_dana == 'Penerimaan Bank')
+                                    <a target="_blank" href="{{ url('/bukti') }}/{{ $dt->bukti_penerimaan_bank }}">Lihat</a>
+                                @endif
+
+                                {{-- <center><img src="{{ url('/bukti') }}/{{ $dt->bukti_transaksi }}"
+                                        class="rounded float-left" width="75" alt="Bukti Transaksi"></center> --}}
                             </td>
                             {{-- <td>
                                 <center>
@@ -168,13 +178,16 @@
         </div>
     </div>
 
+
+    
+
     <script>
         $(document).ready(function() {
 
-                    //Mengaktifkan datatable
-                    $('#table_laporan').DataTable({
-                        paging: true,
-                    });
-                });
+            //Mengaktifkan datatable
+            $('#table_laporan').DataTable({
+                paging: true,
+            });
+        });
     </script>
 @endsection

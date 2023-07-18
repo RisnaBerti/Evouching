@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Twilio\Rest\Client;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -81,6 +82,26 @@ class DataUserController extends Controller
         $user = User::find($id);
         $user->is_active = "1";
         $user->update();
+
+        $sid    = "AC3b9deb3c57406702247d878eddb287da";
+        $token  = "0b3bc836b58827ec36b6ce397249001c";
+        $twilio = new Client($sid, $token);
+
+        $message = $twilio->messages
+        ->create(
+            "whatsapp:+6285155456806", // to
+            array(
+                "from" => "whatsapp:+14155238886",
+                "body" => "*GERAK SEDEKAH CILACAP*" .
+                    "\n============================".
+                    "\nHallo!!".
+                    "\nAkun E-Vouching Anda Sudah Diaktifkan" .
+                    "\nTerima Kasih" .
+                    "\n============================"
+
+            )
+        );
+
         return redirect()->route('datauser')->with(['success' => 'User berhasil diaktifkan']);
     }
 
@@ -90,6 +111,25 @@ class DataUserController extends Controller
         $user = User::find($id);
         $user->is_active = "0";
         $user->update();
+
+        $sid    = "AC3b9deb3c57406702247d878eddb287da";
+        $token  = "0b3bc836b58827ec36b6ce397249001c";
+        $twilio = new Client($sid, $token);
+
+        $message = $twilio->messages
+        ->create(
+            "whatsapp:+6285155456806", // to
+            array(
+                "from" => "whatsapp:+14155238886",
+                "body" => "*GERAK SEDEKAH CILACAP*" .
+                    "\n============================".
+                    "\nHallo!!".
+                    "\nAkun E-Vouching Anda Di Nonaktifkan" .
+                    "\nTerimakasih" .
+                    "\n============================"
+
+            )
+        );
         return redirect()->route('datauser')->with(['success' => 'User berhasil diaktifkan']);
     }
 

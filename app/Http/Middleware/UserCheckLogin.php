@@ -15,17 +15,27 @@ class UserCheckLogin
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, $rules)
-    {
-        if (!Auth::check()) {
-            return redirect()->route('auth-login');
-        }
+    // public function handle(Request $request, Closure $next, $roles)
+    // {
+    //     if (!Auth::check()) {
+    //         return redirect()->route('auth-login');
+    //     }
+    
+    //     $user = Auth::user();
+    //     if (in_array($user->role_id, $roles)) {
+    //         return $next($request);
+    //     } else {
+    //         return redirect()->route('auth-login')->with('status', 'Mohon maaf, Anda tidak memiliki akses');
+    //     }
+    // }
 
-        $user = Auth::user();
-        if ($user->role_id == $rules) {
+    public function handle(Request $request, Closure $next, $roles)
+    {
+        if(auth()->user()->role_id == $roles){
             return $next($request);
-        } else {
-            return redirect('/auth-login')->with('error', 'Mohon maaf, Anda tidak memiliki akses');
         }
+          
+        return response()->json(['You do not have permission to access for this page.']);
+        /* return response()->view('errors.check-permission'); */
     }
 }

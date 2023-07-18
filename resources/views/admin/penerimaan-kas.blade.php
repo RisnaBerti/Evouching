@@ -24,8 +24,8 @@
                                             </div>
                                         </div>
                                         <div class="col-5 align-items-start">
-                                            <input type="text" name="id_permohonan" id="id_permohonan">
-                                            <input type="text" name="id" id="id">
+                                            <input hidden type="text" name="id_permohonan" id="id_permohonan">
+                                            <input hidden type="text" name="id" id="id">
                                             <div class="input-group input-group-sm mb-1">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
@@ -39,7 +39,8 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Tanggal:</span>
                                                 </div>
-                                                <input type="date" value="{{ date('Y-m-d') }}" class="form-control"
+                                                <input type="date" value="{{ date('Y-m-d') }}"
+                                                    accept="image/png, image/jpeg, image/jpg, .pdf" class="form-control"
                                                     id="tanggal_penerimaan_kas" name="tanggal_penerimaan_kas"
                                                     aria-label="Sizing example input"
                                                     aria-describedby="inputGroup-sizing-sm">
@@ -88,7 +89,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" name="file" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file" id="inputFile" class="form-control">
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -126,7 +127,7 @@
                                         <div class="col-7 align-self-start">
                                             <div class="col">
                                                 <h3 class="card-title">
-                                                    EDIT BUKTI PENERIMAAN KAS
+                                                    EDIT BUKTI PENERIMAAN KASXXX
                                                 </h3>
                                             </div>
                                         </div>
@@ -197,7 +198,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" name="file_edit" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file_edit" id="inputFile" class="form-control">
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -230,13 +231,14 @@
                 style="width:100%; margin-top: 13px;">
                 <thead>
                     <tr>
-                        <th>No</th>
+                        <th><center>No</center></th>
                         <th hidden>id_permohonan</th>
-                        <th>Nama</th>
-                        <th>Jabatan</th>
-                        <th>Divisi</th>
-                        <th>Total Mominal ACC</th>
-                        <th>Keterangan</th>
+                        <th><center>Nama</center></th>
+                        <th><center>Jabatan</center></th>
+                        <th><center>Divisi</center></th>
+                        <th><center>Total Mominal ACC</center></th>
+                        <th><center>Keterangan</center></th>
+                        <th><center>Bukti Transaksi</center></th>
                         <th>
                             <center>Aksi</center>
                         </th>
@@ -251,265 +253,277 @@
     </div>
 
     <script>
-       $(document).ready(function() {
-                    get();
-                    getmax();
+        $(document).ready(function() {
+            get();
+            getmax();
 
-                    function get() {
-                        $('#table-penerimaankas').DataTable({
+            function get() {
+                $('#table-penerimaankas').DataTable({
 
-                            "destroy": true,
-                            "processing": true,
-                            "ordering": true,
-                            "scrollX": true,
-                            "pageLength": 10,
-                            "ajax": {
+                    "destroy": true,
+                    "processing": true,
+                    "ordering": true,
+                    "scrollX": true,
+                    "pageLength": 10,
+                    "ajax": {
 
-                                url: "{{ url('/penerimaan-kas/get') }}",
-                                type: 'POST',
-                                data: {
-                                    _token: "{{ csrf_token() }}",
-                                    id_permohonan: "id_permohonan"
-                                },
-                                async: true,
-                                dataType: 'json',
+                        url: "{{ url('/penerimaan-kas/get') }}",
+                        type: 'POST',
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id_permohonan: "id_permohonan"
+                        },
+                        async: true,
+                        dataType: 'json',
+                    },
+
+                    "deferRender": true,
+
+                    "aLengthMenu": [
+                        [5, 10, 50],
+                        [5, 10, 50]
+                    ],
+
+                    "columns": [
+
+                        {
+                            "render": function(data, type, row, meta) {
+                                return meta.row + meta.settings._iDisplayStart + 1;
                             },
 
-                            "deferRender": true,
+                            padding: '5px'
+                        },
 
-                            "aLengthMenu": [
-                                [5, 10, 50],
-                                [5, 10, 50]
-                            ],
+                        {
+                            "render": function(data, type, row) {
 
-                            "columns": [
+                                return String(row.id_permohonan);
 
-                                {
-                                    "render": function(data, type, row, meta) {
-                                        return meta.row + meta.settings._iDisplayStart + 1;
-                                    },
+                            },
+                            padding: '5px',
+                            visible: false
+                        },
 
-                                    padding: '5px'
-                                },
+                        {
+                            "render": function(data, type, row) {
 
-                                {
-                                    "render": function(data, type, row) {
+                                return String(row.name);
 
-                                        return String(row.id_permohonan);
+                            },
+                            padding: '5px'
+                        },
 
-                                    },
-                                    padding: '5px',
-                                    visible: false
-                                },
+                        {
+                            "render": function(data, type, row) {
 
-                                {
-                                    "render": function(data, type, row) {
+                                return String(row.jabatan);
 
-                                        return String(row.name);
+                            },
+                            padding: '5px'
+                        },
 
-                                    },
-                                    padding: '5px'
-                                },
+                        {
+                            "render": function(data, type, row) {
 
-                                {
-                                    "render": function(data, type, row) {
+                                return String(row.divisi);
 
-                                        return String(row.jabatan);
+                            },
+                            padding: '5px'
+                        },
+                        {
+                            "render": function(data, type, row) {
 
-                                    },
-                                    padding: '5px'
-                                },
+                                return String(uang(row.nominal_acc));
 
-                                {
-                                    "render": function(data, type, row) {
+                            },
+                            padding: '5px'
+                        },
 
-                                        return String(row.divisi);
+                        {
+                            "render": function(data, type, row) {
 
-                                    },
-                                    padding: '5px'
-                                },
-                                {
-                                    "render": function(data, type, row) {
+                                return String(row.keterangan_permohonan);
 
-                                        return String(uang(row.nominal_acc));
+                            },
+                            padding: '5px'
+                        },
+                        
+                        {
+                            "render": function(data, type, row) {
 
-                                    },
-                                    padding: '5px'
-                                },
-
-                                {
-                                    "render": function(data, type, row) {
-
-                                        return String(row.keterangan_permohonan);
-
-                                    },
-                                    padding: '5px'
-                                },
-
-                                {
-                                    "render": function(data, type, row) {
-                                        if (row.bukti_transaksi == '0') {
-                                            return '<a class="dropdown-item item-ubah-penerimaankas" href="#" data-id="' +
-                                                row.id + '" data-ip="' +
-                                                row.id_permohonan + '" data-nm="' + row.name +
-                                                '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
-                                                '" data-acc="' + row.nominal_acc + '" data-trb="' + row
-                                                .terbilang + '" data-kp="' + row.keterangan_permohonan +
-                                                '"><i class="ki ki-plus text-danger btn btn-icon btn-light-danger item-ubah-penerimaankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
-                                                row.id_permohonan +
-                                                '"></a>';
-
-
-                                        } else {
-                                            return '<a class="dropdown-item item-edit-penerimaankas" href="#" data-id="' +
-                                                row.id + '" data-ip="' +
-                                                row.id_permohonan + '" data-nm="' + row.name +
-                                                '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
-                                                '" data-acc="' + row.nominal_acc + '" data-trb="' + row
-                                                .terbilang + '" data-kp="' + row.keterangan_permohonan +
-                                                '"><i class="fas fa-edit btn btn-icon btn-light-primary item-edit-penerimaankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
-                                                row.id_permohonan +
-                                                '"></a>';
-                                        }
-                                    },
-                                    padding: '5px',
+                               if (row.bukti_penerimaan_kas == '0' || row.bukti_penerimaan_kas == null) { 
+                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_penerimaan_kas +'" target="_blank"><span class="badge badge-pill  badge-danger">Belum Upload</span></a>';
+                                } else {
+                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_penerimaan_kas +'" target="_blank"><span class="badge badge-pill  badge-primary">Lihat Bukti</span></a>';
                                 }
-                            ],
-                        });
-                    }
-                    // end of get
+                            },
+                            padding: '5px'
+                        },
 
-                    function getmax() {
+                        {
+                            "render": function(data, type, row) {
+                                if (row.bukti_penerimaan_kas == '0' || row.bukti_penerimaan_kas ==
+                                    null) {
+                                    return '<a class="dropdown-item item-ubah-penerimaankas" href="#" data-id="' +
+                                        row.id + '" data-ip="' +
+                                        row.id_permohonan + '" data-nm="' + row.name +
+                                        '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
+                                        '" data-acc="' + row.nominal_acc + '" data-trb="' + row
+                                        .terbilang + '" data-kp="' + row.keterangan_permohonan +
+                                        '"><i class="ki ki-plus text-danger btn btn-icon btn-light-danger item-ubah-penerimaankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
+                                        row.id_permohonan +
+                                        '"></a>';
 
-                        $.get("{{ url('/penerimaan-kas/getmax') }}", {
-                                _token: "{{ csrf_token() }}"
-                            })
-                            .done(function(data) {
-                                var total = parseInt(data) + 1;
-                                $("#no_resi_terima_kas").val(total);
-                            });
-                    }
-
-                    function getdatapenerimaanid(id_permohonan) {
-
-                        $.post("{{ route('penerimaankas.getid') }}", {
-                                _token: "{{ csrf_token() }}",
-                                id_permohonan: id_permohonan
-                            })
-                            .done(function(data) {
-                                $("#id_permohonan_edit").val(data.id_permohonan);
-                                $("#no_resi_terima_kas_edit").val(data.no_resi_terima_kas);
-                                $("#tanggal_penerimaan_kas_edit").val(data.tanggal_penerimaan_kas);
-                                $("#file_edit").val(data.bukti_transaksi);
-                                // alert(data.no_resi_terima_kas);
-                            });
-                    }
-
-                    // edit nota
-                    $('#table-penerimaankas').on('click', '.item-edit-penerimaankas', function() {
-                        var id_permohonan = $(this).data('ip');
-                        var name = $(this).data('nm');
-                        var jabatan = $(this).data('jbt');
-                        var divisi = $(this).data('dvs');
-                        var acc = $(this).data(uang('acc'));
-                        var keterangan = $(this).data('kp');
-                        var terbilang = $(this).data('trb');
-                        var bukti_transaksi = $(this).data('bkt');
-
-                        // $('#id_penerimaan_kas').val(id_penerimaan_kas);
-                        $('#id_permohonan').val(id_permohonan);
-                        $('#id').val(id);
-                        $('#name_edit').val(name);
-                        $('#jabatan_edit').val(jabatan);
-                        $('#divisi_edit').val(divisi);
-                        if (acc == null) {
-                            $('#nominal_acc_edit').val('0');
-                        } else {
-                            $('#nominal_acc_edit').val(uang(acc));
-                        }
-                        $('#keterangan_permohonan_edit').val(keterangan);
-                        $('#terbilang_edit').val(terbilang);
-                        $('#bukti_transaksi_edit').val(bukti_transaksi);
-
-
-                        getdatapenerimaanid(id_permohonan);
-
-
-                        $('.modal-edit-pembayarankas').modal('show');
-                    });
-                    // end of 
-
-                    // uang
-                    $('#nominal_acc').change(function() {
-                        var acc = $('#nominal_acc').val();
-                        $('#nominal_acc').val(uang(acc));
-                    });
-                    // end of uang
-
-                    // upload nota
-                    $('#table-penerimaankas').on('click', '.item-ubah-penerimaankas', function() {
-
-                        // console.log('ubah');
-
-                        getmax();
-
-                        // var id_penerimaan_kas = $(this).data('ipk');
-                        var id = $(this).data('id');
-                        var id_permohonan = $(this).data('ip');
-                        var name = $(this).data('nm');
-                        var jabatan = $(this).data('jbt');
-                        var divisi = $(this).data('dvs');
-                        var acc = $(this).data(uang('acc'));
-                        var keterangan = $(this).data('kp');
-                        var terbilang = $(this).data('trb');
-                        var bukti_transaksi = $(this).data('bkt');
-
-                        // $('#id_penerimaan_kas').val(id_penerimaan_kas);
-                        $('#id_permohonan').val(id_permohonan);
-                        $('#id').val(id);
-                        $('#name').val(name);
-                        $('#jabatan').val(jabatan);
-                        $('#divisi').val(divisi);
-
-                        if (acc == null) {
-                            $('#nominal_acc').val('0');
-                        } else {
-                            $('#nominal_acc').val(uang(acc));
-                        }
-
-                        $('#keterangan_permohonan').val(keterangan);
-                        $('#terbilang').val(terbilang);
-                        $('#bukti_transaksi').val(bukti_transaksi);
-
-                        $('.modal-ubah-pembayarankas').modal('show');
-                    });
-                    
-                    function uang(num) {
-
-                        var str = num.toString().replace("", ""),
-                            parts = false,
-                            output = [],
-                            i = 1,
-                            formatted = null;
-                        if (str.indexOf(".") > 0) {
-                            parts = str.split(".");
-                            str = parts[0];
-                        }
-                        str = str.split("").reverse();
-                        for (var j = 0, len = str.length; j < len; j++) {
-                            if (str[j] != ",") {
-                                output.push(str[j]);
-                                if (i % 3 == 0 && j < (len - 1)) {
-                                    output.push(",");
+                                } else {
+                                    return '<a class="dropdown-item item-edit-penerimaankas" href="#" data-id="' +
+                                        row.id + '" data-ip="' +
+                                        row.id_permohonan + '" data-nm="' + row.name +
+                                        '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
+                                        '" data-acc="' + row.nominal_acc + '" data-trb="' + row
+                                        .terbilang + '" data-kp="' + row.keterangan_permohonan +
+                                        '"><i class="fas fa-edit btn btn-icon btn-light-primary item-edit-penerimaankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
+                                        row.id_permohonan +
+                                        '"></a>';
                                 }
-                                i++;
-                            }
+                            },
+                            padding: '5px',
                         }
-                        formatted = output.reverse().join("");
-                        return ("" + formatted + ((parts) ? "." + parts[1].substr(0, 2) : ""));
+                    ],
+                });
+            }
+            // end of get
 
+            function getmax() {
+
+                $.get("{{ url('/penerimaan-kas/getmax') }}", {
+                        _token: "{{ csrf_token() }}"
+                    })
+                    .done(function(data) {
+                        var total = parseInt(data) + 1;
+                        $("#no_resi_terima_kas").val(total);
+                    });
+            }
+
+            function getdatapenerimaanid(id_permohonan) {
+
+                $.post("{{ route('penerimaankas.getid') }}", {
+                        _token: "{{ csrf_token() }}",
+                        id_permohonan: id_permohonan
+                    })
+                    .done(function(data) {
+                        $("#id_permohonan_edit").val(data.id_permohonan);
+                        $("#no_resi_terima_kas_edit").val(data.no_resi_terima_kas);
+                        $("#tanggal_penerimaan_kas_edit").val(data.tanggal_penerimaan_kas);
+                        $("#file_edit").val(data.bukti_transaksi);
+                        // alert(data.no_resi_terima_kas);
+                    });
+            }
+
+            // edit nota
+            $('#table-penerimaankas').on('click', '.item-edit-penerimaankas', function() {
+                var id_permohonan = $(this).data('ip');
+                var name = $(this).data('nm');
+                var jabatan = $(this).data('jbt');
+                var divisi = $(this).data('dvs');
+                var acc = $(this).data(uang('acc'));
+                var keterangan = $(this).data('kp');
+                var terbilang = $(this).data('trb');
+                var bukti_transaksi = $(this).data('bkt');
+
+                // $('#id_penerimaan_kas').val(id_penerimaan_kas);
+                $('#id_permohonan').val(id_permohonan);
+                $('#id').val(id);
+                $('#name_edit').val(name);
+                $('#jabatan_edit').val(jabatan);
+                $('#divisi_edit').val(divisi);
+                if (acc == null) {
+                    $('#nominal_acc_edit').val('0');
+                } else {
+                    $('#nominal_acc_edit').val(uang(acc));
+                }
+                $('#keterangan_permohonan_edit').val(keterangan);
+                $('#terbilang_edit').val(terbilang);
+                $('#bukti_transaksi_edit').val(bukti_transaksi);
+
+
+                getdatapenerimaanid(id_permohonan);
+
+
+                $('.modal-edit-pembayarankas').modal('show');
+            });
+            // end of 
+
+            // uang
+            $('#nominal_acc').change(function() {
+                var acc = $('#nominal_acc').val();
+                $('#nominal_acc').val(uang(acc));
+            });
+            // end of uang
+
+            // upload nota
+            $('#table-penerimaankas').on('click', '.item-ubah-penerimaankas', function() {
+
+                // console.log('ubah');
+
+                getmax();
+
+                // var id_penerimaan_kas = $(this).data('ipk');
+                var id = $(this).data('id');
+                var id_permohonan = $(this).data('ip');
+                var name = $(this).data('nm');
+                var jabatan = $(this).data('jbt');
+                var divisi = $(this).data('dvs');
+                var acc = $(this).data(uang('acc'));
+                var keterangan = $(this).data('kp');
+                var terbilang = $(this).data('trb');
+                var bukti_transaksi = $(this).data('bkt');
+
+                // $('#id_penerimaan_kas').val(id_penerimaan_kas);
+                $('#id_permohonan').val(id_permohonan);
+                $('#id').val(id);
+                $('#name').val(name);
+                $('#jabatan').val(jabatan);
+                $('#divisi').val(divisi);
+
+                if (acc == null) {
+                    $('#nominal_acc').val('0');
+                } else {
+                    $('#nominal_acc').val(uang(acc));
+                }
+
+                $('#keterangan_permohonan').val(keterangan);
+                $('#terbilang').val(terbilang);
+                $('#bukti_transaksi').val(bukti_transaksi);
+
+                $('.modal-ubah-pembayarankas').modal('show');
+            });
+
+            function uang(num) {
+
+                var str = num.toString().replace("", ""),
+                    parts = false,
+                    output = [],
+                    i = 1,
+                    formatted = null;
+                if (str.indexOf(".") > 0) {
+                    parts = str.split(".");
+                    str = parts[0];
+                }
+                str = str.split("").reverse();
+                for (var j = 0, len = str.length; j < len; j++) {
+                    if (str[j] != ",") {
+                        output.push(str[j]);
+                        if (i % 3 == 0 && j < (len - 1)) {
+                            output.push(",");
+                        }
+                        i++;
                     }
-                  
+                }
+                formatted = output.reverse().join("");
+                return ("" + formatted + ((parts) ? "." + parts[1].substr(0, 2) : ""));
+
+            }
+
         });
     </script>
 
@@ -539,7 +553,7 @@
                             'Bukti Transaksi Berhasil Di Edit.',
                             'success'
                         )
-                        location.reload()
+                        // location.reload()
 
                         $(".item-ubah").attr("disabled", false);
 
@@ -579,9 +593,11 @@
 
                         if (response) {
                             this.reset();
-                            update(response.filename, response.no_resi_terima_kas_edit, response
-                                .id_permohonan_edit,
-                                response.tanggal_penerimaan_kas_edit);
+                            update(response.filename, response.no_resi_terima_kas, response
+                                .id_permohonan, response.tanggal_penerimaan_kas);
+                            location.reload()
+
+                            // alert(response.no_resi_terima_kas)
 
                             alert('File has been uploaded successfully');
                         }
@@ -615,7 +631,7 @@
                             'Permohonan Dana Di setujui.',
                             'success'
                         )
-                        location.reload()
+                        // location.reload()
 
                         $(".item-ubah").attr("disabled", false);
 
@@ -654,12 +670,13 @@
                     success: (response) => {
 
                         if (response) {
-                            this.reset();
-                            update(response.filename, response.no_resi_terima_kas, response
-                                .id_permohonan,
-                                response.tanggal_penerimaan_kas);
+                            //this.reset();
+                            //update(response.filename, response.no_resi_terima_kas, response.id_permohonan, response.tanggal_penerimaan_kas);
 
-                            alert('File has been uploaded successfully');
+                            alert(response.id_permohonan)
+
+
+                            // alert('File has been uploaded successfully');
                         }
 
                     },

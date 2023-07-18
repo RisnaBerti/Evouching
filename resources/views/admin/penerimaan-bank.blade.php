@@ -39,7 +39,8 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Tanggal:</span>
                                                 </div>
-                                                <input type="date" value="{{ date('Y-m-d') }}" class="form-control"
+                                                <input type="date" value="{{ date('Y-m-d') }}"
+                                                    accept="image/png, image/jpeg, image/jpg, .pdf" class="form-control"
                                                     id="tanggal_penerimaan_bank" name="tanggal_penerimaan_bank"
                                                     aria-label="Sizing example input"
                                                     aria-describedby="inputGroup-sizing-sm">
@@ -88,7 +89,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" name="file" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file" id="inputFile" class="form-control">
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -197,7 +198,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" name="file_edit" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file_edit" id="inputFile" class="form-control">
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -237,6 +238,7 @@
                         <th>Divisi</th>
                         <th>Total Mominal ACC</th>
                         <th>Keterangan</th>
+                        <th>Bukti Transaksi</th>
                         <th>
                             <center>Aksi</center>
                         </th>
@@ -348,7 +350,19 @@
 
                         {
                             "render": function(data, type, row) {
-                                if (row.bukti_transaksi == '0') {
+
+                               if (row.bukti_penerimaan_bank == '0' || row.bukti_penerimaan_bank == null) { 
+                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_penerimaan_bank +'" target="_blank"><span class="badge badge-pill  badge-danger">Belum Upload</span></a>';
+                                } else {
+                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_penerimaan_bank +'" target="_blank"><span class="badge badge-pill  badge-primary">Lihat Bukti</span></a>';
+                                }
+                            },
+                            padding: '5px'
+                        },
+
+                        {
+                            "render": function(data, type, row) {
+                                if (row.bukti_penerimaan_bank == '0' || row.bukti_penerimaan_bank == null) {
                                     return '<a class="dropdown-item item-ubah-penerimaanbank" href="#" data-id="' +
                                         row.id + '" data-ip="' +
                                         row.id_permohonan + '" data-nm="' + row.name +
@@ -574,7 +588,8 @@
 
                         if (response) {
                             this.reset();
-                            update(response.filename, response.no_resi_terima_bank_edit, response
+                            update(response.filename, response.no_resi_terima_bank_edit,
+                                response
                                 .id_permohonan_edit,
                                 response.tanggal_penerimaan_bank_edit);
 

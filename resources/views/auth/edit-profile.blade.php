@@ -30,7 +30,7 @@
 
                         <div class="my-lg-0 my-3">
                             <a href="/profile-bendahara"
-                                class="btn btn-sm btn-light-success font-weight-bolder text-uppercase">Back</a>
+                                class="btn btn-sm btn-light-success font-weight-bolder text-uppercase">Kembali</a>
                         </div>
                     </div>
                     <!--end::Title-->
@@ -91,7 +91,7 @@
                         <i class="flaticon-confetti display-4 text-muted font-weight-bold"></i>
                     </span>
                     <div class="d-flex flex-column text-dark-75">
-                        <span class="font-weight-bolder font-size-sm">Member since</span>
+                        <span class="font-weight-bolder font-size-sm">Bergabung Sejak</span>
                         <span class="font-weight-bolder font-size-h5"><span
                                 class="text-dark-50 font-weight-bold">{{ old('created_at', Auth::user()->created_at->format('D, d M Y')) }}</span></span>
                     </div>
@@ -112,8 +112,8 @@
                 <!--begin::Header-->
                 <div class="card-header py-3">
                     <div class="card-title align-items-start flex-column">
-                        <h3 class="card-label font-weight-bolder text-dark">Personal Information</h3>
-                        <span class="text-muted font-weight-bold font-size-sm mt-1">Update your personal settings</span>
+                        <h3 class="card-label font-weight-bolder text-dark">Informasi Pribadi</h3>
+                        <span class="text-muted font-weight-bold font-size-sm mt-1">Ubah Informasi pribadi</span>
                     </div>
                 </div>
                 <!--end::Header-->
@@ -131,7 +131,7 @@
                             type="hidden" value="{{ old('id', Auth::user()->id) }}">
 
                         <div class="form-group row">
-                            <label class="col-xl-5 col-lg-3 col-form-label" for="name">Fullname</label>
+                            <label class="col-xl-5 col-lg-3 col-form-label" for="name">Nama Lengkap</label>
                             <div class="col-lg-9 col-xl-7">
                                 <input class="form-control form-control-lg form-control-solid" name="name" id="name"
                                     type="text" value="{{ old('name', Auth::user()->name) }}">
@@ -147,7 +147,7 @@
                         </div>
                         <!--begin::Form Group-->
                         <div class="form-group row">
-                            <label class="col-xl-5 col-lg-3 col-form-label" for="jabatan">Position</label>
+                            <label class="col-xl-5 col-lg-3 col-form-label" for="jabatan">Jabatan</label>
                             <div class="col-lg-9 col-xl-7">
                                 <input class="form-control form-control-lg form-control-solid" name="jabatan" id="jabatan"
                                     type="text" value="{{ old('jabatan', Auth::user()->jabatan) }}">
@@ -155,7 +155,7 @@
                         </div>
                         <!--begin::Form Group-->
                         <div class="form-group row">
-                            <label class="col-xl-5 col-lg-3 col-form-label" for="email">Email Address</label>
+                            <label class="col-xl-5 col-lg-3 col-form-label" for="email">Email</label>
                             <div class="col-lg-9 col-xl-7">
                                 <div class="input-group input-group-lg input-group-solid">
                                     <div class="input-group-prepend"><span class="input-group-text"><i
@@ -168,7 +168,7 @@
                         </div>
                         <!--begin::Form Group-->
                         <div class="form-group row">
-                            <label class="col-xl-5 col-lg-3 col-form-label" for="no_hp">Contact Phone</label>
+                            <label class="col-xl-5 col-lg-3 col-form-label" for="no_hp">No. Hp</label>
                             <div class="col-lg-9 col-xl-7">
                                 <input class="form-control form-control-lg form-control-solid" name="no_hp" id="no_hp"
                                     type="text" value="{{ old('no_hp', Auth::user()->no_hp) }}">
@@ -176,7 +176,7 @@
                         </div>
                         <!--begin::Form Group-->
                         <div class="form-group row">
-                            <label class="col-xl-5 col-lg-3 col-form-label" for="alamat">Address</label>
+                            <label class="col-xl-5 col-lg-3 col-form-label" for="alamat">Alamat</label>
                             <div class="col-lg-9 col-xl-7">
                                 <input class="form-control form-control-lg form-control-solid" name="alamat"
                                     id="alamat" type="text" value="{{ old('alamat', Auth::user()->alamat) }}">
@@ -186,7 +186,7 @@
                         <!--begin::Form Group-->
                         <div class="form-group row">
                             <div class="col-6">
-                                <button type="submit" class="btn btn-success mr-2">Save Changes</button>
+                                <button type="submit" class="btn btn-success mr-2">Simpan</button>
                             </div>
                         </div>
                         <!--begin::Form Group-->

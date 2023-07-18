@@ -3,109 +3,191 @@
 @section('content')
     <!--begin::Card-->
     <div class="card card-custom gutter-b example example-compact">
+        <!--begin::Form-->
+        {{-- <div class="card-body">
+        <div class="row">
+            <div class="col-7 align-self-start">
+                <div class="col">
+                    <h3 class="card-title">
+                        PERMOHONAN DANA
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-4">
+                <label>Nama Perkiraan</label>
+                <input type="text" class="form-control form-control-sm" placeholder="Nama Legkap" name="nama_perkiraan"
+                    id="nama_perkiraan" value="{{ Auth::user()->name }}" readonly />
+            </div>
+            <div class="col-lg-4">
+                <label>Total</label>
+                <input type="text" class="form-control form-control-sm" name="total_dana_ajuan"
+                    placeholder="Total Harga" id="total_dana_ajuan" />
+            </div>
+            <div class="col-lg-4">
+                <label>Terbilang</label>
+                <input readonly type="text" class="form-control form-control-sm" name="terbilang"
+                    placeholder="Terbilang" id="terbilang" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-6">
+                <label>Keterangan</label>
+                <textarea class="form-control form-control-sm" name="keterangan_permohonan" id="keterangan_permohonan"
+                    placeholder="Keterangan" rows="4"></textarea>
+            </div>
+            <div hidden class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
+                        Ajuan:</span>
+                </div>
+                <input readonly type="text" class="form-control form-control-sm" id="no_resi_ajuan"
+                    name="no_resi_ajuan" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <div hidden class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Tanggal:</span>
+                </div>
+                <input type="date" value="{{ date('Y-m-d') }}" class="form-control form-control-sm"
+                    id="tanggal_permohonan" name="tanggal_permohonan" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            
+        </div>
+    </div> --}}
         <div class="card-body">
             <div class="row">
                 <div class="col-7 align-self-start">
                     <div class="col">
                         <h3 class="card-title">
-                            PENGAJUAN CA
+                            PENGAJUAN PERMOHONAN DANA
                         </h3>
                     </div>
                 </div>
                 <div class="col-5 align-items-start">
-                    <input hidden type="text" id="id" value="{{ Auth::user()->id }}">
+                    <input hidden type="text" id="id">
                     <div class="input-group input-group-sm mb-1">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">No. Formulir:</span>
+                        <div class="input-group input-group-sm mb-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">No. Formulir:</span>
+                            </div>
+                            <input readonly type="text" class="form-control form-control-sm" id="id_permohonan"
+                                name="id_permohonan" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-sm">
                         </div>
-                        <input readonly type="text" class="form-control form-control-sm" id="id_permohonan"
-                            name="id_permohonan" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                    </div>
-                    <div class="input-group input-group-sm mb-1">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
                                 Ajuan:</span>
                         </div>
-                        <input readonly type="text" class="form-control form-control-sm" id="no_resi_ajuan"
-                            name="no_resi_ajuan" value="" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-sm">
+                        <input readonly disabled type="text" class="form-control text-right" id="no_resi_ajuan"
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                     </div>
-                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group input-group-sm mb-1">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Tanggal:</span>
                         </div>
-                        <input type="date" value="{{ date('Y-m-d') }}" class="form-control form-control-sm"
-                            id="tanggal_permohonan" name="tanggal_permohonan" value=""
-                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        <input readonly disabled type="date" value="{{ date('Y-m-d') }}" class="form-control text-right"
+                            name="tanggal_permohonan" id="tanggal_permohonan" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm">
                     </div>
                 </div>
             </div>
-
             <div class="form-group row">
                 <div class="col-lg-4">
-                    <label>Nama Perkiraan</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Nama Legkap" id="name"
+                    <label>Nama </label>
+                    <input type="text" class="form-control" placeholder="Nama Legkap" id="name"
                         value="{{ Auth::user()->name }}" readonly disabled />
                 </div>
                 <div class="col-lg-4">
-                    <label>Jabatan</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Jabatan" id="jabatan"
-                        value="{{ Auth::user()->jabatan }}" readonly disabled />
-                </div>
-                <div class="col-lg-4">
-                    <label>Divisi / Departemen</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Divisi" id="divisi"
+                    <label>Divisi </label>
+                    <input type="text" class="form-control" placeholder="Nama Legkap" id="divisi"
                         value="{{ Auth::user()->divisi }}" readonly disabled />
                 </div>
-            </div>
-
-            <div class="form-group row">
                 <div class="col-lg-4">
-                    <label>Dana Yang Di ajukan</label>
-                    <input type="text" class="form-control form-control-sm" name="harga_satuan"
-                        placeholder="Dana yang diajukan" id="harga_satuan" />
+                    <label>Jabatan </label>
+                    <input type="text" class="form-control" placeholder="Nama Legkap" id="jabatan"
+                        value="{{ Auth::user()->jabatan }}" readonly disabled />
+                </div>
+            </div>
+            <div class="form-group row">
+                {{-- <div class="col-lg-4">
+                <label>Harga Satuan</label>
+                <input type="text" class="form-control" placeholder="Harga Satuan" id="harga_satuan"/>
+            </div> --}}
+                {{-- <div class="col-lg-6">
+                <label>Total Dana Yang Diajukan</label>
+                <input type="text" class="form-control" placeholder="Total" id="total_dana_ajuan"/>
+            </div>
+            <div class="col-lg-6">
+                <label>Terbilang</label>
+                <input type="text" class="form-control" placeholder="Terbilang" id="terbilang" readonly
+                    disabled />
+            </div> --}}
+                <div class="col-lg-4">
+                    <label>Harga Satuan</label>
+                    <input type="text" class="form-control form-control-sm"
+                        name="harga_satuan"placeholder="Dana yang diajukan" id="harga_satuan" />
                 </div>
                 <div class="col-lg-4">
                     <label>Jumlah Satuan</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Jumlah Barang"
-                        name="jumlah_satuan" id="jumlah_satuan" />
+                    <input type="text" class="form-control form-control-sm"
+                        placeholder="Jumlah Barang"name="jumlah_satuan" id="jumlah_satuan" />
                 </div>
                 <div class="col-lg-4">
-                    <label>Total</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Total" name="total_dana_ajuan"
-                        id="total_dana_ajuan" readonly disabled />
+                    <label>Total Dana Yang Di ajukan</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Total"
+                        name="total_dana_ajuan"id="total_dana_ajuan" />
                 </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-6">
-                    <label>Nominal ACC</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Di isi oleh bendahara"
-                        id="nominal_acc" name="nominal_acc" value="" readonly disabled />
-                </div>
+
             </div>
             <div class="form-group row">
                 <div class="col-lg-6">
                     <label>Terbilang</label>
-                    <input readonly disabled type="text" class="form-control form-control-sm" placeholder="Terbilang"
-                        value="" id="terbilang" name="terbilang" />
+                    <input type="text" class="form-control" placeholder="Terbilang" id="terbilang" readonly disabled />
                 </div>
                 <div class="col-lg-6">
-                    <label>Keterangan</label>
-                    <textarea class="form-control form-control-sm" name="keterangan_permohonan" id="keterangan_permohonan"
-                        placeholder="Keterangan" rows="4"></textarea>
+                    <label>Nominal ACC</label>
+                    <input type="text" class="form-control" placeholder="Di isi oleh bendahara" id="nominal_acc" readonly
+                        disabled />
                 </div>
-
+            </div>
+            <div class="form-group row">
+                {{-- <div class="col-lg-6">
+                <label>Terbilang</label>
+                <input type="text" class="form-control" placeholder="Terbilang" id="terbilang" readonly disabled />
+            </div> --}}
+                <div class="col-lg-12">
+                    <label>Keperluan</label>
+                    <textarea class="form-control" placeholder="Keterangan" id="keterangan_permohonan" rows="4"></textarea>
+                </div>
+                <input hidden type="text" id="id">
+                <input hidden type="text" id="id_permohonan">
+                <input hidden type="text" id="tanggal_permohonan">
+                <input hidden type="text" id="nominal_acc" value="0">
+                <input hidden type="text" id="status_permohonan" value="0">
+                <input hidden type="text" id="jenis_dana" value="Chartered Accountant">
+                <input hidden type="text" id="ttd_pemohon">
+                <input hidden type="text" id="ttd_manajer" value="0">
+                <input hidden type="text" id="ttd_bendahara" value="0">
+                <input hidden type="text" id="ttd_pemeriksa" value="0">
+                <input hidden type="text" id="komentar" value="0">
             </div>
         </div>
         <div class="card-footer">
             <div class="row">
-                <div class="col-lg-3 ">
-                    <button type="button" class="btn btn-primary mr-2 simpan-ca">Simpan</button>
+                <div class="col-lg-3">
+                    <button type="button" class="btn btn-primary mr-2 simpan-ca">Submit</button>
+                    {{-- <a href="{{ route('wa') }}"> <button type="button" class="btn btn-primary mr-2 notif">coba</button></a> --}}
+
                 </div>
             </div>
         </div>
+        <!--end::Form-->
     </div>
     <!--end::Card-->
+
+
 
     <div class="card card-custom">
         <div class="card-header">
@@ -125,12 +207,12 @@
                         <th>Nama</th>
                         <th>Tanggal</th>
                         <th>Dana Yang Di ajukan</th>
-                        <th>Jumlah</th>
                         <th>Keterangan </th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 
+
             </table>
             <!--end: Datatable-->
         </div>
@@ -154,6 +236,13 @@
                 var total = parseInt(harga.replace(/,/g, '')) * parseInt(jumlah);
                 $("#total_dana_ajuan").val(uang(total));
                 $('#terbilang').val(terbilang(total));
+
+            });
+
+            $('#total_dana_ajuan').change(function() {
+                var harga_satuan = $('#total_dana_ajuan').val();
+                $('#total_dana_ajuan').val(uang(harga_satuan));
+                $('#terbilang').val(terbilang(harga_satuan));
             });
 
             $('#harga_satuan').change(function() {
@@ -183,10 +272,10 @@
                 var name = $('#name').val();
                 var jabatan = $('#jabatan').val();
                 var divisi = $('#divisi').val();
-                var harga_satuan = $('#harga_satuan').val();
+                var harga_satuan = $('#harga_satuan').val().replace(",", "");
                 var jumlah_satuan = $('#jumlah_satuan').val();
-                var total_dana_ajuan = $('#total_dana_ajuan').val();
-                var nominal_acc = $('#nominal_acc').val();
+                var total_dana_ajuan = $('#total_dana_ajuan').val().replace(",", "");
+                var nominal_acc = $('#nominal_acc').val().replace(",", "");
                 var keterangan_permohonan = $('#keterangan_permohonan').val();
                 var jenis_dana = $('#jenis_dana').val();
                 var terbilang = $('#terbilang').val();
@@ -385,15 +474,15 @@
                             padding: '5px'
                         },
 
-                        {
-                            "render": function(data, type, row) {
+                        // {
+                        //     "render": function(data, type, row) {
 
-                                return row.jumlah_satuan;
-                                // return row.harga_satuan;
+                        //         return row.jumlah_satuan;
+                        //         // return row.harga_satuan;
 
-                            },
-                            padding: '5px'
-                        },
+                        //     },
+                        //     padding: '5px'
+                        // },
 
                         {
                             "render": function(data, type, row) {

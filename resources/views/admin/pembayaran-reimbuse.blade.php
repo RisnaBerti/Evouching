@@ -54,7 +54,7 @@
                         <label>Bukti Nota</label>
                         <div></div>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="bukti_transaksi" />
+                            <input type="file" class="custom-file-input" accept="image/png, image/jpeg, image/jpg, .pdf" id="bukti_transaksi" />
                             <label class="custom-file-label" for="bukti_transaksi">Choose file</label>
                         </div>
                         <span class="form-text text-muted">File wajib scan</span>

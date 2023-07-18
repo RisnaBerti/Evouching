@@ -4,11 +4,7 @@
     <!--begin::Card-->
     <div class="card card-custom gutter-b example example-compact">
         <!--begin::Form-->
-        {{-- <form class="form" id="form_ubah"> --}}
-        {{-- <form method="POST" action="{{ url('/permohonan/add') }}" id="form_permohonan" class="form_permohonan"
-        enctype="multipart/form-data">
-        @csrf --}}
-        <div class="card-body">
+        {{-- <div class="card-body">
             <div class="row">
                 <div class="col-7 align-self-start">
                     <div class="col">
@@ -18,13 +14,11 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="form-group row">
                 <div class="col-lg-4">
                     <label>Nama Perkiraan</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Nama Legkap"
-                        name="nama_perkiraan" id="nama_perkiraan" value="{{ Auth::user()->name }}" readonly />
+                    <input type="text" class="form-control form-control-sm" placeholder="Nama Legkap" name="nama_perkiraan"
+                        id="nama_perkiraan" value="{{ Auth::user()->name }}" readonly />
                 </div>
                 <div class="col-lg-4">
                     <label>Total</label>
@@ -33,8 +27,8 @@
                 </div>
                 <div class="col-lg-4">
                     <label>Terbilang</label>
-                    <input readonly type="text" class="form-control form-control-sm" name="terbilang" placeholder="Terbilang"
-                        id="terbilang" />
+                    <input readonly type="text" class="form-control form-control-sm" name="terbilang"
+                        placeholder="Terbilang" id="terbilang" />
                 </div>
             </div>
             <div class="form-group row">
@@ -59,39 +53,139 @@
                         id="tanggal_permohonan" name="tanggal_permohonan" aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-sm">
                 </div>
+                
+            </div>
+        </div> --}}
+        <div class="card-body">
+            <div class="row">
+                <div class="col-7 align-self-start">
+                    <div class="col">
+                        <h3 class="card-title">
+                            PENGAJUAN PERMOHONAN DANA
+                        </h3>
+                    </div>
+                </div>
+                <div class="col-5 align-items-start">
+                    <input hidden type="text" id="id">
+                    <div class="input-group input-group-sm mb-1">
+                        <div class="input-group input-group-sm mb-1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">No. Formulir:</span>
+                            </div>
+                            <input readonly type="text" class="form-control form-control-sm" id="id_permohonan"
+                                name="id_permohonan" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
+                                Ajuan:</span>
+                        </div>
+                        <input readonly disabled type="text" class="form-control text-right" id="no_resi_ajuan"
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    <div class="input-group input-group-sm mb-1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Tanggal:</span>
+                        </div>
+                        <input readonly disabled type="date" value="{{ date('Y-m-d') }}" class="form-control text-right"
+                            name="tanggal_permohonan" id="tanggal_permohonan" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-4">
+                    <label>Nama </label>
+                    <input type="text" class="form-control" placeholder="Nama Legkap" id="name"
+                        value="{{ Auth::user()->name }}" readonly disabled />
+                </div>
+            </div>
+            <div class="form-group row">
+                {{-- <div class="col-lg-4">
+                    <label>Harga Satuan</label>
+                    <input type="text" class="form-control" placeholder="Harga Satuan" id="harga_satuan"/>
+                </div> --}}
+                {{-- <div class="col-lg-6">
+                    <label>Total Dana Yang Diajukan</label>
+                    <input type="text" class="form-control" placeholder="Total" id="total_dana_ajuan"/>
+                </div>
+                <div class="col-lg-6">
+                    <label>Terbilang</label>
+                    <input type="text" class="form-control" placeholder="Terbilang" id="terbilang" readonly
+                        disabled />
+                </div> --}}
+                <div class="col-lg-4">
+                    <label>Harga Satuan</label>
+                    <input type="text" class="form-control form-control-sm"
+                        name="harga_satuan"placeholder="Dana yang diajukan" id="harga_satuan" />
+                </div>
+                <div class="col-lg-4">
+                    <label>Jumlah Satuan</label>
+                    <input type="text" class="form-control form-control-sm"
+                        placeholder="Jumlah Barang"name="jumlah_satuan" id="jumlah_satuan" />
+                </div>
+                <div class="col-lg-4">
+                    <label>Total Dana Yang Di ajukan</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Total"
+                        name="total_dana_ajuan"id="total_dana_ajuan" />
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-6">
+                    <label>Terbilang</label>
+                    <input type="text" class="form-control" placeholder="Terbilang" id="terbilang" readonly disabled />
+                </div>
+                <div class="col-lg-6">
+                    <label>Nominal ACC</label>
+                    <input type="text" class="form-control" placeholder="Di isi oleh bendahara" id="nominal_acc" readonly
+                        disabled />
+                </div>
+            </div>
+            <div class="form-group row">
+                {{-- <div class="col-lg-6">
+                    <label>Terbilang</label>
+                    <input type="text" class="form-control" placeholder="Terbilang" id="terbilang" readonly disabled />
+                </div> --}}
+                <div class="col-lg-12">
+                    <label>Keperluan</label>
+                    <textarea class="form-control" placeholder="Keterangan" id="keterangan_permohonan" rows="4"></textarea>
+                </div>
                 <input hidden type="text" id="id">
                 <input hidden type="text" id="id_permohonan">
                 <input hidden type="text" id="tanggal_permohonan">
-                <input hidden type="text" id="harga_satuan">
-                <input hidden type="text" id="jumlah_satuan">
-                <input hidden type="text" id="nominal_acc">
-                <input hidden type="text" id="status_permohonan">
+                <input hidden type="text" id="nominal_acc" value="0">
+                <input hidden type="text" id="status_permohonan" value="0">
                 <input hidden type="text" id="jenis_dana" value="0">
-                <input hidden type="text" id="ttd_pemohon" value="0">
+                <input hidden type="text" id="ttd_pemohon">
                 <input hidden type="text" id="ttd_manajer" value="0">
                 <input hidden type="text" id="ttd_bendahara" value="0">
                 <input hidden type="text" id="ttd_pemeriksa" value="0">
+                <input hidden type="text" id="komentar" value="0">
             </div>
         </div>
         <div class="card-footer">
             <div class="row">
                 <div class="col-lg-3">
                     <button type="button" class="btn btn-primary mr-2 simpan-permohonan">Submit</button>
+                    {{-- <a href="{{ route('wa') }}"> <button type="button" class="btn btn-primary mr-2 notif">coba</button></a> --}}
+
                 </div>
             </div>
         </div>
-        {{-- </form> --}}
         <!--end::Form-->
     </div>
     <!--end::Card-->
+
     <div class="card card-custom">
         <div class="card-header">
             <div class="card-title">
                 <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
-                <h3 class="card-label">Permohonan Dana</h3>
+                <h3 class="card-label">Detail Permohonan Dana</h3>
             </div>
         </div>
-        <div class="card-body" >
+        <div class="card-body">
+
             <!--begin: Datatable-->
             <table class="table table-bordered display nowrap table-permohonan" id="table-permohonan"
                 style="width:100%; margin-top: 13px;">
@@ -101,7 +195,7 @@
                         <th hidden>id_permohonan</th>
                         <th>Nama</th>
                         <th>Tanggal</th>
-                        <th>Total</th>
+                        <th>Dana Yang Di ajukan</th>
                         <th>Keterangan</th>
                         <th>Status</th>
                         <th>
@@ -125,7 +219,7 @@
                                 <center>{{ $d->tanggal_permohonan }}</center>
                             </td>
                             <td>
-                                <center>{{ $d->total_dana_ajuan}}</center>
+                                <center>{{ $d->total_dana_ajuan }}</center>
                             </td>
                             <td>
                                 <center>{{ $d->keterangan_permohonan }}</center>
@@ -155,6 +249,8 @@
         </div>
     </div>
 
+
+
     <script>
         $(document).ready(function() {
             const tambahpermohonan = async () => {
@@ -169,10 +265,10 @@
             getmax();
 
 
-            $("#harga_satuan_sum, #jumlah_satuan_sum").keyup(function() {
+            $("#harga_satuan, #jumlah_satuan").keyup(function() {
 
-                var harga = $("#harga_satuan_sum").val();
-                var jumlah = $("#jumlah_satuan_sum").val();
+                var harga = $("#harga_satuan").val();
+                var jumlah = $("#jumlah_satuan").val();
 
                 var total = parseInt(harga.replace(/,/g, '')) * parseInt(jumlah);
                 $("#total_dana_ajuan").val(uang(total));
@@ -185,6 +281,10 @@
                 $('#total_dana_ajuan').val(uang(harga_satuan));
                 $('#terbilang').val(terbilang(harga_satuan));
             });
+            $('#harga_satuan').change(function() {
+                var harga_satuan = $('#harga_satuan').val();
+                $('#harga_satuan').val(uang(harga_satuan));
+            });
 
             function coba() {
 
@@ -194,10 +294,10 @@
                 var jabatan = $('#jabatan').val();
                 var divisi = $('#divisi').val();
                 var nama_perkiraan = $('#nama_perkiraan').val();
-                var harga_satuan_sum = $('#harga_satuan_sum').val();
-                var jumlah_satuan_sum = $('#jumlah_satuan_sum').val();
-                var total_dana_ajuan = $('#total_dana_ajuan').val();
-                var nominal_acc = $('#nominal_acc').val();
+                var harga_satuan = $('#harga_satuan').val().replace(",", "");
+                var jumlah_satuan = $('#jumlah_satuan').val();
+                var total_dana_ajuan = $('#total_dana_ajuan').val().replace(",", "");
+                var nominal_acc = $('#nominal_acc').val().replace(",", "");
                 var keterangan_permohonan = $('#keterangan_permohonan').val();
                 var jenis_dana = $('#jenis_dana').val();
                 var terbilang = $('#terbilang').val();
@@ -205,68 +305,91 @@
                 var ttd_bendahara = $('#ttd_bendahara').val();
                 var ttd_pemohon = $('#ttd_pemohon').val();
                 var ttd_manajer = $('#ttd_manajer').val();
+                var komentar = $('#komentar').val();
 
-                $.post("{{ url('/permohonan/add') }}", {
-                    _token: "{{ csrf_token() }}",
-                    no_resi_ajuan: no_resi_ajuan,
-                    tanggal_permohonan: tanggal_permohonan,
-                    name: name,
-                    jabatan: jabatan,
-                    divisi: divisi,
-                    nama_perkiraan: nama_perkiraan,
-                    harga_satuan_sum: harga_satuan_sum,
-                    jumlah_satuan_sum: jumlah_satuan_sum,
-                    total_dana_ajuan: total_dana_ajuan,
-                    nominal_acc: nominal_acc,
-                    keterangan_permohonan: keterangan_permohonan,
-                    jenis_dana: jenis_dana,
-                    terbilang: terbilang,
-                    ttd_pemeriksa: ttd_pemeriksa,
-                }).done(function(response) {
-                    if (response != null) {
+                if (!nominal_acc || nominal_acc == 0) {
 
-                        Swal.fire(
-                            'Permohonan Dana!',
-                            'Permohonan Dana Sedang Diproses.',
-                            'success'
-                        )
-                        location.reload()
-                        getmax();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Dana yang diajukan tidak boleh kosong!',
+                        showCancelButton: false,
+                        confirmButtonColor: '#FF6347',
+                        confirmButtonText: 'Siap',
+                    })
 
-                        $(".simpan-permohonan").attr("disabled", false);
+                } else {
 
-                        $('#id').val('');
-                        $('#harga_satuan_sum').val('');
-                        $('#jumlah_satuan_sum').val('');
-                        $('#total_dana_ajuan').val('');
-                        $('#keterangan_permohonan').val('');
-                        $('#terbilang').val('');
+                    $.post("{{ url('/permohonan/add') }}", {
 
-                        $('#modalubah').modal('hide');
+                        _token: "{{ csrf_token() }}",
+                        no_resi_ajuan: no_resi_ajuan,
+                        tanggal_permohonan: tanggal_permohonan,
+                        name: name,
+                        jabatan: jabatan,
+                        divisi: divisi,
+                        nama_perkiraan: nama_perkiraan,
+                        harga_satuan: harga_satuan,
+                        jumlah_satuan: jumlah_satuan,
+                        total_dana_ajuan: total_dana_ajuan,
+                        nominal_acc: nominal_acc,
+                        keterangan_permohonan: keterangan_permohonan,
+                        jenis_dana: jenis_dana,
+                        terbilang: terbilang,
+                        ttd_pemeriksa: ttd_pemeriksa,
+                        komentar: komentar
 
-                    } else {
+                    }).done(function(response) {
 
-                        getmax();
+                        if (response != null) {
 
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Permohonan Dana gagal diubah',
-                            text: 'Permohonan Dana gagal diubah.',
-                            showCancelButton: false,
-                            confirmButtonColor: '#FF6347',
-                            confirmButtonText: 'Siap',
-                        })
+                            Swal.fire(
+                                'Permohonan Dana!',
+                                'Permohonan Dana Sedang Diproses.',
+                                'success'
+                            )
+                            location.reload()
+                            getmax();
 
-                        $(".simpan-permohonan").attr("disabled", false);
+                            $(".simpan-permohonan").attr("disabled", false);
 
-                    }
+                            $('#id').val('');
+                            $('#harga_satuan').val('');
+                            $('#jumlah_satuan').val('');
+                            $('#total_dana_ajuan').val('');
+                            $('#keterangan_permohonan').val('');
+                            $('#terbilang').val('');
 
-                }, "json");
+                            $('#modalubah').modal('hide');
+
+                        } else {
+
+                            getmax();
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Permohonan Dana gagal diubah',
+                                text: 'Permohonan Dana gagal diubah.',
+                                showCancelButton: false,
+                                confirmButtonColor: '#FF6347',
+                                confirmButtonText: 'Siap',
+                            })
+
+                            $(".simpan-permohonan").attr("disabled", false);
+                        }
+
+                    }, "json");
+
+
+                }
+
+
             }
 
             $(".simpan-permohonan").click(function() {
                 coba();
             });
+
 
             function getmax() {
 

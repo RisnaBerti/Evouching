@@ -86,7 +86,7 @@
                         <i class="flaticon-confetti display-4 text-muted font-weight-bold"></i>
                     </span>
                     <div class="d-flex flex-column text-dark-75">
-                        <span class="font-weight-bolder font-size-sm">Member since</span>
+                        <span class="font-weight-bolder font-size-sm">Bergabung Sejak</span>
                         <span class="font-weight-bolder font-size-h5"><span
                                 class="text-dark-50 font-weight-bold">{{ old('created_at', Auth::user()->created_at->format('D, d M Y')) }}</span></span>
                     </div>
@@ -108,13 +108,13 @@
                 <!--begin::Header-->
                 <div class="card-header py-3">
                     <div class="card-title align-items-start flex-column">
-                        <h3 class="card-label font-weight-bolder text-dark">Account Information</h3>
-                        <span class="text-muted font-weight-bold font-size-sm mt-1">Change your password</span>
+                        <h3 class="card-label font-weight-bolder text-dark">Informasi Akun</h3>
+                        <span class="text-muted font-weight-bold font-size-sm mt-1">Ubah kata sandi Anda</span>
                     </div>
                 </div>
                 <!--end::Header-->
                 <!--begin::Form-->
-                <form class="form" method="post" action="/change-password-manajer">
+                <form class="form" method="post" action="/change-password-manajer"> 
                     @csrf
                     <div class="card-body">
                         @if ($message = Session::get('success'))
@@ -124,7 +124,7 @@
                         @endif
                         <!--begin::Form Group-->
                         <div class="form-group row">
-                            <label class="col-xl-5 col-lg-3 col-form-label" for="old_password">Current Password</label>
+                            <label class="col-xl-5 col-lg-3 col-form-label" for="old_password">Kata sandi saat ini</label>
                             <div class="col-lg-9 col-xl-7">
                                 <input
                                     class="form-control form-control-lg form-control-solid @error('old_password') is-invalid @enderror"
@@ -136,7 +136,7 @@
                         </div>
                         <!--begin::Form Group-->
                         <div class="form-group row">
-                            <label class="col-xl-5 col-lg-3 col-form-label" for="new_password">New Password</label>
+                            <label class="col-xl-5 col-lg-3 col-form-label" for="new_password">Kata sandi baru</label>
                             <div class="col-lg-9 col-xl-7">
                                 <input
                                     class="form-control form-control-lg form-control-solid @error('new_password') is-invalid @enderror"
@@ -148,8 +148,7 @@
                         </div>
                         <!--begin::Form Group-->
                         <div class="form-group row">
-                            <label class="col-xl-5 col-lg-3 col-form-label" for="confirm_password">Confirm New
-                                Password</label>
+                            <label class="col-xl-5 col-lg-3 col-form-label" for="confirm_password">Konfirmasi password baru</label>
                             <div class="col-lg-9 col-xl-7">
                                 <input
                                     class="form-control form-control-lg form-control-solid @error('confirm_password') is-invalid @enderror"
@@ -160,7 +159,7 @@
                             </div>
                         </div>
                         <div class="card-toolbar">
-                            <button type="submit" class="btn btn-success mr-2">Save Changes</button>
+                            <button type="submit" class="btn btn-success mr-2">Simpan</button>
                         </div>
                         <!--begin::Form Group-->
                         <div class="separator separator-dashed "></div>

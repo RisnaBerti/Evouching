@@ -192,9 +192,9 @@
                     <label>Untuk Keperluan</label>
                     <textarea class="form-control" id="keperluan" name="keperluan" rows="4"></textarea>
                 </div>
-                <input type="text" id="sisa_saldo" name="sisa_saldo" value="0">
-                <input type="text" id="bulan" name="bulan" value="{{ date('m') }}">
-                <input type="text" id="tahun" name="tahun" value="{{ date('Y') }}">
+                <input hidden type="text" id="sisa_saldo" name="sisa_saldo" value="0">
+                <input hidden type="text" id="bulan" name="bulan" value="{{ date('m') }}">
+                <input hidden type="text" id="tahun" name="tahun" value="{{ date('Y') }}">
             </div>
         </div>
 

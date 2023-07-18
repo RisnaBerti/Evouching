@@ -52,7 +52,7 @@ class AkunControllerManajer extends Controller
         $user->alamat =  $request->alamat;
         $user->update();
 
-        return redirect()->route('profile_pemohon')->with('success', 'Profile berhasil diupdate');
+        return redirect()->route('profile_manajer')->with('success', 'Profile berhasil diupdate');
     }
 
     //fungsi change password
@@ -77,9 +77,9 @@ class AkunControllerManajer extends Controller
         if (Hash::check($request->old_password, $user->password)) {
             $user->password = Hash::make($request->new_password);
             $user->update();
-            return redirect()->route('change_password_pemohon')->with('success', 'Password berhasil diupdate');
+            return redirect()->route('change_password_manajer')->with('success', 'Password berhasil diupdate');
         } else {
-            return redirect()->route('change_password_pemohon')->with('error', 'Password lama tidak sesuai');
+            return redirect()->route('change_password_manajer')->with('error', 'Password lama tidak sesuai');
         }
     }
 }

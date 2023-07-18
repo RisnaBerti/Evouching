@@ -23,10 +23,31 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect()->route('profile');
-                // return redirect(RouteServiceProvider::HOME);
+                $user = Auth::guard($guard)->user();
+                $roleId = $user->role_id;
+                switch ($roleId) {
+                    case 1:
+                        return redirect()->route('dashboard-bendahara');
+                    case 2:
+                        return redirect()->route('dashboard-manajer');
+                    case 3:
+                        return redirect()->route('dashboard-pemeriksa');
+                    case 4:
+                        return redirect()->route('dashboard-pemohon');
+                    default:
+                        // Tambahkan logika penanganan jika role_id tidak sesuai
+                        return redirect()->route('auth-login')->with('status', 'Anda tidak memiliki hak akses!');
+                }
             }
         }
+
+        // foreach ($guards as $guard) {
+        //     if (Auth::guard($guard)->check()) {
+        //         return redirect()->route('profile');
+        //         // return redirect()->route('auth-login')->with('status', 'Anda tidak memiliki hak akses!');
+        //         // return redirect(RouteServiceProvider::HOME);
+        //     }
+        // }
 
         return $next($request);
     }

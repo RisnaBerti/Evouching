@@ -24,8 +24,8 @@
                                             </div>
                                         </div>
                                         <div class="col-5 align-items-start">
-                                            <input type="text" name="id_permohonan" id="id_permohonan">
-                                            <input type="text" name="id" id="id">
+                                            <input hidden type="text" name="id_permohonan" id="id_permohonan">
+                                            <input hidden type="text" name="id" id="id">
                                             <div class="input-group input-group-sm mb-1">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
@@ -149,7 +149,7 @@
                                                         id="inputGroup-sizing-sm">Tanggal:</span>
                                                 </div>
                                                 <input type="date" value="{{ date('Y-m-d') }}" class="form-control"
-                                                    id="tanggal_pembayaran_bank_edit" name="tanggal_pembayaran_bank_edit"
+                                                    id="tanggal_pembayaran_bank_edit" accept="image/png, image/jpeg, image/jpg, .pdf" name="tanggal_pembayaran_bank_edit"
                                                     aria-label="Sizing example input"
                                                     aria-describedby="inputGroup-sizing-sm">
                                             </div>
@@ -237,6 +237,7 @@
                         <th>Divisi</th>
                         <th>Total Mominal ACC</th>
                         <th>Keterangan</th>
+                        <th>Bukti Transaksi</th>
                         <th>
                             <center>Aksi</center>
                         </th>
@@ -348,7 +349,19 @@
 
                         {
                             "render": function(data, type, row) {
-                                if (row.bukti_transaksi == '0') {
+
+                               if (row.bukti_pembayaran_bank == '0' || row.bukti_pembayaran_bank == null) { 
+                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_pembayaran_bank +'" target="_blank"><span class="badge badge-pill  badge-danger">Belum Upload</span></a>';
+                                } else {
+                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_pembayaran_bank +'" target="_blank"><span class="badge badge-pill  badge-primary">Lihat</span></a>';
+                                }
+                            },
+                            padding: '5px'
+                        },
+
+                        {
+                            "render": function(data, type, row) {
+                                if (row.bukti_pembayaran_bank == '0' || row.bukti_pembayaran_bank == null) {
                                     return '<a class="dropdown-item item-ubah-pembayaranbank" href="#" data-id="' +
                                         row.id + '" data-ip="' +
                                         row.id_permohonan + '" data-nm="' + row.name +

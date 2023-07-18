@@ -1,0 +1,375 @@
+<div id="layoutSidenav_content">
+    <main>
+        <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+            <div class="container-xl px-4">
+                <div class="page-header-content pt-4">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto mt-4">
+                            <h1 class="page-header-title">
+                                <div class="page-header-icon"><i data-feather="layout"></i></div>
+                                Breadcrumbs
+                            </h1>
+                            <div class="page-header-subtitle">The custom page header supports and styles Bootstrap breadcrumbs</div>
+                        </div>
+                    </div>
+                    <nav class="mt-4 rounded" aria-label="breadcrumb">
+                        <ol class="breadcrumb px-3 py-2 rounded mb-0">
+                            <li class="breadcrumb-item"><a href="dashboard-1.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Breadcrumbs</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <!-- Main page content-->
+        <div class="container-xl px-4 mt-n10">
+           
+            <div class="card card-header-actions">
+                <div class="card-header">
+                    Header Button
+                    <button class="btn btn-primary btn-sm" id="btnAdd">Tambah</button>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12 table-responsive">
+                        <input type="hidden" name="total_partisipan" id="total_partisipan" value="0">
+                        <table id="table-barang" class="table table-striped table-row-bordered gy-5 gs-7" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr class="fw-semibold fs-6 text-gray-800">
+                                        <th class="min-w-50px">
+                                            <input type="checkbox" name="check_all" id="check_all">
+                                        </th>
+                                        <th class="min-w-20px">No</th>
+                                        <th class="min-w-250px" width="250">Nama Barang</th>
+                                        <th class="min-w-250px" width="250">Harga</th>
+                                        <th class="min-w-100px" width="100">Jumlah</th>
+                                        <th class="min-w-100px" width="100">Total Harga</th>
+                                        <th class="min-w-40px"></th>
+                                    </tr>
+                                </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <input type="text" id="total_harga_barang" value="0">
+                </div>
+            </div>
+
+
+        </div>
+    </main>
+    <footer class="footer-admin mt-auto footer-light">
+        <div class="container-xl px-4">
+            <div class="row">
+                <div class="col-md-6 small">Copyright &copy; Your Website 2021</div>
+                <div class="col-md-6 text-md-end small">
+                    <a href="#!">Privacy Policy</a>
+                    &middot;
+                    <a href="#!">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // Shorthand for $( document ).ready()
+    $(function() {
+
+        let base_url = "https://api.sdmdigital.id/crud/";
+        let indexRow = "2";
+        let status = 5;
+
+        let getListUserUrl = "https://presensi.sdmdigital.id/getUsers";
+
+        $(document).on('click', '#btnAdd, #btnAddRow', function() {
+
+            $('#actionContainer').remove();
+
+            let row = $('#table-barang tr').length;
+
+            let html = '<tr id="barang' + indexRow + '" class="row-table" data-idx="' + indexRow + '">';
+
+                html += '<input type="hidden" name="ids_kehadiran[]" id="id_kehadiran'+ indexRow +'" value="0">';
+
+                html += '<input type="hidden" name="is_deleted[]" id="is_deleted'+ indexRow +'" value="0">';
+
+                html += '<td><input type="checkbox" name="check_delete[]" class="check_delete mt-3" id="check_delete' + indexRow + '" data-idx="' + indexRow + '"></td>';
+
+                html += '<td class="no" id="no' + indexRow + '"><div class="mt-3">' + row + '</div></td>';
+
+                html += '<td><input type="text" class="form-control input-sm ml-2" name="nama_barang[]" id="nama_barang' + indexRow +'" required></td>';
+
+                html += '<td><input type="text" class="form-control input-sm ml-2" name="harga_barang[]" id="harga_barang' + indexRow +'" required></td>';
+
+                html += '<td><input type="text" class="form-control input-sm ml-2" name="jumlah_barang[]" id="jumlah_barang' + indexRow +'" required></td>';
+
+                html += '<td><input type="text" disabled class="form-control input-sm ml-2" name="total_harga[]" id="total_harga' + indexRow +'" required></td>';
+                        
+                html += '<td id="action' + indexRow + '" class="action" data-idx="' + indexRow + '"><div id="actionContainer"><i class="fa fa-plus" id="btnAddRow" data-idx="' + indexRow + '"></i>&nbsp;&nbsp;<i class="fa fa-minus" id="btnDeleteRow" data-idx="' + indexRow + '"></i></div></td>';
+                
+                html += '<input type="hidden" name="id_deleted[]" id="pelatihan_session_kehadiran_id'+ indexRow +'" value="0">';
+            
+            html += '</tr>';
+
+            $('#table-barang tbody').append(html);
+            
+            // $('.users').select2({
+            //     minimumInputLength: 1,
+            //     allowClear: true,
+            //     placeholder: 'Input nama Peserta',
+            //     ajax: {
+            //         url: getListUserUrl,
+            //         data: function(params) {
+            //             var query = {
+            //                 pelatihan_id: $('#pelatihan_id').val(),
+            //                 search: params.term,
+            //                 session_id: $('#session_id').val()
+            //             }
+
+            //             // Query parameters will be ?search=[term]&type=public
+            //             return query;
+            //         },
+            //         processResults: function(response) {
+            //             // Transforms the top-level key of the response object from 'items' to 'results'
+            //             let data = response.data.content;
+            //             let result = [];
+            //             for (let i = 0; i < data.length; i++) {
+            //                 result[i] = {
+            //                     id: data[i].user.id,
+            //                     text: data[i].user.name+' - '+data[i].user.email,
+            //                     email: data[i].user.email
+            //                 };
+            //             }
+
+            //             return {
+            //                 results: result
+            //             };
+            //         }
+            //     }
+            // }).on('select2:select', function(evt) {
+            //     var email = $(this).select2('data')[0].email;
+            //     var el = $(this).closest('.column_user').data('idx');
+            //     $('#email' + el).val(email);
+            //     // alert("Data yang dipilih adalah "+data);
+            // });            
+
+            indexRow++;
+        });
+
+        $(document).on('click', '#btnDeleteRow', function() {
+
+            Swal.fire({
+                title: "Hapus Partisipan",
+                text: "Apakah anda yakin ingin menghapus?",
+                icon: 'warning',
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+                showCancelButton: true,
+                showCloseButton: true
+            }).then((result) => {
+                if (result.value) {
+
+                    let idx = $(this).data("idx");
+                    let pelatihan_session_kehadiran_id = $('#pelatihan_session_kehadiran_id'+idx).val();
+                    let nama_barang = $('#nama_barang'+idx).val();
+                    let deletedIds = [];
+
+                    let deletedHtml = '<input type="hidden" name="id_deleted[]" value="'+pelatihan_session_kehadiran_id+'">';
+                    $('#form').append(deletedHtml);
+                    $('#barang' + idx).remove();
+                    let last = 0;
+                    $('.row-table').each(function(i, obj) {
+                        let no = i + 1;
+                        $(this).find('.no').text(no);
+                        last = $(this).find('.action').attr('data-idx');
+                    });
+
+                    $('#actionContainer').remove();
+                    let lastIdx = last;
+                    let html = '<div id="actionContainer"><i class="fa fa-plus" id="btnAddRow" data-idx="' + lastIdx + '"></i>&nbsp;&nbsp;<i class="fa fa-minus" id="btnDeleteRow" data-idx="' + lastIdx + '"></i></div>';
+                    $('#action' + lastIdx).append(html);
+
+                    //call ajax delete
+                    deletedIds[0] = pelatihan_session_kehadiran_id;
+                    //deletePeserta(deletedIds);
+                    alert(nama_barang)
+
+                }
+            });
+        });
+
+    
+        $(document).on('click', '#btnAddRow', function() {
+        
+            let idx = $(this).data("idx");
+
+            let pelatihan_session_kehadiran_id = $('#pelatihan_session_kehadiran_id'+idx).val();
+
+            let nama_barang = $('#nama_barang'+idx).val();
+
+            let harga_barang = $('#harga_barang'+idx).val();
+
+            let jumlah_barang = $('#jumlah_barang'+idx).val();
+
+            //let total_harga = $('#total_harga'+idx).val();
+
+            let total_harga = harga_barang * jumlah_barang;
+
+            let total_harga_ = $('#total_harga'+idx).val(uang(total_harga));
+            //$('#total_dana_ajuan').val(uang(total_dana_ajuan)); 
+
+            let t = $('#total_harga_barang').val();
+
+            let tt = parseInt(t) + total_harga;
+
+            $('#total_harga_barang').val(tt);
+
+            alert(nama_barang+harga_barang+jumlah_barang);
+
+        });
+
+
+        function uang(num) {
+
+            var str = num.toString().replace("", ""),
+                parts = false,
+                output = [],
+                i = 1,
+                formatted = null;
+
+            if (str.indexOf(".") > 0) {
+                parts = str.split(".");
+                str = parts[0];
+            }
+
+            str = str.split("").reverse();
+            for (var j = 0, len = str.length; j < len; j++) {
+                if (str[j] != ",") {
+                    output.push(str[j]);
+                    if (i % 3 == 0 && j < (len - 1)) {
+                        output.push(",");
+                    }
+                    i++;
+                }
+            }
+
+            formatted = output.reverse().join("");
+
+            return ("" + formatted + ((parts) ? "." + parts[1].substr(0, 2) : ""));
+
+        }
+
+        function simpandata() {
+
+            var nama_barang = $('#nama_barang').val();
+            var id_permohonan = '{{ Request::segment(2) }}';
+            // var qty = $('#qty').val();
+            var qty = "2";
+            // var harga_satuan = $('#harga_satuan').val();
+            var harga_satuan = "5000";
+            // $('#harga_satuan').val(uang(harga_satuan));
+            // var total_harga_barang = $('#total_harga_barang').val();
+            var total_harga_barang = "10000";
+
+            $.post("{{ url('/detail-permohonan/add') }}", {
+                _token: "{{ csrf_token() }}",
+                id_permohonan: id_permohonan,
+                nama_barang: nama_barang,
+                qty: qty,
+                harga_satuan: harga_satuan,
+                total_harga_barang: total_harga_barang
+
+            }).done(function(response) {
+                if (response != null) {
+
+                    Swal.fire(
+                        'Detail Permohonan!',
+                        'Detail Permohonan Telah Ditambah.',
+                        'success'
+                    )
+                    location.reload()
+
+                    $(".simpan-permohonan").attr("disabled", false);
+
+                    $('#nama_barang').val('');
+                    $('#qty').val('');
+                    $('#harga_satuan').val('');
+                    $('#nominal_acc').val('');
+                    $('#total_harga_barang').val('');
+
+                    // $('#modalubah').modal('hide');
+
+                } else {
+
+                    getmax();
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Detail Permohonan Dana gagal diubah',
+                        text: 'Detail Permohonan Dana gagal diubah.',
+                        showCancelButton: false,
+                        confirmButtonColor: '#FF6347',
+                        confirmButtonText: 'Siap',
+                    })
+
+                    $(".simpan-permohonan").attr("disabled", false);
+
+                }
+
+            }, "json");
+        }
+
+        function save(){
+
+            var rows = $("#table-barang").find("tr").length;
+            var savingRows = [];
+
+            for (var rowOn = 1; rowOn < rows; rowOn++) {
+
+                var startDate = $("#table-barang").find("tr").eq(rowOn).find("td").eq(0).text();
+                var endDate = $("#table-barang").find("tr").eq(rowOn).find("td").eq(1).val();
+                var thing= $("#table-barang").find("tr").eq(rowOn).find("td").eq(2).val();
+
+                var rowData = [
+                    {start_date:startDate, end_date:endDate, thing: thing}
+                ]
+
+                savingRows.push(rowData);
+
+                alert(rowData)
+
+            }
+
+        }
+
+        function deletePeserta(deletedIds){
+            //ajax delete
+            let token = "yqHqsCfAaCLiqadh3Y9LSoOhhBPnzWvMi4sjhhDj";
+            let urlDeletePeserta = "https://presensi.sdmdigital.id/pelatihan/kelola-sesi/kehadiran-manual/delete-peserta";
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': token
+                }
+            });
+            
+            $.ajax({
+                type: "POST",
+                url: urlDeletePeserta,
+                dataType: "json",
+                data: {
+                    _token: token,
+                    id_deleted: deletedIds
+                },
+                success: function(response) {
+                    $('#deletePesertaMessage').text('Berhasil menghapus data peserta.');
+                    $('#deletePesertaMessage').css('display', 'block');
+                },
+                error: function(e) {
+                    console.log(e.responseText);
+                }
+            });
+        }
+    });
+</script>

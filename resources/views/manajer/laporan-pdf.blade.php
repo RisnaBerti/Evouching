@@ -1,6 +1,4 @@
-<div>
-    <!-- Order your soul. Reduce your wants. - Augustine -->
-</div><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -56,8 +54,7 @@
         }
     </style>
     <style>
-
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
@@ -71,7 +68,7 @@
             margin-top: 20px;
         }
 
-        .content{
+        .content {
             margin-left: 20px;
             margin-top: 20px;
             margin-bottom: 20px;
@@ -79,7 +76,7 @@
         }
 
         table {
-            border-collapse: collapse; 
+            border-collapse: collapse;
             border: 2px solid black;
             padding: 5px;
             font-size: 18px;
@@ -87,18 +84,18 @@
             width: 100%;
         }
 
-        th.lima{
+        th.lima {
             width: 5%;
             text-align: left;
-            border-collapse: collapse; 
+            border-collapse: collapse;
             border: 2px solid black;
             padding: 5px;
         }
 
-        th.dua{
+        th.dua {
             width: 25%;
             text-align: left;
-            border-collapse: collapse; 
+            border-collapse: collapse;
             border: 2px solid black;
             padding: 5px;
         }
@@ -106,37 +103,35 @@
         th.tiga {
             width: 40%;
             text-align: left;
-            border-collapse: collapse; 
+            border-collapse: collapse;
             border: 2px solid black;
             padding: 5px;
         }
 
-        td{
-            border-collapse: collapse; 
+        td {
+            border-collapse: collapse;
             border: 2px solid black;
         }
-
     </style>
     <center>
-        <h5>LAPORAN E-VOUCHING</h4>
-            <h6><a target="_blank"
-                    href="">Gerak Sedekah Cilacap</a>
-        </h5>
+        <h5>LAPORAN TRANSAKSI E-VOUCHING</h5>
+        <h6><a target="_blank" href="">Gerak Sedekah Cilacap</a>
+            </h5>
     </center>
 
     <table class='table table-bordered' width="100%">
         <thead>
             <tr>
                 <td class="tg-x244" rowspan="2">NO</td>
-                <td class="tg-x244" rowspan="2">TANGGAL</td>
+                <td class="tg-x244" rowspan="2">TANGGAL PERMOHONAN</td>
                 <td class="tg-x244" rowspan="2">NAMA</td>
                 <td class="tg-x244" rowspan="2">TF / CASH</td>
                 <td class="tg-x244" rowspan="2">URAIAN TRANSAKSI</td>
-                <td class="tg-x244" rowspan="2">MASUK</td>
-                <td class="tg-x244" rowspan="2">KELUAR</td>
-                <td class="tg-x244" rowspan="2">SALDO</td>
-                <td class="tg-x244" rowspan="2">KETERANGAN</td>
-                <td class="tg-x244" rowspan="2">PJ</td>
+                {{-- <td class="tg-x244" rowspan="2">MASUK</td>
+                <td class="tg-x244" rowspan="2">KELUAR</td> --}}
+                <td class="tg-x244" rowspan="2">NOMINAL ACC</td>
+                {{-- <td class="tg-x244" rowspan="2">KETERANGAN</td> --}}
+                {{-- <td class="tg-x244" rowspan="2">PJ</td> --}}
                 <td class="tg-x244" rowspan="2">BUKTI TRANSAKSI</td>
             </tr>
             <tr>
@@ -149,14 +144,16 @@
                     <td>{{ $i++ }}</td>
                     <td>{{ $l->tanggal_permohonan }}</td>
                     <td>{{ $l->name }}</td>
-                    <td>{{ $l->tanggal_permohonan }}</td>
+                    <td>
+                        @if ($l->jenis_dana = 'Penerimaan Kas' || ($l->jenis_dana = 'Pembayaran Kas'))
+                            {{ 'CASH' }}
+                        @else
+                            {{ 'TF' }}
+                        @endif
+                    </td>
                     <td>{{ $l->keterangan_permohonan }}</td>
                     <td>{{ $l->nominal_acc }}</td>
-                    <td>{{ $l->name }}</td>
-                    <td>{{ $l->tanggal_permohonan }}</td>
-                    <td>{{ $l->keterangan_permohonan }}</td>
-                    <td>{{ $l->nominal_acc }}</td>
-                    {{-- <td><img src="http://127.0.0.1:8000/bukti/{{ $l->bukti_transaksi }}" width="75" alt="Bukti Transaksi"></td> --}}
+                    <td>{{ 'Terlampir' }}</td>
                 </tr>
             @endforeach
         </tbody>

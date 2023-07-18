@@ -26,8 +26,14 @@
                             @csrf
                             <!--begin::Title-->
                             <div class="pb-5">
-                                <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Sign In</h3>
+                                <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Login</h3>
                             </div>
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+
                             <!--begin::Title-->
                             @if (session('status'))
                                 <div class="alert alert-danger">
@@ -57,7 +63,7 @@
                                 <div class="d-flex justify-content-between mt-n5">
                                     <label class="font-size-h6 font-weight-bolder text-dark pt-5" for="password">Your
                                         Password</label>
-                                    <a href="{{ url('forgot_password') }}"
+                                    <a href="{{ url('forgot-password') }}"
                                         class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">
                                         Forgot Password ?
                                     </a>
@@ -75,7 +81,7 @@
                             <div class="pb-lg-0 pb-5">
                                 <button type="submit" id="kt_login_singin_form_submit_button"
                                     class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
-                                    Sign In </button>
+                                    Login </button>
                             </div>
                             <!--end::Action-->
                         </form>

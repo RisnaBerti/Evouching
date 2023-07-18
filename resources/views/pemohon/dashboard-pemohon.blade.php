@@ -221,7 +221,8 @@
                                 </span>
                                 <span
                                     class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block"></span>
-                                <span class="font-weight-bold text-muted  font-size-sm">Total User</span>
+                                <span class="font-weight-bold text-muted  font-size-sm">Total Dana Permohonan</span>
+                                <span class="font-weight-bold text-muted  font-size-sm">{{ $countDanaAccId }}</span>
                             </div>
                             <div class="col px-6 py-8 rounded-xl mb-7">
                             </div>
@@ -247,7 +248,7 @@
                 <div class="card-header align-items-center border-0 mt-4">
                     <h3 class="card-title align-items-start flex-column">
                         <span class="font-weight-bolder text-dark">My Activity</span>
-                        <span class="text-muted mt-3 font-weight-bold font-size-sm">890,344 Sales</span>
+                        <span class="text-muted mt-3 font-weight-bold font-size-sm">permohonan dana</span>
                     </h3>
                 </div>
                 <!--end::Header-->
@@ -256,167 +257,7 @@
                 <div class="card-body pt-4">
                     <!--begin::Timeline-->
                     <div class="timeline timeline-6 mt-3">
-                        <!--begin::Item-->
-                        <div class="timeline-item align-items-start">
-                            <!--begin::Label-->
-                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">08:42</div>
-                            <!--end::Label-->
-
-                            <!--begin::Badge-->
-                            <div class="timeline-badge">
-                                <i class="fa fa-genderless text-warning icon-xl"></i>
-                            </div>
-                            <!--end::Badge-->
-
-                            <!--begin::Text-->
-                            <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">
-                                Outlines keep you honest. And keep structure
-                            </div>
-                            <!--end::Text-->
-                        </div>
-                        <!--end::Item-->
-
-                        <!--begin::Item-->
-                        <div class="timeline-item align-items-start">
-                            <!--begin::Label-->
-                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">10:00</div>
-                            <!--end::Label-->
-
-                            <!--begin::Badge-->
-                            <div class="timeline-badge">
-                                <i class="fa fa-genderless text-success icon-xl"></i>
-                            </div>
-                            <!--end::Badge-->
-
-                            <!--begin::Content-->
-                            <div class="timeline-content d-flex">
-                                <span class="font-weight-bolder text-dark-75 pl-3 font-size-lg">AEOL meeting</span>
-                            </div>
-                            <!--end::Content-->
-                        </div>
-                        <!--end::Item-->
-
-                        <!--begin::Item-->
-                        <div class="timeline-item align-items-start">
-                            <!--begin::Label-->
-                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">14:37</div>
-                            <!--end::Label-->
-
-                            <!--begin::Badge-->
-                            <div class="timeline-badge">
-                                <i class="fa fa-genderless text-danger icon-xl"></i>
-                            </div>
-                            <!--end::Badge-->
-
-                            <!--begin::Desc-->
-                            <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">
-                                Make deposit
-                                <a href="#" class="text-primary">USD 700</a>.
-                                to ESL
-                            </div>
-                            <!--end::Desc-->
-                        </div>
-                        <!--end::Item-->
-
-                        <!--begin::Item-->
-                        <div class="timeline-item align-items-start">
-                            <!--begin::Label-->
-                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">16:50</div>
-                            <!--end::Label-->
-
-                            <!--begin::Badge-->
-                            <div class="timeline-badge">
-                                <i class="fa fa-genderless text-primary icon-xl"></i>
-                            </div>
-                            <!--end::Badge-->
-
-                            <!--begin::Text-->
-                            <div class="timeline-content font-weight-mormal font-size-lg text-muted pl-3">
-                                Indulging in poorly driving and keep structure keep great
-                            </div>
-                            <!--end::Text-->
-                        </div>
-                        <!--end::Item-->
-
-                        <!--begin::Item-->
-                        <div class="timeline-item align-items-start">
-                            <!--begin::Label-->
-                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">21:03</div>
-                            <!--end::Label-->
-
-                            <!--begin::Badge-->
-                            <div class="timeline-badge">
-                                <i class="fa fa-genderless text-danger icon-xl"></i>
-                            </div>
-                            <!--end::Badge-->
-
-                            <!--begin::Desc-->
-                            <div class="timeline-content font-weight-bolder text-dark-75 pl-3 font-size-lg">
-                                New order placed <a href="#" class="text-primary">#XF-2356</a>.
-                            </div>
-                            <!--end::Desc-->
-                        </div>
-                        <!--end::Item-->
-
-                        <!--begin::Item-->
-                        <div class="timeline-item align-items-start">
-                            <!--begin::Label-->
-                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">23:07</div>
-                            <!--end::Label-->
-
-                            <!--begin::Badge-->
-                            <div class="timeline-badge">
-                                <i class="fa fa-genderless text-info icon-xl"></i>
-                            </div>
-                            <!--end::Badge-->
-
-                            <!--begin::Text-->
-                            <div class="timeline-content font-weight-mormal font-size-lg text-muted pl-3">
-                                Outlines keep and you honest. Indulging in poorly driving
-                            </div>
-                            <!--end::Text-->
-                        </div>
-                        <!--end::Item-->
-
-                        <!--begin::Item-->
-                        <div class="timeline-item align-items-start">
-                            <!--begin::Label-->
-                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">16:50</div>
-                            <!--end::Label-->
-
-                            <!--begin::Badge-->
-                            <div class="timeline-badge">
-                                <i class="fa fa-genderless text-primary icon-xl"></i>
-                            </div>
-                            <!--end::Badge-->
-
-                            <!--begin::Text-->
-                            <div class="timeline-content font-weight-mormal font-size-lg text-muted pl-3">
-                                Indulging in poorly driving and keep structure keep great
-                            </div>
-                            <!--end::Text-->
-                        </div>
-                        <!--end::Item-->
-
-                        <!--begin::Item-->
-                        <div class="timeline-item align-items-start">
-                            <!--begin::Label-->
-                            <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">21:03</div>
-                            <!--end::Label-->
-
-                            <!--begin::Badge-->
-                            <div class="timeline-badge">
-                                <i class="fa fa-genderless text-danger icon-xl"></i>
-                            </div>
-                            <!--end::Badge-->
-
-                            <!--begin::Desc-->
-                            <div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">
-                                New order placed <a href="#" class="text-primary">#XF-2356</a>.
-                            </div>
-                            <!--end::Desc-->
-                        </div>
-                        <!--end::Item-->
+                        <div class="item-ac"></div>
                     </div>
                     <!--end::Timeline-->
                 </div>
@@ -485,23 +326,24 @@
                             </td>
                             <td>
                                 <center>
-                                    @if ($d->status_permohonan  == '0')
-                                        <span class="label label-lg font-weight-bold label-light-secondary label-inline">Belum
+                                    @if ($d->status_permohonan == '0')
+                                        <span
+                                            class="label label-lg font-weight-bold label-secondary label-inline">Belum
                                             ACC</span>
-                                    @elseif ($d->status_permohonan  == '2')
+                                    @elseif ($d->status_permohonan == '2')
                                         <span
                                             class="label label-lg font-weight-bold label-light-warning label-inline">Diperiksa
                                             Pemeriksa
                                         </span>
-                                    @elseif ($d->status_permohonan  == '1')
+                                    @elseif ($d->status_permohonan == '1')
                                         <span class="label label-lg font-weight-bold label-light-primary label-inline">
                                             Diperiksa Bendahara</span>
-                                    @elseif ($d->status_permohonan  == '3')
+                                    @elseif ($d->status_permohonan == '3')
                                         <span
                                             class="label label-lg font-weight-bold label-light-success label-inline">SUDAH
                                             ACC
                                         </span>
-                                    @elseif ($d->status_permohonan  == '4')
+                                    @elseif ($d->status_permohonan == '4')
                                         <span
                                             class="label label-lg font-weight-bold label-light-danger label-inline">DITOLAK
                                         </span>
@@ -522,6 +364,89 @@
             $('#table-permohonandana').DataTable({
                 paging: true,
             });
+
+            get();
+
+            function get() {
+
+                $.get("{{ url('/activiti-pemohon/get') }}", {
+                    _token: "{{ csrf_token() }}"
+                }).done(function(data) {
+
+                    var res = $.parseJSON(data);
+
+
+                    $.each(res, function(indexRow, value) {
+
+                        var tanggal = value.tanggal_permohonan.split("-").reverse().join("-");
+
+                        var bulan = tanggal.split("-")[1];
+                        var tahun = tanggal.split("-")[0];
+
+                        if (value.status_permohonan == '1') {
+
+                            var html =
+                                '<div class="timeline-item align-items-start"><div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">' +
+                                bulan + '/' + tahun +
+                                '</div><div class="timeline-badge"><i class="fa fa-genderless text-warning  icon-xl"></i></div><div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">' +
+                                value.keterangan_permohonan +
+                                ' <a href="#" class="text-primary">#' + value.no_resi_ajuan +
+                                '</a>.</div> </div>';
+                        } else if (value.status_permohonan == '2') {
+
+                            var html =
+                                '<div class="timeline-item align-items-start"><div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">' +
+                                bulan + '/' + tahun +
+                                '</div><div class="timeline-badge"><i class="fa fa-genderless text-primary icon-xl"></i></div><div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">' +
+                                value.keterangan_permohonan +
+                                ' <a href="#" class="text-primary">#' + value.no_resi_ajuan +
+                                '</a>.</div> </div>';
+
+                        } else if (value.status_permohonan == '3') {
+
+                            var html =
+                                '<div class="timeline-item align-items-start"><div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">' +
+                                bulan + '/' + tahun +
+                                '</div><div class="timeline-badge"><i class="fa fa-genderless text-success icon-xl"></i></div><div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">' +
+                                value.keterangan_permohonan +
+                                ' <a href="#" class="text-primary">#' + value.no_resi_ajuan +
+                                '</a>.</div> </div>';
+
+                        } else if (value.status_permohonan == '4') {
+
+                            var html =
+                                '<div class="timeline-item align-items-start"><div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">' +
+                                bulan + '/' + tahun +
+                                '</div><div class="timeline-badge"><i class="fa fa-genderless text-danger icon-xl"></i></div><div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">' +
+                                value.keterangan_permohonan +
+                                ' <a href="#" class="text-primary">#' + value.no_resi_ajuan +
+                                '</a>.</div> </div>';
+
+                        } else {
+
+                            var html =
+                                '<div class="timeline-item align-items-start"><div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">' +
+                                bulan + '/' + tahun +
+                                '</div><div class="timeline-badge"><i class="fa fa-genderless text-info icon-xl"></i></div><div class="timeline-content font-weight-bolder font-size-lg text-dark-75 pl-3">' +
+                                value.keterangan_permohonan +
+                                ' <a href="#" class="text-primary">#' + value.no_resi_ajuan +
+                                '</a>.</div> </div>';
+
+                        }
+
+
+
+
+
+                        $('.item-ac').append(html);
+
+
+                    });
+
+                });
+
+            }
+
 
         });
     </script>

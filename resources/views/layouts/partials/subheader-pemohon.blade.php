@@ -100,10 +100,10 @@
                         {{-- <a href="{{ url('detail-permohonan') }}" class="text-muted">
                             Permohonan</a> --}}
                     </li>
-                    <li class="breadcrumb-item">
+                    {{-- <li class="breadcrumb-item">
                         <a href="{{ url('detail-permohonan') }}" class="text-muted">
                             Permohonan</a>
-                    </li>
+                    </li> --}}
                 </ul>
                 <!--end::Breadcrumb-->
             </div>

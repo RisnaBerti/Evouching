@@ -47,27 +47,26 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
                                             <label>Dibayarkan Kepada</label>
                                             <input type="text" class="form-control" placeholder="Nama Legkap"
                                                 id="name" readonly disabled />
                                         </div>
-                                        <div class="col-lg-4">
-                                            <label>Jabatan</label>
-                                            <input type="text" class="form-control" placeholder="Jabatan" id="jabatan"
-                                                readonly disabled />
+                                        <div class="col-lg-6">
+                                            <label>Total Dana Yang Diajukan</label>
+                                            <input type="text" class="form-control" placeholder="" id="total_dana_ajuan"readonly disabled />
                                         </div>
-                                        <div class="col-lg-4">
+                                        {{-- <div class="col-lg-4">
                                             <label>Divisi / Departemen</label>
                                             <input type="text" class="form-control" placeholder="Divisi" id="divisi"
                                                 readonly disabled />
-                                        </div>
+                                        </div> --}}
                                     </div>
 
                                     <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Nominal ACC</label>
-                                            <input readonly type="text" class="form-control" placeholder="Total"
+                                            <input type="text" class="form-control" placeholder="Total"
                                                 name="nominal_acc" id="nominal_acc" />
                                         </div>
                                         <div class="col-lg-6">
@@ -91,7 +90,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" name="file" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file"  id="inputFile" class="form-control">
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -159,21 +158,20 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
                                             <label>Dibayarkan Kepada</label>
                                             <input type="text" class="form-control" placeholder="Nama Legkap"
                                                 id="name_edit" readonly disabled />
                                         </div>
-                                        <div class="col-lg-4">
-                                            <label>Jabatan</label>
-                                            <input type="text" class="form-control" placeholder="Jabatan"
-                                                id="jabatan_edit" readonly disabled />
+                                        <div class="col-lg-6">
+                                            <label>Total Dana Yang Diajukan</label>
+                                            <input type="text" class="form-control" placeholder="Dana yang diajukan"id="total_dana_ajuan" readonly disabled />
                                         </div>
-                                        <div class="col-lg-4">
+                                        {{-- <div class="col-lg-4">
                                             <label>Divisi / Departemen</label>
                                             <input type="text" class="form-control" placeholder="Divisi"
                                                 id="divisi_edit" readonly disabled />
-                                        </div>
+                                        </div> --}}
                                     </div>
 
                                     <div class="form-group row">
@@ -203,7 +201,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" name="file_edit" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file_edit" id="inputFile" class="form-control">
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -243,9 +241,11 @@
                         <th>Jabatan</th>
                         <th>Divisi</th>
                         <th>Total Nominal ACC</th>
-                        <th>Periode</th>
+                        <th>Tanggal Pengajuan CA</th>
                         <th>Keterangan</th>
                         <th>Total Nominal Terpakai</th>
+                        <th>Tanggal Pengembalian CA</th>
+                        <th>Bukti Transaksi</th>
                         <th>
                             <center>Aksi</center>
                         </th>
@@ -359,8 +359,7 @@
                         {
                             "render": function(data, type, row) {
 
-                                return '<span class="badge badge-pill  badge-primary">' + row
-                                    .periode_ca + '</span>';
+                                return '<span class="badge badge-pill  badge-primary">' + row.tanggal_permohonan + '</span>';
 
                             },
                             padding: '5px'
@@ -383,33 +382,35 @@
                             },
                             padding: '5px'
                         },
+                        {
+                            "render": function(data, type, row) {
+
+                                return '<span class="badge badge-pill  badge-primary">' + row.tanggal_penerimaan_ca + '</span>';
+
+                            },
+                            padding: '5px'
+                        },
+
+                        {
+                            "render": function(data, type, row) {
+
+                               if (row.bukti_transaksi == '0' || row.bukti_transaksi == null) { 
+                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_transaksi +'" target="_blank"><span class="badge badge-pill  badge-danger">Belum Upload</span></a>';
+                                } else {
+                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_transaksi +'" target="_blank"><span class="badge badge-pill  badge-primary">Lihat Bukti</span></a>';
+                                }
+                            },
+                            padding: '5px'
+                        },
 
                         {
                             "render": function(data, type, row) {
                                 if (row.bukti_transaksi == '0') {
-                                    return '<a class="dropdown-item item-upload" href="#" data-id="' +
-                                        row.id_ca + '" data-ip="' +
-                                        row.id_permohonan + '" data-nm="' + row.name +
-                                        '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
-                                        '" data-acc="' + row.nominal_acc + '" data-terpakai="' + row
-                                        .nominal_terpakai + '" data-trb="' + row
-                                        .terbilang + '" data-kp="' + row.keterangan_permohonan +
-                                        '" data-bkt="' + row.bukti_transaksi +
-                                        '"><i class="ki ki-plus  text-danger btn btn-icon btn-light-danger item-upload"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
-                                        row.id_permohonan +
-                                        '"><span class="badge bg-danger">Belum Di Unggah</span></a>';
+                                    return '<a class="dropdown-item item-upload" href="#" data-id="' +row.id_ca + '" data-ip="' +row.id_permohonan + '" data-nm="' + row.name +'" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +'" data-acc="' + row.nominal_acc + '" data-terpakai="' + row.nominal_terpakai + '" data-trb="' + row.terbilang + '" data-kp="' + row.keterangan_permohonan +'" data-bkt="' + row.bukti_transaksi + '" dana-ajuan="' + row.total_dana_ajuan +'"><i class="ki ki-plus  text-danger btn btn-icon btn-light-danger item-upload"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +row.id_permohonan + '"></a>';
 
 
                                 } else {
-                                    return '<a class="dropdown-item item-edit" href="#" data-id="' +
-                                        row.id_ca + '" data-ip="' +
-                                        row.id_permohonan + '" data-nm="' + row.name +
-                                        '" data-jbt="' + row.jabatan + '" data-resi="' + row
-                                        .no_resi_ca + '" data-tgl="' + row.tanggal_penerimaan_ca +
-                                        '" data-dvs="' + row.divisi +
-                                        '" data-acc="' + row.nominal_acc + '" data-trb="' + row
-                                        .terbilang + '" data-kp="' + row.keterangan_permohonan +
-                                        '"><i class="fas fa-edit btn btn-icon btn-light-primary item-edit"></i></a> <span class="badge bg-success">Bukti Telah Di Unggah</span>';
+                                    return '<a class="dropdown-item item-edit" href="#" data-id="' +row.id_ca + '" data-ip="' +row.id_permohonan + '" data-nm="' + row.name +'" data-jbt="' + row.jabatan + '" data-resi="' + row.no_resi_ca + '" data-tgl="' + row.tanggal_penerimaan_ca +'" data-dvs="' + row.divisi +'" data-acc="' + row.nominal_acc + '" data-trb="' + row.terbilang + '" data-kp="' + row.keterangan_permohonan +'" dana-ajuan="' + row.total_dana_ajuan +'"><i class="fas fa-edit btn btn-icon btn-light-primary item-edit"></i></a>';
                                 }
                             },
                             padding: '5px',
@@ -454,8 +455,8 @@
                 var tanggal_penerimaan_ca = $(this).data('tgl');
                 var id_permohonan = $(this).data('ip');
                 var name = $(this).data('nm');
-                var jabatan = $(this).data('jbt');
-                var divisi = $(this).data('dvs');
+                var total_dana_ajuan = $(this).data('dana-ajuan');
+                // var divisi = $(this).data('dvs');
                 var acc = $(this).data(uang('acc'));
                 var terpakai = $(this).data(uang('terpakai'));
                 var keterangan = $(this).data('kp');
@@ -468,8 +469,8 @@
                 $('#id_permohonan').val(id_permohonan);
                 $('#id_ca').val(id_ca);
                 $('#name').val(name);
-                $('#jabatan').val(jabatan);
-                $('#divisi').val(divisi);
+                $('#total_dana_ajuan').val(total_dana_ajuan);
+                // $('#divisi').val(divisi);
 
                 if (acc == null) {
                     $('#nominal_acc').val('0');
@@ -517,35 +518,33 @@
                 var tanggal_penerimaan_ca = $(this).data('tgl');
                 var id_permohonan = $(this).data('ip');
                 var name = $(this).data('nm');
-                var jabatan = $(this).data('jbt');
-                var divisi = $(this).data('dvs');
+                var total_dana_ajuan = $(this).data('dana-ajuan').replace(",", "");
+                // var divisi = $(this).data('dvs');
                 var acc = $(this).data(uang('acc'));
-                var terpakai = $(this).data(uang('terpakai'));
+                var terpakai = $(this).data(uang('terpakai')).replace(",", "");
                 var keterangan = $(this).data('kp');
                 var terbilang = $(this).data('trb');
                 var bukti_transaksi = $(this).data('bkt');
-
-                // alert(id_ca);
 
                 //$('#id_penerimaan_kas').val(id_penerimaan_kas);
                 $('#id_permohonan_edit').val(id_permohonan);
                 $('#id_ca_edit').val(id_ca);
                 $('#name_edit').val(name);
                 $('#jabatan_edit').val(jabatan);
-                $('#divisi_edit').val(divisi);
 
                 if (acc == null) {
                     $('#nominal_acc_edit').val('0');
                 } else {
-                    $('#nominal_acc_edit').val(uang(acc));
+                    $('#nominal_acc_edit').val(uang(acc)).replace(",", "");
                 }
 
                 if (terpakai == null) {
                     $('#nominal_terpakai_edit').val('0');
                 } else {
-                    $('#nominal_terpakai_edit').val(uang(terpakai));
+                    $('#nominal_terpakai_edit').val(uang(terpakai)).replace(",", "");
                 }
                 $('#keterangan_permohonan_edit').val(keterangan);
+                $('#total_dana_ajuan').val(uang(total_dana_ajuan));
                 $('#terbilang_edit').val(terbilang);
                 $('#bukti_transaksi_edit').val(bukti_transaksi);
 

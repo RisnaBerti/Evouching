@@ -20,9 +20,9 @@
                                         </div>
                                     </div>
                                     <div class="col-5 align-items-start">
-                                        <input hidden type="text" id="id">
-                                        <input type="text" id="sisa_saldo">
-                                        <input type="text" id="id_pembayaran_antar_bank">
+                                        <input type="text" id="id">
+                                        <input hidden type="text" id="sisa_saldo">
+                                        <input hidden type="text" id="id_pembayaran_antar_bank">
                                         <div hidden class="input-group input-group-sm mb-1">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">No.
@@ -46,7 +46,7 @@
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">Tanggal:</span>
                                             </div>
                                             <input readonly disabled type="date" value="{{ date('d-m-Y') }}"
-                                                class="form-control text-right" id="tanggal_permohonan"
+                                                class="form-control text-right" name="tanggal_permohonan" id="tanggal_permohonan" 
                                                 aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                         </div>
                                         <div class="input-group input-group-sm mb-1">
@@ -121,10 +121,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-6">
                                         <label>Terbilang</label>
-                                        <input type="text" class="form-control" placeholder="Terbilang"
-                                            id="terbilang" readonly disabled />
+                                        <input type="text" class="form-control" placeholder="Terbilang"id="terbilang" readonly disabled />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Komentar</label>
+                                        <textarea class="form-control" placeholder="Keterangan" id="komentar" rows="2"></textarea>
                                     </div>
                                     <input type="text" id="status_permohonan" hidden>
                                     <input type="text" id="ttd_bendahara" hidden>
@@ -353,7 +356,8 @@
                                         '" data-hrg="' + row.harga_satuan + '" data-jml="' + row
                                         .jumlah_satuan + '" data-ttl="' + row.total_dana_ajuan +
                                         '" data-acc="' + row.nominal_acc + '" data-kp="' + row
-                                        .keterangan_permohonan + '" data-trb="' + row.terbilang +
+                                        .keterangan_permohonan + '" data-kmnt="' + row
+                                        .komentar +  '" data-trb="' + row.terbilang +
                                         '" data-st="' + row.status_permohonan +
                                         '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
                                         row.id_permohonan +
@@ -479,6 +483,7 @@
                 var acc = $(this).data(uang('acc'));
                 var keterangan = $(this).data('kp');
                 var terbilang = $(this).data('trb');
+                var komentar = $(this).data('kmnt');
                 var status = $(this).data('st');
 
                 $('#id_permohonan').val(id_permohonan);
@@ -495,6 +500,7 @@
                 $('#nominal_acc').val(uang(acc));
                 $('#keterangan_permohonan').val(keterangan);
                 $('#terbilang').val(terbilang);
+                $('#komentar').val(komentar);
                 $('#status_permohonan').val(status);
 
                 $('.modal-ubah-permohonan').modal('show');
@@ -506,6 +512,7 @@
                 var id = $('#id').val();
                 var nominal_acc = $('#nominal_acc').val().replace(",", "");
                 var status_permohonan = $('#status_permohonan').val();
+                var komentar = $('#komentar').val();
                 var jenis_dana = $('#jenis_dana').val();
                 var sisa_saldo = $("#sisa_saldo").val();
 
@@ -541,7 +548,8 @@
                             id_permohonan: id_permohonan,
                             nominal_acc: nominal_acc.replace(",", ""),
                             status_permohonan: status_permohonan,
-                            jenis_dana: jenis_dana
+                            jenis_dana: jenis_dana,
+                            komentar: komentar
 
                         }).done(function(response) {
 
@@ -571,6 +579,7 @@
                                 $('#nominal_acc').val('');
                                 $('#jenis_dana').val('');
                                 $('#keterangan_permohonan').val('');
+                                $('#komentar').val('');
 
                                 $('.modal-ubah-permohonan').modal('hide');
 
@@ -659,7 +668,7 @@
 
                 var id_permohonan = $('#id_permohonan').val();
                 var status_permohonan = $('#status_permohonan').val();
-                // var jenis_dana = $('#jenis_dana').val();
+                var komentar = $('#komentar').val();
 
                 $('.button-menolak').attr("disabled", "disabled");
 
@@ -674,7 +683,8 @@
                     $.post("{{ url('/permohonan-bendahara/menolak') }}", {
                         _token: "{{ csrf_token() }}",
                         id_permohonan: id_permohonan,
-                        status_permohonan: '4'
+                        status_permohonan: '4',
+                        komentar: komentar
 
                     }).done(function(response) {
 
@@ -700,6 +710,7 @@
                             $('#nominal_acc').val('');
                             $('#jenis_dana').val('');
                             $('#keterangan_permohonan').val('');
+                            $('#komentar').val('');
 
                             $('#modalubah').modal('hide');
 

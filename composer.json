@@ -6,14 +6,17 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "arielmejiadev/larapex-charts": "^6.0",
         "barryvdh/laravel-dompdf": "^2.0",
         "codedge/laravel-fpdf": "^1.11",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "phpmailer/phpmailer": "^6.8",
         "realrashid/sweet-alert": "^7.0",
-        "riskihajar/terbilang": "2.0"
+        "riskihajar/terbilang": "2.0",
+        "twilio/sdk": "^7.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",

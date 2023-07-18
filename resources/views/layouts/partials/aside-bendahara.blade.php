@@ -324,7 +324,7 @@
                                 </span>
                             </li>
                             <!--MENU PENERIMAAN CA-->
-                            <li class="menu-item " aria-haspopup="true">
+                            {{-- <li class="menu-item " aria-haspopup="true">
                                 <a href="/penerimaanca" class="menu-link">
                                     <span class="svg-icon menu-icon svg-icon-primary">
                                         <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Chart-bar1.svg-->
@@ -349,7 +349,7 @@
                                     </i>
                                     <span class="menu-text">Penerimaan CA</span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <!-- END MENU PENERIMAAN CA-->
                             <!-- END MENU PEMBAYARAN CA-->
                             <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
