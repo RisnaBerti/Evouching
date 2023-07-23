@@ -18,7 +18,6 @@ class PengajuanCA extends Model
         'no_resi_ca',
         'tanggal_penerimaan_ca',
         'nominal_terpakai',
-        'periode_ca',
         'bukti_transaksi'
     ];
 }

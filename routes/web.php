@@ -143,6 +143,8 @@ Route::middleware(['role:1'])->group(function () {
         Route::post('/pembayaranca/getid', 'get_id')->name('pembayaranca.getid');
         Route::post('/pembayaran-ca/uploadid', 'upload_pembayaran_id')->name('pembayaranca.uploadid');
         Route::post('/pembayaran-ca/editid', 'edit_upload_pembayaran_id')->name('pembayaranca.editid');
+
+        Route::get('/ca-bendahara/getnominalterpakai/{id_ca}', 'getNominalTerpakai');
     });
     Route::controller(ReimbuseController::class)->group(function () {
         Route::get('/reimbuse', 'index')->name('reimbuse');
@@ -270,7 +272,8 @@ Route::middleware(['role:4'])->group(function () {
 
         Route::post('/pengajuan-ca/upload', 'upload_struk')->name('buktica.upload');
 
-        Route::post('/pengajuan-ca/editid', 'edit_pembayaran_bank_id')->name('pembayaranbank.uploadid');
+        Route::post('/pengajuan-ca/ubah', 'ubah_struk')->name('buktica.ubah');
+
         Route::post('/pengajuan-ca/ubahid', 'ubah_pembayaran_bank_id')->name('pembayaranbank.ubahid');
         Route::post('/pengajuan-ca/getid', 'get_pembayaran_bank_id')->name('pembayaranbank.getid');
     });

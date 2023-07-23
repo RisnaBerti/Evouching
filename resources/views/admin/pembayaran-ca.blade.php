@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Nominal Terpakai</label>
-                                            <input type="text" class="form-control" placeholder="Total"
+                                            <input readonly type="text" class="form-control" placeholder="Total"
                                                 name="nominal_terpakai" id="nominal_terpakai" />
                                         </div>
                                     </div>
@@ -186,7 +186,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Nominal Terpakai</label>
-                                            <input type="text" class="form-control" placeholder="Total"
+                                            <input readonly type="text" class="form-control" placeholder="Total"
                                                 name="nominal_terpakai_edit" id="nominal_terpakai_edit" />
                                         </div>
                                     </div>
@@ -434,7 +434,8 @@
 
                                 } else {
                                     return '<a class="dropdown-item item-edit" href="#" data-id="' +
-                                        row.id_ca + '" data-ip="' + row.id_permohonan + '" data-resi="' + row.no_resi_ca +
+                                        row.id_ca + '" data-ip="' + row.id_permohonan +
+                                        '" data-resi="' + row.no_resi_ca +
                                         '" data-nm="' + row.name + '" data-jbt="' + row.jabatan +
                                         '" data-dvs="' + row.divisi + '" data-acc="' + row
                                         .nominal_acc + '" data-tglajuan="' + row
@@ -465,7 +466,7 @@
                         $("#no_resi_ca").val(total);
                     });
             }
-            
+
             // uang
             $('#nominal_acc').change(function() {
                 var acc = $('#nominal_acc').val();
@@ -597,10 +598,32 @@
                 $('#bukti_transaksi_edit').val(bukti_transaksi);
 
                 getdatapembayaranid(id_ca);
+                getNominalTerpakai(id_ca);
 
                 $('.modal-upload-edit').modal('show');
             });
             // end of 
+
+            function getNominalTerpakai(id_ca) {
+                $.get("{{ url('/ca-bendahara/getnominalterpakai/') }}" + "/" + id_ca, {
+                        _token: "{{ csrf_token() }}"
+                    })
+                    .done(function(data) {
+                        var s = JSON.stringify(data);
+
+                        // alert(data);
+
+                        if (s == "{}") {
+                            $("#nominal_terpakai").val("Rp. 0");
+                            $("#nominal_terpakai_edit").val("Rp. 0");
+                        } else {
+                            $("#nominal_terpakai").val(data);
+                            $("#nominal_terpakai_edit").val(data);
+
+                           
+                        }
+                    });
+            }
 
             function uang(num) {
 
@@ -639,11 +662,7 @@
 
         function update(filename, no_resi_ca, id_ca, id_permohonan, tanggal_penerimaan_ca, nominal_terpakai) {
 
-            //var tanggal_penerimaan_ca = $('#tanggal_penerimaan_ca').val();
-            //var no_resi_ca = $('#no_resi_ca').val();
-            //var id_permohonan = $('#id_permohonan').val();
-            //var id_ca = $('#id_ca').val();
-            //var nominal_terpakai = $('#nominal_terpakai').val();
+
 
             $.post("{{ route('pembayaranca.edit') }}", {
                 _token: "{{ csrf_token() }}",
@@ -662,7 +681,7 @@
                         'Bukti Transaksi Berhasil Di Unggah.',
                         'success'
                     )
-                    location.reload()
+                    // location.reload()
 
                     // get();
 
@@ -795,7 +814,9 @@
                     if (response) {
                         this.reset();
 
-                        update(response.filename, response.no_resi_ca_edit, response.id_ca_edit, response.id_permohonan_edit, response.tanggal_penerimaan_ca_edit, response.nominal_terpakai_edit);
+                        update(response.filename, response.no_resi_ca_edit, response.id_ca_edit,
+                            response.id_permohonan_edit, response.tanggal_penerimaan_ca_edit,
+                            response.nominal_terpakai_edit);
 
                         // alert('File has been uploaded successfully');
 

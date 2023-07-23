@@ -54,7 +54,7 @@ class KasController extends Controller
         $data['data'] = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
             ->join('tb_penerimaan', 'tb_penerimaan.id_permohonan', '=', 'tb_permohonan.id_permohonan')
             ->where('tb_permohonan.jenis_dana', '=', 'Penerimaan Kas')
-            ->get(['users.id', 'users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.id_permohonan', 'tb_permohonan.nominal_acc', 'tb_permohonan.keterangan_permohonan', 'tb_penerimaan.bukti_penerimaan_kas']);
+            ->get(['users.id', 'users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.id_permohonan', 'tb_permohonan.nominal_acc', 'tb_permohonan.keterangan_permohonan', 'tb_permohonan.terbilang', 'tb_penerimaan.bukti_penerimaan_kas']);
 
         return $data;
     }
@@ -132,7 +132,7 @@ class KasController extends Controller
         $data['data'] = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
             ->join('tb_pembayaran', 'tb_pembayaran.id_permohonan', '=', 'tb_permohonan.id_permohonan')
             ->where('tb_permohonan.jenis_dana', '=', 'Pembayaran Kas')
-            ->get(['users.id', 'users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.id_permohonan', 'tb_permohonan.nominal_acc', 'tb_permohonan.keterangan_permohonan', 'tb_pembayaran.bukti_pembayaran_kas']);
+            ->get(['users.id', 'users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.id_permohonan', 'tb_permohonan.nominal_acc', 'tb_permohonan.keterangan_permohonan', 'tb_permohonan.terbilang', 'tb_pembayaran.bukti_pembayaran_kas']);
 
         return $data;
     }

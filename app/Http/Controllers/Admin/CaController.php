@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\DetailCa;
 use Illuminate\Support\Facades\Auth;
 
 class CaController extends Controller
@@ -80,13 +81,56 @@ class CaController extends Controller
 
     public function get()
     {
-        $data['data'] = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
-            ->join('tb_ca', 'tb_ca.id_permohonan', '=', 'tb_permohonan.id_permohonan')
-            ->where('tb_permohonan.jenis_dana', '=', 'Chartered Accountant')
-            ->get(['users.id', 'users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.id_permohonan', 'tb_ca.id_ca', 'tb_permohonan.nominal_acc','tb_permohonan.total_dana_ajuan', 'tb_permohonan.keterangan_permohonan', 'tb_permohonan.terbilang', 'tb_permohonan.tanggal_permohonan', 'tb_ca.bukti_transaksi', 'tb_ca.tanggal_penerimaan_ca', 'tb_ca.nominal_terpakai']);
+        // $data['data'] = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
+        //     ->join('tb_ca', 'tb_ca.id_permohonan', '=', 'tb_permohonan.id_permohonan')
+        //     ->where('tb_permohonan.jenis_dana', '=', 'Chartered Accountant')
+        //     ->get([
+        //         'users.id', 
+        //         'users.name', 
+        //         'users.jabatan', 
+        //         'users.divisi', 
+        //         'tb_permohonan.id_permohonan',  
+        //         'tb_ca.id_ca', 
+        //         'tb_permohonan.nominal_acc', 
+        //         'tb_permohonan.total_dana_ajuan', 
+        //         'tb_permohonan.keterangan_permohonan', 
+        //         'tb_permohonan.terbilang', 
+        //         'tb_permohonan.tanggal_permohonan', 
+        //         'tb_ca.bukti_transaksi', 
+        //         'tb_ca.tanggal_penerimaan_ca', 
+        //         'tb_ca.nominal_terpakai'
+        //     ]);
 
-       
+        $data['data'] = Permohonan::leftJoin('tb_ca', 'tb_ca.id_permohonan', '=', 'tb_permohonan.id_permohonan')
+            // ->leftJoin('detail_ca', 'detail_ca.id_ca', '=', 'tb_ca.id_ca')
+            ->leftJoin('users', 'users.id', '=', 'tb_permohonan.id')
+            ->join('detail_ca', 'detail_ca.id_ca', '=', 'tb_ca.id_ca')
+            ->where('tb_permohonan.jenis_dana', '=', 'Chartered Accountant')
+            ->where('tb_permohonan.status_permohonan', '=', '3')
+            ->get([
+                'users.id',
+                'users.name',
+                'users.jabatan',
+                'users.divisi',
+                'tb_permohonan.id_permohonan',
+                'tb_ca.id_ca',
+                'tb_permohonan.nominal_acc',
+                'tb_permohonan.total_dana_ajuan',
+                'tb_permohonan.keterangan_permohonan',
+                'tb_permohonan.terbilang',
+                'tb_permohonan.tanggal_permohonan',
+                'tb_ca.bukti_transaksi',
+                'tb_ca.tanggal_penerimaan_ca',
+                'tb_ca.nominal_terpakai'
+            ]);
+
         return $data;
+    }
+
+    public function getNominalTerpakai($id_ca)
+    {
+        $data = DetailCa::where('id_ca', $id_ca)->sum('nominal');
+        return response()->json($data);
     }
 
     function edit_upload_pembayaran(Request $request)
@@ -110,6 +154,8 @@ class CaController extends Controller
         ]);
 
         $ip = $request->id_permohonan;
+        // $ic = $request->id_ca;
+
 
         $fileName = $ip . '.' . $request->file->extension();
         $request->file->move(public_path('bukti/ca'), $fileName);
@@ -156,12 +202,14 @@ class CaController extends Controller
         $fileName = $ip . '.' . $request->file_edit->extension();
         $request->file_edit->move(public_path('bukti/ca'), $fileName);
 
-        return response()->json(['message' => 'Operation Successful !', 
-        'filename' => $fileName, 
-        'id_ca' => $request->id_ca_edit, 
-        'no_resi_ca' => $request->no_resi_ca_edit,  
-        'id_permohonan' => $request->id_permohonan_edit, 
-        'tanggal_penerimaan_ca' => $request->tanggal_penerimaan_ca_edit, 
-        'nominal_terpakai' => $request->nominal_terpakai_edit]);
+        return response()->json([
+            'message' => 'Operation Successful !',
+            'filename' => $fileName,
+            'id_ca' => $request->id_ca_edit,
+            'no_resi_ca' => $request->no_resi_ca_edit,
+            'id_permohonan' => $request->id_permohonan_edit,
+            'tanggal_penerimaan_ca' => $request->tanggal_penerimaan_ca_edit,
+            'nominal_terpakai' => $request->nominal_terpakai_edit
+        ]);
     }
 }

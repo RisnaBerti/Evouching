@@ -55,7 +55,7 @@ class AuthController extends Controller
                 return redirect()->route('auth-login')->with('error', 'Akun anda tidak aktif, silahkan hubungi admin!');
             }
         }
-        return redirect()->route('auth-login')->with('status', 'Email atau kata sandi Anda salah!');
+        return redirect()->route('auth-login')->with('error', 'Email atau kata sandi Anda salah!');
     }
 
     public function logout(Request $request)

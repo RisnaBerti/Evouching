@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Console\View\Components\Alert;
 
 class DataUserController extends Controller
@@ -33,9 +34,15 @@ class DataUserController extends Controller
     public function add(Request $request)
     {
         $request->validate([
+            'name' => 'required',
             'email' => 'required|email|unique:users,email',
+            'no_hp' => 'required|numeric|digits_between:10,13',
+            'divisi' => 'required',
+            'jabatan' => 'required',
+            'alamat' => 'required',
         ]);
 
+        
         User::create(
             [
                 'id' => str_replace('-', '', Str::uuid()),
@@ -51,8 +58,14 @@ class DataUserController extends Controller
             ]
         );
 
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
+
+        return response()->json('success');
+
         // return "success";
-        return redirect()->route('datauser')->with(['success' => 'User berhasil ditambahkan']);
+        // return redirect()->route('datauser')->with(['success' => 'User berhasil ditambahkan']);
     }
 
     //fungsi edit user

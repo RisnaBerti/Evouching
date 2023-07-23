@@ -3,59 +3,6 @@
 @section('content')
     <!--begin::Card-->
     <div class="card card-custom gutter-b example example-compact">
-        <!--begin::Form-->
-        {{-- <div class="card-body">
-        <div class="row">
-            <div class="col-7 align-self-start">
-                <div class="col">
-                    <h3 class="card-title">
-                        PERMOHONAN DANA
-                    </h3>
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-lg-4">
-                <label>Nama Perkiraan</label>
-                <input type="text" class="form-control form-control-sm" placeholder="Nama Legkap" name="nama_perkiraan"
-                    id="nama_perkiraan" value="{{ Auth::user()->name }}" readonly />
-            </div>
-            <div class="col-lg-4">
-                <label>Total</label>
-                <input type="text" class="form-control form-control-sm" name="total_dana_ajuan"
-                    placeholder="Total Harga" id="total_dana_ajuan" />
-            </div>
-            <div class="col-lg-4">
-                <label>Terbilang</label>
-                <input readonly type="text" class="form-control form-control-sm" name="terbilang"
-                    placeholder="Terbilang" id="terbilang" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-lg-6">
-                <label>Keterangan</label>
-                <textarea class="form-control form-control-sm" name="keterangan_permohonan" id="keterangan_permohonan"
-                    placeholder="Keterangan" rows="4"></textarea>
-            </div>
-            <div hidden class="input-group input-group-sm mb-1">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
-                        Ajuan:</span>
-                </div>
-                <input readonly type="text" class="form-control form-control-sm" id="no_resi_ajuan"
-                    name="no_resi_ajuan" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-            </div>
-            <div hidden class="input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Tanggal:</span>
-                </div>
-                <input type="date" value="{{ date('Y-m-d') }}" class="form-control form-control-sm"
-                    id="tanggal_permohonan" name="tanggal_permohonan" aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-sm">
-            </div>
-            
-        </div>
-    </div> --}}
         <div class="card-body">
             <div class="row">
                 <div class="col-7 align-self-start">
@@ -167,7 +114,7 @@
                 <input hidden type="text" id="nominal_acc" value="0">
                 <input hidden type="text" id="status_permohonan" value="0">
                 <input hidden type="text" id="jenis_dana" value="Chartered Accountant">
-                <input hidden type="text" id="ttd_pemohon">
+                <input hidden type="text" id="ttd_pemohon" value="0">
                 <input hidden type="text" id="ttd_manajer" value="0">
                 <input hidden type="text" id="ttd_bendahara" value="0">
                 <input hidden type="text" id="ttd_pemeriksa" value="0">
@@ -200,6 +147,14 @@
                         <div class="card-body">
 
                             <input hidden type="text" name="id_permohonan" id="id_permohonan_upload">
+                            <input hidden type="text" name="id_ca" id="id_ca_upload">
+
+                            <div class="col-lg-12">
+                                <label class="form-label" for="inputFile">Nominal transaksi</label>
+                                <input type="text" name="nominal" id="nominal" class="form-control">
+                                <p class="text-mute">nominal transaksi</p>
+                                <span class="text-danger" id="file-input-error"></span>
+                            </div>
 
                             <div class="col-lg-12">
                                 <label class="form-label" for="inputFile">Bukti Nota</label>
@@ -244,6 +199,8 @@
                         <th>Dana Yang Di ajukan</th>
                         <th>Keterangan </th>
                         <th>Status</th>
+                        <th>Bukti</th>
+                        <th>Dana Terpakai</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -288,8 +245,12 @@
             $('#table-pengajuan-ca').on('click', '.item-upload', function() {
 
                 var id_permohonan = $(this).data('ip');
+                var id_ca = $(this).data('ic');
+                var nominal = $(this).data('nom');
 
                 $('#id_permohonan_upload').val(id_permohonan);
+                $('#id_ca_upload').val(id_ca);
+                $('#nominal').val(nominal);
 
                 $('.modal-upload-struk').modal('show');
 
@@ -547,9 +508,46 @@
                         {
                             "render": function(data, type, row) {
 
+                                if (row.bukti_detail_ca == '0' || row.bukti_detail_ca == null) {
+                                    return '<a href="{{ url('') }}/bukti/ca/' + row
+                                        .bukti_detail_ca +
+                                        '" target="_blank"><span class="badge badge-pill  badge-danger">Belum Upload</span></a>';
+                                } else {
+                                    return '<a href="{{ url('') }}/bukti/ca/' + row
+                                        .bukti_detail_ca +
+                                        '" target="_blank"><span class="badge badge-pill  badge-primary">Lihat Bukti</span></a>';
+                                }
+                            },
+                            padding: '5px'
+                        },
+
+                        {
+                            "render": function(data, type, row) {
+
+                                if (row.nominal == '0' || row.nominal == null) {
+                                    return '<span class="badge badge-pill  badge-dark">Rp. 0</span>';
+                                } else {
+                                    return '<span class="badge badge-pill  badge-dark">' + row
+                                    .nominal + '</span>';
+                                }
+
+                               
+
+                            },
+                            padding: '5px'
+                        },
+
+
+                        {
+                            "render": function(data, type, row) {
+
 
                                 return '<button type="button" class="btn btn-outline-primary item-upload" data-ip="' +
                                     row.id_permohonan +
+                                    '" data-ic="' +
+                                    row.id_ca +
+                                    '"data-nom="' +
+                                    row.nominal +
                                     '"><i class="fas fa-upload"></i> Bukti Struk</button>';
 
 
@@ -717,10 +715,10 @@
                         if (response) {
 
                             this.reset();
-                            
-                        ///update(response.filename, response.id_permohonan);
 
-                            consolo.log(response.filename, response.id_permohonan);
+                            update(response.filename, response.id_ca, response.nominal);
+
+                            consolo.log(response.filename, response.id_ca);
 
                             alert('File has been uploaded successfully');
                         }
@@ -737,14 +735,13 @@
 
             });
 
-            function update(filename, no_resi_bayar_bank, id_permohonan, tanggal_pembayaran_bank) {
+            function update(filename, id_ca, nominal) {
 
 
-                $.post("{{ route('pembayaranbank.ubah') }}", {
+                $.post("{{ route('buktica.ubah') }}", {
                     _token: "{{ csrf_token() }}",
-                    id_permohonan: id_permohonan,
-                    no_resi_bayar_bank: no_resi_bayar_bank,
-                    tanggal_pembayaran_bank: tanggal_pembayaran_bank,
+                    id_ca: id_ca,
+                    nominal: nominal,
                     bukti_transaksi: filename
 
                 }).done(function(response) {

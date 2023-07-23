@@ -1,7 +1,7 @@
 @extends('layouts.main-bendahara')
 
 @section('content')
-    <div class="modal" id="modal_user" tabindex="-1">
+    <div class="modal" id="modal_user" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -13,6 +13,15 @@
                 <form id="form_user" action="/datauser/add" method="POST">
                     @csrf
                     <div class="modal-body">
+                        {{-- @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif --}}
                         <div class="form-group row">
                             <label class="col-form-label col-4" for="name ">Nama </label>
                             <div class="col-8">
@@ -92,7 +101,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal" id="modal_ubah" tabindex="-1">
+    <div class="modal" id="modal_ubah" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -328,8 +337,8 @@
 
     <script>
         const tambahuser = async () => {
-            $('#form_user')[0].reset()
-            $('#modal_user').modal('show')
+            $('#form_user')[0].reset();
+            $('#modal_user').modal('show');
         }
 
         $(document).ready(function() {
@@ -484,7 +493,6 @@
             // 			Swal.fire("", "Berhasil menyimpan data", "success");
             // 			table.ajax.reload();
 
-
             //Hapus user
             $('#table_datauser').on('click', '.item-hapus', function() {
                 var currow = $(this).closest('tr');
@@ -496,6 +504,67 @@
 
             // $(".hapus-user").click(function() {
             // });
+
+            $(".simpan-user").click(function() {
+                var form = $('#form_user');
+                var url = form.attr('action');
+
+                $.post(url, form.serialize())
+                    .done(function(response) {
+                        if (response === "success") {
+                            Swal.fire(
+                                'Berhasil!',
+                                'Data pengguna berhasil ditambahkan.',
+                                'success'
+                            )
+                            $('#modal_user').modal('hide');
+                            location.reload();
+                        } else {
+                            // Tangani kesalahan validasi di sini dan biarkan modal tetap terbuka
+                            var errors = JSON.parse(
+                                response); // Jika pesan kesalahan dikembalikan dalam format JSON
+                            // Tampilkan pesan kesalahan di bawah masing-masing input yang bermasalah
+                            if (errors.hasOwnProperty('name')) {
+                                $('#name').addClass('is-invalid');
+                                $('#name').siblings('.invalid-feedback').html(errors['name'][0]);
+                            }
+                            if (errors.hasOwnProperty('email')) {
+                                $('#email').addClass('is-invalid');
+                                $('#email').siblings('.invalid-feedback').html(errors['email'][0]);
+                            }
+                            if (errors.hasOwnProperty('no_hp')) {
+                                $('#no_hp').addClass('is-invalid');
+                                $('#no_hp').siblings('.invalid-feedback').html(errors['no_hp'][0]);
+                            }
+                        }
+                    })
+                    .fail(function(error) {
+                        // Tangani kegagalan permintaan AJAX di sini
+                        Swal.fire(
+                            'Gagal!',
+                            'Data pengguna gagal ditambahkan.',
+                            'error'
+                        )
+                        // $('#modal_user').modal('show');
+
+                        // var errors = JSON.parse(
+                        //     response); // Jika pesan kesalahan dikembalikan dalam format JSON
+                        // // Tampilkan pesan kesalahan di bawah masing-masing input yang bermasalah
+                        // if (errors.hasOwnProperty('name')) {
+                        //     $('#name').addClass('is-invalid');
+                        //     $('#name').siblings('.invalid-feedback').html(errors['name'][0]);
+                        // }
+                        // if (errors.hasOwnProperty('email')) {
+                        //     $('#email').addClass('is-invalid');
+                        //     $('#email').siblings('.invalid-feedback').html(errors['email'][0]);
+                        // }
+                        // if (errors.hasOwnProperty('no_hp')) {
+                        //     $('#no_hp').addClass('is-invalid');
+                        //     $('#no_hp').siblings('.invalid-feedback').html(errors['no_hp'][0]);
+                        // }
+                    });
+            });
+
         });
     </script>
 @endsection

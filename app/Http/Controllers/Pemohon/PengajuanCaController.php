@@ -9,6 +9,7 @@ use App\Models\Permohonan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DetailCa;
 use App\Models\PengajuanCA;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,8 +32,31 @@ class PengajuanCaController extends Controller
         // ->where('jenis_dana', 'Pengajuan CA')
         // ->get(['users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.*']);
 
-        $permohonan['data'] = ModelUmum::getDataPengajuanCa()->where('id', Auth::user()->id)->where('jenis_dana', 'Chartered Accountant');
-        return response()->json($permohonan);
+        // $permohonan['data'] = ModelUmum::getDataPengajuanCa()->where('id', Auth::user()->id)->where('jenis_dana', 'Chartered Accountant');
+        $data['data'] = Permohonan::leftJoin('tb_ca', 'tb_ca.id_permohonan', '=', 'tb_permohonan.id_permohonan')
+            ->leftJoin('detail_ca', 'detail_ca.id_ca', '=', 'tb_ca.id_ca')
+            ->join('users', 'users.id', '=', 'tb_permohonan.id')
+            ->where('tb_permohonan.jenis_dana', '=', 'Chartered Accountant')
+            ->get([
+                'users.id',
+                'users.name',
+                'users.jabatan',
+                'users.divisi',
+                'tb_permohonan.id_permohonan',
+                'tb_ca.id_ca',
+                'tb_permohonan.nominal_acc',
+                'tb_permohonan.total_dana_ajuan',
+                'tb_permohonan.keterangan_permohonan',
+                'tb_permohonan.status_permohonan',
+                'tb_permohonan.terbilang',
+                'tb_permohonan.tanggal_permohonan',
+                'detail_ca.bukti_detail_ca',
+                'detail_ca.nominal',
+                'tb_ca.tanggal_penerimaan_ca',
+                'tb_ca.nominal_terpakai'
+            ]);
+
+        return response()->json($data);
     }
 
     //fungsi add
@@ -118,11 +142,46 @@ class PengajuanCaController extends Controller
             'file' => 'required|mimes:png,jpg,jpeg|max:8048',
         ]);
 
-        $ip = $request->id_permohonan;
+        $ic = $request->id_ca;
 
-        $fileName = $ip . '.' . $request->file->extension();
+        $fileName = $ic . '.' . $request->file->extension();
         $request->file->move(public_path('bukti/ca'), $fileName);
 
-        return response()->json(['message' => 'Operation Successful !', 'filename' => $fileName, 'id_permohonan' => $request->id_permohonan]);
+        return response()->json(['message' => 'Operation Successful !', 'filename' => $fileName, 'id_ca' => $request->id_ca, 'nominal' => $request->nominal]);
+    }
+
+    public function ubah_struk(Request $request)
+    {
+
+        $ca = DetailCa::where('id_ca', $request->id_ca)->first();
+
+        if ($ca != null) {
+            $update =  DetailCa::where('id_ca', $request->id_ca)
+                ->update([
+                    'nominal' => $request->nominal,
+                    'bukti_detail_ca' => $request->bukti_transaksi
+                ]);
+
+            if ($update) {
+                return response()->json(['message' => 'success']);
+            } else {
+                return response()->json(['message' => 'failed']);
+            }
+        } else {
+            $insert = DetailCa::create(
+                [
+                    'id_detail_ca' => str_replace('-', '', Str::uuid()),
+                    'id_ca' => $request->id_ca,
+                    'nominal' => $request->nominal,
+                    'bukti_detail_ca' => $request->bukti_transaksi
+                ]
+            );
+
+            if ($insert) {
+                return response()->json(['message' => 'success']);
+            } else {
+                return response()->json(['message' => 'failed']);
+            }
+        }
     }
 }

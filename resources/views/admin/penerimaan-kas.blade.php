@@ -70,15 +70,14 @@
                                     <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Total Taksiran</label>
-                                            <input type="text" class="form-control" placeholder="Total"
+                                            <input readonly type="text" class="form-control" placeholder="Total"
                                                 id="nominal_acc" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Terbilang</label>
-                                            <input type="text" class="form-control" placeholder="Terbilang"
-                                                id="terbilang" />
+                                            <input readonly type="text" class="form-control" placeholder="Terbilang" id="terbilang" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -129,12 +128,12 @@
                                         <div class="col-7 align-self-start">
                                             <div class="col">
                                                 <h3 class="card-title">
-                                                    EDIT BUKTI PENERIMAAN KASXXX
+                                                    EDIT BUKTI PENERIMAAN KAS
                                                 </h3>
                                             </div>
                                         </div>
                                         <div class="col-5 align-items-start">
-                                            <input type="text" name="id_permohonan_edit" id="id_permohonan_edit">
+                                            <input hidden type="text" name="id_permohonan_edit" id="id_permohonan_edit">
                                             {{-- <input type="text" name="id_edit" id="id_edit"> --}}
                                             <div class="input-group input-group-sm mb-1">
                                                 <div class="input-group-prepend">
@@ -181,14 +180,14 @@
                                     <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Total Taksiran</label>
-                                            <input type="text" class="form-control" placeholder="Total"
+                                            <input readonly type="text" class="form-control" placeholder="Total"
                                                 id="nominal_acc_edit" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Terbilang</label>
-                                            <input type="text" class="form-control" placeholder="Terbilang"
+                                            <input readonly type="text" class="form-control" placeholder="Terbilang"
                                                 id="terbilang_edit" />
                                         </div>
                                     </div>
@@ -391,8 +390,7 @@
                                         row.id + '" data-ip="' +
                                         row.id_permohonan + '" data-nm="' + row.name +
                                         '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
-                                        '" data-acc="' + row.nominal_acc + '" data-trb="' + row
-                                        .terbilang + '" data-kp="' + row.keterangan_permohonan +
+                                        '" data-acc="' + row.nominal_acc + '" data-trb="' + row.terbilang + '" data-kp="' + row.keterangan_permohonan +
                                         '"><i class="ki ki-plus text-danger btn btn-icon btn-light-danger item-ubah-penerimaankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
                                         row.id_permohonan +
                                         '"></a>';
@@ -402,8 +400,7 @@
                                         row.id + '" data-ip="' +
                                         row.id_permohonan + '" data-nm="' + row.name +
                                         '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
-                                        '" data-acc="' + row.nominal_acc + '" data-trb="' + row
-                                        .terbilang + '" data-kp="' + row.keterangan_permohonan +
+                                        '" data-acc="' + row.nominal_acc + '" data-trb="' + row.terbilang + '" data-kp="' + row.keterangan_permohonan +
                                         '"><i class="fas fa-edit btn btn-icon btn-light-primary item-edit-penerimaankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
                                         row.id_permohonan +
                                         '"></a>';

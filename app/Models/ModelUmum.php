@@ -81,6 +81,7 @@ class ModelUmum extends Model
     public static function getDataPengajuanCa()
     {
         $data = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
+            ->join('tb_ca', 'tb_ca.id_permohonan', '=', 'tb_permohonan.id_permohonan')
             ->where('tb_permohonan.id', Auth::user()->id)
             ->where('jenis_dana', 'Chartered Accountant')
             ->get(['users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.*']);
