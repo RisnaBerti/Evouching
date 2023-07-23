@@ -199,6 +199,9 @@ Route::middleware(['role:2'])->group(function () {
     Route::controller(LaporanManajer::class)->group(function () {
         Route::get('/laporan-manajer', 'index');
         Route::post('/laporan-manajer/pdf', 'export_pdf');
+        Route::get('/laporan-manajer/pdf/bulan', 'export_pdf_bulan');
+        Route::get('/laporan-manajer/pdf/tahun', 'export_pdf_tahun');
+        Route::get('/laporan-manajer/pdf/custom/{tahun}/{bulan}', 'export_pdf_custom')->name('export_pdf_custom');
     });
     Route::controller((AkunControllerManajer::class))->group(function () {
         Route::get('/profile-manajer', 'index')->name('profile_manajer');
@@ -224,6 +227,9 @@ Route::middleware(['role:3'])->group(function () {
     Route::controller(LaporanPemeriksa::class)->group(function () {
         Route::get('/laporan-pemeriksa', 'index');
         Route::post('/laporan-pemeriksa/pdf', 'export_pdf');
+        Route::get('/laporan-pemeriksa/pdf/bulan', 'export_pdf_bulan');
+        Route::get('/laporan-pemeriksa/pdf/tahun', 'export_pdf_tahun');
+        Route::get('/laporan-pemeriksa/pdf/custom/{tahun}/{bulan}', 'export_pdf_custom')->name('export_pdf_custom');
     });
     Route::controller((AkunPemeriksaController::class))->group(function () {
         Route::get('/profile-pemeriksa', 'index')->name('profile_pemeriksa');

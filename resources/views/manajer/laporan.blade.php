@@ -61,15 +61,15 @@
                                 Choose an option:
                             </li>
                             <li class="navi-item">
-                                <a href="/laporan-bendahara/pdf" target="_blank" class="navi-link">
+                                <a href="/laporan-manajer/pdf" target="_blank" class="navi-link">
                                     <span class="navi-icon"><i class="la la-file-pdf-o"></i></span>
                                     <span class="navi-text">PDF</span>
                                 </a>
-                                <a href="/laporan-bendahara/pdf/bulan" target="_blank" class="navi-link">
+                                <a href="/laporan-manajer/pdf/bulan" target="_blank" class="navi-link">
                                     <span class="navi-icon"><i class="la la-file-pdf-o"></i></span>
                                     <span class="navi-text">Bulan ini</span>
                                 </a>
-                                <a href="/laporan-bendahara/pdf/bulan" target="_blank" class="navi-link">
+                                <a href="/laporan-manajer/pdf/bulan" target="_blank" class="navi-link">
                                     <span class="navi-icon"><i class="la la-file-pdf-o"></i></span>
                                     <span class="navi-text">Tahun ini</span>
                                 </a>
@@ -205,7 +205,7 @@
             var tahun = document.getElementById('tahun').value;
             var bulan = document.getElementById('bulan').value;
 
-            var url = '/laporan-bendahara/pdf/custom/' + tahun + '/' + bulan;
+            var url = '/laporan-manajer/pdf/custom/' + tahun + '/' + bulan;
             window.open(url, '_blank');
         }
         $(document).ready(function() {
@@ -219,7 +219,7 @@
 
             // $('.custom').click(function() {
 
-            //     var url = '/laporan-bendahara/pdf/custom/' + $('.tahun').val() + '/' + $('.bulan').val();
+            //     var url = '/laporan-manajer/pdf/custom/' + $('.tahun').val() + '/' + $('.bulan').val();
             //     // Use '_blank' to open in a new unnamed window
             //     var windowName = '_blank';
 

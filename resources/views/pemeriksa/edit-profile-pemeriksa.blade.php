@@ -1,4 +1,4 @@
-@extends('layouts.main.pemeriksa')
+@extends('layouts.main-pemeriksa')
 
 @section('content')
     <!--begin::Card-->
