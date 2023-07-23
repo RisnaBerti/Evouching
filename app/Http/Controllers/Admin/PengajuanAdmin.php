@@ -172,6 +172,9 @@ Terimakasih
             ]
         );
         $permohonan = Permohonan::findOrFail($request->id_permohonan);
+        $permohonan->nominal_acc = '0';
+        $permohonan->status_permohonan = '1';
+        $permohonan->jenis_dana = '0';
         $permohonan->status_permohonan = '4';
         $permohonan->komentar = $request->komentar;
         $permohonan->ttd_bendahara = '1';

@@ -358,7 +358,7 @@
 
                         if (response == "success") {
                             Swal.fire(
-                                'Ubah Data!',
+                                'Hapus Data!',
                                 'Data berhasil diubah.',
                                 'success'
                             )

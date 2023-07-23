@@ -363,7 +363,7 @@
                                 } else {
                                     return '<a href="{{ url('') }}/bukti/' + row
                                         .bukti_pembayaran_bank +
-                                        '" target="_blank"><span class="badge badge-pill  badge-primary">Lihat</span></a>';
+                                        '" target="_blank"><span class="badge badge-pill  badge-primary">Lihat bukti</span></a>';
                                 }
                             },
                             padding: '5px'
@@ -375,7 +375,7 @@
                                     null) {
                                     return '<a class="dropdown-item item-ubah-pembayaranbank" href="#" data-id="' +
                                         row.id + '" data-ip="' +
-                                        row.id_permohonan + '" data-nm="' + row.name +
+                                        row.id_permohonan + '" data-nm="' + row.name + '" data-resi="' + row.no_resi_bayar_bank +
                                         '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
                                         '" data-acc="' + row.nominal_acc + '" data-trb="' + row
                                         .terbilang + '" data-kp="' + row.keterangan_permohonan +
@@ -387,7 +387,7 @@
                                 } else {
                                     return '<a class="dropdown-item item-edit-pembayaranbank" href="#" data-id="' +
                                         row.id + '" data-ip="' +
-                                        row.id_permohonan + '" data-nm="' + row.name +
+                                        row.id_permohonan + '" data-nm="' + row.name + '" data-resi="' + row.no_resi_bayar_bank +
                                         '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
                                         '" data-acc="' + row.nominal_acc + '" data-trb="' + row
                                         .terbilang + '" data-kp="' + row.keterangan_permohonan +
@@ -439,6 +439,7 @@
                 var keterangan = $(this).data('kp');
                 var terbilang = $(this).data('trb');
                 var bukti_transaksi = $(this).data('bkt');
+                var no_resi_bayar_bank = $(this).data('resi');
 
                 // $('#id_pembayaran_kas').val(id_pembayaran_kas);
                 $('#id_permohonan').val(id_permohonan);
@@ -454,6 +455,7 @@
                 $('#keterangan_permohonan_edit').val(keterangan);
                 $('#terbilang_edit').val(terbilang);
                 $('#bukti_transaksi_edit').val(bukti_transaksi);
+                $('#no_resi_bayar_bank_edit').val(no_resi_bayar_bank);
 
                 getdatapembayaranid(id_permohonan);
 
@@ -483,6 +485,7 @@
                 var keterangan = $(this).data('kp');
                 var terbilang = $(this).data('trb');
                 var bukti_transaksi = $(this).data('bkt');
+                var no_resi_bayar_bank = $(this).data('resi');
 
                 // $('#id_pembayaran_kas').val(id_pembayaran_kas);
                 $('#id_permohonan').val(id_permohonan);
@@ -500,6 +503,7 @@
                 $('#keterangan_permohonan').val(keterangan);
                 $('#terbilang').val(terbilang);
                 $('#bukti_transaksi').val(bukti_transaksi);
+                $('#no_resi_bayar_bank').val(no_resi_bayar_bank);
 
                 $('.modal-ubah-pembayaranbank').modal('show');
             });

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-bendahara')
 
 @section('content')
     <div class="card card-custom ">
@@ -28,6 +28,8 @@
                 </h3>
             </div>
             <div class="card-toolbar">
+                <input type="date" name="tahun" id="tahun" class="tahun" placeholder="tahun">
+                <input type="date" name="bulan" id="bulan" class="bulan" placeholder="bulan">
 
                 <!--begin::Dropdown-->
                 <div class="dropdown dropdown-inline mr-2">
@@ -63,6 +65,19 @@
                                     <span class="navi-icon"><i class="la la-file-pdf-o"></i></span>
                                     <span class="navi-text">PDF</span>
                                 </a>
+                                <a href="/laporan-bendahara/pdf/bulan" target="_blank" class="navi-link">
+                                    <span class="navi-icon"><i class="la la-file-pdf-o"></i></span>
+                                    <span class="navi-text">Bulan ini</span>
+                                </a>
+                                <a href="/laporan-bendahara/pdf/bulan" target="_blank" class="navi-link">
+                                    <span class="navi-icon"><i class="la la-file-pdf-o"></i></span>
+                                    <span class="navi-text">Tahun ini</span>
+                                </a>
+                                <button class="navi-link custom" onclick="export_pdf_custom()">
+                                    <span class="navi-icon"><i class="la la-file-pdf-o"></i></span>
+                                    <span class="navi-text">Custom</span>
+                                </button>
+
                             </li>
                             {{-- <li class="navi-item">
                                 <a href="#" class="navi-link">
@@ -147,13 +162,17 @@
                             </td>
                             <td>
                                 @if ($dt->jenis_dana == 'Pembayaran Kas')
-                                    <a target="_blank" href="{{ url('/bukti') }}/{{ $dt->bukti_pembayaran_kas }}">Lihat</a>
+                                    <a target="_blank"
+                                        href="{{ url('/bukti') }}/{{ $dt->bukti_pembayaran_kas }}">Lihat</a>
                                 @elseif ($dt->jenis_dana == 'Penerimaan Kas')
-                                    <a target="_blank" href="{{ url('/bukti') }}/{{ $dt->bukti_penerimaan_kas }}">Lihat</a>
+                                    <a target="_blank"
+                                        href="{{ url('/bukti') }}/{{ $dt->bukti_penerimaan_kas }}">Lihat</a>
                                 @elseif ($dt->jenis_dana == 'Pembayaran Bank')
-                                    <a target="_blank" href="{{ url('/bukti') }}/{{ $dt->bukti_pembayaran_bank }}">Lihat</a>
+                                    <a target="_blank"
+                                        href="{{ url('/bukti') }}/{{ $dt->bukti_pembayaran_bank }}">Lihat</a>
                                 @elseif ($dt->jenis_dana == 'Penerimaan Bank')
-                                    <a target="_blank" href="{{ url('/bukti') }}/{{ $dt->bukti_penerimaan_bank }}">Lihat</a>
+                                    <a target="_blank"
+                                        href="{{ url('/bukti') }}/{{ $dt->bukti_penerimaan_bank }}">Lihat</a>
                                 @endif
 
                                 {{-- <center><img src="{{ url('/bukti') }}/{{ $dt->bukti_transaksi }}"
@@ -179,15 +198,39 @@
     </div>
 
 
-    
+
 
     <script>
+        function export_pdf_custom() {
+            var tahun = document.getElementById('tahun').value;
+            var bulan = document.getElementById('bulan').value;
+
+            var url = '/laporan-bendahara/pdf/custom/' + tahun + '/' + bulan;
+            window.open(url, '_blank');
+        }
         $(document).ready(function() {
 
             //Mengaktifkan datatable
             $('#table_laporan').DataTable({
                 paging: true,
             });
+
+
+
+            // $('.custom').click(function() {
+
+            //     var url = '/laporan-bendahara/pdf/custom/' + $('.tahun').val() + '/' + $('.bulan').val();
+            //     // Use '_blank' to open in a new unnamed window
+            //     var windowName = '_blank';
+
+            //     // Specify window settings if needed (e.g., 'width=500,height=300')
+            //     var windowSettings = '';
+
+            //     // Open the new window
+            //     window.open(url, windowName, windowSettings);
+            //     return false;
+            // });
+
         });
     </script>
 @endsection

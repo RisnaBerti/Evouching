@@ -78,6 +78,9 @@
                                     <label>Untuk Keperluan</label>
                                     <textarea class="form-control" id="keperluan_edit" name="keperluan_edit" rows="4"></textarea>
                                 </div>
+
+                                {{-- <input type="text" name="total_dana" value="{{ old('total_dana', Pembayaran::user()->total_dana) }}"> --}}
+                                {{-- <input type="text" name="" value="{{ old('total_dana', Pembayaran::user()->total_dana) }}"> --}}
                             </div>
 
                         </div>

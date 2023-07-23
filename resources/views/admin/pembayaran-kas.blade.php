@@ -88,7 +88,8 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" name="file" accept=".pdf" id="inputFile" class="form-control">
+                                            <input type="file" name="file" accept=".pdf" id="inputFile"
+                                                class="form-control">
                                             <p class="text-mute">File Max 8 Mb</p>
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
@@ -132,7 +133,8 @@
                                             </div>
                                         </div>
                                         <div class="col-5 align-items-start">
-                                            <input hidden type="text" name="id_permohonan_edit" id="id_permohonan_edit">
+                                            <input hidden type="text" name="id_permohonan_edit"
+                                                id="id_permohonan_edit">
                                             {{-- <input type="text" name="id_edit" id="id_edit"> --}}
                                             <div class="input-group input-group-sm mb-1">
                                                 <div class="input-group-prepend">
@@ -198,7 +200,8 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" accept=".pdf" name="file_edit" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file_edit" id="inputFile"
+                                                class="form-control">
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -351,10 +354,15 @@
                         {
                             "render": function(data, type, row) {
 
-                               if (row.bukti_pembayaran_kas == '0' || row.bukti_pembayaran_kas == null) { 
-                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_pembayaran_kas +'" target="_blank"><span class="badge badge-pill  badge-danger">Belum Upload</span></a>';
+                                if (row.bukti_pembayaran_kas == '0' || row.bukti_pembayaran_kas ==
+                                    null) {
+                                    return '<a href="{{ url('') }}/bukti/' + row
+                                        .bukti_pembayaran_kas +
+                                        '" target="_blank"><span class="badge badge-pill  badge-danger">Belum Upload</span></a>';
                                 } else {
-                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_pembayaran_kas +'" target="_blank"><span class="badge badge-pill  badge-primary">Lihat Bukti</span></a>';
+                                    return '<a href="{{ url('') }}/bukti/' + row
+                                        .bukti_pembayaran_kas +
+                                        '" target="_blank"><span class="badge badge-pill  badge-primary">Lihat Bukti</span></a>';
                                 }
                             },
                             padding: '5px'
@@ -362,15 +370,13 @@
 
                         {
                             "render": function(data, type, row) {
-                                if (row.bukti_pembayaran_kas == '0' && row.bukti_pembayaran_kas == null) {
+                                if (row.bukti_pembayaran_kas == '0' && row.bukti_pembayaran_kas ==null) {
                                     return '<a class="dropdown-item item-ubah-pembayarankas" href="#" data-id="' +
                                         row.id + '" data-ip="' +
                                         row.id_permohonan + '" data-nm="' + row.name +
                                         '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
-                                        '" data-acc="' + row.nominal_acc + '" data-trb="' + row
-                                        .terbilang + '" data-kp="' + row.keterangan_permohonan +
-                                        '"><i class="ki ki-plus text-danger btn btn-icon btn-light-danger item-ubah-pembayarankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
-                                        row.id_permohonan +
+                                        '" data-acc="' + row.nominal_acc + '" data-trb="' + row.terbilang + '" data-kp="' + row.keterangan_permohonan +
+                                        '"><i class="ki ki-plus text-danger btn btn-icon btn-light-danger item-ubah-pembayarankas"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +row.id_permohonan +
                                         '"></a>';
 
 
@@ -378,6 +384,7 @@
                                     return '<a class="dropdown-item item-edit-pembayarankas" href="#" data-id="' +
                                         row.id + '" data-ip="' +
                                         row.id_permohonan + '" data-nm="' + row.name +
+                                        '" data-resi="' + row.no_resi_bayar_kas +
                                         '" data-jbt="' + row.jabatan + '" data-dvs="' + row.divisi +
                                         '" data-acc="' + row.nominal_acc + '" data-trb="' + row
                                         .terbilang + '" data-kp="' + row.keterangan_permohonan +
@@ -429,6 +436,7 @@
                 var keterangan = $(this).data('kp');
                 var terbilang = $(this).data('trb');
                 var bukti_transaksi = $(this).data('bkt');
+                var no_resi_bayar_kas = $(this).data('resi');
 
                 // $('#id_pembayaran_kas').val(id_pembayaran_kas);
                 $('#id_permohonan').val(id_permohonan);
@@ -444,6 +452,7 @@
                 $('#keterangan_permohonan_edit').val(keterangan);
                 $('#terbilang_edit').val(terbilang);
                 $('#bukti_transaksi_edit').val(bukti_transaksi);
+                $('#no_resi_bayar_kas_edit').val(no_resi_bayar_kas);
 
 
                 getdatapembayaranid(id_permohonan);
@@ -590,7 +599,8 @@
 
                         if (response) {
                             this.reset();
-                            update(response.filename, response.no_resi_bayar_kas, response.id_permohonan, response.tanggal_pembayaran_kas);
+                            update(response.filename, response.no_resi_bayar_kas, response
+                                .id_permohonan, response.tanggal_pembayaran_kas);
 
                             // alert(response.id_permohonan);
                             alert('File has been uploaded successfully');
