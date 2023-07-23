@@ -203,7 +203,8 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" name="file_edit" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file_edit" id="inputFile" class="form-control">
+                                            <p class="text-mute">File Max 8 Mb</p>
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -613,8 +614,8 @@
 
                 if (response == "success") {
                     Swal.fire(
-                        'Disetujui!',
-                        'Permohonan Dana Di setujui.',
+                        'Terupload!',
+                        'Bukti Transaksi Berhasil Di Unggah.',
                         'success'
                     )
                     location.reload()
@@ -629,8 +630,8 @@
 
                 } else {
                     Swal.fire(
-                        'Tidak Disetujui!',
-                        'Permohonan Dana Tidak Di setujui.',
+                        'Terupload!',
+                        'Bukti Transaksi Berhasil Di Unggah.',
                         'error'
                     )
                     location.reload()

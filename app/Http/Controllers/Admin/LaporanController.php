@@ -122,4 +122,131 @@ class LaporanController extends Controller
         $pdf = PDF::loadview('admin.laporan-pdf', ['laporan' => $laporan])->setPaper('a4', 'landscape');
         return $pdf->download();
     }
+
+    public function export_pdf_bulan()
+    {
+
+        $laporan = DB::select(DB::raw('SELECT
+        users.name,
+        tb_permohonan.tanggal_permohonan,
+        tb_permohonan.jenis_dana,
+        tb_permohonan.keterangan_permohonan,
+        tb_permohonan.nominal_acc,
+        tb_penerimaan.bukti_penerimaan_kas,
+        tb_penerimaan.bukti_penerimaan_bank,
+        tb_penerimaan.id_penerimaan,
+        tb_pembayaran.bukti_pembayaran_kas,
+        tb_pembayaran.bukti_pembayaran_bank,
+        tb_pembayaran.id_pembayaran
+        FROM
+        tb_permohonan
+        LEFT JOIN users USING(id)
+        LEFT JOIN tb_penerimaan USING(id_permohonan)
+        LEFT JOIN tb_pembayaran USING(id_permohonan)
+        WHERE tb_permohonan.status_permohonan="3"
+        AND tb_permohonan.tanggal_permohonan BETWEEN "2023-07-01" AND "2023-07-31"
+        '));
+
+        $pdf = PDF::loadview('admin.laporan-pdf', ['laporan' => $laporan])->setPaper('a4', 'landscape');
+        return $pdf->download();
+    }
+
+    public function export_pdf_tahun()
+    {
+
+        $laporan = DB::select(DB::raw('SELECT
+        users.name,
+        tb_permohonan.tanggal_permohonan,
+        tb_permohonan.jenis_dana,
+        tb_permohonan.keterangan_permohonan,
+        tb_permohonan.nominal_acc,
+        tb_penerimaan.bukti_penerimaan_kas,
+        tb_penerimaan.bukti_penerimaan_bank,
+        tb_penerimaan.id_penerimaan,
+        tb_pembayaran.bukti_pembayaran_kas,
+        tb_pembayaran.bukti_pembayaran_bank,
+        tb_pembayaran.id_pembayaran
+        FROM
+        tb_permohonan
+        LEFT JOIN users USING(id)
+        LEFT JOIN tb_penerimaan USING(id_permohonan)
+        LEFT JOIN tb_pembayaran USING(id_permohonan)
+        WHERE tb_permohonan.status_permohonan="3"
+        AND tb_permohonan.tanggal_permohonan BETWEEN "2023-01-01" AND "2023-12-31"
+        '));
+
+        $pdf = PDF::loadview('admin.laporan-pdf', ['laporan' => $laporan])->setPaper('a4', 'landscape');
+        return $pdf->download();
+    }
+
+    public function export_pdf_custom($tahun, $bulan)
+    {
+        // Ambil input dari pengguna pada formulir
+        // Tanggal awal pada bulan dan tahun tertentu
+        //$tanggal_awal = $tahun . '-' . $bulan . '-01';
+
+        // Tanggal akhir pada bulan dan tahun tertentu (menggunakan fungsi date() untuk mendapatkan akhir bulan)
+        //$tanggal_akhir = date('Y-m-t', strtotime($tanggal_awal));
+
+        $laporan = DB::select(DB::raw("SELECT
+            users.name,
+            tb_permohonan.tanggal_permohonan,
+            tb_permohonan.jenis_dana,
+            tb_permohonan.keterangan_permohonan,
+            tb_permohonan.nominal_acc,
+            tb_penerimaan.bukti_penerimaan_kas,
+            tb_penerimaan.bukti_penerimaan_bank,
+            tb_penerimaan.id_penerimaan,
+            tb_pembayaran.bukti_pembayaran_kas,
+            tb_pembayaran.bukti_pembayaran_bank,
+            tb_pembayaran.id_pembayaran
+        FROM
+            tb_permohonan
+        LEFT JOIN users USING(id)
+        LEFT JOIN tb_penerimaan USING(id_permohonan)
+        LEFT JOIN tb_pembayaran USING(id_permohonan)
+        WHERE tb_permohonan.status_permohonan='3'
+        AND tb_permohonan.tanggal_permohonan BETWEEN '$tahun' AND '$bulan' "));
+
+        // //dd($laporan);
+
+        $pdf = PDF::loadview('admin.laporan-pdf', ['laporan' => $laporan])->setPaper('a4', 'landscape');
+        return $pdf->download();
+
+        echo $tahun;
+    
+    }
+
+    // public function export_pdf_custom($tahun, $bulan)
+    // {
+
+    //     // Tanggal awal pada bulan dan tahun tertentu
+    //     $tanggal_awal = $tahun . '-' . $bulan . '-01';
+
+    //     // Tanggal akhir pada bulan dan tahun tertentu (menggunakan fungsi date() untuk mendapatkan akhir bulan)
+    //     $tanggal_akhir = date('Y-m-t', strtotime($tanggal_awal));
+
+    //     $laporan = DB::select(DB::raw('SELECT
+    //     users.name,
+    //     tb_permohonan.tanggal_permohonan,
+    //     tb_permohonan.jenis_dana,
+    //     tb_permohonan.keterangan_permohonan,
+    //     tb_permohonan.nominal_acc,
+    //     tb_penerimaan.bukti_penerimaan_kas,
+    //     tb_penerimaan.bukti_penerimaan_bank,
+    //     tb_penerimaan.id_penerimaan,
+    //     tb_pembayaran.bukti_pembayaran_kas,
+    //     tb_pembayaran.bukti_pembayaran_bank,
+    //     tb_pembayaran.id_pembayaran
+    //     FROM
+    //     tb_permohonan
+    //     LEFT JOIN users USING(id)
+    //     LEFT JOIN tb_penerimaan USING(id_permohonan)
+    //     LEFT JOIN tb_pembayaran USING(id_permohonan)
+    //     WHERE tb_permohonan.status_permohonan="3"
+    //     AND tb_permohonan.tanggal_permohonan BETWEEN :tanggal_awal AND :tanggal_akhir'), ['tanggal_awal' => $tanggal_awal, 'tanggal_akhir' => $tanggal_akhir]);
+
+    //     $pdf = PDF::loadview('admin.laporan-pdf', ['laporan' => $laporan])->setPaper('a4', 'landscape');
+    //     return $pdf->download();
+    // }
 }

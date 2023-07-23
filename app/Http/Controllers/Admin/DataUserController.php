@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Twilio\Rest\Client;
 use App\Models\User;
+use Twilio\Rest\Client;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Console\View\Components\Alert;
@@ -79,65 +80,107 @@ class DataUserController extends Controller
     //fungsi active user
     public function active($id)
     {
+        // Find the user with the provided ID.
         $user = User::find($id);
+
+        // Check if the user exists.
+        if (!$user) {
+            return redirect()->route('datauser')->with(['error' => 'User tidak ditemukan']);
+        }
+
         $user->is_active = "1";
         $user->update();
 
-        $sid    = "AC3b9deb3c57406702247d878eddb287da";
-        $token  = "0b3bc836b58827ec36b6ce397249001c";
-        $twilio = new Client($sid, $token);
-
-        $message = $twilio->messages
-        ->create(
-            "whatsapp:+6285155456806", // to
-            array(
-                "from" => "whatsapp:+14155238886",
-                "body" => "*GERAK SEDEKAH CILACAP*" .
-                    "\n============================".
-                    "\nHallo!!".
-                    "\nAkun E-Vouching Anda Sudah Diaktifkan" .
-                    "\nTerima Kasih" .
-                    "\n============================"
-
-            )
-        );
+        // Call the sendWhatsAppNonActive function to send a WhatsApp message.
+        $this->sendWhatsAppActive($user);
 
         return redirect()->route('datauser')->with(['success' => 'User berhasil diaktifkan']);
     }
 
-    //fungsi active user
+    private function sendWhatsAppActive($user)
+    {
+        $curl = curl_init();
+        $token = "gvbDmLUMUkrsoRuWelzKZU9J88zhHbu0PJizx5QTlCRkda2s7Ne5BoGsApUZ4SI3";
+        $phone = $user->no_hp;
+
+        $message = "*SISTEM INFORMASI E-VOUCHING GSC*
+==============================
+Nama                    : " . $user->name . "
+Jabatan                 : " . $user->jabatan . "
+Divisi                  : " . $user->divisi . "
+==============================
+*AKUN E-VOUCHING ANDA SUDAH DI AKTIFKAN*
+Terimakasih
+==============================";
+
+        $encodedMessage = urlencode($message);
+        $url = "https://solo.wablas.com/api/send-message?phone=$phone&message=$encodedMessage&token=$token";
+
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $result = curl_exec($curl);
+        curl_close($curl);
+
+        return true;
+    }
+
+
     public function nonactive($id)
     {
+        // Find the user with the provided ID.
         $user = User::find($id);
+
+        // Check if the user exists.
+        if (!$user) {
+            return redirect()->route('datauser')->with(['error' => 'User tidak ditemukan']);
+        }
+
+        // Update the is_active attribute to "0" to deactivate the user.
         $user->is_active = "0";
         $user->update();
 
-        $sid    = "AC3b9deb3c57406702247d878eddb287da";
-        $token  = "0b3bc836b58827ec36b6ce397249001c";
-        $twilio = new Client($sid, $token);
+        // Call the sendWhatsAppNonActive function to send a WhatsApp message.
+        $this->sendWhatsAppNonActive($user);
 
-        $message = $twilio->messages
-        ->create(
-            "whatsapp:+6285155456806", // to
-            array(
-                "from" => "whatsapp:+14155238886",
-                "body" => "*GERAK SEDEKAH CILACAP*" .
-                    "\n============================".
-                    "\nHallo!!".
-                    "\nAkun E-Vouching Anda Di Nonaktifkan" .
-                    "\nTerimakasih" .
-                    "\n============================"
-
-            )
-        );
+        // Redirect back to the datauser route with a success message.
         return redirect()->route('datauser')->with(['success' => 'User berhasil diaktifkan']);
     }
 
-    public function destroy(Request $request)
+    private function sendWhatsAppNonActive($user)
     {
-        //delete post
-        User::where('id', $request->id_hapus)->delete();
-        //redirect to index
-        return redirect()->route('datauser')->with(["success"]);
+        $curl = curl_init();
+        $token = "gvbDmLUMUkrsoRuWelzKZU9J88zhHbu0PJizx5QTlCRkda2s7Ne5BoGsApUZ4SI3";
+        $phone = $user->no_hp;
+
+        $message = "*SISTEM INFORMASI E-VOUCHING GSC*
+==============================
+Nama                    : " . $user->name . "
+Jabatan                 : " . $user->jabatan . "
+Divisi                  : " . $user->divisi . "
+==============================
+*AKUN E-VOUCHING ANDA SUDAH DI NON-AKTIFKAN*
+Terimakasih
+==============================";
+
+        $encodedMessage = urlencode($message);
+        $url = "https://solo.wablas.com/api/send-message?phone=$phone&message=$encodedMessage&token=$token";
+
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $result = curl_exec($curl);
+        curl_close($curl);
+
+        return true;
     }
+
+
+    // public function destroy(Request $request)
+    // {
+    //     //delete post
+    //     User::where('id', $request->id_hapus)->delete();
+    //     //redirect to index
+    //     return redirect()->route('datauser')->with(["success"]);
+    // }
 }

@@ -113,10 +113,13 @@
                                     </div>
                                 </div>
                                 <div readonly class="form-group row">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-6">
                                         <label>Terbilang</label>
-                                        <input type="text" class="form-control" placeholder="Terbilang"
-                                            id="terbilang" readonly disabled />
+                                        <input type="text" class="form-control" placeholder="Terbilang"id="terbilang" readonly disabled />
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>Komentar</label>
+                                        <textarea class="form-control" placeholder="Keterangan" id="komentar" rows="2"></textarea>
                                     </div>
                                     <input type="text" id="status_permohonan" hidden>
                                     <input type="text" id="ttd_bendahara" hidden>
@@ -346,7 +349,7 @@
                                     .jumlah_satuan + '" data-ttl="' + row.total_dana_ajuan +
                                     '" data-acc="' + row.nominal_acc + '" data-kp="' + row
                                     .keterangan_permohonan + '" data-trb="' + row.terbilang +
-                                    '" data-st="' + row.status_permohonan +
+                                    '" data-st="' + row.status_permohonan + '" data-kmtr="' + row.komentar +
                                     '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
                                     row.id_permohonan +
                                     '"><i class="fas fa-trash-alt btn btn-icon btn-light-danger item-jenis-dana"></i></a>';
@@ -383,6 +386,8 @@
                 var keterangan = $(this).data('kp');
                 var terbilang = $(this).data('trb');
                 var status = $(this).data('st');
+                var komentar = $(this).data('kmtr');
+
 
                 $('#id_permohonan').val(id_permohonan);
                 $('#name').val(name);
@@ -398,6 +403,8 @@
                 $('#keterangan_permohonan').val(keterangan);
                 $('#terbilang').val(terbilang);
                 $('#status_permohonan').val(status);
+                $('#komentar').val(komentar);
+
 
                 $('.modal-ubah-permohonan').modal('show');
             });
@@ -406,6 +413,7 @@
 
                 var id_permohonan = $('#id_permohonan').val();
                 var status_permohonan = $('#status_permohonan').val();
+                var komentar = $('#komentar').val();
                 // var jenis_dana = $('#jenis_dana').val();
 
                 $('.button-menyetujui').attr("disabled", "disabled");
@@ -421,7 +429,8 @@
                     $.post("{{ url('/permohonan-manajer/edit') }}", {
                         _token: "{{ csrf_token() }}",
                         id_permohonan: id_permohonan,
-                        status_permohonan: status_permohonan
+                        status_permohonan: status_permohonan,
+                        komentar: komentar
 
                     }).done(function(response) {
 
@@ -473,7 +482,7 @@
 
                 var id_permohonan = $('#id_permohonan').val();
                 var status_permohonan = $('#status_permohonan').val();
-                // var jenis_dana = $('#jenis_dana').val();
+                var komentar = $('#komentar').val();
 
                 $('.button-menolak').attr("disabled", "disabled");
 
@@ -488,7 +497,8 @@
                     $.post("{{ url('/permohonan-manajer/menolak') }}", {
                         _token: "{{ csrf_token() }}",
                         id_permohonan: id_permohonan,
-                        status_permohonan: '4'
+                        status_permohonan: '4',
+                        komentar: komentar
 
                     }).done(function(response) {
 

@@ -61,7 +61,7 @@ class AntarBankController extends Controller
             [
                 'no_resi_penerimaan_antar_bank' => 'required',
                 'tanggal_penerimaan_antar_bank' => 'required',
-                'total_dana' => 'required',
+                'total_dana' => 'required|numeric',
                 'terbilang' => 'required',
                 'keperluan' => 'required',
             ]
@@ -84,6 +84,16 @@ class AntarBankController extends Controller
 
     public function penerimaan_antar_bank_edit(Request $request)
     {
+        $request->validate(
+            [
+                'no_resi_penerimaan_antar_bank' => 'required',
+                'tanggal_penerimaan_antar_bank' => 'required',
+                'total_dana' => 'required|numeric',
+                'terbilang' => 'required',
+                'keperluan' => 'required',
+            ]
+        );
+
         //edit data
         $penerimaan_antar_bank = PenerimaanAntarBank::find($request->id_penerimaan_antar_bank_edit);
         $penerimaan_antar_bank->no_resi_penerimaan_antar_bank = $request->no_resi_penerimaan_antar_bank_edit;
@@ -98,7 +108,6 @@ class AntarBankController extends Controller
         } else {
             echo "false";
         }
-
     }
 
     //fungsi delete penerimaan antar bank
@@ -139,7 +148,7 @@ class AntarBankController extends Controller
             [
                 'no_resi_pembayaran_antar_bank' => 'required',
                 'tanggal_pembayaran_antar_bank' => 'required',
-                'total_dana' => 'required',
+                'total_dana' => 'required|numeric',
                 'terbilang' => 'required',
                 'keperluan' => 'required',
             ]
@@ -163,15 +172,31 @@ class AntarBankController extends Controller
             ]
         );
 
-        Saldo::create(
-            [
-                'id_saldo' => str_replace('-', '', Str::uuid()),
-                'id_pembayaran_antar_bank' => $id_pembayaran_antar_bank,
-                'saldo_akhir' => $request->total_dana,
-                'bulan' => $bulan,
-                'tahun' => $tahun
-            ]
-        );
+        $saldo = Saldo::where('bulan', $bulan)->where('tahun', $tahun)->first();
+
+        if ($saldo != null) {
+            $this->update_tabel_saldo($bulan, $tahun, $request->total_dana);
+        } else {
+            Saldo::create(
+                [
+                    'id_saldo' => str_replace('-', '', Str::uuid()),
+                    'id_pembayaran_antar_bank' => $id_pembayaran_antar_bank,
+                    'saldo_akhir' => $request->total_dana,
+                    'bulan' => $bulan,
+                    'tahun' => $tahun
+                ]
+            );
+        }
+
+        // Saldo::create(
+        //     [
+        //         'id_saldo' => str_replace('-', '', Str::uuid()),
+        //         'id_pembayaran_antar_bank' => $id_pembayaran_antar_bank,
+        //         'saldo_akhir' => $request->total_dana,
+        //         'bulan' => $bulan,
+        //         'tahun' => $tahun
+        //     ]
+        // );
 
         // return "success";
         return redirect()->route('pembayaran-antarbank')->with(['success' => ' berhasil ditambahkan']);
@@ -180,15 +205,15 @@ class AntarBankController extends Controller
     public function pembayaran_antar_bank_edit(Request $request)
     {
         //edit data
-        // $request->validate(
-        //     [
-        //         'no_resi_pembayaran_antar_bank' => 'required',
-        //         'tanggal_pembayaran_antar_bank' => 'required',
-        //         'total_dana' => 'required',
-        //         'terbilang' => 'required',
-        //         'keperluan' => 'required',
-        //     ]
-        // );
+        $request->validate(
+            [
+                'no_resi_pembayaran_antar_bank' => 'required',
+                'tanggal_pembayaran_antar_bank' => 'required',
+                'total_dana' => 'required|numeric',
+                'terbilang' => 'required',
+                'keperluan' => 'required',
+            ]
+        );
 
         $pembayaran_antar_bank = PembayaranAntarBank::find($request->id_pembayaran_antar_bank_edit);
         $pembayaran_antar_bank->no_resi_pembayaran_antar_bank = $request->no_resi_pembayaran_antar_bank_edit;
@@ -223,5 +248,25 @@ class AntarBankController extends Controller
         $sisa_saldo = PembayaranAntarBank::where('bulan', $bulan)->where('tahun', $tahun)->first();
         $sisa_saldo->sisa_saldo = $sisa_saldo->sisa_saldo + $total_dana;
         $sisa_saldo->update();
+    }
+
+    public function update_saldo_tb_antar_bank($bulan, $tahun, $total_dana)
+    {
+        PembayaranAntarBank::where('bulan', $bulan)
+            ->where('tahun', $tahun)
+            ->update([
+                // Tambahkan kolom-kolom yang ingin diperbarui beserta nilai barunya
+                'sisa_saldo' => $total_dana
+                              // ...
+            ]);
+    }
+
+    public function update_tabel_saldo($bulan, $tahun, $total_dana)
+    {
+        $saldo_akhir = Saldo::where('bulan', $bulan)->where('tahun', $tahun)->first();
+        $saldo_akhir->saldo_akhir = $saldo_akhir->saldo_akhir + $total_dana;
+        $saldo_akhir->update();
+
+        $this->update_saldo_tb_antar_bank($bulan, $tahun, $saldo_akhir->saldo_akhir);
     }
 }

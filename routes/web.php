@@ -47,20 +47,14 @@ Route::get('/testroute', function () {
     Mail::to('grizenzioorchivillando@gmail.com')->send(new MailableName($name));
 });
 
-Route::get('/test', [AuthController::class, 'sendMail']);
-Route::get('/kirim', [AuthController::class, 'sendWhatsApp']);
+// Route::get('/test', [AuthController::class, 'sendMail']);
+// Route::get('/kirim', [PengajuanAdmin::class, 'hoam']);
 
 
 Route::get('/', [AuthController::class, 'login']);
+
 // authentification
 Route::get('/logout', [AuthController::class, 'logout']);
-// Route::middleware('guest')->group(function () {
-//     Route::get('/login', 'AuthController@login')->name('auth-login');
-//     Route::post('/login', 'AuthController@authenticate')->name('auth-authenticate');
-//     Route::get('/forgot-password', 'AuthController@forgot_password');
-//     Route::get('/reset-password', 'AuthController@reset_password');
-//     Route::post('/reset-password', 'AuthController@reset_password');
-// });
 
 Route::middleware('guest')->group(function () {
     Route::controller(AuthController::class)->group(function () {
@@ -129,7 +123,9 @@ Route::middleware(['role:1'])->group(function () {
 
         Route::get('/pembayaranbank', 'pembayaran_bank');
         Route::post('/pembayaran-bank/get', 'get_pembayaran_bank');
+
         Route::post('/pembayaran-bank/edit', 'edit_pembayaran_bank')->name('pembayaranbank.upload');
+
         Route::post('/pembayaran-bank/ubah', 'ubah_pembayaran_bank')->name('pembayaranbank.ubah');
         Route::post('/pembayaran-bank/editid', 'edit_pembayaran_bank_id')->name('pembayaranbank.uploadid');
         Route::post('/pembayaran-bank/ubahid', 'ubah_pembayaran_bank_id')->name('pembayaranbank.ubahid');
@@ -143,6 +139,7 @@ Route::middleware(['role:1'])->group(function () {
         Route::post('/pembayaran-ca/get', 'get');
         Route::post('/pembayaran-ca/upload', 'upload_pembayaran')->name('pembayaranca.upload');
         Route::post('/pembayaran-ca/edit', 'edit_upload_pembayaran')->name('pembayaranca.edit');
+
         Route::post('/pembayaranca/getid', 'get_id')->name('pembayaranca.getid');
         Route::post('/pembayaran-ca/uploadid', 'upload_pembayaran_id')->name('pembayaranca.uploadid');
         Route::post('/pembayaran-ca/editid', 'edit_upload_pembayaran_id')->name('pembayaranca.editid');
@@ -169,6 +166,10 @@ Route::middleware(['role:1'])->group(function () {
     Route::controller(LaporanController::class)->group(function () {
         Route::get('/laporan-bendahara', 'index');
         Route::get('/laporan-bendahara/pdf', 'export_pdf');
+        Route::get('/laporan-bendahara/pdf/bulan', 'export_pdf_bulan');
+        Route::get('/laporan-bendahara/pdf/tahun', 'export_pdf_tahun');
+        Route::get('/laporan-bendahara/pdf/custom/{tahun}/{bulan}', 'export_pdf_custom')->name('export_pdf_custom');
+        // Route::get('/laporan-bendahara/pdf/custom', 'export_pdf_custom')->name('export_pdf_custom');
     });
     Route::controller(UserController::class)->group(function () {
         Route::get('/profile', 'index')->name('profile');
@@ -216,6 +217,7 @@ Route::middleware(['role:3'])->group(function () {
         Route::get('/permohonan-pemeriksa', 'index');
         Route::post('/permohonan-pemeriksa/get', 'get');
         Route::post('/permohonan-pemeriksa/edit', 'edit');
+        Route::post('/permohonan-pemeriksa/menolak', 'menolak');
     });
     Route::controller(LaporanPemeriksa::class)->group(function () {
         Route::get('/laporan-pemeriksa', 'index');
@@ -265,6 +267,12 @@ Route::middleware(['role:4'])->group(function () {
         Route::get('/pengajuan-ca', 'index');
         Route::post('/pengajuan-ca/get', 'get');
         Route::post('/pengajuan-ca/add', 'add');
+
+        Route::post('/pengajuan-ca/upload', 'upload_struk')->name('buktica.upload');
+
+        Route::post('/pengajuan-ca/editid', 'edit_pembayaran_bank_id')->name('pembayaranbank.uploadid');
+        Route::post('/pengajuan-ca/ubahid', 'ubah_pembayaran_bank_id')->name('pembayaranbank.ubahid');
+        Route::post('/pengajuan-ca/getid', 'get_pembayaran_bank_id')->name('pembayaranbank.getid');
     });
 });
 

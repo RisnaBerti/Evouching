@@ -59,11 +59,13 @@ class PermohonanPemohonController extends Controller
 
     public function add(Request $request)
     {
-        // $request->validate([
-        //     'no_resi_ajuan' => 'required',
-        //     'tanggal_permohonan' => 'required',
-        //     'terbilang' => 'required',
-        // ]);
+        $request->validate([
+            'terbilang' => 'required',
+            'harga_satuan' => 'required|numeric',
+            'jumlah_satuan' => 'required|numeric',
+            'total_dana_ajuan' => 'required|numeric',
+            'keterangan_permohonan' => 'required',
+        ]);
 
         $user = User::findOrFail(Auth::user()->id);
         $id_permohonan = str_replace('-', '', Str::uuid());
@@ -87,39 +89,64 @@ class PermohonanPemohonController extends Controller
                 'ttd_manajer' => '0',
                 'ttd_pemeriksa' => '0',
                 'ttd_bendahara' => '0',
-                'komentar' => '0',
+                'komentar' => '-',
             ]
         );
 
-        $this->sendWhatsApp('6285155456806',  Auth::user()->id); //bendahara
-        $this->sendWhatsApp('6283863533646', Auth::user()->id); //manajer
-        //$this->sendWhatsApp('6287889980443');//pemeriksa
+        $this->sendWhatsApp('6285155456806',  Auth::user()->id, $request->no_resi_ajuan, $request->tanggal_permohonan, $request->total_dana_ajuan, $request->harga_satuan, $request->jumlah_satuan,  $request->keterangan_permohonan); //bendahara
+        $this->sendWhatsApp('6283863533646',  Auth::user()->id, $request->no_resi_ajuan, $request->tanggal_permohonan, $request->total_dana_ajuan, $request->harga_satuan, $request->jumlah_satuan,  $request->keterangan_permohonan); //bendahara
+        // $this->sendWhatsApp('6285155456806',  Auth::user()->id, $request->no_resi_ajuan, $request->tanggal_permohonan, $request->total_dana_ajuan, $request->harga_satuan, $request->jumlah_satuan,  $request->keterangan_permohonan); //bendahara
+        // $this->sendWhatsApp('6283863533646', Auth::user()->id); //manajer
+        // $this->sendWhatsApp('6289670992751',  Auth::user()->id); //pemeriksa
 
         return "success";
     }
 
-    private function sendWhatsApp($phone, $id)
+    private function sendWhatsApp($phone, $id, $no_resi_ajuan, $tanggal_permohonan, $total_dana_ajuan, $harga_satuan, $jumlah_satuan, $keterangan_permohonan)
     {
-        $user = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
-            ->where('tb_permohonan.id', $id)
-            ->get('users.name', 'users.jabatan', 'users.divisi', 'no_resi_ajuan', 'tanggal_permohonan', 'total_dana_ajuan', 'harga_satuan', 'jumlah_satuan', 'keterangan_permohonan')
+        $user = User::join('tb_permohonan', 'users.id', '=', 'tb_permohonan.id')
+            ->where('users.id', $id)
+            ->select(
+                'users.name',
+                'users.jabatan',
+                'users.divisi',
+                'tb_permohonan.no_resi_ajuan',
+                'tb_permohonan.tanggal_permohonan',
+                'tb_permohonan.total_dana_ajuan',
+                'tb_permohonan.harga_satuan',
+                'tb_permohonan.jumlah_satuan',
+                'tb_permohonan.keterangan_permohonan'
+            )
             ->first();
+
+        // Format the total_dana_ajuan and harga_satuan with Rupiah currency symbol.
+        $total_dana_ajuan_formatted = 'Rp ' . number_format($total_dana_ajuan, 0, ',', '.');
+        $harga_satuan_formatted = 'Rp ' . number_format($harga_satuan, 0, ',', '.');
 
         $curl = curl_init();
         $token = "gvbDmLUMUkrsoRuWelzKZU9J88zhHbu0PJizx5QTlCRkda2s7Ne5BoGsApUZ4SI3";
-        $message = "\n*PERMOHONAN DANA E-VOUCHING*" .
+        $message = "\n==============================" .
+            "\n*PERMOHONAN DANA E-VOUCHING*" .
             "\n==============================" .
-            "\nNama                    : " . $user->name .
-            "\nJabatan                 : " . $user->jabatan .
-            "\nDivisi                  : " . $user->divisi .
-            "\nNo Resi                 : " . $user->no_resi_ajuan .
-            "\nTanggal Permohonan      : " . $user->tanggal_permohonan .
-            "\nTotal Dana Yang Diajukan: " . $user->total_dana_ajuan .
-            "\nHarga Satuan            : " . $user->harga_satuan .
-            "\nJumlah Satuan           : " . $user->jumlah_satuan .
-            "\nKeterangan              : " . $user->keterangan_permohonan .
+            "\n*Nama:* " . $user->name .
+            "\n*Jabatan:* " . $user->jabatan .
+            "\n*Divisi:* " . $user->divisi .
+            "\n*No Resi:* " . $no_resi_ajuan .
+            "\n*Tanggal Permohonan:* " . $tanggal_permohonan .
+            "\n*Total Dana Yang Diajukan:* " . $total_dana_ajuan_formatted .
+            "\n*Harga Satuan:* " . $harga_satuan_formatted .
+            "\n*Jumlah Satuan:* " . $jumlah_satuan .
+            "\n*Keterangan:* " . $keterangan_permohonan .
             "\nTerimakasih" .
             "\n==============================";
+
+        // Replace label dengan bold
+        $message = str_replace(
+            ["*Nama:*", "*Jabatan:*", "*Divisi:*", "*No Resi:*", "*Tanggal Permohonan:*", "*Total Dana Yang Diajukan:*", "*Harga Satuan:*", "*Jumlah Satuan:*", "*Keterangan:*"],
+            ["*Nama:*", "*Jabatan:*", "*Divisi:*", "*No Resi:*", "*Tanggal Permohonan:*", "*Total Dana Yang Diajukan:*", "*Harga Satuan:*", "*Jumlah Satuan:*", "*Keterangan:*"],
+            $message
+        );
+
         $encodedMessage = urlencode($message);
         $url = "https://solo.wablas.com/api/send-message?phone=$phone&message=$encodedMessage&token=$token";
 

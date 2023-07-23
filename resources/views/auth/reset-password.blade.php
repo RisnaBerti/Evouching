@@ -12,8 +12,8 @@
                 <!--begin::Wrapper-->
                 <div class="login-content d-flex flex-column pt-lg-0 pt-12">
                     <!--begin::Logo-->
-                    <a href="#" class="login-logo pb-xl-20 pb-15">
-                        <img src="{{ asset('assets/media/logos/logo-4.png') }}" class="max-h-70px" alt="" />
+                    <a href="/" class="login-logo pb-xl-20 pb-15">
+                        <img src="{{ asset('assets/media/evouching.png') }}" class="max-h-70px" alt="" />
                     </a>
                     <!--end::Logo-->
 

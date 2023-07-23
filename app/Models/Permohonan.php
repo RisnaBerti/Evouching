@@ -28,7 +28,8 @@ class Permohonan extends Model
         'ttd_pemohon',
         'ttd_pemeriksa',
         'ttd_manajer',
-        'ttd_bendahara'
+        'ttd_bendahara',
+        'komentar'
     ];
 
     public function user()

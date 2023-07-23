@@ -19,13 +19,13 @@
                                         <div class="col-7 align-self-start">
                                             <div class="col">
                                                 <h3 class="card-title">
-                                                    BUKTI PENERIMAAN KAS
+                                                    BUKTI PENERIMAAN BANK
                                                 </h3>
                                             </div>
                                         </div>
                                         <div class="col-5 align-items-start">
-                                            <input type="text" name="id_permohonan" id="id_permohonan">
-                                            <input type="text" name="id" id="id">
+                                            <input hidden type="text" name="id_permohonan" id="id_permohonan">
+                                            <input hidden type="text" name="id" id="id">
                                             <div class="input-group input-group-sm mb-1">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
@@ -89,7 +89,8 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" accept=".pdf" name="file" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file" id="inputFile"
+                                                class="form-control">
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -127,7 +128,7 @@
                                         <div class="col-7 align-self-start">
                                             <div class="col">
                                                 <h3 class="card-title">
-                                                    EDIT BUKTI PENERIMAAN KAS
+                                                    EDIT BUKTI PENERIMAAN BANK
                                                 </h3>
                                             </div>
                                         </div>
@@ -198,7 +199,9 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" accept=".pdf" name="file_edit" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file_edit" id="inputFile"
+                                                class="form-control">
+                                                <p class="text-mute">File Max 8 Mb</p>
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -222,7 +225,7 @@
         <div class="card-header">
             <div class="card-title">
                 <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
-                <h3 class="card-label">Penerimaan Kas</h3>
+                <h3 class="card-label">Penerimaan Bank</h3>
             </div>
         </div>
         <div class="card-body">
@@ -351,10 +354,15 @@
                         {
                             "render": function(data, type, row) {
 
-                               if (row.bukti_penerimaan_bank == '0' || row.bukti_penerimaan_bank == null) { 
-                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_penerimaan_bank +'" target="_blank"><span class="badge badge-pill  badge-danger">Belum Upload</span></a>';
+                                if (row.bukti_penerimaan_bank == '0' || row.bukti_penerimaan_bank ==
+                                    null) {
+                                    return '<a href="{{ url('') }}/bukti/' + row
+                                        .bukti_penerimaan_bank +
+                                        '" target="_blank"><span class="badge badge-pill  badge-danger">Belum Upload</span></a>';
                                 } else {
-                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_penerimaan_bank +'" target="_blank"><span class="badge badge-pill  badge-primary">Lihat Bukti</span></a>';
+                                    return '<a href="{{ url('') }}/bukti/' + row
+                                        .bukti_penerimaan_bank +
+                                        '" target="_blank"><span class="badge badge-pill  badge-primary">Lihat Bukti</span></a>';
                                 }
                             },
                             padding: '5px'
@@ -362,7 +370,8 @@
 
                         {
                             "render": function(data, type, row) {
-                                if (row.bukti_penerimaan_bank == '0' || row.bukti_penerimaan_bank == null) {
+                                if (row.bukti_penerimaan_bank == '0' || row.bukti_penerimaan_bank ==
+                                    null) {
                                     return '<a class="dropdown-item item-ubah-penerimaanbank" href="#" data-id="' +
                                         row.id + '" data-ip="' +
                                         row.id_permohonan + '" data-nm="' + row.name +
@@ -558,8 +567,8 @@
 
                     } else {
                         Swal.fire(
-                            'Tidak Disetujui!',
-                            'Permohonan Dana Tidak Di setujui.',
+                            'Terupload!',
+                            'Bukti Transaksi Gagal Di Unggah.',
                             'error'
                         )
                         location.reload()
@@ -621,8 +630,8 @@
 
                     if (response.message == "success") {
                         Swal.fire(
-                            'Disetujui!',
-                            'Permohonan Dana Di setujui.',
+                            'Terupload!',
+                            'Bukti Transaksi Berhasil Di Unggah.',
                             'success'
                         )
                         location.reload()
@@ -635,8 +644,8 @@
 
                     } else {
                         Swal.fire(
-                            'Tidak Disetujui!',
-                            'Permohonan Dana Tidak Di setujui.',
+                            'Terupload!',
+                            'Bukti Transaksi Gagal Di Unggah.',
                             'error'
                         )
                         location.reload()

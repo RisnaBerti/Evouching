@@ -3,6 +3,7 @@
 @section('content')
     <div id="layoutSidenav_content">
         <main>
+            
             <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
             </header>
             <!-- Main page content-->
@@ -13,7 +14,6 @@
                             <h3 class="card-label">
                                 Detail Permohonan Dana
                             </h3>
-                            <h1 class="text_nominal_ajuan">Nominal Ajuan: </h1>
                         </div>
                         <div class="card-toolbar">
                             <a href="{{ route('permohonan-pemohon') }}"> <button
@@ -22,6 +22,8 @@
                     </div>
                     <div class="card-header">
                         <div class="card-body">
+                            <h4 class="text_nominal_ajuan alert alert-primary">Nominal Ajuan: </h4> <br>
+
                             <div class="col-md-12 table-responsive">
                                 <input type="hidden" name="total_partisipan" id="total_partisipan" value="0">
                                 <table id="table-barang" class="table table-striped table-row-bordered gy-5 gs-7"
@@ -45,9 +47,15 @@
                             </div>
                         </div>
                         <div class="card-footer container-xl mt-5 mb-5">
-
-                            <input type="text" id="total_harga_barang" value="0">
-                            <button class="btn btn-primary btn-sm float-right" id="btnAdd">Tambah</button>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Total Harga :</label>
+                                    <input readonly type="text" id="total_harga_barang" value="0">
+                                </div>
+                                <div class="col-lg-6">
+                                    <button class="btn btn-primary btn-sm float-right" id="btnAdd">Tambah</button>
+                                </div>
+                            </div>                                                    
                         </div>
                     </div>
                 </div>
@@ -282,7 +290,7 @@
                     .done(function(data) {
                         // alert(data.harga_satuan);
                         // var hargatotal = parseInt(data);
-                        $(".text_nominal_ajuan").html(data.total_dana_ajuan);
+                        $(".text_nominal_ajuan").html("Nominal Dana yang di ajukan : Rp. " +uang(data.total_dana_ajuan));
                     });
             }
 
@@ -323,6 +331,7 @@
                             'Detail Permohonan Telah Ditambah.',
                             'success'
                         )
+                        location.reload();
 
                     } else {
 
@@ -353,6 +362,8 @@
                     if (response != null) {
 
                         console.log("deleted")
+
+                        location.reload();
 
                         // Swal.fire(
                         //     'Detail Permohonan!',

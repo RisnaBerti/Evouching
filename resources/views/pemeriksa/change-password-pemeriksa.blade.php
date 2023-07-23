@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main-pemeriksa')
 
 @section('content')
     <!--begin::Card-->
@@ -8,8 +8,18 @@
             <div class="d-flex mb-9">
                 <!--begin: Pic-->
                 <div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
+                    @php
+                        $name = explode(' ', Auth::user()->name);
+                        $initials = substr($name[0], 0, 1);
+                        if (count($name) > 1) {
+                            $initials .= substr($name[1], 0, 1);
+                        }
+                    @endphp
                     <div class="symbol symbol-50 symbol-lg-120">
-                        <img src="assets/media/users/300_1.jpg" alt="image" />
+                        {{-- <img src="{{ $initials }}" alt="image" /> --}}
+                        <span class="symbol symbol-35 symbol-light-success">
+                            <span class="symbol-label font-size-h5 font-weight-bold">{{ $initials }}</span>
+                        </span>
                     </div>
 
                     <div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
@@ -114,7 +124,7 @@
                 </div>
                 <!--end::Header-->
                 <!--begin::Form-->
-                <form class="form" method="post" action="/change-password-pemeriksa"> 
+                <form class="form" method="post" action="/change-password-pemeriksa">
                     @csrf
                     <div class="card-body">
                         @if ($message = Session::get('success'))
@@ -148,7 +158,8 @@
                         </div>
                         <!--begin::Form Group-->
                         <div class="form-group row">
-                            <label class="col-xl-5 col-lg-3 col-form-label" for="confirm_password">Konfirmasi password baru</label>
+                            <label class="col-xl-5 col-lg-3 col-form-label" for="confirm_password">Konfirmasi password
+                                baru</label>
                             <div class="col-lg-9 col-xl-7">
                                 <input
                                     class="form-control form-control-lg form-control-solid @error('confirm_password') is-invalid @enderror"

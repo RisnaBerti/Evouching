@@ -20,9 +20,15 @@
                                         </div>
                                     </div>
                                     <div class="col-5 align-items-start">
-                                        <input type="text" id="id">
-                                        <input hidden type="text" id="sisa_saldo">
+                                        <input hidden type="text" id="id">
+                                        {{-- <input type="text" id="sisa_saldo"> --}}
                                         <input hidden type="text" id="id_pembayaran_antar_bank">
+                                        <div class="input-group input-group-sm mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-sm">Total Dana:</span>
+                                            </div>
+                                            <input readonly disabled type="text" class="form-control text-right" id="sisa_saldo" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                        </div>
                                         <div hidden class="input-group input-group-sm mb-1">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">No.
@@ -46,8 +52,9 @@
                                                 <span class="input-group-text" id="inputGroup-sizing-sm">Tanggal:</span>
                                             </div>
                                             <input readonly disabled type="date" value="{{ date('d-m-Y') }}"
-                                                class="form-control text-right" name="tanggal_permohonan" id="tanggal_permohonan" 
-                                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                                class="form-control text-right" name="tanggal_permohonan"
+                                                id="tanggal_permohonan" aria-label="Sizing example input"
+                                                aria-describedby="inputGroup-sizing-sm">
                                         </div>
                                         <div class="input-group input-group-sm mb-1">
                                             <div class="input-group-prepend">
@@ -64,7 +71,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row row-cols-3">
+                                {{-- <div class="row row-cols-3">
                                     <div class="input-group input-group-sm mb-3 p-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroup-sizing-sm">Nama</span>
@@ -86,10 +93,10 @@
                                         <input readonly disabled type="text" class="form-control" id="divisi"
                                             aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="form-group row">
                                     <div class="col-lg-3">
-                                        <label>Nama Perkiraan</label>
+                                        <label>Nama Pengaju</label>
                                         <input type="text" class="form-control" placeholder="Nama Legkap"
                                             id="nama_perkiraan" readonly disabled />
                                     </div>
@@ -123,7 +130,8 @@
                                 <div class="form-group row">
                                     <div class="col-lg-6">
                                         <label>Terbilang</label>
-                                        <input type="text" class="form-control" placeholder="Terbilang"id="terbilang" readonly disabled />
+                                        <input type="text" class="form-control" placeholder="Terbilang"id="terbilang"
+                                            readonly disabled />
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Komentar</label>
@@ -357,7 +365,7 @@
                                         .jumlah_satuan + '" data-ttl="' + row.total_dana_ajuan +
                                         '" data-acc="' + row.nominal_acc + '" data-kp="' + row
                                         .keterangan_permohonan + '" data-kmnt="' + row
-                                        .komentar +  '" data-trb="' + row.terbilang +
+                                        .komentar + '" data-trb="' + row.terbilang +
                                         '" data-st="' + row.status_permohonan +
                                         '"><i class="fas fa-edit btn btn-icon btn-light-primary item-ubah"></i></a> <a class="dropdown-item item-hapus" href="#" data-ip="' +
                                         row.id_permohonan +
@@ -494,7 +502,7 @@
                 $('#nama_perkiraan').val(name);
                 $('#no_resi_ajuan').val(resi);
                 $('#tanggal_permohonan').val(tanggal);
-                $('#harga_satuan').val(harga);
+                $('#harga_satuan').val(uang(harga));
                 $('#jumlah_satuan').val(jumlah);
                 $('#total_dana_ajuan').val(total);
                 $('#nominal_acc').val(uang(acc));
@@ -510,11 +518,12 @@
 
                 var id_permohonan = $('#id_permohonan').val();
                 var id = $('#id').val();
-                var nominal_acc = $('#nominal_acc').val().replace(",", "");
+                var nominal_acc = $('#nominal_acc').val().replace(/[\D,]/g, '');
                 var status_permohonan = $('#status_permohonan').val();
                 var komentar = $('#komentar').val();
                 var jenis_dana = $('#jenis_dana').val();
-                var sisa_saldo = $("#sisa_saldo").val();
+                var sisa_saldo = $("#sisa_saldo").val().replace(/[\D,]/g, '');
+                // var sisa_saldo_final = sisa_saldo.replace(/\,/g, '');
 
                 var s = parseInt(sisa_saldo) - parseInt(nominal_acc);
 
@@ -527,6 +536,7 @@
                         'Saldo Tidak Mencukupi.',
                         'error'
                     )
+                    location.reload()
 
                 } else {
 
@@ -546,7 +556,7 @@
                             _token: "{{ csrf_token() }}",
                             id: id,
                             id_permohonan: id_permohonan,
-                            nominal_acc: nominal_acc.replace(",", ""),
+                            nominal_acc: nominal_acc.replace(/[\D,]/g, ''),
                             status_permohonan: status_permohonan,
                             jenis_dana: jenis_dana,
                             komentar: komentar
@@ -559,6 +569,7 @@
                                     'Permohonan Dana Di setujui.',
                                     'success'
                                 )
+                                location.reload()
 
 
                                 updatesaldo(s);
@@ -779,9 +790,16 @@
                     })
                     .done(function(data) {
 
-                        $("#id_pembayaran_antar_bank").val(data.id_pembayaran_antar_bank);
+                        var s= JSON.stringify(data);
 
-                        $("#sisa_saldo").val(data.sisa_saldo);
+                        if (s=="{}") {
+                            $("#sisa_saldo").val("Rp. 0");
+                        } else {
+
+                            $("#id_pembayaran_antar_bank").val(data.id_pembayaran_antar_bank);
+
+                            $("#sisa_saldo").val("Rp"+uang(data.sisa_saldo));
+                        }
 
 
                     });

@@ -47,7 +47,7 @@ class AdminController extends Controller
 
     public function getDataActivity()
     {
-        $data = Permohonan::all();
+        $data = Permohonan::orderBy('created_at', 'desc')->take(10)->get();
 
         if ($data != null) {
             echo json_encode($data);

@@ -14,8 +14,8 @@
                 <!--begin::Wrapper-->
                 <div class="login-content d-flex flex-column pt-lg-0 pt-12">
                     <!--begin::Logo-->
-                    <a href="#" class="login-logo pb-xl-20 pb-15">
-                        <img src="{{ asset('assets/media/logos/logo-4.png') }}" class="max-h-70px" alt="" />
+                    <a href="/" class="login-logo pb-xl-20 pb-15">
+                        <img src="{{ asset('assets/media/evouching.png') }}" class="max-h-70px" alt="" />
                     </a>
                     <!--end::Logo-->
 
@@ -45,10 +45,7 @@
                             <div class="form-group">
                                 <label class="font-size-h6 font-weight-bolder text-dark" for="email">Your
                                     Email</label>
-                                <input
-                                    class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0 @error('email') is-invalid @enderror"
-                                    type="email" name="email" id="email" autocomplete="email"
-                                    value="{{ old('email') }}" autofocus />
+                                <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0 @error('email') is-invalid @enderror" type="email" name="email" id="email" autocomplete="email" value="{{ old('email') }}" autofocus />
                             </div>
                             @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>

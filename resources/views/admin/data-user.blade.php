@@ -1,8 +1,6 @@
 @extends('layouts.main-bendahara')
 
 @section('content')
-
-
     <div class="modal" id="modal_user" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -93,11 +91,12 @@
         </div>
     </div>
 
+    <!-- Modal -->
     <div class="modal" id="modal_ubah" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Kelola User</h5>
+                    <h5 class="modal-title">Kelola Pengguna</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -182,7 +181,9 @@
             </div>
         </div>
     </div>
+    <!--end::Modal-->
 
+    <!-- Modal -->
     <div class="modal" id="modal_hapus" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -208,9 +209,12 @@
             </div>
         </div>
     </div>
-
-    {{-- //////////// --}}
-
+    <!--end::Modal-->
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="card card-custom gutter-b">
         <div class="card-header">
             <div class="card-title">
@@ -234,7 +238,7 @@
                         </span>
                     </span>
                 </span>
-                <h3 class="card-label">Kelola Data User
+                <h3 class="card-label">Kelola Data Pengguna
                 </h3>
             </div>
             <div class="card-toolbar">
@@ -483,24 +487,15 @@
 
             //Hapus user
             $('#table_datauser').on('click', '.item-hapus', function() {
-
                 var currow = $(this).closest('tr');
-
                 var id = currow.find('td:eq(1)').text();
 
                 $('#id_hapus').val(id.trim());
-
                 $('#modal_hapus').modal('show');
-
             });
 
-            $(".hapus-user").click(function() {
-
-
-            });
-
-
-
+            // $(".hapus-user").click(function() {
+            // });
         });
     </script>
 @endsection

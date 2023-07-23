@@ -11,33 +11,20 @@
             <div class="dropdown">
                 <!--begin::Toggle-->
                 <div class="topbar-item" data-toggle="dropdown" data-offset="0px,0px">
-                    <div
-                        class="
-							btn btn-icon
-							w-auto
-							btn-clean
-							d-flex
-							align-items-center
-							btn-lg
-							px-2
-						">
-                        <span
-                            class="
-								text-muted
-								font-weight-bold font-size-base
-								d-none d-md-inline
-								mr-1
-							">Hallo,</span>
-                        <span
-                            class="
-								text-dark-50
-								font-weight-bolder font-size-base
-								d-none d-md-inline
-								mr-3
-							">
-                            {{ Auth::user()->name }}</span>
+                    <div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2">
+                        <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hallo,</span>
+                        <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+                            {{ Auth::user()->name }}
+                        </span>
                         <span class="symbol symbol-35 symbol-light-success">
-                            <span class="symbol-label font-size-h5 font-weight-bold">a</span>
+                            <span class="symbol-label font-size-h5 font-weight-bold">@php
+                                $str = Auth::user()->name;
+                                $exp = explode(' ', $str);
+                                echo substr($exp[0], 0, 1);
+                                if (count($exp) > 1) {
+                                    echo substr($exp[1], 0, 1);
+                                }
+                            @endphp</span>
                         </span>
                     </div>
                 </div>
@@ -86,7 +73,7 @@
                 <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">
                     {{ $title }}
                 </h5>
-                <span class="text-muted font-weight-bold mr-4">{{ Auth::user()->jabatan; }}</span>
+                <span class="text-muted font-weight-bold mr-4">{{ Auth::user()->jabatan }}</span>
 
             </div>
             <!--end::Page Heading-->

@@ -8,8 +8,18 @@
             <div class="d-flex mb-9">
                 <!--begin: Pic-->
                 <div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
+                    @php
+                        $name = explode(' ', Auth::user()->name);
+                        $initials = substr($name[0], 0, 1);
+                        if (count($name) > 1) {
+                            $initials .= substr($name[1], 0, 1);
+                        }
+                    @endphp
                     <div class="symbol symbol-50 symbol-lg-120">
-                        <img src="assets/media/users/300_1.jpg" alt="image" />
+                        {{-- <img src="{{ $initials }}" alt="image" /> --}}
+                        <span class="symbol symbol-35 symbol-light-success">
+                            <span class="symbol-label font-size-h5 font-weight-bold">{{ $initials }}</span>
+                        </span>
                     </div>
 
                     <div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
@@ -118,7 +128,7 @@
                 </div>
                 <!--end::Header-->
                 <!--begin::Form-->
-                <form class="form" method="post" action="/edit-profile-bendahara"> 
+                <form class="form" method="post" action="/edit-profile-bendahara">
                     @csrf
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
@@ -170,8 +180,8 @@
                         <div class="form-group row">
                             <label class="col-xl-5 col-lg-3 col-form-label" for="no_hp">No. Hp</label>
                             <div class="col-lg-9 col-xl-7">
-                                <input class="form-control form-control-lg form-control-solid" name="no_hp" id="no_hp"
-                                    type="text" value="{{ old('no_hp', Auth::user()->no_hp) }}">
+                                <input class="form-control form-control-lg form-control-solid" name="no_hp"
+                                    id="no_hp" type="text" value="{{ old('no_hp', Auth::user()->no_hp) }}">
                             </div>
                         </div>
                         <!--begin::Form Group-->

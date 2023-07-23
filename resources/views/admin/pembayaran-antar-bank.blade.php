@@ -183,7 +183,7 @@
                 </div>
                 <div class="col-lg-6">
                     <label>Terbilang</label>
-                    <input type="text" class="form-control" placeholder="Terbilang" id="terbilang"
+                    <input readonly type="text" class="form-control" placeholder="Terbilang" id="terbilang"
                         name="terbilang" />
                 </div>
             </div>
@@ -513,7 +513,7 @@
 
                 var no_resi_pembayaran_antar_bank = $('#no_resi_pembayaran_antar_bank').val();
                 var tanggal_pembayaran_antar_bank = $('#tanggal_pembayaran_antar_bank').val();
-                var total_dana = $('#total_dana').val();
+                var total_dana = $('#total_dana').val().replace(/\,/g, '');
                 var terbilang = $('#terbilang').val();
                 var keperluan = $('#keperluan').val();
                 var sisa_saldo = $('#sisa_saldo').val();
@@ -524,10 +524,10 @@
                     _token: "{{ csrf_token() }}",
                     no_resi_pembayaran_antar_bank: no_resi_pembayaran_antar_bank,
                     tanggal_pembayaran_antar_bank: tanggal_pembayaran_antar_bank,
-                    total_dana: total_dana,
+                    total_dana: total_dana.replace(",", ""),
                     terbilang: terbilang,
                     keperluan: keperluan,
-                    sisa_saldo: sisa_saldo,
+                    sisa_saldo: sisa_saldo.replace(",", ""),
                     bulan: bulan,
                     tahun: tahun
                 }).done(function(response) {

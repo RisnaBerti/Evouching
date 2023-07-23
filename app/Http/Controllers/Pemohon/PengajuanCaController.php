@@ -98,7 +98,6 @@ class PengajuanCaController extends Controller
         //     );
 
         return "success";
-        
     }
 
     public function getmax3()
@@ -109,5 +108,21 @@ class PengajuanCaController extends Controller
             $maxValue = 0;
         }
         return response()->json($maxValue);
+    }
+
+
+    //fungsi edit pembayaran bank
+    public function upload_struk(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:png,jpg,jpeg|max:8048',
+        ]);
+
+        $ip = $request->id_permohonan;
+
+        $fileName = $ip . '.' . $request->file->extension();
+        $request->file->move(public_path('bukti/ca'), $fileName);
+
+        return response()->json(['message' => 'Operation Successful !', 'filename' => $fileName, 'id_permohonan' => $request->id_permohonan]);
     }
 }

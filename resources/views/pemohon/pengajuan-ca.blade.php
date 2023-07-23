@@ -187,6 +187,41 @@
     </div>
     <!--end::Card-->
 
+    <!-- Modal -->
+    <div class="modal fade modal-upload-struk" id="staticBackdrop" data-backdrop="static" data-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="{{ route('buktica.upload') }}" method="POST" id="file-upload"
+                        enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="card-body">
+
+                            <input hidden type="text" name="id_permohonan" id="id_permohonan_upload">
+
+                            <div class="col-lg-12">
+                                <label class="form-label" for="inputFile">Bukti Nota</label>
+                                <input type="file" accept="image/*" name="file" id="inputFile"
+                                    class="form-control">
+                                <p class="text-mute">File Max 8 Mb</p>
+                                <span class="text-danger" id="file-input-error"></span>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Nanti Aja</button>
+                            <button type="submit" class="btn btn-primary">Unggah Struk</button>
+                        </div>
+                    </form>
+                </div>
+                <!--end::Card-->
+            </div>
+        </div>
+    </div>
+    <!--end::Modal-->
+
 
 
     <div class="card card-custom">
@@ -209,9 +244,10 @@
                         <th>Dana Yang Di ajukan</th>
                         <th>Keterangan </th>
                         <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
-                
+
 
             </table>
             <!--end: Datatable-->
@@ -222,11 +258,6 @@
         $(document).ready(function() {
             getmax3();
             get();
-            // $('#table-pengajuan-ca').DataTable({
-            //     paging: true,
-            //     scrollY: 200,
-            //     scrollX: true,
-            // });
 
             $("#harga_satuan, #jumlah_satuan").keyup(function() {
 
@@ -252,6 +283,16 @@
 
             $(".simpan-ca").click(function() {
                 simpandata();
+            });
+
+            $('#table-pengajuan-ca').on('click', '.item-upload', function() {
+
+                var id_permohonan = $(this).data('ip');
+
+                $('#id_permohonan_upload').val(id_permohonan);
+
+                $('.modal-upload-struk').modal('show');
+
             });
 
             function getmax3() {
@@ -474,16 +515,6 @@
                             padding: '5px'
                         },
 
-                        // {
-                        //     "render": function(data, type, row) {
-
-                        //         return row.jumlah_satuan;
-                        //         // return row.harga_satuan;
-
-                        //     },
-                        //     padding: '5px'
-                        // },
-
                         {
                             "render": function(data, type, row) {
 
@@ -511,6 +542,19 @@
 
                             },
                             padding: '5px'
+                        },
+
+                        {
+                            "render": function(data, type, row) {
+
+
+                                return '<button type="button" class="btn btn-outline-primary item-upload" data-ip="' +
+                                    row.id_permohonan +
+                                    '"><i class="fas fa-upload"></i> Bukti Struk</button>';
+
+
+                            },
+                            padding: '5px',
                         }
 
                     ],
@@ -640,6 +684,100 @@
                 });
 
             }
+
+        });
+    </script>
+
+    {{-- //UPLOAD --}}
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $.ajaxSetup({
+                headers: {
+
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+            $('#file-upload').submit(function(e) {
+                e.preventDefault();
+                let formData = new FormData(this);
+                $('#file-input-error').text('');
+
+                $.ajax({
+
+                    type: 'POST',
+                    url: "{{ route('buktica.upload') }}",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+
+                    success: (response) => {
+
+                        if (response) {
+
+                            this.reset();
+                            
+                        ///update(response.filename, response.id_permohonan);
+
+                            consolo.log(response.filename, response.id_permohonan);
+
+                            alert('File has been uploaded successfully');
+                        }
+
+                    },
+
+                    error: function(response) {
+
+                        $('#file-input-error').text(response.responseJSON.message);
+
+                    }
+
+                });
+
+            });
+
+            function update(filename, no_resi_bayar_bank, id_permohonan, tanggal_pembayaran_bank) {
+
+
+                $.post("{{ route('pembayaranbank.ubah') }}", {
+                    _token: "{{ csrf_token() }}",
+                    id_permohonan: id_permohonan,
+                    no_resi_bayar_bank: no_resi_bayar_bank,
+                    tanggal_pembayaran_bank: tanggal_pembayaran_bank,
+                    bukti_transaksi: filename
+
+                }).done(function(response) {
+
+                    if (response.message == "success") {
+                        Swal.fire(
+                            'Terupload!',
+                            'Bukti Transaksi Berhasil Di Unggah.',
+                            'success'
+                        )
+                        location.reload()
+
+                        $(".item-ubah").attr("disabled", false);
+
+                        $('#id_permohonan').val('');
+
+                        $('#modalubah').modal('hide');
+
+                    } else {
+                        Swal.fire(
+                            'Terupload!',
+                            'Bukti Transaksi Gagal Di Unggah.',
+                            'error'
+                        )
+                        location.reload()
+
+                        $(".item-ubah").attr("disabled", false);
+
+                    }
+
+                });
+            }
+
 
         });
     </script>

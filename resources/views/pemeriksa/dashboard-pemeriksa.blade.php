@@ -8,15 +8,19 @@
             <div class="card card-custom bg-gray-100 card-stretch gutter-b">
                 <!--begin::Header-->
                 <div class="card-header border-0  py-5" style="background-color: #2C3580">
-                    <h3 class="card-title font-weight-bolder text-white">Grafik Transaksi</h3>
+                    <h3 class="card-title font-weight-bolder text-white">E-Vouching GSC</h3>
                 </div>
                 <!--end::Header-->
                 <!--begin::Body-->
                 <div class="card-body p-0 position-relative overflow-hidden">
                     <!--begin::Chart-->
-                    <div id="kt_mixed_widget_1_chart" class="card-rounded-bottom "
+                    <div class="card-rounded-bottom"
                         style="height: 200px; min-height: 200px; background-color: #2C3580">
-                        <div id="apexchartskma0simii" class="apexcharts-canvas apexchartskma0simii apexcharts-theme-light"
+
+                        <h3 class="card-title font-weight-bolder text-white text-center">Selamat Datang <br> Dashboard Pemeriksa</h3>
+                       
+
+                        {{-- <div id="apexchartskma0simii" class="apexcharts-canvas apexchartskma0simii apexcharts-theme-light"
                             style="width: 413px; height: 200px;"><svg id="SvgjsSvg1082" width="413" height="200"
                                 xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 xmlns:svgjs="http://svgjs.com/svgjs" class="apexcharts-svg" xmlns:data="ApexChartsNS"
@@ -194,7 +198,7 @@
                                 class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light">
                                 <div class="apexcharts-yaxistooltip-text"></div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <!--end::Chart-->
 

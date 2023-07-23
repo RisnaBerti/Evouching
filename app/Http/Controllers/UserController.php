@@ -54,13 +54,16 @@ class UserController extends Controller
         // $user->update();
 
         if (!$request->id == Auth::id()) {
-
             $request->validate([
-                'email' => 'required|email|unique:users,email' 
+                'email' => 'required|email|unique:users,email',
+                'name' => 'required',
+                'no_hp' => 'required|numeric|digits_between:10,13|unique:users,no_hp,',
+                'divisi' => 'required',
+                'jabatan' => 'required',
+                'alamat' => 'required',
             ]);
         }
         
-
         $user = User::find(Auth::id());
         $user->name = $request->name;
         $user->email = $request->email;

@@ -89,7 +89,9 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" accept=".pdf" name="file" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file" id="inputFile"
+                                                class="form-control">
+                                                <p class="text-mute">File Max 8 Mb</p>
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -198,7 +200,9 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" accept=".pdf" name="file_edit" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file_edit" id="inputFile"
+                                                class="form-control">
+                                                <p class="text-mute">File Max 8 Mb</p>
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -231,14 +235,28 @@
                 style="width:100%; margin-top: 13px;">
                 <thead>
                     <tr>
-                        <th><center>No</center></th>
+                        <th>
+                            <center>No</center>
+                        </th>
                         <th hidden>id_permohonan</th>
-                        <th><center>Nama</center></th>
-                        <th><center>Jabatan</center></th>
-                        <th><center>Divisi</center></th>
-                        <th><center>Total Mominal ACC</center></th>
-                        <th><center>Keterangan</center></th>
-                        <th><center>Bukti Transaksi</center></th>
+                        <th>
+                            <center>Nama</center>
+                        </th>
+                        <th>
+                            <center>Jabatan</center>
+                        </th>
+                        <th>
+                            <center>Divisi</center>
+                        </th>
+                        <th>
+                            <center>Total Mominal ACC</center>
+                        </th>
+                        <th>
+                            <center>Keterangan</center>
+                        </th>
+                        <th>
+                            <center>Bukti Transaksi</center>
+                        </th>
                         <th>
                             <center>Aksi</center>
                         </th>
@@ -347,14 +365,19 @@
                             },
                             padding: '5px'
                         },
-                        
+
                         {
                             "render": function(data, type, row) {
 
-                               if (row.bukti_penerimaan_kas == '0' || row.bukti_penerimaan_kas == null) { 
-                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_penerimaan_kas +'" target="_blank"><span class="badge badge-pill  badge-danger">Belum Upload</span></a>';
+                                if (row.bukti_penerimaan_kas == '0' || row.bukti_penerimaan_kas ==
+                                    null) {
+                                    return '<a href="{{ url('') }}/bukti/' + row
+                                        .bukti_penerimaan_kas +
+                                        '" target="_blank"><span class="badge badge-pill  badge-danger">Belum Upload</span></a>';
                                 } else {
-                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_penerimaan_kas +'" target="_blank"><span class="badge badge-pill  badge-primary">Lihat Bukti</span></a>';
+                                    return '<a href="{{ url('') }}/bukti/' + row
+                                        .bukti_penerimaan_kas +
+                                        '" target="_blank"><span class="badge badge-pill  badge-primary">Lihat Bukti</span></a>';
                                 }
                             },
                             padding: '5px'
@@ -549,11 +572,11 @@
 
                     if (response.message == "success") {
                         Swal.fire(
-                            'Terpload!',
+                            'Terupload!',
                             'Bukti Transaksi Berhasil Di Edit.',
                             'success'
                         )
-                        // location.reload()
+                        location.reload()
 
                         $(".item-ubah").attr("disabled", false);
 
@@ -563,8 +586,8 @@
 
                     } else {
                         Swal.fire(
-                            'Tidak Disetujui!',
-                            'Permohonan Dana Tidak Di setujui.',
+                            'Tidak Terupload!',
+                            'Bukti Transaksi Gagal Di Edit.',
                             'error'
                         )
                         location.reload()
@@ -593,11 +616,8 @@
 
                         if (response) {
                             this.reset();
-                            update(response.filename, response.no_resi_terima_kas, response
-                                .id_permohonan, response.tanggal_penerimaan_kas);
-                            location.reload()
-
-                            // alert(response.no_resi_terima_kas)
+                            update(response.filename, response.no_resi_terima_kas, response.id_permohonan, response.tanggal_penerimaan_kas);
+                            // location.reload()
 
                             alert('File has been uploaded successfully');
                         }
@@ -627,11 +647,11 @@
 
                     if (response.message == "success") {
                         Swal.fire(
-                            'Disetujui!',
-                            'Permohonan Dana Di setujui.',
+                            'Terupload!',
+                            'Bukti Transaksi Berhasil Di Unggah.',
                             'success'
                         )
-                        // location.reload()
+                        location.reload()
 
                         $(".item-ubah").attr("disabled", false);
 
@@ -641,8 +661,8 @@
 
                     } else {
                         Swal.fire(
-                            'Tidak Disetujui!',
-                            'Permohonan Dana Tidak Di setujui.',
+                            'Terupload!',
+                            'Bukti Transaksi Gagal Di Unggah.',
                             'error'
                         )
                         location.reload()
@@ -670,13 +690,11 @@
                     success: (response) => {
 
                         if (response) {
-                            //this.reset();
-                            //update(response.filename, response.no_resi_terima_kas, response.id_permohonan, response.tanggal_penerimaan_kas);
+                            this.reset();
+                            update(response.filename, response.no_resi_terima_kas, response.id_permohonan, response.tanggal_penerimaan_kas);
+                            // location.reload()
 
-                            alert(response.id_permohonan)
-
-
-                            // alert('File has been uploaded successfully');
+                            alert('File has been uploaded successfully');
                         }
 
                     },

@@ -1,5 +1,4 @@
 @extends('layouts.main-pemohon')
-
 @section('content')
     <!-- Dashboard -->
     <div class="row">
@@ -7,16 +6,19 @@
             <!--begin::Mixed Widget 1-->
             <div class="card card-custom bg-gray-100 card-stretch gutter-b">
                 <!--begin::Header-->
-                <div class="card-header border-0  py-5" style="background-color: #2C3580">
-                    <h3 class="card-title font-weight-bolder text-white">Grafik Transaksi</h3>
+                <div class="card-header border-0  " style="background-color: #2C3580">
+                    <h3 class="card-title font-weight-bolder text-white text-center">E-Vouching GSC</h3>
                 </div>
                 <!--end::Header-->
                 <!--begin::Body-->
                 <div class="card-body p-0 position-relative overflow-hidden">
                     <!--begin::Chart-->
-                    <div id="kt_mixed_widget_1_chart" class="card-rounded-bottom "
+                    <div class="card-rounded-bottom"
                         style="height: 200px; min-height: 200px; background-color: #2C3580">
-                        <div id="apexchartskma0simii" class="apexcharts-canvas apexchartskma0simii apexcharts-theme-light"
+
+                        <h3 class="card-title font-weight-bolder text-white text-center">Selamat Datang <br> Dashboard Pemohon</h3>
+                       
+                        {{-- <div id="apexchartskma0simii" class="apexcharts-canvas apexchartskma0simii apexcharts-theme-light"
                             style="width: 413px; height: 200px;"><svg id="SvgjsSvg1082" width="413" height="200"
                                 xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 xmlns:svgjs="http://svgjs.com/svgjs" class="apexcharts-svg" xmlns:data="ApexChartsNS"
@@ -194,7 +196,7 @@
                                 class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light">
                                 <div class="apexcharts-yaxistooltip-text"></div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <!--end::Chart-->
 
@@ -202,7 +204,7 @@
                     <div class="card-spacer mt-n25">
                         <!--begin::Row-->
                         <div class="row m-0">
-                            <div class="col bg-light-white px-6 py-8 rounded-xl mr-7 mb-7">
+                            <div class="col bg-light-white px-6 py-6 rounded-xl mr-5 mb-7">
                                 <span class="svg-icon svg-icon-primary svg-icon-3x">
                                     <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Gift.svg--><svg
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"

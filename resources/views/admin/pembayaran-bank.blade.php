@@ -88,7 +88,9 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" name="file" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file" id="inputFile"
+                                                class="form-control">
+                                            <p class="text-mute">File Max 8 Mb</p>
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -131,7 +133,8 @@
                                             </div>
                                         </div>
                                         <div class="col-5 align-items-start">
-                                            <input hidden type="text" name="id_permohonan_edit" id="id_permohonan_edit">
+                                            <input hidden type="text" name="id_permohonan_edit"
+                                                id="id_permohonan_edit">
                                             {{-- <input type="text" name="id_edit" id="id_edit"> --}}
                                             <div class="input-group input-group-sm mb-1">
                                                 <div class="input-group-prepend">
@@ -149,7 +152,7 @@
                                                         id="inputGroup-sizing-sm">Tanggal:</span>
                                                 </div>
                                                 <input type="date" value="{{ date('Y-m-d') }}" class="form-control"
-                                                    id="tanggal_pembayaran_bank_edit" accept="image/png, image/jpeg, image/jpg, .pdf" name="tanggal_pembayaran_bank_edit"
+                                                    id="tanggal_pembayaran_bank_edit" name="tanggal_pembayaran_bank_edit"
                                                     aria-label="Sizing example input"
                                                     aria-describedby="inputGroup-sizing-sm">
                                             </div>
@@ -197,7 +200,9 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
-                                            <input type="file" name="file_edit" id="inputFile" class="form-control">
+                                            <input type="file" accept=".pdf" name="file_edit" id="inputFile"
+                                                class="form-control">
+                                            <p class="text-mute">File Max 8 Mb</p>
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -350,10 +355,15 @@
                         {
                             "render": function(data, type, row) {
 
-                               if (row.bukti_pembayaran_bank == '0' || row.bukti_pembayaran_bank == null) { 
-                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_pembayaran_bank +'" target="_blank"><span class="badge badge-pill  badge-danger">Belum Upload</span></a>';
+                                if (row.bukti_pembayaran_bank == '0' || row.bukti_pembayaran_bank ==
+                                    null) {
+                                    return '<a href="{{ url('') }}/bukti/' + row
+                                        .bukti_pembayaran_bank +
+                                        '" target="_blank"><span class="badge badge-pill  badge-danger">Belum Upload</span></a>';
                                 } else {
-                                    return '<a href="{{ url('') }}/bukti/' + row.bukti_pembayaran_bank +'" target="_blank"><span class="badge badge-pill  badge-primary">Lihat</span></a>';
+                                    return '<a href="{{ url('') }}/bukti/' + row
+                                        .bukti_pembayaran_bank +
+                                        '" target="_blank"><span class="badge badge-pill  badge-primary">Lihat</span></a>';
                                 }
                             },
                             padding: '5px'
@@ -361,7 +371,8 @@
 
                         {
                             "render": function(data, type, row) {
-                                if (row.bukti_pembayaran_bank == '0' || row.bukti_pembayaran_bank == null) {
+                                if (row.bukti_pembayaran_bank == '0' || row.bukti_pembayaran_bank ==
+                                    null) {
                                     return '<a class="dropdown-item item-ubah-pembayaranbank" href="#" data-id="' +
                                         row.id + '" data-ip="' +
                                         row.id_permohonan + '" data-nm="' + row.name +
@@ -461,7 +472,7 @@
             $('#table-pembayaranbank').on('click', '.item-ubah-pembayaranbank', function() {
 
                 getmax();
-            //    alert(getmax());
+                //    alert(getmax());
                 // var id_pembayaran_kas = $(this).data('ipk');
                 var id = $(this).data('id');
                 var id_permohonan = $(this).data('ip');
@@ -520,6 +531,19 @@
             }
 
         });
+
+        document.getElementById('inputFile').addEventListener('change', function() {
+            var fileInput = document.getElementById('inputFile');
+            var fileSize = fileInput.files[0].size; // Ukuran file dalam bytes
+            var maxSize = 8 * 1024 * 1024; // 8MB dalam bytes
+
+            if (fileSize > maxSize) {
+                document.getElementById('file-input-error').innerText = 'Ukuran file melebihi batas maksimum 8MB';
+                fileInput.value = ''; // Reset input file
+            } else {
+                document.getElementById('file-input-error').innerText = '';
+            }
+        });
     </script>
 
     <script type="text/javascript">
@@ -544,7 +568,7 @@
 
                     if (response.message == "success") {
                         Swal.fire(
-                            'Terpload!',
+                            'Terupload!',
                             'Bukti Transaksi Berhasil Di Edit.',
                             'success'
                         )
@@ -558,8 +582,8 @@
 
                     } else {
                         Swal.fire(
-                            'Tidak Disetujui!',
-                            'Permohonan Dana Tidak Di setujui.',
+                            'Terupload!',
+                            'Bukti Transaksi Gagal Di Unggah.',
                             'error'
                         )
                         location.reload()
@@ -620,8 +644,8 @@
 
                     if (response.message == "success") {
                         Swal.fire(
-                            'Disetujui!',
-                            'Permohonan Dana Di setujui.',
+                            'Terupload!',
+                            'Bukti Transaksi Berhasil Di Unggah.',
                             'success'
                         )
                         location.reload()
@@ -634,8 +658,8 @@
 
                     } else {
                         Swal.fire(
-                            'Tidak Disetujui!',
-                            'Permohonan Dana Tidak Di setujui.',
+                            'Terupload!',
+                            'Bukti Transaksi Gagal Di Unggah.',
                             'error'
                         )
                         location.reload()
@@ -681,5 +705,9 @@
 
             });
         });
+    </script>
+
+    <script>
+        // Fungsi untuk memeriksa ukuran file saat memilih file
     </script>
 @endsection

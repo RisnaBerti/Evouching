@@ -75,58 +75,17 @@ class CaController extends Controller
             ]
         );
 
-        // $sid    = "AC3b9deb3c57406702247d878eddb287da";
-        // $token  = "0b3bc836b58827ec36b6ce397249001c";
-        // $twilio = new Client($sid, $token);
-
-        // $message = $twilio->messages
-        //     ->create(
-        //         "whatsapp:+6285155456806", // to
-        //         array(
-        //             "from" => "whatsapp:+14155238886",
-        //             "body" => "==============================" .
-        //                 "\n*PERMOHONAN DANA E-VOUCHING*" .
-        //                 "\n==============================".
-        //                 "\nNama                    : " . $user->name .
-        //                 "\nJabatan                 : " . $user->jabatan .
-        //                 "\nDivisi                  : " . $user->divisi .
-        //                 "\nNo Resi                 : " . $request->no_resi_ajuan .
-        //                 "\nTanggal Permohonan      : " . $request->tanggal_permohonan .
-        //                 "\nTotal Dana Yang Diajukan: " . $request->total_dana_ajuan .
-        //                 "\nHarga Satuan            : " . $request->harga_satuan .
-        //                 "\nJumlah Satuan           : " . $request->jumlah_satuan .
-        //                 "\nKeterangan              : " . $request->keterangan_permohonan .
-        //                 "\nTerimakasih" .
-        //                 "\n=============================="
-        //         )
-        //     );
-
         return "success";
     }
 
     public function get()
     {
-        // $data['data'] = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
-        //     ->join('tb_ca', 'tb_ca.id_permohonan', '=', 'tb_permohonan.id_permohonan')
-        //     ->where('tb_permohonan.jenis_dana', '=', 'Chartered Accountant')
-        //     ->get(['users.id', 'users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.id_permohonan', 'tb_ca.id_ca', 'tb_permohonan.nominal_acc','tb_permohonan.total_dana_ajuan', 'tb_permohonan.keterangan_permohonan', 'tb_permohonan.terbilang', 'tb_permohonan.tanggal_permohonan', 'tb_ca.bukti_transaksi', 'tb_ca.tanggal_penerimaan_ca', 'tb_ca.nominal_terpakai']);
+        $data['data'] = Permohonan::join('users', 'users.id', '=', 'tb_permohonan.id')
+            ->join('tb_ca', 'tb_ca.id_permohonan', '=', 'tb_permohonan.id_permohonan')
+            ->where('tb_permohonan.jenis_dana', '=', 'Chartered Accountant')
+            ->get(['users.id', 'users.name', 'users.jabatan', 'users.divisi', 'tb_permohonan.id_permohonan', 'tb_ca.id_ca', 'tb_permohonan.nominal_acc','tb_permohonan.total_dana_ajuan', 'tb_permohonan.keterangan_permohonan', 'tb_permohonan.terbilang', 'tb_permohonan.tanggal_permohonan', 'tb_ca.bukti_transaksi', 'tb_ca.tanggal_penerimaan_ca', 'tb_ca.nominal_terpakai']);
 
-        $data = DB::select(DB::raw('SELECT
-        users.name,
-        tb_permohonan.tanggal_permohonan,
-        tb_permohonan.jenis_dana,
-        tb_permohonan.keterangan_permohonan,
-        tb_permohonan.total_dana_ajuan,
-        tb_permohonan.status_permohonan,
-        tb_ca.id_ca,
-        FROM
-        tb_permohonan
-        LEFT JOIN users USING(id)
-        LEFT JOIN tb_ca USING(id_permohonan)
-        WHERE tb_permohonan.jenis_dana="Chartered Accountant"
-        
-        '));
-
+       
         return $data;
     }
 
@@ -189,7 +148,7 @@ class CaController extends Controller
     public function upload_pembayaran_id(Request $request)
     {
         $request->validate([
-            'file_edit' => 'required|mimes:.pdf,jpg,jpeg,png|max:8048',
+            'file_edit' => 'required|mimes:pdf|max:8048',
         ]);
 
         $ip = $request->id_permohonan_edit;

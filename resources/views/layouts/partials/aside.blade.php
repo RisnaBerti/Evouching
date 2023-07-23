@@ -146,7 +146,7 @@
                             </svg>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-text">Setting</span>
+                        <span class="menu-text">Pengaturan</span>
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="menu-submenu">
@@ -154,7 +154,7 @@
                         <ul class="menu-subnav">
                             <li class="menu-item menu-item-parent" aria-haspopup="true">
                                 <span class="menu-link">
-                                    <span class="menu-text">Setting</span>
+                                    <span class="menu-text">Pengaturan</span>
                                 </span>
                             </li>
                             <!--MENU Account Setting -->
@@ -181,7 +181,7 @@
                                         <!--end::Svg Icon-->
                                     </span>
                                     </i>
-                                    <span class="menu-text">Account</span>
+                                    <span class="menu-text">Pengaturan Akun</span>
                                 </a>
                             </li>
                             <!-- END MENU Account Setting -->
@@ -211,7 +211,7 @@
                                         <!--end::Svg Icon-->
                                     </span>
                                     </i>
-                                    <span class="menu-text">Change Password</span>
+                                    <span class="menu-text">Ganti Kata Sandi</span>
                                 </a>
                             </li>
                             <!--END MENU Password Setting-->
@@ -219,8 +219,6 @@
                     </div>
                 </li>
                 <!-- END MENU Setting-->
-
-
             </ul>
             <!--end::Menu Nav-->
         </div>

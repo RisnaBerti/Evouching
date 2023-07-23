@@ -89,6 +89,7 @@
                                         <div class="col-lg-6">
                                             <label class="form-label" for="inputFile">Bukti Nota</label>
                                             <input type="file" name="file" accept=".pdf" id="inputFile" class="form-control">
+                                            <p class="text-mute">File Max 8 Mb</p>
                                             <span class="text-danger" id="file-input-error"></span>
                                         </div>
                                     </div>
@@ -221,7 +222,7 @@
         <div class="card-header">
             <div class="card-title">
                 <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
-                <h3 class="card-label">pembayaran Kas</h3>
+                <h3 class="card-label">Pembayaran Kas</h3>
             </div>
         </div>
         <div class="card-body">
@@ -545,7 +546,7 @@
 
                     if (response.message == "success") {
                         Swal.fire(
-                            'Terpload!',
+                            'Terupload!',
                             'Bukti Transaksi Berhasil Di Edit.',
                             'success'
                         )
@@ -559,8 +560,8 @@
 
                     } else {
                         Swal.fire(
-                            'Tidak Disetujui!',
-                            'Permohonan Dana Tidak Di setujui.',
+                            'Terupload!',
+                            'Bukti Transaksi Gagal Di Edit.',
                             'error'
                         )
                         location.reload()
@@ -620,8 +621,8 @@
 
                     if (response.message == "success") {
                         Swal.fire(
-                            'Disetujui!',
-                            'Permohonan Dana Di setujui.',
+                            'Terupload!',
+                            'Bukti Transaksi Berhasil Di Unggah.',
                             'success'
                         )
                         location.reload()
@@ -634,8 +635,8 @@
 
                     } else {
                         Swal.fire(
-                            'Tidak Disetujui!',
-                            'Permohonan Dana Tidak Di setujui.',
+                            'Terupload!',
+                            'Bukti Transaksi Gagal Di Unggah.',
                             'error'
                         )
                         location.reload()

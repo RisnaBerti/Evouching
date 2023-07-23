@@ -8,8 +8,18 @@
             <div class="d-flex mb-9">
                 <!--begin: Pic-->
                 <div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
+                    @php
+                        $name = explode(' ', Auth::user()->name);
+                        $initials = substr($name[0], 0, 1);
+                        if (count($name) > 1) {
+                            $initials .= substr($name[1], 0, 1);
+                        }
+                    @endphp
                     <div class="symbol symbol-50 symbol-lg-120">
-                        <img src="assets/media/users/300_1.jpg" alt="image" />
+                        {{-- <img src="{{ $initials }}" alt="image" /> --}}
+                        <span class="symbol symbol-35 symbol-light-success">
+                            <span class="symbol-label font-size-h5 font-weight-bold">{{ $initials }}</span>
+                        </span>
                     </div>
 
                     <div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
@@ -67,8 +77,8 @@
                     </span>
                     <div class="d-flex flex-column text-dark-75">
                         <span class="font-weight-bolder font-size-sm">Transaksi</span>
-                        <span class="font-weight-bolder font-size-h5"><span class="text-dark-50 font-weight-bold">Rp.
-                                782,300</span></span>
+                        <span class="font-weight-bolder font-size-h5"><span
+                                class="text-dark-50 font-weight-bold">xxx</span></span>
                     </div>
                 </div>
                 <!--end::Item-->
@@ -81,7 +91,7 @@
                     <div class="d-flex flex-column flex-lg-fill">
                         <span class="text-dark-75 font-weight-bolder font-size-sm">Permohonan</span>
                         <span class="font-weight-bolder font-size-h5"><span
-                                class="text-dark-50 font-weight-bold">782,300</span></span>
+                                class="text-dark-50 font-weight-bold">xxx</span></span>
                     </div>
                 </div>
                 <!--end::Item-->

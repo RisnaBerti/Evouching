@@ -3,59 +3,6 @@
 @section('content')
     <!--begin::Card-->
     <div class="card card-custom gutter-b example example-compact">
-        <!--begin::Form-->
-        {{-- <div class="card-body">
-            <div class="row">
-                <div class="col-7 align-self-start">
-                    <div class="col">
-                        <h3 class="card-title">
-                            PERMOHONAN DANA
-                        </h3>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-4">
-                    <label>Nama Perkiraan</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Nama Legkap" name="nama_perkiraan"
-                        id="nama_perkiraan" value="{{ Auth::user()->name }}" readonly />
-                </div>
-                <div class="col-lg-4">
-                    <label>Total</label>
-                    <input type="text" class="form-control form-control-sm" name="total_dana_ajuan"
-                        placeholder="Total Harga" id="total_dana_ajuan" />
-                </div>
-                <div class="col-lg-4">
-                    <label>Terbilang</label>
-                    <input readonly type="text" class="form-control form-control-sm" name="terbilang"
-                        placeholder="Terbilang" id="terbilang" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-lg-6">
-                    <label>Keterangan</label>
-                    <textarea class="form-control form-control-sm" name="keterangan_permohonan" id="keterangan_permohonan"
-                        placeholder="Keterangan" rows="4"></textarea>
-                </div>
-                <div hidden class="input-group input-group-sm mb-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">No. Resi
-                            Ajuan:</span>
-                    </div>
-                    <input readonly type="text" class="form-control form-control-sm" id="no_resi_ajuan"
-                        name="no_resi_ajuan" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                </div>
-                <div hidden class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Tanggal:</span>
-                    </div>
-                    <input type="date" value="{{ date('Y-m-d') }}" class="form-control form-control-sm"
-                        id="tanggal_permohonan" name="tanggal_permohonan" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-sm">
-                </div>
-                
-            </div>
-        </div> --}}
         <div class="card-body">
             <div class="row">
                 <div class="col-7 align-self-start">
@@ -101,19 +48,6 @@
                 </div>
             </div>
             <div class="form-group row">
-                {{-- <div class="col-lg-4">
-                    <label>Harga Satuan</label>
-                    <input type="text" class="form-control" placeholder="Harga Satuan" id="harga_satuan"/>
-                </div> --}}
-                {{-- <div class="col-lg-6">
-                    <label>Total Dana Yang Diajukan</label>
-                    <input type="text" class="form-control" placeholder="Total" id="total_dana_ajuan"/>
-                </div>
-                <div class="col-lg-6">
-                    <label>Terbilang</label>
-                    <input type="text" class="form-control" placeholder="Terbilang" id="terbilang" readonly
-                        disabled />
-                </div> --}}
                 <div class="col-lg-4">
                     <label>Harga Satuan</label>
                     <input type="text" class="form-control form-control-sm"
@@ -143,10 +77,6 @@
                 </div>
             </div>
             <div class="form-group row">
-                {{-- <div class="col-lg-6">
-                    <label>Terbilang</label>
-                    <input type="text" class="form-control" placeholder="Terbilang" id="terbilang" readonly disabled />
-                </div> --}}
                 <div class="col-lg-12">
                     <label>Keperluan</label>
                     <textarea class="form-control" placeholder="Keterangan" id="keterangan_permohonan" rows="4"></textarea>
@@ -163,13 +93,16 @@
                 <input hidden type="text" id="ttd_pemeriksa" value="0">
                 <input hidden type="text" id="komentar" value="0">
             </div>
+            
+            <div class="alert alert-secondary" role="alert">
+                <i class="fa-solid fa-circle-info mr-2"></i> Permohonan Dana <strong>tidak dapat diubah</strong>  setelah di simpan, pastikan data yang di masukan sudah benar.
+            </div>
+
         </div>
         <div class="card-footer">
             <div class="row">
                 <div class="col-lg-3">
                     <button type="button" class="btn btn-primary mr-2 simpan-permohonan">Submit</button>
-                    {{-- <a href="{{ route('wa') }}"> <button type="button" class="btn btn-primary mr-2 notif">coba</button></a> --}}
-
                 </div>
             </div>
         </div>
@@ -307,7 +240,8 @@
                 var ttd_manajer = $('#ttd_manajer').val();
                 var komentar = $('#komentar').val();
 
-                if (!nominal_acc || nominal_acc == 0) {
+                if (!no_resi_ajuan || !tanggal_permohonan || !harga_satuan || !jumlah_satuan || !total_dana_ajuan ||
+                    !keterangan_permohonan) {
 
                     Swal.fire({
                         icon: 'error',
@@ -329,9 +263,9 @@
                         jabatan: jabatan,
                         divisi: divisi,
                         nama_perkiraan: nama_perkiraan,
-                        harga_satuan: harga_satuan,
+                        harga_satuan: harga_satuan.replace(",", ""),
                         jumlah_satuan: jumlah_satuan,
-                        total_dana_ajuan: total_dana_ajuan,
+                        total_dana_ajuan: total_dana_ajuan.replace(",", ""),
                         nominal_acc: nominal_acc,
                         keterangan_permohonan: keterangan_permohonan,
                         jenis_dana: jenis_dana,
